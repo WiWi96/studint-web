@@ -2,6 +2,7 @@ import { ProfileName } from './profileName';
 import { Skill } from '../skill/skill';
 import { Team } from '../team/team';
 import { Duration } from '../duration';
+
 export class ProjectProfile {
     id: number;
     profileName: ProfileName;
