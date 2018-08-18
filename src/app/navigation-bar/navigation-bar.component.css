@@ -1,8 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 #list {
-    margin-left: 40%;
-    height: 30px;
-}
-.btn {
-height: 30px;
+    margin-left: 30%;
 }

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormControl} from '@angular/forms';
 import { AutoCompleteModule } from 'ng5-auto-complete';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    TypeaheadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
