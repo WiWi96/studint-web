@@ -2,7 +2,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl} from '@angular/forms';
+import { AutoCompleteModule } from 'ng5-auto-complete';
 
 
 import { AppComponent } from './app.component';
@@ -14,7 +15,9 @@ import { AppComponent } from './app.component';
     NavigationBarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    AutoCompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,11 +3,8 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-inline">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
+    <input id="list" [ng5-auto-complete]="states" [word-trigger]="1" [list-length]="10" placeholder="Search">
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
