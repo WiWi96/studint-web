@@ -4,7 +4,7 @@ import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.css'],
+  styleUrls: ['./navigation-bar.component.less'],
 })
 export class NavigationBarComponent implements OnInit {
   selected: string;

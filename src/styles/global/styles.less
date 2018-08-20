@@ -1,0 +1,51 @@
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+@import 'variables.less';
+@import 'mixins.less';
+
+body {
+    background-color: @gray-light;
+    .default-font(normal);
+    color: @gray-dark;
+    margin: 0;
+}
+
+span.studint-logo {
+    &:before, &:after {
+        .logo-font();
+        font-size: 1.2em;
+    }
+
+    &:before {
+        content: 'stud';
+        color: @primary-color;
+    }
+
+    &:after {
+        content: 'int';
+        color: @gray-dark; 
+    }
+}
+
+.navbar {
+    .default-font(bold);
+
+    .navbar-nav {
+        color: @gray-dark;
+    }
+}
+
+.btn-primary {
+    background-color: @primary-color;
+    border-color: @primary-color-dark;
+
+    &:hover {
+        background-color: @primary-color-dark;
+        border-color: @primary-color-darker;
+    }
+
+    &:not(:disabled):not(:disabled):active {
+        background-color: @primary-color-darker;
+        border-color: @primary-color-darker;
+    }
+}
