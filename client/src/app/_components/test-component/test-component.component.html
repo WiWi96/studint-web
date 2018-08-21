@@ -1,0 +1,18 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Profile Name</th>
+        <th scope="col">Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let profileName of profileNames">
+        <th scope="col">{{profileName.id}}</th>
+        <th scope="col">{{profileName.name}}</th>
+        <th scope="col">{{profileName.photo}}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
