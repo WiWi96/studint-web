@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '../../node_modules/@angular
 import { AppComponent } from './app.component';
 import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationBarComponent } from './_components/navigation-bar/navigation-bar.component';
-import { FormsModule } from '../../node_modules/@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
 
 // Services 
 import { UserService } from './_services/profile/user/user.service';
@@ -18,6 +18,8 @@ import { TestComponentComponent } from './_components/test-component/test-compon
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient } from '../../node_modules/@types/selenium-webdriver/http';
 import { LeftBarComponent } from './_components/left-bar/left-bar.component';
+import { LoginComponent } from './_components/login';
+import { RegisterComponent } from './_components/register';
 
 
 
@@ -28,11 +30,14 @@ import { LeftBarComponent } from './_components/left-bar/left-bar.component';
     NavigationBarComponent,
     TestComponentComponent,
     LeftBarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AutoCompleteModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule.forRoot()
