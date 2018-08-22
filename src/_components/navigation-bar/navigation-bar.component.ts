@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.less'],
 })
 export class NavigationBarComponent implements OnInit {
+  isCollapsed = true;
+  smallScreen: boolean;
+
   selected: string;
   states: string[] = [
     'Alabama',
@@ -66,12 +69,18 @@ export class NavigationBarComponent implements OnInit {
       debounceTime(200),
       distinctUntilChanged(),
       map(term => term.length < 2 ? []
-        : this.states.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10))
+        : this.states.filter(v => v.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
     )
   constructor() {
   }
 
   ngOnInit() {
+    this.onResize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.smallScreen = window.innerWidth < 992;
   }
 
 }
