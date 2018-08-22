@@ -1,49 +1,124 @@
-@import 'variables.less';
 @import 'mixins.less';
+/* Defaults */
 
 body {
-    background-color: @gray-light;
+    background-color: @gray-lighter;
     .default-font(normal);
     color: @gray-dark;
     margin: 0;
 }
 
+.bg-light {
+    background-color: @gray-light;
+}
+
+.bg-dark {
+    background-color: @gray-dark;
+}
+
+/* Studint logo */
+
 span.studint-logo {
-    &:before, &:after {
+    &:before,
+    &:after {
         .logo-font();
+        .transition();
         font-size: 1.2em;
     }
-
     &:before {
         content: 'stud';
         color: @primary-color;
     }
-
     &:after {
         content: 'int';
-        color: @gray-dark; 
-    }
-}
-
-.navbar {
-    .default-font(bold);
-
-    .navbar-nav {
         color: @gray-dark;
     }
+    &:hover {
+        &:before,
+        &:after {
+            .hover-text-shadow();
+        }
+    }
+    &:active {
+        &:before,
+        &:after {
+            .active-text-shadow();
+        }
+    }
 }
 
-.btn-primary {
-    background-color: @primary-color;
-    border-color: @primary-color-dark;
-
+.btn,
+.form-control {
+    .default-shadow();
     &:hover {
-        background-color: @primary-color-dark;
-        border-color: @primary-color-darker;
+        .hover-shadow();
     }
+    &:active,
+    &:focus {
+        .active-shadow();
+    }
+}
 
+/* Buttons */
+
+.btn {
+    box-sizing: border-box;
+    .transition();
+    &:hover {
+        transform: scale(1.05);
+    }
+    &:active {
+        transform: scale(1.1);
+    }
+}
+
+.btn-outline-primary {
+    border-color: @primary-color;
+    color: @primary-color;
+    &:hover {
+        background-color: @primary-color;
+        border-color: @primary-color-light;
+    }
     &:not(:disabled):not(:disabled):active {
-        background-color: @primary-color-darker;
-        border-color: @primary-color-darker;
+        background-color: @primary-color;
+        border-color: @primary-color;
+    }
+    &:not(:disabled):not(:disabled):focus,
+    &:not(:disabled):not(:disabled):focus:active {
+        box-shadow: 0 0 30px 5px @primary-color-light;
+    }
+}
+
+/* Forms */
+
+.form-control {
+    &:focus {
+        border-color: @primary-color-light;
+    }
+}
+
+/* Dropdown menu */
+
+.dropdown-menu {
+    width: 100%;
+    margin-top: 0px;
+    opacity: .9;
+    .active-shadow();
+    &:hover {
+        opacity: 1;
+    }
+    .dropdown-item {
+        color: @gray;
+        &.active {
+            background-color: @primary-color;
+            color: @primary-color-lighter;
+            .ngb-highlight {
+                color: @gray-lighter;
+            }
+        }
+        .ngb-highlight {
+            font-weight: normal !important;
+            color: @gray-darker;
+        }
     }
 }

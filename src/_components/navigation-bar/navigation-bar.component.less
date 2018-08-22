@@ -1,0 +1,36 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.navbar {
+    .default-font(bold);
+    .light-shadow();
+    margin-bottom: 20px;
+    .navbar-nav {
+        color: @gray-dark;
+    }
+    .navbar-buttons {
+        .navbar-btn {
+            &:not(:last-child) {
+                margin-right: 5px;
+            }
+            i.navbar-btn-icon {
+                height: 1.5em;
+                width: 1.5em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    #search-bar-container {
+        width: 100%;
+        #search-bar {
+            input {
+                box-shadow: -3px 8px 20px @gray;
+                .transition();
+                &:hover {
+                    box-shadow: -3px 8px 30px @gray;
+                }
+            }
+        }
+    }
+}

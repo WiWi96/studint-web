@@ -1,25 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><span class="studint-logo"></span></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div id="search-bar" class="col-6 offset-3 input-group">
-      <input [(ngModel)]="selected" [ngbTypeahead]="search" class="form-control">
-      <div class="input-group-append">
-        <button id="searchButton" class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <div class="container">
+    <a class="navbar-brand my-2" href="#"><span class="studint-logo"></span></a>
+    <div class="navbar-buttons">
+      <button class="btn navbar-btn navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+        aria-controls="search-bar-collapse" aria-label="Toggle search bar">
+        <i class="navbar-btn-icon fas fa-search"></i>
+      </button>
+      <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div id="search-bar-container" [ngbCollapse]="isCollapsed && smallScreen">
+      <div id="search-bar" class="container form-inline col-lg-10">
+        <input [(ngModel)]="selected" [ngbTypeahead]="search" class="form-control col mr-2">
+        <button id="searchButton" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
       </div>
     </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Messages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-      </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div>
+        <ul class="navbar-nav ml-auto text-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
