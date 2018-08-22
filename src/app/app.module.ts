@@ -8,6 +8,7 @@ import { TypeaheadModule } from 'ngx-bootstrap';
 
 
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     AutoCompleteModule,
-    TypeaheadModule.forRoot()
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

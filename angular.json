@@ -21,7 +21,10 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles/global/styles.less"
+              "src/styles/global/styles.less",
+              {
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
+              }
             ],
             "scripts": []
           },
