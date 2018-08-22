@@ -6,7 +6,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div id="search-bar" class="col-6 offset-3 input-group">
-      <input [(ngModel)]="selected" [typeahead]="states" class="form-control">
+      <input [(ngModel)]="selected" [ngbTypeahead]="search" class="form-control">
       <div class="input-group-append">
         <button id="searchButton" class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
       </div>
