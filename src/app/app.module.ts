@@ -1,27 +1,43 @@
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormControl} from '@angular/forms';
+import { FormsModule, FormControl, ReactiveFormsModule} from '@angular/forms';
 import { AutoCompleteModule } from 'ng5-auto-complete';
 import { TypeaheadModule } from 'ngx-bootstrap';
 
 
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavigationBarComponent } from '../_components/navigation-bar/navigation-bar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { UserService } from '../_service/profile/user/user.service';
+import { CompanyService } from '../_service/profile/company/company.service';
+import { UniveristyService } from '../_service/profile/university/university.service';
+import { MainPageService } from '../_service/mainpage/mainpage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from '../_components/login';
+import { RegisterComponent } from '../_components/register';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AutoCompleteModule,
-    TypeaheadModule.forRoot()
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [UserService, CompanyService, UniveristyService, MainPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
