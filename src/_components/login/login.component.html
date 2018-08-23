@@ -1,66 +1,58 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" [routerLink]="['/login']"><span class="studint-logo"></span></a>
+    <a class="navbar-brand" [routerLink]="['/login']">
+        <span class="studint-logo"></span>
+    </a>
 </nav>
 
 
 <div class="bg">
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br>
-
-    <div class="form-group">
-        <form class="form">
-            <div class="form-group col-4 offset-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'user']"></fa-icon>
+    <div class="container">
+        <div class="row" style="margin-top:20px">
+            <div class="col-6 offset-3">
+                <form role="form">
+                    <fieldset>
+                        <h2>Please Sign In</h2>
+                        <hr class="colorgraph">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'user']"></fa-icon>
+                                    </div>
+                                </div>
+                                <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Username">
+                            </div>
                         </div>
-                    </div>
-                    <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Username">
-                </div>
-            </div>
-            <div class="form-group col-4 offset-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'unlock-alt']"></fa-icon>
-                        </div>
-                    </div>
-                    <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Password">
-                </div>
-            </div>
-
-
-            <br><br><br>
-            <div class="form-group col-4 offset-4">
-                <div class="form-row">
-
-                    <div class="form-row">
-                        <div id="register-link" class="text-left">
-                            <label class="customcheck">Forget</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'unlock-alt']"></fa-icon>
+                                    </div>
+                                </div>
+                                <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Password">
+                            </div>
                         </div>
 
-                        <div id="register-link" class="text-right">
-                            <label class="customcheck">Forget your password?</label>
+                        <label class="customcheck">
+                            <label class="float-left">One</label>
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                        </label>
+
+
+                        <a href="" class="btn btn-link float-right">Forgot Password?</a>
+                        <br>
+                        <hr class="colorgraph">
+                        <div class="form-group col-4 offset-4">
+                            <button type="button" class="btn">LOG IN</button>
                         </div>
-                    </div>
-                </div>
+                    </fieldset>
+                </form>
             </div>
-
-
-            <div class="form-group col-4 offset-4">
-                <button type="button" class="btn">LOG IN</button>
-            </div>
-
-        </form>
+        </div>
     </div>
 </div>
-
-<div class="container">
-
-</div>
-
 
 <!--                    <div class="form-check form-check-inline">
                         <label class="customcheck">Remember me
