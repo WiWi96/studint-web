@@ -1,0 +1,56 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+div#profile-background-photo {
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    overflow: hidden;
+    filter: blur(2px);
+    box-shadow: 0px -126px 63px -63px @background-color inset;
+    z-index: -1;
+}
+
+.profile-header {
+    @media (min-width: 576px) {
+        .light-shadow();
+        background-color: @background-color;
+    }
+
+    position: relative;
+    margin-top: 200px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: 200px;
+    .profile-top {
+        position: absolute;
+        top: -100px;
+        margin-left: 0;
+        margin-right: 0;
+        .profile-photo {
+            .light-shadow();
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 180px;
+            height: 180px;
+            border-radius: 100%;
+            background-position: center;
+            background-size: cover;
+            background-color: @background-color;
+        }
+        .profile-name {
+            padding-top: 20px;
+            h1 {
+                font-weight: bold;
+                color: @gray-lighter;
+                .default-text-shadow(@gray-dark);
+            }
+            #profile-status {
+                color: @secondary-color-light;
+                font-weight: bold;
+                .default-text-shadow(@gray-lighter);
+            }
+        }
+    }
+}
