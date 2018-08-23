@@ -20,10 +20,9 @@ div#profile-background-photo {
     margin-top: 200px;
     padding-top: 40px;
     padding-bottom: 40px;
-    min-height: 200px;
     .profile-top {
-        position: absolute;
-        top: -100px;
+        position: relative;
+        margin-top: -140px;
         margin-left: 0;
         margin-right: 0;
         .profile-photo {
@@ -40,16 +39,27 @@ div#profile-background-photo {
             background-color: @background-color;
         }
         .profile-name {
-            padding-top: 20px;
+            padding-top: 50px;
             h1 {
                 font-weight: bold;
                 color: @gray-lighter;
                 .default-text-shadow(@gray-dark);
             }
             #profile-status {
-                color: @secondary-color-light;
+                color: @secondary-color;
                 font-weight: bold;
-                .default-text-shadow(@gray-lighter);
+            }
+            .profile-bio {
+                margin-top: 30px;
+                .bio-item {
+                    display: flex;
+                    .bio-item-icon {
+                        color: @secondary-color;
+                        width: 20px;
+                        text-align: center;
+                        margin-right: 10px;
+                    }
+                }
             }
         }
     }

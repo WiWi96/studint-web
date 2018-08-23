@@ -23,8 +23,6 @@ span.studint-logo {
     &:before,
     &:after {
         .logo-font();
-        .transition();
-        font-size: 1.2em;
     }
     &:before {
         content: 'stud';
@@ -33,18 +31,6 @@ span.studint-logo {
     &:after {
         content: 'int';
         color: @gray-dark;
-    }
-    &:hover {
-        &:before,
-        &:after {
-            .hover-text-shadow();
-        }
-    }
-    &:active {
-        &:before,
-        &:after {
-            .active-text-shadow();
-        }
     }
 }
 

@@ -3,6 +3,24 @@
 .navbar {
     .default-font(bold);
     .light-shadow();
+    .navbar-brand {
+        span {
+            .transition();
+            font-size: 1.2em;
+            &:hover {
+                &:before,
+                &:after {
+                    .hover-text-shadow();
+                }
+            }
+            &:active {
+                &:before,
+                &:after {
+                    .active-text-shadow();
+                }
+            }
+        }
+    }
     .navbar-nav {
         color: @gray-dark;
     }
