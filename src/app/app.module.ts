@@ -19,7 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from '../_components/login';
 import { RegisterComponent } from '../_components/register';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+ 
+library.add(fas);
 
 @NgModule({
   declarations: [
@@ -31,6 +36,7 @@ import { RegisterComponent } from '../_components/register';
   imports: [
     BrowserModule,
     FormsModule,
+    FontAwesomeModule,
     AutoCompleteModule,
     ReactiveFormsModule,
     AppRoutingModule,
