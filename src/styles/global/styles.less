@@ -1,29 +1,11 @@
 @import 'mixins.less';
-/* Defaults */
-
-body {
-    background-color: @gray-lighter;
-    .default-font(normal);
-    color: @gray-dark;
-    margin: 0;
-}
-
-.bg-light {
-    background-color: @gray-light;
-}
-
-.bg-dark {
-    background-color: @gray-dark;
-}
-
 /* Studint logo */
 
 span.studint-logo {
     &:before,
     &:after {
         .logo-font();
-        .transition();
-        font-size: 1.2em;
+        text-transform: none;
     }
     &:before {
         content: 'stud';
@@ -33,16 +15,89 @@ span.studint-logo {
         content: 'int';
         color: @gray-dark;
     }
-    &:hover {
-        &:before,
+}
+
+/* Defaults */
+
+body {
+    background-color: @background-color;
+    .default-font(normal);
+    color: @gray-dark;
+    margin: 0;
+    padding-top: 70px;
+    padding-bottom: 60px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: @secondary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.bg-light {
+    background-color: @gray-light;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: @secondary-color;
+    }
+}
+
+.bg-dark {
+    background-color: @gray-dark;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: @gray-light;
+    }
+    span.studint-logo {
         &:after {
-            .hover-text-shadow();
+            color: @gray-lighter;
         }
     }
-    &:active {
-        &:before,
-        &:after {
-            .active-text-shadow();
+}
+
+.bg-primary {
+    background-color: @primary-color  !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: @gray-light;
+    }
+    span.studint-logo {
+        &:before {
+            color: @gray-lighter;
+        }
+    }
+}
+
+.bg-secondary {
+    background-color: @secondary-color  !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: @gray-light;
+    }
+    span.studint-logo {
+        &:before {
+            color: @gray-lighter;
         }
     }
 }
