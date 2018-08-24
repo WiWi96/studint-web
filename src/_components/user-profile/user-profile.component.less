@@ -1,5 +1,11 @@
 @import '~styles/global/variables.less';
 @import '~styles/global/mixins.less';
+h4 {
+    color: @secondary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 div#profile-background-photo {
     width: 100%;
     height: 400px;
@@ -15,39 +21,46 @@ div#profile-background-photo {
         .light-shadow();
         background-color: @background-color;
     }
-
     position: relative;
     margin-top: 200px;
     padding-top: 40px;
     padding-bottom: 40px;
+    z-index: 1;
     .profile-top {
-        position: relative;
-        margin-top: -140px;
         margin-left: 0;
         margin-right: 0;
-        .profile-photo {
-            .light-shadow();
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            width: 180px;
-            height: 180px;
-            border-radius: 100%;
-            background-position: center;
-            background-size: cover;
-            background-color: @background-color;
-        }
-        .profile-name {
-            padding-top: 50px;
-            h1 {
-                font-weight: bold;
-                color: @gray-lighter;
-                .default-text-shadow(@gray-dark);
+        .profile-photo-container {
+            height: 160px;
+            .profile-photo {
+                position: relative;
+                margin-top: -140px;
+                .light-shadow();
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                width: 180px;
+                height: 180px;
+                border-radius: 100%;
+                background-position: center;
+                background-size: cover;
+                background-color: @background-color;
             }
-            #profile-status {
-                color: @secondary-color;
-                font-weight: bold;
+        }
+        .profile-card {
+            position: relative;
+            margin-top: -140px;
+            .profile-name {
+                padding-top: 50px;
+                h1 {
+                    font-weight: bold;
+                    color: @gray-lighter;
+                    .default-text-shadow(@gray-dark);
+                }
+                #profile-status {
+                    color: @secondary-color;
+                    font-weight: bold;
+                }
             }
             .profile-bio {
                 margin-top: 30px;
@@ -61,6 +74,57 @@ div#profile-background-photo {
                     }
                 }
             }
+        }
+        .profile-skills {
+            .light-shadow;
+            background-color: @gray-light;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .skill-item {
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 20px;
+                border: 1px solid @gray;
+                margin: 4px 2px;
+                .light-shadow;
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+
+.profile-description-container {
+    max-height: 300px;
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    .light-shadow;
+    &.expanded {
+        max-height: none;
+        overflow: auto;
+        .profile-description-more {
+            display: none;
+        }
+    }
+    .profile-description-more {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: @secondary-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        box-shadow: 0px -61px 100px 3px @background-color inset;
+        span {
+            position: absolute;
+            bottom: 0;
+            line-height: 40px;
         }
     }
 }
