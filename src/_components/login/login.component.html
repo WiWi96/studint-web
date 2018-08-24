@@ -5,62 +5,63 @@
         </a>
     </nav>
     <div class="container">
-        <div class="row" style="margin-top:20px">
-            <div class="col-6 offset-3">
-                <form  ngNativeValidate>
-                    <fieldset>
-                        <div class="form-group">
-                            <h2>Sign In</h2>
-                            <hr class="colorgraph">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'user']"></fa-icon>
-                                    </div>
-                                </div>
-                                <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Username">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'unlock-alt']"></fa-icon>
-                                    </div>
-                                </div>
-                                <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Password">
-                            </div>
-                        </div>
-
-                        <label class="customcheck">
-                            <label class="float-left">
-                                <label class="text-remember">
-                                    Remember me
-                                </label>
-                            </label>
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                            <a href="" class="btn-link float-right">
-                                <label class="text-forgot">
-                                    Forgot Password?
-                                </label>
-                            </a>
-                        </label>
+        <div class="row">
+            <form ngNativeValidate>
+                <div class="col-6 offset-3">
+                    <div class="form-group">
+                        <h2>Sign In</h2>
                         <hr class="colorgraph">
-                        <button type="btn" class="btn">LOG IN</button>
-                        <div class="text-center">
-                            <label class="text-notamember">
-                                Not a member?&nbsp;
-                            </label>
-                            <a href="">
-                                <label class="signup">
-                                    Sign up now!
-                                </label>
-                            </a>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'user']"></fa-icon>
+                                </div>
+                            </div>
+                            <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Username">
                         </div>
-                    </fieldset>
-                </form>
-            </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'unlock-alt']"></fa-icon>
+                            </div>
+                        </div>
+                        <input type="username" class="form-control form-control-lg" id="inputlg" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="customcheck">
+                        <label class="float-left">
+                            <label class="text-remember">
+                                Remember me
+                            </label>
+                        </label>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                        <a href="" class="btn-link float-right">
+                            <label class="text-forgot">
+                                Forgot Password?
+                            </label>
+                        </a>
+                    </label>
+                </div>
+
+                <hr class="colorgraph">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+                <div class="text-center">
+                    <label class="text-notamember">
+                        Not a member?&nbsp;
+                    </label>
+                    <a href="">
+                        <label class="signup">
+                            Sign up now!
+                        </label>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
