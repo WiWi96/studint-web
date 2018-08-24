@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormControl, ReactiveFormsModule} from '@angular/forms';
 import { AutoCompleteModule } from 'ng5-auto-complete';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,6 +31,7 @@ import { UserProfileComponent} from '../_components/user-profile';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     AutoCompleteModule,
     ReactiveFormsModule,

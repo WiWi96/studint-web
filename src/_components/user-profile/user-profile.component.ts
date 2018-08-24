@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./user-profile.component.less'],
 })
 export class UserProfileComponent implements OnInit {
+    expanded = false;
 
-    constructor() {}
+    constructor() { }
 
-    ngOnInit() {}
+    ngOnInit() { }
+
+    expandDescription() {
+        this.expanded = true;
+    }
 }

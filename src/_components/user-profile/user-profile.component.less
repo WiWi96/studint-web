@@ -93,3 +93,37 @@ div#profile-background-photo {
         }
     }
 }
+
+.profile-description-container {
+    max-height: 300px;
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    .light-shadow;
+    &.expanded {
+        max-height: none;
+        overflow: auto;
+        .profile-description-more {
+            display: none;
+        }
+    }
+    .profile-description-more {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: @secondary-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        box-shadow: 0px -61px 100px 3px @background-color inset;
+        span {
+            position: absolute;
+            bottom: 0;
+            line-height: 40px;
+        }
+    }
+}
