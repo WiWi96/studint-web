@@ -12,7 +12,8 @@ import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
-    templateUrl: 'register.component.html'
+    templateUrl: 'register.component.html',
+    styleUrls: []
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;

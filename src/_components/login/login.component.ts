@@ -6,7 +6,7 @@ import { first } from 'rxjs/operators';
 
 
 @Component({
-    //selector: 'app-login',
+    selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['./login.component.less']
 })
