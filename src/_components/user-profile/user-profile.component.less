@@ -28,10 +28,11 @@ div#profile-background-photo {
     .profile-top {
         margin-left: 0;
         margin-right: 0;
-        .profile-card {
-            position: relative;
-            margin-top: -140px;
+        .profile-photo-container {
+            height: 160px;
             .profile-photo {
+                position: relative;
+                margin-top: -140px;
                 .light-shadow();
                 display: flex;
                 align-items: center;
@@ -44,6 +45,10 @@ div#profile-background-photo {
                 background-size: cover;
                 background-color: @background-color;
             }
+        }
+        .profile-card {
+            position: relative;
+            margin-top: -140px;
             .profile-name {
                 padding-top: 50px;
                 h1 {
@@ -55,16 +60,16 @@ div#profile-background-photo {
                     color: @secondary-color;
                     font-weight: bold;
                 }
-                .profile-bio {
-                    margin-top: 30px;
-                    .bio-item {
-                        display: flex;
-                        .bio-item-icon {
-                            color: @secondary-color;
-                            width: 20px;
-                            text-align: center;
-                            margin-right: 10px;
-                        }
+            }
+            .profile-bio {
+                margin-top: 30px;
+                .bio-item {
+                    display: flex;
+                    .bio-item-icon {
+                        color: @secondary-color;
+                        width: 20px;
+                        text-align: center;
+                        margin-right: 10px;
                     }
                 }
             }
