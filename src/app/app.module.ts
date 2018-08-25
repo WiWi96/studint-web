@@ -20,6 +20,7 @@ import { NavigationBarComponent } from '../_components/navigation-bar/navigation
 import { LoginComponent } from '../_components/login';
 import { RegisterComponent } from '../_components/register';
 import { UserProfileComponent} from '../_components/user-profile';
+import { StaticBarComponent } from '../_components/static-bar/static-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserProfileComponent} from '../_components/user-profile';
     NavigationBarComponent,
     LoginComponent,
     RegisterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    StaticBarComponent
   ],
   imports: [
     BrowserModule,
