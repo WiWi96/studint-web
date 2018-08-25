@@ -13,7 +13,7 @@ import { first } from 'rxjs/operators';
 @Component({
     selector: 'app-login',
     templateUrl: 'register.component.html',
-    styleUrls: []
+    styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
