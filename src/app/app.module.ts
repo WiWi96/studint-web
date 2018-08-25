@@ -23,6 +23,7 @@ import { UserProfileComponent} from '../_components/user-profile';
 import { UniversityProfileComponent} from '../_components/university-profile';
 import { CompanyProfileComponent} from '../_components/company-profile';
 import { StaticBarComponent } from '../_components/static-bar/static-bar.component';
+import { WallComponent } from '../_components/wall';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StaticBarComponent } from '../_components/static-bar/static-bar.compone
     UserProfileComponent,
     UniversityProfileComponent,
     CompanyProfileComponent,
-    StaticBarComponent
+    StaticBarComponent,
+    WallComponent
   ],
   imports: [
     BrowserModule,
