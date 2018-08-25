@@ -1,86 +1,70 @@
 @import 'variables.less';
-
 /* Font imports */
+
 @font-face {
-	font-family: Knife Princess;
-	src: url('/assets/fonts/Knife Princess/Knife Princess.ttf') format('truetype'),
-         url('/assets/fonts/Knife Princess/Knife Princess.otf');	
+    font-family: Knife Princess;
+    src: url('/assets/fonts/Knife Princess/Knife Princess.ttf') format('truetype'), url('/assets/fonts/Knife Princess/Knife Princess.otf');
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-Regular.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-Regular.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-Regular.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-Regular.woff') format('woff');
+    font-family: Lato;
+    src: url('/assets/fonts/Lato/Lato-Regular.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-Regular.woff') format('woff'), url('/assets/fonts/Lato/Lato-Regular.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-Regular.eot') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-Italic.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-Italic.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-Italic.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-Italic.woff') format('woff');
+    font-family: Lato;
+    src: format('embedded-opentype'), url('/assets/fonts/Lato/Lato-Italic.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-Italic.woff') format('woff'), url('/assets/fonts/Lato/Lato-Italic.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-Italic.eot');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-Light.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-Light.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-Light.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-Light.woff') format('woff');
+    font-family: Lato;
+    src: url('/assets/fonts/Lato/Lato-Light.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-Light.woff') format('woff'), url('/assets/fonts/Lato/Lato-Light.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-Light.eot') format('embedded-opentype');
     font-weight: lighter;
     font-style: normal;
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-LightItalic.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-LightItalic.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-LightItalic.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-LightItalic.woff') format('woff');
+    font-family: Lato;
+    src: url('/assets/fonts/Lato/Lato-LightItalic.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-LightItalic.woff') format('woff'), url('/assets/fonts/Lato/Lato-LightItalic.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-LightItalic.eot') format('embedded-opentype');
     font-weight: lighter;
     font-style: italic;
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-Bold.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-Bold.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-Bold.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-Bold.woff') format('woff');
+    font-family: Lato;
+    src: url('/assets/fonts/Lato/Lato-Bold.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-Bold.woff') format('woff'), url('/assets/fonts/Lato/Lato-Bold.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-Bold.eot') format('embedded-opentype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-	font-family: Lato;
-	src: url('/assets/fonts/Lato/Lato-BoldItalic.ttf') format('truetype'),
-         url('/assets/fonts/Lato/Lato-BoldItalic.eot') format('embedded-opentype'),
-         url('/assets/fonts/Lato/Lato-BoldItalic.woff2') format('woff2'),
-         url('/assets/fonts/Lato/Lato-BoldItalic.woff') format('woff');
+    font-family: Lato;
+    src: url('/assets/fonts/Lato/Lato-BoldItalic.woff2') format('woff2'), url('/assets/fonts/Lato/Lato-BoldItalic.woff') format('woff'), url('/assets/fonts/Lato/Lato-BoldItalic.ttf') format('truetype'), url('/assets/fonts/Lato/Lato-BoldItalic.eot') format('embedded-opentype');
     font-weight: bold;
     font-style: italic;
 }
 
 /* Fonts */
+
 .logo-font() {
     font-family: 'Knife Princess';
     font-weight: normal;
     font-style: normal;
 }
 
-.default-font(@weight: normal, @style: normal) {
+.default-font(@weight: normal,
+@style: normal) {
     font-family: 'Lato';
     font-weight: @weight;
     font-style: @style;
 }
 
 /* Transitions */
+
 .transition(@duration: 0.25s) {
     transition: all @duration;
     -webkit-transition: all @duration;
@@ -89,6 +73,7 @@
 }
 
 /* Shadows */
+
 .default-shadow(@color: @gray) {
     box-shadow: -3px 8px 16px @color;
 }
