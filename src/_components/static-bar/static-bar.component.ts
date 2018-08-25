@@ -13,6 +13,7 @@ export class StaticBarComponent implements OnInit {
   constructor() {
     this.showProjects = false;
     this.projects = ['item1', 'item2', 'item3'];
+    //document.getElementById('mySidenav').style.width = '0';
   }
 
   ngOnInit() {
@@ -20,5 +21,13 @@ export class StaticBarComponent implements OnInit {
 
   public toggleProjects() {
     this.showProjects = !this.showProjects;
+  }
+
+  public closeNav() {
+    document.getElementById('mySidenav').style.width = '0';
+  }
+
+  public openNav() {
+    document.getElementById('mySidenav').style.width = '200px';
   }
 }

@@ -1,8 +1,12 @@
+<div class="sidenav__openbtn"(click)="openNav()">
+    <i class="fas fa-arrow-alt-circle-right"></i>
+</div>
 
-    <div class="sidenav">
+<div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="sidenav__closebtn" (click)="closeNav()">&times;</a>
         <a href="#" (click)="toggleProjects()">Projects</a>
         <!-- <div *ngIf="showProjects" *ngFor="let project of projects">
-          <a href="#">{{project}}</a>
+            <a href="#">{{project}}</a>
         </div> -->
         <a href="#">University</a>
-    </div>
+</div>
