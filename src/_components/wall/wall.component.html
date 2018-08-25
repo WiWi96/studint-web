@@ -4,11 +4,22 @@
     <div class="card-columns">
         <div *ngFor="let item of posts" class="wall-item card p-4 text-left">
             <div class="card-body">
-                <h5 class="card-title">{{item.author.name ? item.author.name : 'Unknown person'}}</h5>
-                <h6 class="card-subtitle">{{item.publishedDate | date: 'longDate'}}</h6>
+                <div class="row mb-2">
+                    <div [ngClass]="{'hidden': !photoExists(item.author)}" class="card-photo-container mr-3">
+                        <div class="card-photo" [ngStyle]="{'background-image': 'url(' + item.author.photo + ')'}"></div>
+                    </div>
+                    <div>
+                        <h5 class="card-title">
+                            <a [routerLink]="['/user', item.author.id]">
+                                {{item.author.name ? item.author.name : 'Unknown person'}}
+                            </a>
+                        </h5>
+                        <h6 class="card-subtitle">{{item.publishedDate | date: 'longDate'}}</h6>
+                    </div>
+                </div>
                 <p class="card-text">{{item.post}}</p>
             </div>
         </div>
-        
+
     </div>
 </div>

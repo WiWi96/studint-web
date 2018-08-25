@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '_models/post';
 import { ProfileName } from '_models/profile/profileName';
 
@@ -8,8 +8,12 @@ import { ProfileName } from '_models/profile/profileName';
     styleUrls: ['./wall.component.less'],
 })
 export class WallComponent implements OnInit {
-    public posts: Array<Post>;
+    @Input() posts: Array<Post>;
     constructor() { }
 
     ngOnInit() { }
+
+    photoExists(profile: ProfileName): Boolean {
+        return profile.photo && profile.photo.length > 0;
+    }
 }
