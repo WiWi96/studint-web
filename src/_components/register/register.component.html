@@ -22,8 +22,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#messages" data-toggle="tab">
-
+                                        <a class="nav-link" href="#university" data-toggle="tab">
                                             UNIVERSITY
                                         </a>
                                     </li>
@@ -31,7 +30,6 @@
                                         <a class="nav-link" href="#settings" data-toggle="tab">
                                             COMPANY
                                         </a>
-
                                     </li>
                                 </ul>
                             </div>
@@ -49,14 +47,14 @@
 
                             <div class="tab-pane active" id="profile">
 
-                                <form class="registerform">
-
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidatez>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+                                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2"
+                                            required>
                                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+                                        <input type="password" class="form-control is-invalid" id="exampleInputPassword1" placeholder="Enter password" required>
                                     </div>
 
                                     <div class="form-check">
@@ -70,22 +68,27 @@
                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="messages">
-                                <form class="registerform">
-
-
+                            <div class="tab-pane" id="university">
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+                                        <input type="text" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="E-mail" required pattern="[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                                            oninvalid="this.setCustomValidity('Invalid E-mail')" oninput="this.setCustomValidity('')"
+                                            onchange="try{setCustomValidity('')}catch(e){}" />
                                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
                                     </div>
                                     <div class="form-group">
-                                        <input type="url" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+                                        <input type="text" class="form-control" id="InputPassword2" placeholder="Enter password" required pattern="(^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$)"
+                                            oninvalid="this.setCustomValidity('Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters')"
+                                            oninput="this.setCustomValidity('')" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="University name">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="University name" required pattern="([a-zA-Z])"
+                                            oninvalid="this.setCustomValidity('Invalid Name of University')" oninput="this.setCustomValidity('Invalid Name of University')"
+                                        />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                                        <input type="email" class="form-control" id="InputPassword" placeholder="City" required>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
@@ -110,10 +113,10 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="settings">
-                                <form class="registerform">
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
 
                                     <div class="form-group">
-                                        <input type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                     <div class="form-group">
