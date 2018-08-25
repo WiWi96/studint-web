@@ -1,0 +1,76 @@
+<div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&h=650&w=940')"></div>
+<div class="profile-header container">
+    <div class="profile-top row text-center text-sm-left">
+        <div class="profile-photo-container col-sm-auto">
+            <div class="profile-photo ml-auto mr-auto" style="background-image: url('https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png')"></div>
+        </div>
+        <div class="profile-card col">
+            <div class="profile-name">
+                <h1>Silesian University of Technology</h1>
+            </div>
+            <div class="row">
+                <div class="profile-bio col-md-5 text-left">
+                    <div class="bio-item">
+                        <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <p>Akademicka 2A,<br> 44-100 Gliwice,<br> Poland</p>
+                    </div>
+                    <div class="bio-item">
+                        <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <p>University of technology</p>
+                    </div>
+                </div>
+                <div class="profile-courses col-md-7">
+                    <h4>Our courses</h4>
+                    <span class="course-item">Computer Science</span>
+                    <span class="course-item">Architecture</span>
+                    <span class="course-item">Building</span>
+                    <span class="course-item">Chemistry</span>
+                    <span class="course-item">Economics</span>
+                    <span class="course-item">Geology</span>
+                    <span class="course-item">Mathematics</span>
+                    <span class="course-item">Medical Technology</span>
+                    <span class="course-item">Robotics</span>
+                    <span class="course-item">Sociology</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
+    <div class="profile-description row mx-4">
+        <h4>About us</h4>
+        <p>
+            The Silesian University of Technology, a higher education institution with over 70 years of tradition in operating
+            under various social and economic conditions, is a renowned technical university, recognized both in the scientific
+            and research community, as well as in the area of higher education. 
+        </p>
+        <p>
+            The main objective of our university is to train highly skilled engineering staff from the modern industry and to
+            conduct innovative research. New ideas and solutions, born at the Silesian University of Technology, enable 
+            multilateral scientific cooperation in many areas of relevance to the economy, making the SUT an active player 
+            with regards to innovation and new technologies, required by the knowledge-based economy. 
+        </p>
+        <p>
+            Aliquam erat volutpat. Donec eu efficitur eros. Vestibulum nec mollis erat, quis pharetra ipsum. Aenean venenatis purus nibh,
+            in rhoncus ex elementum tristique. Nullam luctus nulla ac leo posuere malesuada. Sed sed dignissim libero. Cras
+            cursus tincidunt magna, in aliquam dui vulputate in. Maecenas tincidunt sapien viverra justo varius tincidunt.
+            Phasellus molestie, justo congue accumsan cursus, nunc magna congue nisi, vitae dignissim nibh metus vel tortor.
+        </p>
+        <p>
+            Cras sed tempus erat. Sed accumsan sapien ut turpis porta, ullamcorper iaculis quam lacinia. Pellentesque in orci a erat
+            semper tempor. Phasellus velit ipsum, efficitur et posuere in, interdum sed tellus. Duis eu nisi magna. Sed nec
+            urna sed tortor scelerisque maximus. Quisque eget ante tristique, suscipit tortor nec, congue massa. Proin faucibus
+            diam quis nulla pharetra congue.
+        </p>
+        <p>
+            Vivamus at ullamcorper lacus. Suspendisse scelerisque condimentum ex et sagittis. Pellentesque accumsan eget leo sit amet
+            viverra. Mauris ornare odio tincidunt nisi rutrum, vel commodo justo faucibus. Aliquam non odio at felis maximus
+            consequat vel a elit. Sed interdum ornare eros ut aliquam. Ut imperdiet sollicitudin molestie. Vestibulum venenatis
+            augue nunc, ut iaculis ante efficitur a. Maecenas varius maximus mollis. Mauris eu turpis leo. Duis eget mauris
+            ipsum. Donec sollicitudin sagittis leo non convallis.
+        </p>
+    </div>
+    <div class="profile-description-more col" (click)="expandDescription()">
+        <span><i class="fas fa-angle-down"></i></span>
+    </div>
+</div>
