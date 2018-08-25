@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
             profileName: {
                 id: 1,
                 name: 'Lisa Chase',
-                photo: ''
+                photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREbV9-iTUYpckFiSiJgS6H1flN2NgeSecPGRX5M4wT8m7mRQ5xNA'
             },
             description: "<p>I'm a sport enthusiast</p><p>I like pizza!</p>",
             profiles: new Map(),
@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
                 author: {
                     id: 1,
                     name: 'Lisa Chase',
-                    photo: ''
+                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREbV9-iTUYpckFiSiJgS6H1flN2NgeSecPGRX5M4wT8m7mRQ5xNA'
                 },
                 publishedDate: new Date(2018, 8, 25, 23, 14),
                 post: 'This is a personal post, don\'t read it!'

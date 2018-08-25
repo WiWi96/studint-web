@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '_models/post';
+import { ProfileName } from '_models/profile/profileName';
 
 @Component({
     selector: 'app-wall',
@@ -11,4 +12,8 @@ export class WallComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
+
+    photoExists(profile: ProfileName): Boolean {
+        return profile.photo && profile.photo.length > 0;
+    }
 }
