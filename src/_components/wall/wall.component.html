@@ -1,0 +1,14 @@
+<div class="wall container text-center p-4">
+    <h4>Wall of thoughts</h4>
+    <p *ngIf="!posts?.length" class="italic">No posts so far...</p>
+    <div class="card-columns">
+        <div *ngFor="let item of posts" class="wall-item card p-4 text-left">
+            <div class="card-body">
+                <h5 class="card-title">{{item.author.name ? item.author.name : 'Unknown person'}}</h5>
+                <h6 class="card-subtitle">{{item.publishedDate | date: 'longDate'}}</h6>
+                <p class="card-text">{{item.post}}</p>
+            </div>
+        </div>
+        
+    </div>
+</div>

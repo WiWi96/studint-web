@@ -21,6 +21,7 @@ import { LoginComponent } from '../_components/login';
 import { RegisterComponent } from '../_components/register';
 import { UserProfileComponent} from '../_components/user-profile';
 import { StaticBarComponent } from '../_components/static-bar/static-bar.component';
+import { WallComponent } from '../_components/wall';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { StaticBarComponent } from '../_components/static-bar/static-bar.compone
     LoginComponent,
     RegisterComponent,
     UserProfileComponent,
-    StaticBarComponent
+    StaticBarComponent,
+    WallComponent
   ],
   imports: [
     BrowserModule,
