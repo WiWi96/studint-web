@@ -5,6 +5,7 @@ import { LoginComponent } from '../_components/login';
 import { RegisterComponent } from '../_components/register';
 import { UserProfileComponent } from '../_components/user-profile';
 import { UniversityProfileComponent } from '../_components/university-profile';
+import { CompanyProfileComponent } from '../_components/company-profile';
 
 const routes: Routes = [
     // { path: 'mainpage/profilenames', component: TestComponentComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent},
     { path: 'user/:id', component: UserProfileComponent},
     { path: 'university/:id', component: UniversityProfileComponent},
+    { path: 'company/:id', component: CompanyProfileComponent},
     { path: '**', component: LoginComponent}
 ];
 
