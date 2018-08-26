@@ -1,6 +1,9 @@
 @import '~styles/global/variables.less';
 
 .sidenav {
+    @media screen and (max-width: 480px){
+        align-items: center;
+    }
     display: flex;
     flex-flow: column;    
     height: 100%;
@@ -14,7 +17,17 @@
     transition: 0.5s;
     z-index: 2;
 
+    &.shown {        
+        @media screen and (max-width: 480px){
+            width: 100%;
+        }
+        width: 200px;
+    }
+
     a {
+        @media screen and (max-width: 480px) {
+            padding: 6px;
+        }
         padding: 6px 6px 6px 32px;
         text-decoration: none;
         font-size: 25px;
@@ -28,6 +41,9 @@
     }
 
     .sidenav__closebtn {
+        @media screen and (max-width: 480px){
+            align-self: flex-end;
+        }
         display: flex;
         justify-content: flex-end;
         margin-right: 0.4em;
@@ -45,7 +61,3 @@
     cursor: pointer;
     z-index: 2;
 }
-
-@media screen and (max-height: 450px) {
-    .sidenav a {font-size: 18px;}
-  }

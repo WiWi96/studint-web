@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-static-bar',
-  templateUrl: './static-bar.component.html',
+  templateUrl: 'static-bar.component.html',
   styleUrls: ['./static-bar.component.less']
 })
 export class StaticBarComponent implements OnInit {
-
+  showMenu = false;
   public projects: Array<string>;
   public showProjects: boolean;
 
   constructor() {
     this.showProjects = false;
     this.projects = ['item1', 'item2', 'item3'];
-    //document.getElementById('mySidenav').style.width = '0';
   }
 
   ngOnInit() {
@@ -24,10 +23,12 @@ export class StaticBarComponent implements OnInit {
   }
 
   public closeNav() {
-    document.getElementById('mySidenav').style.width = '0';
+    // document.getElementById('mySidenav').style.width = '0';
+    this.showMenu = false;
   }
 
-  public openNav() {
-    document.getElementById('mySidenav').style.width = '200px';
+  openNav() {
+    this.showMenu = true;
+    // document.getElementById('mySidenav').style.width = '200px';
   }
 }
