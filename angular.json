@@ -21,17 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-<<<<<<< HEAD
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles/global/styles.less"
-=======
-              "src/styles/global/styles.less",
-              {
-                
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              }
->>>>>>> file-structure
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
