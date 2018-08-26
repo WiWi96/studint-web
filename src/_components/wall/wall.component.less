@@ -1,0 +1,27 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.wall {
+    .card-columns {
+        @media (max-width: 991px) {
+            column-count: 1;
+        }
+        .wall-item {
+            .light-shadow;
+            .card-photo {
+                width: 50px;
+                height: 50px;
+                background-position: center;
+                background-size: cover;
+                border-radius: 100%;
+                .light-shadow;
+            }
+            h5,
+            h6 {
+                text-transform: none;
+            }
+            h6.card-subtitle {
+                color: @gray-dark;
+            }
+        }
+    }
+}
