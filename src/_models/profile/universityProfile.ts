@@ -1,5 +1,6 @@
 import { Address } from './../address';
 import { ProfileName } from './profileName';
+import { Course } from '../course';
 import { Post } from '../post';
 
 export class UniversityProfile {
@@ -9,4 +10,5 @@ export class UniversityProfile {
     posts: Array<Post> = [];
     address: Address;
     type: string;
+    courses: Array<Course> = [];
 }

@@ -67,7 +67,7 @@ div#profile-background-photo {
                     text-transform: none;
                 }
             }
-            .profile-bio {
+            .profile-bio-container {
                 margin-top: 30px;
                 .bio-item {
                     display: flex;
@@ -76,6 +76,13 @@ div#profile-background-photo {
                         width: 20px;
                         text-align: center;
                         margin-right: 10px;
+                    }
+                    a {
+                        display: flex;
+                        flex-direction: row;
+                        margin-bottom: 1rem;
+                        color: @dark-default;
+                        text-decoration: none;
                     }
                 }
             }
@@ -128,26 +135,6 @@ div#profile-background-photo {
             position: absolute;
             bottom: 0;
             line-height: 40px;
-        }
-    }
-}
-
-.profile-universities,
-.profile-projects {
-    .light-shadow;
-    padding: 10px;
-    .item {
-        h5, h6 {
-            text-transform: none;
-        }
-        h5 {
-            color: @secondary-color;
-        }
-        h6 {
-            color: @gray-dark;
-        }
-        &:hover {
-            transform: scale(1.01);
         }
     }
 }
