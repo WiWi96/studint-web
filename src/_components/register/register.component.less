@@ -1,3 +1,6 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+
 .bg {
     background: url(/assets/images/024.PNG);
     height: 100vh;
@@ -27,7 +30,7 @@
 
 .btn {
     width: 100%;
-    background-color: #ef5500 !important
+    background-color: @orange-default !important
 
 }
 
@@ -73,7 +76,7 @@ div.card .card-header {
 }
 
 div.card .card-header-primary {
-    background: linear-gradient(60deg,#ac4e1c,#ef5500);
+    background: linear-gradient(60deg,#ac4e1c,@orange-default);
     box-shadow: 0 5px 20px 0 rgba(0,0,0,.2), 0 13px 24px -11px rgba(156,39,176,.6);
 }
 
