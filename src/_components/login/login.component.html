@@ -1,27 +1,70 @@
-<div class="container">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-            />
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Username is required</div>
+<div class="bg">
+        <div class="studint-logo-2">
+            <span class="studint-logo"></span>
+        </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 pb-5">
+      
+      
+              <form action="mail.php" method="post" ngNativeValidate>
+      
+                <div class="form-group">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'envelope']"></fa-icon>
+                      </div>
+                    </div>
+                    <input type="email" class="form-control is-valid" id="validationServer01" placeholder="e-mail" required>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <fa-icon class="fas fa-stroopwafel fa-2x" [icon]="['fas', 'unlock-alt']"></fa-icon>
+                      </div>
+                    </div>
+                    <input type="password" class="form-control is-valid" id="validationServer01" placeholder="password" required>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label class="customcheck">
+                    <label class="float-left">
+                      <label class="text-remember" for="customCheck1">
+                        Remember me
+                      </label>
+                    </label>
+                    <input type="checkbox" checked="checked" id="customCheck1">
+                    <span class="checkmark"></span>
+                    <a href="" class="btn-link float-right">
+                      <label class="text-forgot">
+                        Forgot Password?
+                      </label>
+                    </a>
+                  </label>
+                </div>
+      
+                <button type="submit" class="btn">Log In</button>
+      
+                <hr class="colorgraph">
+      
+                <div class="text-center">
+                  <label class="text-notamember">
+                    Not a member?&nbsp;
+                  </label>
+                  <a [routerLink]="['/register']" >
+                    <label class="signup">
+                      Sign up now!
+                    </label>
+                  </a>
+                </div>
+      
+              </form>
             </div>
+          </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-            />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Login</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            />
-            <a [routerLink]="['/register']" class="btn btn-link">Register</a>
-        </div>
-    </form>
-</div>
+      </div>
