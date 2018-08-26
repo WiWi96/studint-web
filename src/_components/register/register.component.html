@@ -1,46 +1,158 @@
-<div class="container">
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
-            />
-            <!-- [ngClass] generuje klase CSS kiedy warunek jest prawdziwy -->
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
-            />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-            />
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Username is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+<div class="bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 pb-5">
+                <!-- Tabs with icons on Card -->
+                <div class="card card-nav-tabs">
+                    <div class="card-header card-header-primary">
+                        <!--  -->
+                        <div class="nav-justified">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#student" data-toggle="tab">
+                                            STUDENT
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#university" data-toggle="tab">
+                                            UNIVERSITY
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#company" data-toggle="tab">
+                                            COMPANY
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <div class="tab-content">
+                            <div class="text-center">
+                                <div class="size-studint">
+                                    <label class="label-studint">Welcome to
+                                        <span class="studint-logo"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane active" id="student">
+
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required />
+                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="InputPassword1" placeholder="Enter password" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="university">
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="E-mail" required />
+                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="InputPassword2" placeholder="Enter password" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="InputUniversity2" placeholder="University name" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="InputCity2" placeholder="City" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" class="form-control" id="Street2" placeholder="Street" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="number" class="form-control" id="HouseNumber2" placeholder="House number" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Zip2" placeholder="Zip" required>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="company">
+                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="InputEmail3" aria-describedby="emailHelp" placeholder="E-mail" required />
+                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="InputPassword3" placeholder="Enter password" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="InputCompany3" placeholder="Comapny name" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="InputCity3" placeholder="City" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" class="form-control" id="Street3" placeholder="Street" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="number" class="form-control" id="HouseNumber3" placeholder="House number" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Zip3" placeholder="Zip" required>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- End Tabs on Card -->
+
             </div>
         </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-        </div>
-    </form>
+    </div>
 </div>

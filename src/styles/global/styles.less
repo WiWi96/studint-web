@@ -19,6 +19,7 @@ span.studint-logo {
 
 /* Defaults */
 
+
 body {
     background-color: @background-color;
     .default-font(normal);
@@ -26,6 +27,13 @@ body {
     margin: 0;
     padding-top: 70px;
     padding-bottom: 60px;
+}
+
+a {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
 }
 
 h1,
@@ -104,6 +112,10 @@ h6 {
 
 .italic {
     font-style: italic;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .btn,
