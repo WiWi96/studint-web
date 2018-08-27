@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
                 publishedDate: new Date(2018, 8, 25, 23, 14),
                 post: 'This is a personal post, don\'t read it!'
             }],
-            status: 'busy',
+            status: 'ready',
             projects: [{
                 id: 2,
                 name: 'Dark project',

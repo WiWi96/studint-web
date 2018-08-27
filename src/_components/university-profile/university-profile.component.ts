@@ -51,7 +51,7 @@ export class UniversityProfileComponent implements OnInit {
                 postCode: '44-100',
                 street: 'Akademicka',
                 country: 'Poland',
-                houseNo: 2,
+                houseNo: '2',
             },
             type: 'University of technology',
             courses: [

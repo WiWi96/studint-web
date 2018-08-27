@@ -6,10 +6,12 @@ import { RegisterComponent } from '../_components/register';
 import { UserProfileComponent } from '../_components/user-profile';
 import { UniversityProfileComponent } from '../_components/university-profile';
 import { CompanyProfileComponent } from '../_components/company-profile';
+import { HomeComponent } from '_components/home/home.component';
 
 const routes: Routes = [
+    { path: '', component: HomeComponent },
     // { path: 'mainpage/profilenames', component: TestComponentComponent },
-    { path: 'login', component: LoginComponent},
+    { path: 'login', component: LoginComponent },
     // { path: 'mainpage', component: MainPageComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'user/:id', component: UserProfileComponent},
