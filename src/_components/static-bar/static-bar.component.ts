@@ -24,8 +24,6 @@ export class StaticBarComponent implements OnInit {
     // temp projects initialization
     this.projects = [
       {
-        id: 1,
-        name: 'Project 1',
         profileName: {
           id: 1,
           name: 'Project 1',
@@ -36,16 +34,14 @@ export class StaticBarComponent implements OnInit {
         type: 'string',
         level: 'string',
         participants: [new ProfileName],
-        teams: [new Team],
-        participationStatus: 'string',
+        // teams: [new Team],
+        // participationStatus: 'string',
         startDate: new Date,
         joiningDate: new Date,
         duration: new Duration,
         status: 'string',
       },
       {
-        id: 2,
-        name: 'Project 2',
         profileName: {
           id: 2,
           name: 'Project 2',
@@ -56,16 +52,14 @@ export class StaticBarComponent implements OnInit {
         type: 'string',
         level: 'string',
         participants: [new ProfileName],
-        teams: [new Team],
-        participationStatus: 'string',
+        // teams: [new Team],
+        // participationStatus: 'string',
         startDate: new Date,
         joiningDate: new Date,
         duration: new Duration,
         status: 'string',
       },
       {
-        id: 3,
-        name: 'Project 3',
         profileName: {
           id: 3,
           name: 'Project 3',
@@ -76,8 +70,8 @@ export class StaticBarComponent implements OnInit {
         type: 'string',
         level: 'string',
         participants: [new ProfileName],
-        teams: [new Team],
-        participationStatus: 'string',
+        // teams: [new Team],
+        // participationStatus: 'string',
         startDate: new Date,
         joiningDate: new Date,
         duration: new Duration,

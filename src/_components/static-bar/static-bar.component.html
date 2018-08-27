@@ -8,7 +8,7 @@
             <button class="sidenav__button" (click)="toggleProjects()">Projects</button>
             <ul class="sidenav__list" *ngIf="showProjects">
                 <li *ngFor="let project of projects">
-                    <a class="sidenav__list-item" href="project/:{{project.id}}">{{project.name}}</a>
+                    <a class="sidenav__list-item" href="project/:{{project.profileName.id}}">{{project.profileName.name}}</a>
                 </li>
             </ul>
             <button class="sidenav__button" (click)="toggleUniversities()">University</button>
