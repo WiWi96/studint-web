@@ -1,4 +1,5 @@
 @import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
 
 .sidenav {
     @media screen and (max-width: 480px){
@@ -21,35 +22,63 @@
         @media screen and (max-width: 480px){
             width: 100%;
         }
-        width: 200px;
+        width: 250px;
     }
 
-    a {
-        @media screen and (max-width: 480px) {
-            padding: 6px;
-        }
-        padding: 6px 6px 6px 32px;
-        text-decoration: none;
+    .sidenav__button {
+        padding: 6px 6px 3px 25px;
         font-size: 25px;
+    }
+
+    a, .sidenav__closebtn, button {              
+        text-decoration: none;        
         color: #818181;
         transition: 0.3s;
         display: block;
+        cursor: pointer;
+        background: none;
+        border: none; 
+        outline: none;
 
         &:hover {
             color: #f1f1f1;
         }
     }
 
-    .sidenav__closebtn {
-        @media screen and (max-width: 480px){
-            align-self: flex-end;
-        }
+    .sidenav__closebtn {        
         display: flex;
         justify-content: flex-end;
         margin-right: 0.4em;
         font-size: 36px;
+        align-self: flex-end;
+    }
+
+    .sidenav__content, .sidenav__list-item  {
+        @media screen and (max-width: 480px){
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }        
+    }
+
+    .sidenav__list-item {
+        font-size: 15px;
+        padding: 6px 25px 3px 35px;    
+    }
+
+    .sidenav__button, .sidenav__list-item {
+        @media screen and (max-width: 480px) {
+            padding: 6px;
+        }
     }
 }
+
+.sidenav__list {
+    list-style: none;
+    padding: 0;
+    // transition: 0.5s; 
+  }
 
 .sidenav__openbtn {
     position: fixed;
@@ -60,4 +89,8 @@
     color: @orange-default;
     cursor: pointer;
     z-index: 2;
+
+    // &:hover {
+    //     .hover-shadow();
+    // }
 }

@@ -3,10 +3,19 @@
 </div>
 
 <div class="sidenav" [ngClass]="{'shown': showMenu}">
-        <a href="javascript:void(0)" class="sidenav__closebtn" (click)="closeNav()">&times;</a>
-        <a href="#" (click)="toggleProjects()">Projects</a>
-        <!-- <div *ngIf="showProjects" *ngFor="let project of projects">
-            <a href="#">{{project}}</a>
-        </div> -->
-        <a href="#">University</a>
+        <span class="sidenav__closebtn" (click)="closeNav()">&times;</span>
+        <div class="sidenav__content">
+            <button class="sidenav__button" (click)="toggleProjects()">Projects</button>
+            <ul class="sidenav__list" *ngIf="showProjects">
+                <li *ngFor="let project of projects">
+                    <a class="sidenav__list-item" href="#">{{project.name}}</a>
+                </li>
+            </ul>
+            <button class="sidenav__button" (click)="toggleUniversities()">University</button>
+            <ul class="sidenav__list" *ngIf="showUniversities">
+                <li *ngFor="let university of universities">
+                    <a class="sidenav__list-item" href="#">{{university.profileName.name}}</a>
+                </li>
+            </ul>
+        </div>
 </div>
