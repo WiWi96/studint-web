@@ -112,7 +112,7 @@ export class StaticBarComponent implements OnInit {
             postCode: '',
             street: '',
             country: '',
-            houseNo: 2,
+            houseNo: '2',
         },
         type: '',
         courses: [
@@ -147,7 +147,7 @@ export class StaticBarComponent implements OnInit {
             postCode: '',
             street: '',
             country: '',
-            houseNo: 2,
+            houseNo: '2',
         },
         type: '',
         courses: [
@@ -182,7 +182,7 @@ export class StaticBarComponent implements OnInit {
             postCode: '',
             street: '',
             country: '',
-            houseNo: 2,
+            houseNo: '2',
         },
         type: '',
         courses: [
