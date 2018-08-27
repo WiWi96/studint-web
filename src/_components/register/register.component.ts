@@ -1,6 +1,6 @@
 // ts-ignore
 import { NgModule, Component, OnInit, ViewChild } from "@angular/core";
-import { FormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormsModule, FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
@@ -12,7 +12,7 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 })
 export class RegisterComponent implements OnInit {
 
-  countries = [ "Poland", "France", "Japan", "Great Britain", "Germany", "Italy", 'Ondraszek' ];
+  countries = ["Poland", "France", "Japan", "Great Britain", "Germany", "Italy", 'Ondraszek'];
 
   submittedStudent: boolean = false;
   submittedUniversity: boolean = false;
@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
 
   addressFormGroup: FormGroup;
 
+  intitutionFormGroup: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
   ) {
@@ -34,25 +36,28 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.passwordFormGroup = this.formBuilder.group({
-      'password': ['', Validators.required],
-      'repeatPassword': ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      repeatPassword: ['', Validators.required]
     }, {
         validator: RegistrationValidator.validate.bind(this)
       });
 
     this.registrationFormGroup = this.formBuilder.group({
-      'email': ['', [Validators.required, Validators.email]],
-      'passwordFormGroup': this.passwordFormGroup.get('password')
+      email: ['', [Validators.required, Validators.email]],
+      passwordFormGroup: this.passwordFormGroup.get('password')
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      'town': ['', [Validators.required]],
-      'postCode': ['', [Validators.required]],
-      'street': ['', [Validators.required]],
-      'country': ['', [Validators.required]],
-      'houseNo': ['', [Validators.required]],
+      town: ['', [Validators.required]],
+      postCode: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      houseNo: ['', [Validators.required]]
     })
 
+    this.intitutionFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required]]
+    })
 
   }
 

@@ -11,17 +11,17 @@
                                 <ul class="nav nav-tabs" data-tabs="tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="#student" data-toggle="tab">
-                                                <i class="fas fa-graduation-cap fa-2x"></i>&nbsp;STUDENT
+                                            <i class="fas fa-graduation-cap fa-2x"></i>&nbsp;STUDENT
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#university" data-toggle="tab">
-                                                <i class="fas fa-university fa-2x"></i> &nbsp;UNIVERSITY
+                                            <i class="fas fa-university fa-2x"></i> &nbsp;UNIVERSITY
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#company" data-toggle="tab">
-                                                <i class="fas fa-building fa-2x"></i>&nbsp;COMPANY
+                                            <i class="fas fa-building fa-2x"></i>&nbsp;COMPANY
                                         </a>
                                     </li>
                                 </ul>
@@ -52,9 +52,10 @@
                                     <div [formGroup]="passwordFormGroup">
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="password" id="InputStudentPassword1" placeholder="Enter password"
-                                                required />
+                                                minlength="4" required />
                                             <div *ngIf="submittedStudent">
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -96,18 +97,26 @@
                                                 required />
                                             <div *ngIf="submittedUniversity">
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="repeatPassword" id="InputUniversityRepeatPassword2" placeholder="Repeat password"
-                                                required />
+                                                minlength="4" required />
                                             <div *ngIf="submittedUniversity">
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat password is required</p>
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <form [formGroup]="intitutionFormGroup">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="name" id="InputUniversityName" placeholder="University name" required>
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">University name is required</p>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <form [formGroup]="addressFormGroup">
                                         <div class="form-group">
                                             <select class="custom-select form-control">
@@ -169,9 +178,10 @@
                                     <div [formGroup]="passwordFormGroup">
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
-                                                required />
+                                                minlength="4" required />
                                             <div *ngIf="submittedCompany">
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -183,6 +193,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <form [formGroup]="intitutionFormGroup">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="name" id="InputCompanyName" placeholder="Company name" required>
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">University name is required</p>
+                                            </div>
+                                        </div>
+                                    </form>
 
                                     <form [formGroup]="addressFormGroup">
                                         <div class="form-group">
