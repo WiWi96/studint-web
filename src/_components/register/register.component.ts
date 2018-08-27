@@ -12,8 +12,11 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 })
 export class RegisterComponent implements OnInit {
 
+  countries = [ "Poland", "France", "Japan", "Great Britain", "Germany", "Italy", 'Ondraszek' ];
+
   submittedStudent: boolean = false;
   submittedUniversity: boolean = false;
+  submittedCompany: boolean = false;
 
   registrationFormGroup: FormGroup;
   //universityRegistrationForm: FormGroup;
@@ -65,6 +68,14 @@ export class RegisterComponent implements OnInit {
   }
   onSubmitUniversity() {
     this.submittedUniversity = true;
+
+    if (this.registrationFormGroup.invalid) {
+      return;
+    }
+  }
+
+  onSubmitCompany() {
+    this.submittedCompany = true;
 
     if (this.registrationFormGroup.invalid) {
       return;

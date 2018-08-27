@@ -83,7 +83,11 @@
                             <div class="tab-pane" id="university">
                                 <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitUniversity()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail2" placeholder="E-mail" required />
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail2" placeholder="E-mail" required />
+                                        <div *ngIf="submittedUniversity">
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
+                                        </div>
                                     </div>
 
                                     <div [formGroup]="passwordFormGroup">
@@ -105,31 +109,35 @@
                                     </div>
 
                                     <form [formGroup]="addressFormGroup">
-
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="InputCity2" placeholder="City" required>
+                                            <select class="custom-select form-control">
+                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="town" id="InputCity2" placeholder="City" required>
                                             <div *ngIf="submittedUniversity">
                                                 <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
-                                                <input type="text" class="form-control" id="Street2" placeholder="Street" required>
+                                                <input type="text" class="form-control" formControlName="street" id="Street2" placeholder="Street" required>
                                                 <div *ngIf="submittedUniversity">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">City is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street is required</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <input type="number" class="form-control" id="HouseNumber2" placeholder="House number" required>
+                                                <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber2" placeholder="House number" required>
                                                 <div *ngIf="submittedUniversity">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">City is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="Zip2" placeholder="Zip" required>
+                                            <input type="text" class="form-control" formControlName="postCode" id="Zip2" placeholder="Zip" required>
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">City is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip is required</p>
                                             </div>
                                         </div>
 
@@ -149,33 +157,68 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="company">
-                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitCompany()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail3" placeholder="E-mail" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="InputPassword3" placeholder="Enter password" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="InputRepeatPassword3" placeholder="Repeat password" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="InputCompany3" placeholder="Comapny name" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="InputCity3" placeholder="City" required>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="Street3" placeholder="Street" required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <input type="number" class="form-control" id="HouseNumber3" placeholder="House number" required>
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail3" placeholder="E-mail" required />
+                                        <div *ngIf="submittedCompany">
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="Zip3" placeholder="Zip" required>
+
+                                    <div [formGroup]="passwordFormGroup">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
+                                                required />
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputCompanyRepeatPassword3" placeholder="Repeat password"
+                                                required />
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <form [formGroup]="addressFormGroup">
+                                        <div class="form-group">
+                                            <select class="custom-select form-control">
+                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
+                                                <div *ngIf="submittedCompany">
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street is required</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
+                                                <div *ngIf="submittedCompany">
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="postCode" id="Zip3" placeholder="Zip" required>
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip is required</p>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label class="form-check-label">
