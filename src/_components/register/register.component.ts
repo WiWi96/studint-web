@@ -1,66 +1,93 @@
-// @angular-core
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// ts-ignore
+import { NgModule, Component, OnInit, ViewChild } from "@angular/core";
+import { FormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
-// @rx-js
-import { first } from 'rxjs/operators';
-
-// @Services
-//import { UserService } from '../../_services/user.service';
-//import { AlertService } from '../../_services-authentication';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: 'register.component.html',
-    styleUrls: ['./register.component.less']
+  selector: 'app-login',
+  templateUrl: 'register.component.html',
+  styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private router: Router,
-        //private userService: UserService,
-        // private alertService: AlertService
-    ) { }
+  submittedStudent: boolean = false;
+  submittedUniversity: boolean = false;
 
-    ngOnInit() {
-        this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-        });
+  registrationFormGroup: FormGroup;
+  //universityRegistrationForm: FormGroup;
+  //comapnyRegistrationForm: FormGroup;
 
+  passwordFormGroup: FormGroup;
+
+  addressFormGroup: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.passwordFormGroup = this.formBuilder.group({
+      'password': ['', Validators.required],
+      'repeatPassword': ['', Validators.required]
+    }, {
+        validator: RegistrationValidator.validate.bind(this)
+      });
+
+    this.registrationFormGroup = this.formBuilder.group({
+      'email': ['', [Validators.required, Validators.email]],
+      'passwordFormGroup': this.passwordFormGroup.get('password')
+    });
+
+    this.addressFormGroup = this.formBuilder.group({
+      'town': ['', [Validators.required]],
+      'postCode': ['', [Validators.required]],
+      'street': ['', [Validators.required]],
+      'country': ['', [Validators.required]],
+      'houseNo': ['', [Validators.required]],
+    })
+
+
+  }
+
+  get f() { return this.registrationFormGroup.controls; }
+
+
+  onSubmitStudent() {
+    this.submittedStudent = true;
+
+    if (this.registrationFormGroup.invalid) {
+      return;
+    }
+  }
+  onSubmitUniversity() {
+    this.submittedUniversity = true;
+
+    if (this.registrationFormGroup.invalid) {
+      return;
+    }
+  }
+}
+
+export class RegistrationValidator {
+  static validate(registrationFormGroup: FormGroup) {
+    let password = registrationFormGroup.controls.password.value;
+    let repeatPassword = registrationFormGroup.controls.repeatPassword.value;
+
+    if (repeatPassword.length <= 0) {
+      return null;
     }
 
-    // getter do wydobywania wartosci z formularza
-    get f() { return this.registerForm.controls; }
-
-    onSubmit() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-
-        //console.log(this.registerForm.value);
-
-        this.loading = true;
-        /* this.userService.addUser(this.registerForm.value)
-             .pipe(first())
-             .subscribe(
-                 data => {
-                     this.alertService.success('Registration successful', true);
-                     this.router.navigate(['/login']);
-                 },
-                 error => {
-                     this.alertService.error(error);
-                     this.loading = false;
-                 });*/
+    if (repeatPassword !== password) {
+      return {
+        doesMatchPassword: true
+      };
     }
+
+    return null;
+
+  }
 }

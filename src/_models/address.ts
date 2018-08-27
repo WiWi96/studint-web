@@ -3,5 +3,5 @@ export class Address {
     postCode: string;
     street: string;
     country: string;
-    houseNo: number;
+    houseNo: string;
 }

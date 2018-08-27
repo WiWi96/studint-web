@@ -40,21 +40,42 @@
 
                             <div class="tab-pane active" id="student">
 
-                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required />
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail1" placeholder="E-mail" required />
+                                        <div *ngIf="submittedStudent">
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required
+                                            </p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email
+                                                is not valid</p>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="InputPassword1" placeholder="Enter password" required />
+                                    <div [formGroup]="passwordFormGroup">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputStudentPassword1" placeholder="Enter password"
+                                                required />
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password
+                                                    is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputStudentRepeatPassword2" placeholder="Repeat password"
+                                                required />
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
+                                                    password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password
+                                                    does not match</p>
+                                            </div>
+                                        </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
@@ -64,13 +85,33 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="university">
-                                <form class="registerform" action="mail.php" method="post" ngNativeValidate>
+                                <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitUniversity()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail2" aria-describedby="emailHelp" placeholder="E-mail" required />
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="email" class="form-control" id="InputEmail2" placeholder="E-mail" required />
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="InputPassword2" placeholder="Enter password" required />
+
+                                    <div [formGroup]="passwordFormGroup">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputUniversityPassword1" placeholder="Enter password"
+                                                required />
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password
+                                                    is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputUniversityRepeatPassword2" placeholder="Repeat password"
+                                                required />
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
+                                                    password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password
+                                                    does not match</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div [formGroup]="addressFormGroup">
+
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="InputUniversity2" placeholder="University name" required />
@@ -95,8 +136,8 @@
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
@@ -108,11 +149,13 @@
                             <div class="tab-pane" id="company">
                                 <form class="registerform" action="mail.php" method="post" ngNativeValidate>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail3" aria-describedby="emailHelp" placeholder="E-mail" required />
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="email" class="form-control" id="InputEmail3" placeholder="E-mail" required />
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" id="InputPassword3" placeholder="Enter password" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="InputRepeatPassword3" placeholder="Repeat password" required />
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="InputCompany3" placeholder="Comapny name" required />
@@ -131,14 +174,12 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="Zip3" placeholder="Zip" required>
                                     </div>
-
-
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
