@@ -1,6 +1,10 @@
 @import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
 
 .sidenav {
+    @media screen and (max-width: 480px){
+        align-items: center;
+    }
     display: flex;
     flex-flow: column;    
     height: 100%;
@@ -8,32 +12,72 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: @gray-cod;
     overflow-x: hidden;
     padding-top: 85px;
     transition: 0.5s;
     z-index: 2;
 
-    a {
-        padding: 6px 6px 6px 32px;
-        text-decoration: none;
+    &.shown {        
+        @media screen and (max-width: 480px){
+            width: 100%;
+        }
+        width: 250px;
+    }
+
+    .sidenav__button {
+        padding: 6px 6px 3px 25px;
         font-size: 25px;
+    }
+
+    a, .sidenav__closebtn, button {              
+        text-decoration: none;        
         color: #818181;
         transition: 0.3s;
         display: block;
+        cursor: pointer;
+        background: none;
+        border: none; 
+        outline: none;
 
         &:hover {
-            color: #f1f1f1;
+            color: @light-default;
         }
     }
 
-    .sidenav__closebtn {
+    .sidenav__closebtn {        
         display: flex;
         justify-content: flex-end;
         margin-right: 0.4em;
         font-size: 36px;
+        align-self: flex-end;
+    }
+
+    .sidenav__content, .sidenav__list-item  {
+        @media screen and (max-width: 480px){
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }        
+    }
+
+    .sidenav__list-item {
+        font-size: 15px;
+        padding: 6px 25px 3px 35px;    
+    }
+
+    .sidenav__button, .sidenav__list-item {
+        @media screen and (max-width: 480px) {
+            padding: 6px;
+        }
     }
 }
+
+.sidenav__list {
+    list-style: none;
+    padding: 0;
+  }
 
 .sidenav__openbtn {
     position: fixed;
@@ -45,7 +89,3 @@
     cursor: pointer;
     z-index: 2;
 }
-
-@media screen and (max-height: 450px) {
-    .sidenav a {font-size: 18px;}
-  }
