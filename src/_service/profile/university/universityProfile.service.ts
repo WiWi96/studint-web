@@ -14,10 +14,30 @@ const httpOptions = {
 const universityUrl = '//localhost:8080/university';
 
 @Injectable()
-export class UniversityService {
+export class UniversityProfileService {
   constructor(private http: HttpClient) { }
 
+  //post requests
+  public createUniversity(universityProfile: UniversityProfile): Observable<UniversityProfile> {
+    return this.http.post<UniversityProfile>(`${universityUrl}`, universityProfile);
+  }
+
+  //put requests
+  public updateUniversity(universityProfile: UniversityProfile): Observable<UniversityProfile> {
+    return this.http.put<UniversityProfile>(`${universityUrl}`, universityProfile);
+  }
+
+  //delete requests
+  public deleteUniversity(id: number): Observable<UniversityProfile> {
+    return this.http.delete<UniversityProfile>(`${universityUrl}/${id}`);
+  }
+
+  //get requests
   public getUniversity(id: number): Observable<UniversityProfile> {
     return this.http.get<UniversityProfile>(`${universityUrl}/${id}`);
+  }
+
+  public getAllCompanies(): Observable<UniversityProfile> {
+    return this.http.get<UniversityProfile>(`${universityUrl}`);
   }
 }

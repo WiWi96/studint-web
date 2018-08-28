@@ -13,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 // Services
-
+import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
+import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
+import { UserProfileService } from '_service/profile/user/userProfile.service';
 // Site components
 import { NavigationBarComponent } from '_components/navigation-bar/navigation-bar.component';
 import { LoginComponent } from '_components/login';
@@ -52,7 +54,7 @@ import { HomeComponent } from '_components/home/home.component';
     MomentModule,
     NgbModule.forRoot()
   ],
-  providers: [ ],
+  providers: [CompanyProfileService, UniversityProfileService, UserProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
