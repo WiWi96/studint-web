@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputStudentRepeatPassword2" placeholder="Repeat password"
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputStudentRepeatPassword1" placeholder="Repeat password"
                                                 required />
                                             <div *ngIf="submittedStudent">
                                                 <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
@@ -73,6 +73,26 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <form [formGroup]="firstNameSurnameFormGroup">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
+                                                required/>
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.firstName.errors?.required">First
+                                                    name is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="surname" id="InputSurname" placeholder="Surname" maxlength="254"
+                                                required/>
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.surname.errors?.required">Surname
+                                                    is required</p>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                     <form [formGroup]="othersFormGroup">
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -104,7 +124,6 @@
                                                 is not valid</p>
                                         </div>
                                     </div>
-
                                     <div [formGroup]="passwordFormGroup">
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="password" id="InputUniversityPassword1" placeholder="Enter password"
@@ -316,7 +335,6 @@
                     </div>
                 </div>
                 <!-- End Tabs on Card -->
-
             </div>
         </div>
     </div>

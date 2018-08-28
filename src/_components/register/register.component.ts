@@ -22,9 +22,7 @@ export class RegisterComponent implements OnInit {
   passwordFormGroup: FormGroup;
   addressFormGroup: FormGroup;
   othersFormGroup: FormGroup;
-
-  checkbox: FormControl;
-  conditions: boolean;
+  firstNameSurnameFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,8 +54,11 @@ export class RegisterComponent implements OnInit {
       checkbox: ['', [Validators.required]]
     })
     
-    this.checkbox = new FormControl('', Validators.required);
- 
+    this.firstNameSurnameFormGroup = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      surname: ['', [Validators.required]]
+    })
+
   }
 
   get f() { return this.registrationFormGroup.controls; }
