@@ -245,6 +245,8 @@
                                             <div *ngIf="submittedCompany">
                                                 <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City
                                                     is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.pattern">
+                                                    Only letters are allowed</p>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -262,6 +264,8 @@
                                                 <div *ngIf="submittedCompany">
                                                     <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House
                                                         number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.pattern">House
+                                                        number is incorrect</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,6 +274,8 @@
                                             <div *ngIf="submittedCompany">
                                                 <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip
                                                     is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.pattern">
+                                                    Incorrect zip code</p>
                                             </div>
                                         </div>
 
