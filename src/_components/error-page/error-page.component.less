@@ -1,0 +1,61 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.error-header {
+    position: absolute;
+    background: linear-gradient(180deg, @gray-dark 35%, @secondary-color 35%);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    .error-message {
+        z-index: 1;
+    }
+    .road-sign-container {
+        position: relative;
+        .road-sign,
+        .road-sign-code {
+            display: flex;
+            position: relative;
+            margin: 0 auto;
+            z-index: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 0.5rem solid @gray-darker;
+            color: @gray-darker;
+            background-color: @road-sign-yellow;
+            border-radius: 20px;
+            box-shadow: 0 0 0 0.25rem @road-sign-yellow;
+            span {
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 3.75rem;
+            }
+        }
+        .road-sign {
+            width: 15rem;
+            height: 15rem;
+            transform: rotate(45deg);
+            span {
+                transform: rotate(-45deg);
+            }
+        }
+        .road-sign-code-container {
+            position: relative;
+            top: 3rem;
+            &:after {
+                content: '';
+                width: 7px;
+                height: 100vh;
+                background-color: @gray-dark;
+                position: absolute;
+                top: -1rem;
+            }
+            .road-sign-code {
+                width: 12rem;
+                height: 5rem;
+            }
+        }
+    }
+}
