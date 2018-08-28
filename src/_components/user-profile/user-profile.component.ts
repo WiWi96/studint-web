@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from '_models/profile/userProfile';
 import { ProfileName } from '_models/profile/profileName';
+import { UserProfileService } from '_service/profile/user/userProfile.service';
+import { SkillService } from '_service/skill/skill.service';
+import { PostService } from '_service/post/post.service';
+import { TeamService } from '_service/team/team.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -11,7 +15,12 @@ export class UserProfileComponent implements OnInit {
     expanded = false;
     user: UserProfile;
 
-    constructor() {
+    constructor(
+        private userProfileService: UserProfileService,
+        private skillService: SkillService,
+        private postService: PostService,
+        private teamService: TeamService
+    ) {
         this.user = {
             profileName: {
                 id: 1,

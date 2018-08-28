@@ -11,7 +11,7 @@ const httpOptions = {
   })
 };
 
-const profileUrl = '//localhost:8080/project';
+const projectUrl = '//localhost:8080/project';
 
 @Injectable()
 export class ProjectProfileService {
@@ -19,25 +19,25 @@ export class ProjectProfileService {
 
   // post requests
   public createProject(projectProfile: ProjectProfile): Observable<ProjectProfile> {
-    return this.http.post<ProjectProfile>(`${profileUrl}`, projectProfile);
+    return this.http.post<ProjectProfile>(`${projectUrl}`, projectProfile);
   }
 
   //put requests
   public updateProject(projectProfile: ProjectProfile): Observable<ProjectProfile> {
-    return this.http.put<ProjectProfile>(`${profileUrl}`, projectProfile);
+    return this.http.put<ProjectProfile>(`${projectUrl}`, projectProfile);
   }
 
   //delete request
   public deleteProject(id: number): Observable<ProjectProfile> {
-    return this.http.delete<ProjectProfile>(`${profileUrl}/${id}`);
+    return this.http.delete<ProjectProfile>(`${projectUrl}/${id}`);
   }
 
   //get requests
   public getProject(id: number): Observable<ProjectProfile> {
-    return this.http.get<ProjectProfile>(`${profileUrl}/${id}`);
+    return this.http.get<ProjectProfile>(`${projectUrl}/${id}`);
   }
 
   public getAllProjects(): Observable<ProjectProfile[]> {
-    return this.http.get<ProjectProfile[]>(`${profileUrl}`);
+    return this.http.get<ProjectProfile[]>(`${projectUrl}`);
   }
 }

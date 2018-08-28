@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 
 @Component({
     selector: 'app-company-profile',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CompanyProfileComponent implements OnInit {
     expanded = false;
 
-    constructor() { }
+    constructor(private companyProfileService: CompanyProfileService) { }
 
     ngOnInit() { }
 

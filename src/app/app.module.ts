@@ -17,6 +17,9 @@ import { CompanyProfileService } from '_service/profile/company/companyProfile.s
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 import { UserProfileService } from '_service/profile/user/userProfile.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
+import { TeamService } from '_service/team/team.service';
+import { SkillService } from '_service/skill/skill.service';
+import { PostService } from '_service/post/post.service';
 
 // Site components
 import { NavigationBarComponent } from '_components/navigation-bar/navigation-bar.component';
@@ -29,10 +32,6 @@ import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
-import { SkillService } from '_service/skill/skill.service';
-
-
-
 
 @NgModule({
   declarations: [
@@ -61,7 +60,8 @@ import { SkillService } from '_service/skill/skill.service';
     NgbModule.forRoot()
   ],
   providers: [CompanyProfileService, UniversityProfileService,
-    SkillService, UserProfileService, ProjectProfileService],
+    SkillService, UserProfileService, ProjectProfileService,
+    TeamService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

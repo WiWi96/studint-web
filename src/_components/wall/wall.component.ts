@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '_models/post';
 import { ProfileName } from '_models/profile/profileName';
+import { PostService } from '_service/post/post.service';
+import { MainPageService } from '_service/mainpage/mainpage.service';
 
 @Component({
     selector: 'app-wall',
@@ -9,7 +11,10 @@ import { ProfileName } from '_models/profile/profileName';
 })
 export class WallComponent implements OnInit {
     @Input() posts: Array<Post>;
-    constructor() { }
+    constructor(
+        private postService: PostService,
+        private mainPageService: MainPageService 
+    ) { }
 
     ngOnInit() { }
 
