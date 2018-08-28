@@ -20,6 +20,7 @@ import { ProjectProfileService } from '_service/profile/project/projectProfile.s
 import { TeamService } from '_service/team/team.service';
 import { SkillService } from '_service/skill/skill.service';
 import { PostService } from '_service/post/post.service';
+import { MainPageService } from '_service/mainpage/mainpage.service';
 
 // Site components
 import { NavigationBarComponent } from '_components/navigation-bar/navigation-bar.component';
@@ -32,6 +33,7 @@ import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +63,7 @@ import { HomeComponent } from '_components/home/home.component';
   ],
   providers: [CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService],
+    TeamService, PostService, MainPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
