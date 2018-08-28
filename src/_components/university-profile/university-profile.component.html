@@ -49,13 +49,13 @@
     </div>
 </div>
 <div *ngIf="university.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
-        <div class="profile-description mx-4">
-            <h4>Read my story</h4>
-            <div [innerHTML]="university.description" class="profile-description-text">
-            </div>
-            <div class="profile-description-more col" (click)="expandDescription()">
-                <span><i class="fas fa-angle-down"></i></span>
-            </div>
+    <div class="profile-description mx-4">
+        <h4>About us</h4>
+        <div [innerHTML]="university.description" class="profile-description-text">
+        </div>
+        <div class="profile-description-more col" (click)="expandDescription()">
+            <span><i class="fas fa-angle-down"></i></span>
         </div>
     </div>
+</div>
 <app-wall [posts]="university.posts"></app-wall>
