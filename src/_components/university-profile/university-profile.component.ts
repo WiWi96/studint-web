@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfile } from '_models/profile/universityProfile';
+import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
+import { PostService } from '_service/post/post.service';
 
 @Component({
     selector: 'app-university-profile',
@@ -11,7 +13,10 @@ export class UniversityProfileComponent implements OnInit {
     expanded = false;
     university: UniversityProfile;
 
-    constructor() {
+    constructor(
+        private universityProfileService: UniversityProfileService,
+        private postService: PostService,
+    ) {
         this.university = {
             profileName: {
                 id: 1,
@@ -36,14 +41,14 @@ export class UniversityProfileComponent implements OnInit {
                 },
                 {
                     id: 1,
-                author: {
-                    id: 1,
-                    name: 'PolSl',
-                    // tslint:disable-next-line:max-line-length
-                    photo: 'https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png',
-                },
-                publishedDate: new Date(2018, 7, 10, 9, 0),
-                post: 'Happy holidays for all Students!'
+                    author: {
+                        id: 1,
+                        name: 'PolSl',
+                        // tslint:disable-next-line:max-line-length
+                        photo: 'https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png',
+                    },
+                    publishedDate: new Date(2018, 7, 10, 9, 0),
+                    post: 'Happy holidays for all Students!'
                 }
             ],
             address: {

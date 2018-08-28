@@ -37,7 +37,7 @@ export class CompanyProfileService {
     return this.http.get<CompanyProfile>(`${companyUrl}/${id}`);
   }
 
-  public getAllCompanies(): Observable<CompanyProfile> {
-    return this.http.get<CompanyProfile>(`${companyUrl}`);
+  public getAllCompanies(): Observable<CompanyProfile[]> {
+    return this.http.get<CompanyProfile[]>(`${companyUrl}`);
   }
 }

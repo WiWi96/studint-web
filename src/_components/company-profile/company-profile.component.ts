@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
-
+import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 
 @Component({
     selector: 'app-company-profile',
@@ -12,7 +12,7 @@ export class CompanyProfileComponent implements OnInit {
     expanded = false;
     company: CompanyProfile;
 
-    constructor() {
+    constructor(private companyProfileService: CompanyProfileService) {
         this.company = {
             profileName: {
                 id: 1,

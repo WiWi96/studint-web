@@ -12,33 +12,33 @@ const httpOptions = {
   })
 };
 
-const companyUrl = '//localhost:8080/post';
+const postUrl = '//localhost:8080/post';
 
 @Injectable()
-export class CompanyProfileService {
+export class PostService {
   constructor(private http: HttpClient) { }
 
   // post requests
   public createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${companyUrl}`, post);
+    return this.http.post<Post>(`${postUrl}`, post);
   }
 
   //put requests
   public updatePost(post: Post): Observable<Post> {
-    return this.http.put<Post>(`${companyUrl}`, post);
+    return this.http.put<Post>(`${postUrl}`, post);
   }
 
   //delete request
   public deletePost(id: number): Observable<Post> {
-    return this.http.delete<Post>(`${companyUrl}/${id}`);
+    return this.http.delete<Post>(`${postUrl}/${id}`);
   }
 
   //get requests
   public getPost(id: number): Observable<Post> {
-    return this.http.get<Post>(`${companyUrl}/${id}`);
+    return this.http.get<Post>(`${postUrl}/${id}`);
   }
 
-  public getAllPosts(): Observable<Post> {
-    return this.http.get<Post>(`${companyUrl}`);
+  public getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${postUrl}`);
   }
 }

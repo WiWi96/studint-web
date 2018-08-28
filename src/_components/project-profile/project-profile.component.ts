@@ -3,6 +3,9 @@ import { ProjectProfile } from '_models/profile/projectProfile';
 import { ProfileName } from '_models/profile/profileName';
 import * as moment from 'moment';
 import { Duration } from '_models/duration';
+import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
+import { PostService } from '_service/post/post.service';
+import { SkillService } from '_service/skill/skill.service';
 
 @Component({
     selector: 'app-project-profile',
@@ -15,7 +18,11 @@ export class ProjectProfileComponent implements OnInit {
     Arr = Array;
     public now = moment().startOf('day');
 
-    constructor() {
+    constructor(
+        private projectProfileService: ProjectProfileService,
+        private postService: PostService,
+        private skillService: SkillService
+    ) {
         this.project = {
             profileName: {
                 id: 1,
