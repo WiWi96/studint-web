@@ -39,7 +39,7 @@ export class UserProfileService {
     return this.http.get<UserProfile>(`${userUrl}/${id}`);
   }
 
-  public getAllUser(): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${userUrl}`);
+  public getAllUser(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(`${userUrl}`);
   }
 }

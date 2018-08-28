@@ -19,6 +19,6 @@ export class MainPageService {
   constructor(private http: HttpClient) { }
 
   public getAllProfileNames(): Observable<ProfileName[]> {
-    return this.http.get<ProfileName[]>(`${mainPageUrl}/${'profilenames'}`);
+    return this.http.get<ProfileName[]>(`${mainPageUrl}`);
   }
 }

@@ -37,7 +37,7 @@ export class UniversityProfileService {
     return this.http.get<UniversityProfile>(`${universityUrl}/${id}`);
   }
 
-  public getAllCompanies(): Observable<UniversityProfile> {
-    return this.http.get<UniversityProfile>(`${universityUrl}`);
+  public getAllCompanies(): Observable<UniversityProfile[]> {
+    return this.http.get<UniversityProfile[]>(`${universityUrl}`);
   }
 }
