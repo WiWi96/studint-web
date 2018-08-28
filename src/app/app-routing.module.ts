@@ -8,6 +8,7 @@ import { UniversityProfileComponent } from '_components/university-profile';
 import { CompanyProfileComponent } from '_components/company-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
+import { ErrorPageComponent } from '_components/error-page/error-page.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
     { path: 'university/:id', component: UniversityProfileComponent},
     { path: 'project/:id', component: ProjectProfileComponent},
     { path: 'company/:id', component: CompanyProfileComponent},
-    { path: '**', component: LoginComponent}
+    { path: '**', component: ErrorPageComponent}
 ];
 
 // export const routing = RouterModule.forRoot(routes);

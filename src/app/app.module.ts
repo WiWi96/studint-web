@@ -33,6 +33,7 @@ import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
+import { ErrorPageComponent } from '_components/error-page/error-page.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { HomeComponent } from '_components/home/home.component';
     ProjectProfileComponent,
     CompanyProfileComponent,
     StaticBarComponent,
-    WallComponent
+    WallComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
