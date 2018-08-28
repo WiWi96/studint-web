@@ -16,7 +16,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#university" data-toggle="tab">
-                                            <i class="fas fa-university fa-2x"></i> &nbsp;UNIVERSITY
+                                            <i class="fas fa-university fa-2x"></i>&nbsp;UNIVERSITY
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -40,8 +40,11 @@
                             <div class="tab-pane active" id="student">
                                 <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" formControlName="email" id="InputEmail1" placeholder="E-mail" maxlength="254" required
-                                        />
+                                        <div class="md-form">
+                                            <input type="email" class="form-control" formControlName="email" id="form3" placeholder="E-mail" maxlength="254" required
+                                            />
+                                            <label for="form3">Example label</label>
+                                        </div>
                                         <div *ngIf="submittedStudent">
                                             <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required
                                             </p>
@@ -73,7 +76,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <form [formGroup]="firstNameSurnameFormGroup">
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
@@ -81,6 +83,8 @@
                                             <div *ngIf="submittedStudent">
                                                 <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.firstName.errors?.required">First
                                                     name is required</p>
+                                                <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.firstName.errors?.pattern">
+                                                    Invalid first name</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -89,10 +93,11 @@
                                             <div *ngIf="submittedStudent">
                                                 <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.surname.errors?.required">Surname
                                                     is required</p>
+                                                <p class="alert alert-danger" *ngIf="firstNameSurnameFormGroup.controls.surname.errors?.pattern">
+                                                    Invalid surname </p>
                                             </div>
                                         </div>
                                     </form>
-
                                     <form [formGroup]="othersFormGroup">
                                         <div class="form-group">
                                             <div class="checkbox">

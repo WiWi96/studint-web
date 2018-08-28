@@ -55,8 +55,8 @@ export class RegisterComponent implements OnInit {
     })
     
     this.firstNameSurnameFormGroup = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      surname: ['', [Validators.required]]
+      firstName: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
+      surname: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]]
     })
 
   }
