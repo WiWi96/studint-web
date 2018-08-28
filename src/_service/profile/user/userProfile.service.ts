@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { UserProfile } from '../../../_models/profile/userProfile';
+import { UserProfile } from '_models/profile/userProfile';
 
 
 const httpOptions = {
@@ -15,7 +15,7 @@ const httpOptions = {
 const userUrl = '//localhost:8080/user';
 
 @Injectable()
-export class UserService {
+export class UserProfileService {
 
   constructor(private http: HttpClient) { }
 

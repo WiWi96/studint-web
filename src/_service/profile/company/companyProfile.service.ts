@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { CompanyProfile } from '../../../_models/profile/companyProfile';
+import { CompanyProfile } from '_models/profile/companyProfile';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +14,7 @@ const httpOptions = {
 const companyUrl = '//localhost:8080/company';
 
 @Injectable()
-export class CompanyService {
+export class CompanyProfileService {
   constructor(private http: HttpClient) { }
 
   public getCompany(id: number): Observable<CompanyProfile> {

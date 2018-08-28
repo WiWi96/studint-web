@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
     styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
+    loginFormGroup: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+        this.loginFormGroup = this.formBuilder.group({
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
 
@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f() { return this.loginFormGroup.controls; }
 
     onSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.loginForm.invalid) {
+        if (this.loginFormGroup.invalid) {
             return;
         }
 
