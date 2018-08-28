@@ -14,7 +14,7 @@ const httpOptions = {
 const companyUrl = '//localhost:8080/company';
 
 @Injectable()
-export class CompanyProfileService {
+export class CompanyService {
   constructor(private http: HttpClient) { }
 
   public getCompany(id: number): Observable<CompanyProfile> {

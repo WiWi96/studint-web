@@ -14,7 +14,7 @@ const httpOptions = {
 const universityUrl = '//localhost:8080/university';
 
 @Injectable()
-export class UniversityprofileService {
+export class UniversityService {
   constructor(private http: HttpClient) { }
 
   public getUniversity(id: number): Observable<UniversityProfile> {

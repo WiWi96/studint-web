@@ -15,7 +15,7 @@ const httpOptions = {
 const userUrl = '//localhost:8080/user';
 
 @Injectable()
-export class UserProfileService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
