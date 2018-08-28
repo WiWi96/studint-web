@@ -19,20 +19,13 @@ export class RegisterComponent implements OnInit {
   submittedCompany: boolean = false;
 
   registrationFormGroup: FormGroup;
-  //universityRegistrationForm: FormGroup;
-  //comapnyRegistrationForm: FormGroup;
-
   passwordFormGroup: FormGroup;
-
   addressFormGroup: FormGroup;
-
   intitutionFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.passwordFormGroup = this.formBuilder.group({
@@ -43,16 +36,16 @@ export class RegisterComponent implements OnInit {
       });
 
     this.registrationFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
       passwordFormGroup: this.passwordFormGroup.get('password')
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      town: ['', [Validators.required]],
-      postCode: ['', [Validators.required]],
-      street: ['', [Validators.required]],
+      town: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
+      postCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
+      street: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
       country: ['', [Validators.required]],
-      houseNo: ['', [Validators.required]]
+      houseNo: ['', [Validators.required, Validators.pattern("[a-zA-z0-9]+")]]
     })
 
     this.intitutionFormGroup = this.formBuilder.group({

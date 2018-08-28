@@ -42,11 +42,15 @@
 
                                 <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" formControlName="email" id="InputEmail1" placeholder="E-mail" required />
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail1" placeholder="E-mail" maxlength="254" required
+                                        />
                                         <div *ngIf="submittedStudent">
                                             <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required
                                             </p>
-                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email
+                                                is not valid</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.maxlength">Email may have
+                                                maximum 254 characters </p>
                                         </div>
                                     </div>
                                     <div [formGroup]="passwordFormGroup">
@@ -54,16 +58,20 @@
                                             <input type="password" class="form-control" formControlName="password" id="InputStudentPassword1" placeholder="Enter password"
                                                 minlength="4" required />
                                             <div *ngIf="submittedStudent">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password
+                                                    is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password
+                                                    must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="repeatPassword" id="InputStudentRepeatPassword2" placeholder="Repeat password"
                                                 required />
                                             <div *ngIf="submittedStudent">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
+                                                    password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password
+                                                    does not match</p>
                                             </div>
                                         </div>
                                     </div>
@@ -71,8 +79,8 @@
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
@@ -87,7 +95,8 @@
                                         <input type="email" class="form-control" formControlName="email" id="InputEmail2" placeholder="E-mail" required />
                                         <div *ngIf="submittedUniversity">
                                             <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required</p>
-                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email
+                                                is not valid</p>
                                         </div>
                                     </div>
 
@@ -96,16 +105,20 @@
                                             <input type="password" class="form-control" formControlName="password" id="InputUniversityPassword1" placeholder="Enter password"
                                                 required />
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password
+                                                    is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password
+                                                    must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="repeatPassword" id="InputUniversityRepeatPassword2" placeholder="Repeat password"
                                                 minlength="4" required />
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
+                                                    password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password
+                                                    does not match</p>
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +126,8 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="name" id="InputUniversityName" placeholder="University name" required>
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">University name is required</p>
+                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">University
+                                                    name is required</p>
                                             </div>
                                         </div>
                                     </form>
@@ -126,27 +140,39 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="town" id="InputCity2" placeholder="City" required>
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City
+                                                    is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.pattern">
+                                                    Only letters are allowed</p>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" formControlName="street" id="Street2" placeholder="Street" required>
                                                 <div *ngIf="submittedUniversity">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street
+                                                        is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.pattern">
+                                                        Only letters are allowed</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber2" placeholder="House number" required>
                                                 <div *ngIf="submittedUniversity">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House
+                                                        number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.pattern">House
+                                                        number is incorrect</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="postCode" id="Zip2" placeholder="Zip" required>
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip
+                                                    is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.pattern">
+                                                    Incorrect zip code</p>
                                             </div>
                                         </div>
 
@@ -155,8 +181,8 @@
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
@@ -171,7 +197,8 @@
                                         <input type="email" class="form-control" formControlName="email" id="InputEmail3" placeholder="E-mail" required />
                                         <div *ngIf="submittedCompany">
                                             <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required</p>
-                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email
+                                                is not valid</p>
                                         </div>
                                     </div>
 
@@ -180,16 +207,20 @@
                                             <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
                                                 minlength="4" required />
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password must be at least 4 characters long</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.required">Password
+                                                    is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.password.errors?.minlength">Password
+                                                    must be at least 4 characters long</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="repeatPassword" id="InputCompanyRepeatPassword3" placeholder="Repeat password"
                                                 required />
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat password is required</p>
-                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required">Repeat
+                                                    password is required</p>
+                                                <p class="alert alert-danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password
+                                                    does not match</p>
                                             </div>
                                         </div>
                                     </div>
@@ -197,7 +228,8 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="name" id="InputCompanyName" placeholder="Company name" required>
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">Company name is required</p>
+                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">Company
+                                                    name is required</p>
                                             </div>
                                         </div>
                                     </form>
@@ -211,27 +243,33 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City
+                                                    is required</p>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
                                                 <div *ngIf="submittedCompany">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street
+                                                        is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.pattern">
+                                                        Only letters are allowed</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
                                                 <div *ngIf="submittedCompany">
-                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House
+                                                        number is required</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="postCode" id="Zip3" placeholder="Zip" required>
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip is required</p>
+                                                <p class="alert alert-danger" *ngIf="addressFormGroup.controls.postCode.errors?.required">Zip
+                                                    is required</p>
                                             </div>
                                         </div>
 
@@ -241,8 +279,8 @@
                                         <div class="checkbox">
                                             <label class="form-check-label">
                                                 <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
-                                                    and Privacy Policy.
+                                                    <input type="checkbox" required> By clicking Register, you agree to our
+                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
                                                 </small>
                                             </label>
                                         </div>
