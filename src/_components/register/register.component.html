@@ -37,9 +37,7 @@
                                     </label>
                                 </div>
                             </div>
-
                             <div class="tab-pane active" id="student">
-
                                 <form class="registerform" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php" method="post">
                                     <div class="form-group">
                                         <input type="email" class="form-control" formControlName="email" id="InputEmail1" placeholder="E-mail" maxlength="254" required
@@ -75,16 +73,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label class="form-check-label">
-                                                <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our
-                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
-                                                </small>
-                                            </label>
+                                    <form [formGroup]="othersFormGroup">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label class="form-check-label">
+                                                    <small>
+                                                        <input type="checkbox" formControlName="checkbox" id="InputCheckbox1" required>                                                        By
+                                                        clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                        and Privacy Policy.
+                                                    </small>
+                                                    <div *ngIf="submittedStudent">
+                                                        <p class="alert alert-danger" *ngIf="othersFormGroup.controls.checkbox.errors?.required">You
+                                                            must accept Terms & Conditions</p>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <br>
                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </form>
@@ -122,11 +127,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form [formGroup]="intitutionFormGroup">
+                                    <form [formGroup]="othersFormGroup">
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="name" id="InputUniversityName" placeholder="University name" required>
                                             <div *ngIf="submittedUniversity">
-                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">University
+                                                <p class="alert alert-danger" *ngIf="othersFormGroup.controls.name.errors?.required">University
                                                     name is required</p>
                                             </div>
                                         </div>
@@ -177,16 +182,23 @@
                                         </div>
 
                                     </form>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label class="form-check-label">
-                                                <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our
-                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
-                                                </small>
-                                            </label>
+                                    <form [formGroup]="othersFormGroup">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label class="form-check-label">
+                                                    <small>
+                                                        <input type="checkbox" formControlName="checkbox" id="InputCheckbox2" required>                                                        By
+                                                        clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                        and Privacy Policy.
+                                                    </small>
+                                                    <div *ngIf="submittedUniversity">
+                                                        <p class="alert alert-danger" *ngIf="othersFormGroup.controls.checkbox.errors?.required">You
+                                                            must accept Terms & Conditions</p>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <br>
                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </form>
@@ -224,11 +236,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form [formGroup]="intitutionFormGroup">
+                                    <form [formGroup]="othersFormGroup">
                                         <div class="form-group">
                                             <input type="text" class="form-control" formControlName="name" id="InputCompanyName" placeholder="Company name" required>
                                             <div *ngIf="submittedCompany">
-                                                <p class="alert alert-danger" *ngIf="intitutionFormGroup.controls.name.errors?.required">Company
+                                                <p class="alert alert-danger" *ngIf="othersFormGroup.controls.name.errors?.required">Company
                                                     name is required</p>
                                             </div>
                                         </div>
@@ -278,19 +290,24 @@
                                                     Incorrect zip code</p>
                                             </div>
                                         </div>
-
                                     </form>
-
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label class="form-check-label">
-                                                <small>
-                                                    <input type="checkbox" required> By clicking Register, you agree to our
-                                                    Terms & Conditions, Visitor Agreement and Privacy Policy.
-                                                </small>
-                                            </label>
+                                    <form [formGroup]="othersFormGroup">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label class="form-check-label">
+                                                    <small>
+                                                        <input type="checkbox" formControlName="checkbox" id="InputCheckbox3" required>                                                        By
+                                                        clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                        and Privacy Policy.
+                                                    </small>
+                                                    <div *ngIf="submittedCompany">
+                                                        <p class="alert alert-danger" *ngIf="othersFormGroup.controls.checkbox.errors?.required">You
+                                                            must accept Terms & Conditions</p>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <br>
                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </form>

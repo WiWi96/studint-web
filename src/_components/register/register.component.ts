@@ -21,7 +21,10 @@ export class RegisterComponent implements OnInit {
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   addressFormGroup: FormGroup;
-  intitutionFormGroup: FormGroup;
+  othersFormGroup: FormGroup;
+
+  checkbox: FormControl;
+  conditions: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,10 +51,13 @@ export class RegisterComponent implements OnInit {
       houseNo: ['', [Validators.required, Validators.pattern("[a-zA-z0-9]+")]]
     })
 
-    this.intitutionFormGroup = this.formBuilder.group({
-      name: ['', [Validators.required]]
+    this.othersFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      checkbox: ['', [Validators.required]]
     })
-
+    
+    this.checkbox = new FormControl('', Validators.required);
+ 
   }
 
   get f() { return this.registrationFormGroup.controls; }
