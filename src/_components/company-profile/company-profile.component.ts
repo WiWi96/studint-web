@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddressFormComponent } from '../_forms/address-form/address-form.component';
 
 @Component({
     selector: 'app-company-profile',
@@ -12,7 +14,10 @@ export class CompanyProfileComponent implements OnInit {
     expanded = false;
     company: CompanyProfile;
 
-    constructor(private companyProfileService: CompanyProfileService) {
+    constructor(
+        private companyProfileService: CompanyProfileService,
+        private modalService: NgbModal
+        ) {
         this.company = {
             profileName: {
                 id: 1,
@@ -81,5 +86,9 @@ export class CompanyProfileComponent implements OnInit {
 
     photoExists(profile: ProfileName): Boolean {
         return profile.photo && profile.photo.length > 0;
+    }
+
+    openExampleModalWindow() {
+        const modalRef = this.modalService.open(AddressFormComponent);
     }
 }

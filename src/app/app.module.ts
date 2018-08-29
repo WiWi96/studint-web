@@ -71,6 +71,10 @@ import { AddressFormComponent } from '_components/_forms/address-form/address-fo
   providers: [CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
     TeamService, PostService, MainPageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [
+    AddressFormComponent
+  ]
 })
 export class AppModule { }
