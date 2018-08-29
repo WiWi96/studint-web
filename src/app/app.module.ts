@@ -34,6 +34,9 @@ import { StaticBarComponent } from '_components/static-bar/static-bar.component'
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
 import { ErrorPageComponent } from '_components/error-page/error-page.component';
+import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
+import { AddressFormComponent } from '_components/_forms/address-form/address-form.component';
+
 
 
 @NgModule({
@@ -49,7 +52,9 @@ import { ErrorPageComponent } from '_components/error-page/error-page.component'
     CompanyProfileComponent,
     StaticBarComponent,
     WallComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ModalWindowComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,

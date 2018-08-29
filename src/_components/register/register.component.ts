@@ -42,11 +42,11 @@ export class RegisterComponent implements OnInit {
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      town: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
+      town: ['', [Validators.required, Validators.pattern("[a-zA-Z]+")]],
       postCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
       country: ['', [Validators.required]],
-      houseNo: ['', [Validators.required, Validators.pattern("[a-zA-z0-9]+")]]
+      houseNo: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9]+")]]
     })
 
     this.othersFormGroup = this.formBuilder.group({
