@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-address-form',
@@ -12,6 +13,7 @@ export class AddressFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,10 @@ export class AddressFormComponent implements OnInit {
       country: ['', [Validators.required]],
       houseNo: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9]+")]]
     })
+  }
+
+  close() {
+    this.activeModal.close();
   }
 
 }

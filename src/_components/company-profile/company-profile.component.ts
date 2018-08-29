@@ -88,7 +88,7 @@ export class CompanyProfileComponent implements OnInit {
         return profile.photo && profile.photo.length > 0;
     }
 
-    openExampleModalWindow() {
+    openExampleModalWindow(): any {
         const modalRef = this.modalService.open(AddressFormComponent);
     }
 }
