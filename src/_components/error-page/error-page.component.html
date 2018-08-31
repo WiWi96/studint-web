@@ -10,7 +10,7 @@
         <p *ngSwitchCase="'4xx'">The request wasn't correct. Try again</p>
         <p *ngSwitchDefault>To be honest... We don't know what happened here</p>
       </div>
-      <div class="col-md-6 order-1 order-md-2 my-4 my-md-auto">
+      <div class="road-sign-parent col-md-6 order-1 order-md-2">
         <div class="road-sign-container">
           <div class="road-sign">
             <span class="road-sign-text">
@@ -18,8 +18,8 @@
             </span>
           </div>
           <div class="road-sign-code-container">
-            <div class="road-sign-code">
-              <span>{{code || 404}}</span>
+            <div [ngClass]="{'hidden': !code}" class="road-sign-code">
+              <span>{{code}}</span>
             </div>
           </div>
         </div>

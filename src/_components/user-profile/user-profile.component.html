@@ -1,13 +1,13 @@
 <div id="profile-background-photo" style="background-image: url('https://static1.visitestonia.com/images/2890339/Estonian_forest_reasons_to_visit_Sven_Zacek.jpg')"></div>
 <div class="profile-header container">
     <div class="profile-top row text-center text-sm-left">
-        <div [ngClass]="{'hidden': !photoExists(user.profileName)}" class="profile-photo-container col-sm-auto">
-            <div class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + user.profileName.photo + ')'}"></div>
+        <div class="profile-photo-container col-sm-auto">
+            <div *ngIf="user?.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + user.profileName.photo + ')'}"></div>
         </div>
         <div class="profile-card col">
             <div class="profile-name">
-                <h1>{{user.profileName.name}}</h1>
-                <h6 [ngSwitch]="user.status" id="profile-status">
+                <h1>{{user?.profileName.name}}</h1>
+                <h6 [ngSwitch]="user?.status" id="profile-status">
                     <span *ngSwitchCase="'ready'">Ready to join a project</span>
                     <span *ngSwitchCase="'busy'">Currently doing something</span>
                     <span *ngSwitchCase="'new'">Looking around</span>
@@ -16,23 +16,23 @@
             </div>
             <div class="profile-bio-container row d-block">
                 <div class="profile-bio col-md-5 text-left float-left">
-                    <div *ngIf="user.universities.length" class="bio-item">
+                    <div *ngIf="user?.universities?.length" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
                         <p>3rd year student of Computer Science<br> University of Chicago</p>
                     </div>
-                    <div *ngIf="user.languages.length" class="bio-item">
+                    <div *ngIf="user?.languages?.length" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-language"></i></div>
                         <p>{{getLanguages()}}</p>
                     </div>
                     <div class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-flask"></i></div>
-                        <p *ngIf="!user.projects.length">I'm really new here</p>
-                        <p *ngIf="user.projects.length > 0">I took part in {{user.projects.length}} <span class="studint-logo"></span> projects.</p>
+                        <p *ngIf="!user?.projects?.length">I'm really new here</p>
+                        <p *ngIf="user?.projects?.length > 0">I took part in {{user?.projects.length}} <span class="studint-logo"></span> projects.</p>
                     </div>
                 </div>
-                <div *ngIf="user.skills.length" class="profile-skills col-md-7 float-left">
+                <div *ngIf="user?.skills?.length" class="profile-skills col-md-7 float-left">
                     <h4>My skills</h4>
-                    <span class="skill-item" *ngFor="let skill of user.skills">
+                    <span class="skill-item" *ngFor="let skill of user?.skills">
                         {{skill.name}}
                     </span>
                 </div>
@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="user.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
+<div *ngIf="user?.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
     <div class="profile-description mx-4">
         <h4>Read my story</h4>
         <div [innerHTML]="user.description" class="profile-description-text">
@@ -52,9 +52,9 @@
 </div>
 <div class="container">
     <div class="row">
-        <div *ngIf="user.universities.length" class="profile-universities bg-primary col-md m-1">
+        <div *ngIf="user?.universities?.length" class="profile-universities bg-primary col-md m-1">
             <h4>Schools</h4>
-            <div *ngFor="let university of user.universities" class="item bg-light container my-3">
+            <div *ngFor="let university of user?.universities" class="item bg-light container my-3">
                 <h5>{{university.name}}</h5>
                 <h6>since 2015</h6>
                 <p>Computer Science</p>
@@ -62,14 +62,14 @@
         </div>
         <div class="profile-projects bg-dark col-md m-1">
             <h4><span class="studint-logo"></span> Projects</h4>
-            <div *ngIf="!user.projects.length" class="no-projects text-center p-5">
+            <div *ngIf="!user?.projects?.length" class="no-projects text-center p-5">
                 <h5>I haven't participated any</h5>
             </div>
-            <div *ngFor="let project of user.projects" class="item bg-light container my-3">
+            <div *ngFor="let project of user?.projects" class="item bg-light container my-3">
                 <h5>{{project.name}}</h5>
                 <h6>by PolSl</h6>
             </div>
         </div>
     </div>
 </div>
-<app-wall [posts]="user.posts"></app-wall>
+<app-wall [posts]="user?.posts"></app-wall>

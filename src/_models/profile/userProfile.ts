@@ -5,11 +5,12 @@ import { Language } from '../skill/language';
 export class UserProfile {
     profileName: ProfileName;
     description: string;
+    experienceInfos: Array<Object>;
     profiles: Map<string, string>;
     posts: Array<Post> = [];
     status: string;
     projects: Array<ProfileName> = [];
-    universities: Array<ProfileName> = [];
+    studiesInfos: Array<Object>;
     skills: Array<Skill> = [];
     languages: Array<Language> = [];
 }

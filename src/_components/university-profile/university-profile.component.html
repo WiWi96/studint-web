@@ -1,20 +1,20 @@
 <div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')"></div>
 <div class="profile-header container">
     <div class="profile-top row text-center text-sm-left">
-        <div [ngClass]="{'hidden': !photoExists(university.profileName)}" class="profile-photo-container col-sm-auto">
-            <div class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + university.profileName.photo + ')'}"></div>
+        <div class="profile-photo-container col-sm-auto">
+            <div *ngIf="university?.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + university.profileName.photo + ')'}"></div>
         </div>
         <div class="profile-card col">
             <div class="profile-name">
-                <h1>{{university.profileName.name}}</h1>
+                <h1>{{university?.profileName?.name}}</h1>
             </div>            
             <div class="profile-bio-container row d-block">
                 <div class="profile-bio col-md-5 text-left float-left">
-                    <div class="bio-item">
+                    <div *ngIf="university?.address" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <p>{{university.address.street + ' ' + university.address.houseNo}}<br>{{university.address.postCode + ' ' + university.address.town + ', ' + university.address.country}}</p>
                     </div>
-                    <div *ngIf="university.type.length" class="bio-item">
+                    <div *ngIf="university?.type?.length" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
                         <p>{{university.type}}</p>
                     </div>
@@ -37,7 +37,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="profile-courses col-md-7 float-left">
+                <div *ngIf="university?.courses?.length > 0" class="profile-courses col-md-7 float-left">
                     <h4>Our courses</h4>
                     <span class="course-item" *ngFor="let course of university.courses">
                         {{course.name}}
@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="university.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
+<div *ngIf="university?.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
     <div class="profile-description mx-4">
         <h4>About us</h4>
         <div [innerHTML]="university.description" class="profile-description-text">
@@ -58,4 +58,4 @@
         </div>
     </div>
 </div>
-<app-wall [posts]="university.posts"></app-wall>
+<app-wall [posts]="university?.posts"></app-wall>

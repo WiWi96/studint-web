@@ -1,13 +1,13 @@
 <div id="profile-background-photo" style="background-image: url('https://static1.visitestonia.com/images/2890339/Estonian_forest_reasons_to_visit_Sven_Zacek.jpg')"></div>
 <div class="profile-header container">
     <div class="profile-top row text-center text-sm-left">
-        <div [ngClass]="{'hidden': !photoExists(project.profileName)}" class="profile-photo-container col-sm-auto">
-            <div class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + project.profileName.photo + ')'}"></div>
+        <div class="profile-photo-container col-sm-auto">
+            <div *ngIf="project?.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + project.profileName.photo + ')'}"></div>
         </div>
         <div class="profile-card col">
             <div class="profile-name">
-                <h1>{{project.profileName.name}}</h1>
-                <h6 [ngSwitch]="project.status" id="profile-status">
+                <h1>{{project?.profileName?.name}}</h1>
+                <h6 [ngSwitch]="project?.status" id="profile-status">
                     <span *ngSwitchCase="'inprogress'">In progress</span>
                     <span *ngSwitchCase="'invite'">Join us!</span>
                     <span *ngSwitchCase="'tba'">To be announced</span>
@@ -23,11 +23,11 @@
                             <i *ngFor="let i of Arr(5 - getDifficultyNumber()).fill(1)" class="far fa-star"></i>
                         </div>
                     </div>
-                    <div *ngIf="project.duration" class="info-item d-block text-center text-sm-left">
+                    <div *ngIf="project?.duration" class="info-item d-block text-center text-sm-left">
                             <h6>Estimated duration</h6>
                             <p>{{project.duration.value}} {{getDurationUnit(project.duration)}}</p>
                         </div>
-                    <div *ngIf="project.startDate" [ngSwitch]="getDateStatus(project.startDate)" class="info-item">
+                    <div *ngIf="project?.startDate" [ngSwitch]="getDateStatus(project.startDate)" class="info-item">
                         <div class="info-item-icon"><i class="fas fa-play"></i></div>
                         <p *ngSwitchCase="'future'">Project starts on {{project.startDate | amDateFormat: 'LL'}}</p>
                         <p *ngSwitchCase="'tenDays'">Project is starting in less than 10 days! ({{project.startDate | amDateFormat:
@@ -38,7 +38,7 @@
                         <p *ngSwitchCase="'yesterday'">Project started yesterday</p>
                         <p *ngSwitchCase="'past'">Project started on {{project.startDate | amDateFormat: 'LL'}}</p>
                     </div>
-                    <div *ngIf="project.joiningDate" [ngSwitch]="getDateStatus(project.joiningDate)" class="info-item">
+                    <div *ngIf="project?.joiningDate" [ngSwitch]="getDateStatus(project.joiningDate)" class="info-item">
                         <div class="info-item-icon"><i class="fas fa-stopwatch"></i></div>
                         <p *ngSwitchCase="'future'">Entries are accepted until {{project.joiningDate | amDateFormat: 'LL'}}</p>
                         <p *ngSwitchCase="'tenDays'" class="bold">Little time left to join the project! (deadline is on {{project.joiningDate
@@ -49,7 +49,7 @@
                         <p *ngSwitchCase="'past'">Entries are no longer accepted</p>
                     </div>
                 </div>
-                <div *ngIf="project.technologies.length" class="profile-technologies col-md-7 float-left">
+                <div *ngIf="project?.technologies?.length" class="profile-technologies col-md-7 float-left">
                     <h4>Technologies</h4>
                     <span class="technology-item" *ngFor="let technology of project.technologies">
                         {{technology.name}}
@@ -59,7 +59,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="project.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
+<div *ngIf="project?.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
     <div class="profile-description mx-4">
         <h4>Project description</h4>
         <div [innerHTML]="project.description" class="profile-description-text">
@@ -69,25 +69,3 @@
         </div>
     </div>
 </div>
-<!-- <div class="container">
-    <div class="row">
-        <div *ngIf="project.universities.length" class="profile-universities bg-primary col-md m-1">
-            <h4>Schools</h4>
-            <div *ngFor="let university of project.universities" class="item bg-light container my-3">
-                <h5>{{university.name}}</h5>
-                <h6>since 2015</h6>
-                <p>Computer Science</p>
-            </div>
-        </div>
-        <div class="profile-projects bg-dark col-md m-1">
-            <h4><span class="studint-logo"></span> Projects</h4>
-            <div *ngIf="!project.projects.length" class="no-projects text-center p-5">
-                <h5>I haven't participated any</h5>
-            </div>
-            <div *ngFor="let project of project.projects" class="item bg-light container my-3">
-                <h5>{{project.name}}</h5>
-                <h6>by PolSl</h6>
-            </div>
-        </div>
-    </div>
-</div> -->
