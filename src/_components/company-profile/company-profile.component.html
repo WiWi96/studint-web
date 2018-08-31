@@ -1,20 +1,20 @@
 <div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/374018/pexels-photo-374018.jpeg')"></div>
 <div class="profile-header container">
     <div class="profile-top row text-center text-sm-left">
-        <div [ngClass]="{'hidden': !photoExists(company.profileName)}" class="profile-photo-container col-sm-auto">
-            <div class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + company.profileName.photo + ')'}"></div>
+        <div class="profile-photo-container col-sm-auto">
+            <div *ngIf="company?.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + company.profileName.photo + ')'}"></div>
         </div>
         <div class="profile-card col">
             <div class="profile-name">
-                <h1>{{company.profileName.name}}</h1>
+                <h1>{{company?.profileName?.name}}</h1>
             </div>
             <div class="profile-bio-container row d-block">
                 <div class="profile-bio col-md-auto text-left float-left">
-                    <div class="bio-item">
+                    <div *ngIf="company?.address" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <p>{{company.address.street + ' ' + company.address.houseNo}}<br>{{company.address.postCode + ' ' + company.address.town + ', ' + company.address.country}}</p>
                     </div>
-                    <div *ngIf="company.type.length" class="bio-item">
+                    <div *ngIf="company?.type?.length" class="bio-item">
                         <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
                         <p>{{company.type}}</p>
                     </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="company.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
+<div *ngIf="company?.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
     <div class="profile-description mx-4">
         <h4>About us</h4>
         <div [innerHTML]="company.description" class="profile-description-text">
@@ -56,14 +56,14 @@
     <div class="row">        
         <div class="profile-projects bg-dark col-md m-1">
             <h4><span class="studint-logo"></span> Projects</h4>
-            <div *ngIf="!company.projects.length" class="no-projects text-center p-5">
+            <div *ngIf="!company?.projects?.length" class="no-projects text-center p-5">
                 <h5>I haven't participated any</h5>
             </div>
-            <div *ngFor="let project of company.projects" class="item bg-light container my-3">
+            <div *ngFor="let project of company?.projects" class="item bg-light container my-3">
                 <h5>{{project.name}}</h5>
                 <h6>IBM</h6>
             </div>
         </div>
     </div>
 </div>
-<app-wall [posts]="company.posts"></app-wall>
+<app-wall [posts]="company?.posts"></app-wall>

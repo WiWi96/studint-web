@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { ProfileName } from '_models/profile/profileName';
 import * as moment from 'moment';
@@ -14,60 +15,37 @@ import { SkillService } from '_service/skill/skill.service';
 })
 export class ProjectProfileComponent implements OnInit {
     expanded = false;
+    sub: any;
+    id: number;
     project: ProjectProfile;
     Arr = Array;
     public now = moment().startOf('day');
 
     constructor(
+        private route: ActivatedRoute,
         private projectProfileService: ProjectProfileService,
         private postService: PostService,
         private skillService: SkillService
     ) {
-        this.project = {
-            profileName: {
-                id: 1,
-                name: 'Cookie of the Month',
-                photo: ''
-            },
-            description: '<p>The project is all about cookies 🍪</p>',
-            technologies: [
-                {
-                    id: 1,
-                    name: 'Flour'
-                },
-                {
-                    id: 2,
-                    name: 'Cocoa'
-                },
-                {
-                    id: 1,
-                    name: 'Chocolate'
-                },
-                {
-                    id: 1,
-                    name: 'Eggs'
-                }
-            ],
-            type: 'Cooking',
-            level: 'intermediate',
-            participants: [
-                {
-                    id: 1,
-                    name: 'Lisa Chase',
-                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREbV9-iTUYpckFiSiJgS6H1flN2NgeSecPGRX5M4wT8m7mRQ5xNA'
-                }
-            ],
-            status: 'inprogress',
-            startDate: new Date(2018, 7, 25),
-            joiningDate: new Date(2018, 7, 31),
-            duration: {
-                value: 3,
-                unit: 'month'
-            }
-        }
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id'];
+            this.getProject(this.id);
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    getProject(id: number): void {
+        this.projectProfileService.getProject(id).subscribe(
+            data => { this.project = data },
+            err => console.error(err)
+        );
+    }
 
     expandDescription() {
         this.expanded = true;
@@ -104,20 +82,23 @@ export class ProjectProfileComponent implements OnInit {
     }
 
     getDifficultyNumber(): number {
-        switch (this.project.level) {
-            case 'beginner':
-                return 1;
-            case 'intermediate':
-                return 2;
-            case 'advanced':
-                return 3;
-            case 'professional':
-                return 4;
-            case 'master':
-                return 5;
-            default:
-                return undefined;
+        if (this.project) {
+            switch (this.project.level) {
+                case 'beginner':
+                    return 1;
+                case 'intermediate':
+                    return 2;
+                case 'advanced':
+                    return 3;
+                case 'professional':
+                    return 4;
+                case 'master':
+                    return 5;
+                default:
+                    return undefined;
+            }
         }
+        return undefined;
     }
 
     getDurationUnit(duration: Duration): String {
