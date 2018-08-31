@@ -3,6 +3,7 @@ import { NgModule, Component, OnInit, ViewChild } from "@angular/core";
 import { FormsModule, FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { MainPageService } from "_service/mainpage/mainpage.service";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private mainPageService: MainPageService
   ) { }
 
   ngOnInit() {
@@ -53,11 +55,13 @@ export class RegisterComponent implements OnInit {
       name: ['', [Validators.required]],
       checkbox: ['', [Validators.required]]
     })
-    
+
     this.firstNameSurnameFormGroup = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
       surname: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]]
     })
+
+    this.getAllProfileNames();
 
   }
 
@@ -86,6 +90,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
   }
+
+  //endpoints
+  getAllProfileNames() {
+    this.mainPageService.getAllProfileNames().subscribe(data => {
+      console.log(data);
+    })
+  }
+
 }
 
 export class RegistrationValidator {
