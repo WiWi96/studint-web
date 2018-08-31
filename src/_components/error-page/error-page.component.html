@@ -18,8 +18,8 @@
             </span>
           </div>
           <div class="road-sign-code-container">
-            <div class="road-sign-code">
-              <span>{{code || 404}}</span>
+            <div [ngClass]="{'hidden': !code}" class="road-sign-code">
+              <span>{{code}}</span>
             </div>
           </div>
         </div>
