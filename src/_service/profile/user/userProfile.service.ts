@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { UserProfile } from '_models/profile/userProfile';
+import { environment } from 'environments/environment';
 
 
 const httpOptions = {
@@ -12,7 +13,7 @@ const httpOptions = {
   })
 };
 
-const userUrl = '//localhost:8080/user';
+const userUrl = environment.apiEndpoint + '/user';
 
 @Injectable()
 export class UserProfileService {

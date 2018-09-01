@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { Skill } from '_models/skill/skill';
+import { environment } from 'environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -12,7 +13,7 @@ const httpOptions = {
     })
 };
 
-const profileUrl = '//localhost:8080/skill';
+const profileUrl = environment.apiEndpoint + '/skill';
 
 @Injectable()
 export class SkillService {

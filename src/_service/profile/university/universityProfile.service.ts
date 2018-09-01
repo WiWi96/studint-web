@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { UniversityProfile } from '_models/profile/universityProfile';
+import { environment } from 'environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,7 +12,7 @@ const httpOptions = {
   })
 };
 
-const universityUrl = '//localhost:8080/university';
+const universityUrl = environment.apiEndpoint + '/university';
 
 @Injectable()
 export class UniversityProfileService {

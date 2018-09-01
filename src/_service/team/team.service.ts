@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { CompanyProfile } from '_models/profile/companyProfile';
 import { Post } from '_models/post';
 import { Team } from '_models/team/team';
+import { environment } from 'environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
   })
 };
 
-const teamUrl = '//localhost:8080/team';
+const teamUrl = environment.apiEndpoint + '/team';
 
 @Injectable()
 export class TeamService {

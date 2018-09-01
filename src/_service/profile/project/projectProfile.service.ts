@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { ProjectProfile } from '_models/profile/projectProfile';
+import { environment } from 'environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,7 +12,7 @@ const httpOptions = {
   })
 };
 
-const projectUrl = '//localhost:8080/project';
+const projectUrl = environment.apiEndpoint + '/project';
 
 @Injectable()
 export class ProjectProfileService {
