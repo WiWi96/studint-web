@@ -1,57 +1,59 @@
 <span *ngIf="company">
     <div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/374018/pexels-photo-374018.jpeg')"></div>
-    <div class="profile-header container">
-        <div class="profile-top row text-center text-sm-left">
-            <div class="profile-photo-container col-sm-auto">
-                <div *ngIf="company.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + company.profileName.photo + ')'}"></div>
-            </div>
-            <div class="profile-card col">
-                <div class="profile-name">
-                    <h1>{{company.profileName?.name}}</h1>
+    <div class="container">
+        <div class="profile-header container">
+            <div class="profile-top row text-center text-sm-left">
+                <div class="profile-photo-container col-sm-auto">
+                    <div *ngIf="company.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + company.profileName.photo + ')'}"></div>
                 </div>
-                <div class="profile-bio-container row d-block">
-                    <div class="profile-bio col-md-auto text-left float-left">
-                        <div *ngIf="company.address" class="bio-item">
-                            <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <p>{{company.address.street + ' ' + company.address.houseNo}}<br>{{company.address.postCode +
-                                ' ' + company.address.town + ', ' + company.address.country}}</p>
+                <div class="profile-card col">
+                    <div class="profile-name">
+                        <h1>{{company.profileName?.name}}</h1>
+                    </div>
+                    <div class="profile-bio-container row d-block">
+                        <div class="profile-bio col-md-auto text-left float-left">
+                            <div *ngIf="company.address" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <p>{{company.address.street + ' ' + company.address.houseNo}}<br>{{company.address.postCode
+                                    + ' ' + company.address.town + ', ' + company.address.country}}</p>
+                            </div>
+                            <div *ngIf="company.type?.length" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <p>{{company.type}}</p>
+                            </div>
+                            <div class="bio-item">
+                                <a href="https://github.com" class="profile-item">
+                                    <div class="bio-item-icon"><i class="fab fa-github"></i></div>
+                                    Github
+                                </a>
+                            </div>
+                            <div class="bio-item">
+                                <a href="https://twitter.com" class="profile-item">
+                                    <div class="bio-item-icon"><i class="fab fa-twitter"></i></div>
+                                    Twitter
+                                </a>
+                            </div>
+                            <div class="bio-item">
+                                <a href="https://www.facebook.com" class="profile-item">
+                                    <div class="bio-item-icon"><i class="fab fa-facebook-square"></i></div>
+                                    Facebook
+                                </a>
+                            </div>
+                            <button class="btn btn-success" (click)="openExampleModalWindow()">OpenModalWindow</button>
                         </div>
-                        <div *ngIf="company.type?.length" class="bio-item">
-                            <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <p>{{company.type}}</p>
-                        </div>
-                        <div class="bio-item">
-                            <a href="https://github.com" class="profile-item">
-                                <div class="bio-item-icon"><i class="fab fa-github"></i></div>
-                                Github
-                            </a>
-                        </div>
-                        <div class="bio-item">
-                            <a href="https://twitter.com" class="profile-item">
-                                <div class="bio-item-icon"><i class="fab fa-twitter"></i></div>
-                                Twitter
-                            </a>
-                        </div>
-                        <div class="bio-item">
-                            <a href="https://www.facebook.com" class="profile-item">
-                                <div class="bio-item-icon"><i class="fab fa-facebook-square"></i></div>
-                                Facebook
-                            </a>
-                        </div>
-                        <button class="btn btn-success" (click)="openExampleModalWindow()">OpenModalWindow</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div *ngIf="company.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
-        <div class="profile-description mx-4">
-            <h4>About us</h4>
-            <div id="description" [innerHTML]="company.description" class="profile-description-text">
-            </div>
-            <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
-                <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
-                <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
+        <div *ngIf="company.description?.length > 0" class="profile-description-container container col-md-10" [ngClass]="{'expanded': expanded}">
+            <div class="profile-description mx-4">
+                <h4>About us</h4>
+                <div id="description" [innerHTML]="company.description" class="profile-description-text">
+                </div>
+                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                    <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
+                    <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
+                </div>
             </div>
         </div>
     </div>

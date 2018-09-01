@@ -1,55 +1,57 @@
 <span *ngIf="user">
     <div id="profile-background-photo" style="background-image: url('https://static1.visitestonia.com/images/2890339/Estonian_forest_reasons_to_visit_Sven_Zacek.jpg')"></div>
-    <div class="profile-header container">
-        <div class="profile-top row text-center text-sm-left">
-            <div class="profile-photo-container col-sm-auto">
-                <div *ngIf="user.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + user.profileName.photo + ')'}"></div>
-            </div>
-            <div class="profile-card col">
-                <div class="profile-name">
-                    <h1>{{user.profileName?.name}}</h1>
-                    <h6 [ngSwitch]="user.status" id="profile-status">
-                        <span *ngSwitchCase="'ready'">Ready to join a project</span>
-                        <span *ngSwitchCase="'busy'">Currently doing something</span>
-                        <span *ngSwitchCase="'new'">Looking around</span>
-                        <span *ngSwitchCase="'inactive'">I'm away for a while</span>
-                    </h6>
+    <div class="container">
+        <div class="profile-header container">
+            <div class="profile-top row text-center text-sm-left">
+                <div class="profile-photo-container col-sm-auto">
+                    <div *ngIf="user.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + user.profileName.photo + ')'}"></div>
                 </div>
-                <div class="profile-bio-container row d-block">
-                    <div class="profile-bio col-md-5 text-left float-left">
-                        <div *ngIf="user.universities?.length" class="bio-item">
-                            <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <p>3rd year student of Computer Science<br> University of Chicago</p>
-                        </div>
-                        <div *ngIf="user.languages?.length" class="bio-item">
-                            <div class="bio-item-icon"><i class="fas fa-language"></i></div>
-                            <p>{{getLanguages()}}</p>
-                        </div>
-                        <div class="bio-item">
-                            <div class="bio-item-icon"><i class="fas fa-flask"></i></div>
-                            <p *ngIf="!user.projects?.length">I'm really new here</p>
-                            <p *ngIf="user.projects?.length > 0">I took part in {{user.projects.length}} <span class="studint-logo"></span>
-                                projects.</p>
-                        </div>
+                <div class="profile-card col">
+                    <div class="profile-name">
+                        <h1>{{user.profileName?.name}}</h1>
+                        <h6 [ngSwitch]="user.status" id="profile-status">
+                            <span *ngSwitchCase="'ready'">Ready to join a project</span>
+                            <span *ngSwitchCase="'busy'">Currently doing something</span>
+                            <span *ngSwitchCase="'new'">Looking around</span>
+                            <span *ngSwitchCase="'inactive'">I'm away for a while</span>
+                        </h6>
                     </div>
-                    <div *ngIf="user.skills?.length" class="profile-skills col-md-7 float-left">
-                        <h4>My skills</h4>
-                        <span class="skill-item" *ngFor="let skill of user.skills">
-                            {{skill.name}}
-                        </span>
+                    <div class="profile-bio-container row d-block">
+                        <div class="profile-bio col-md-5 text-left float-left">
+                            <div *ngIf="user.universities?.length" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <p>3rd year student of Computer Science<br> University of Chicago</p>
+                            </div>
+                            <div *ngIf="user.languages?.length" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-language"></i></div>
+                                <p>{{getLanguages()}}</p>
+                            </div>
+                            <div class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-flask"></i></div>
+                                <p *ngIf="!user.projects?.length">I'm really new here</p>
+                                <p *ngIf="user.projects?.length > 0">I took part in {{user.projects.length}} <span class="studint-logo"></span>
+                                    projects.</p>
+                            </div>
+                        </div>
+                        <div *ngIf="user.skills?.length" class="profile-skills col-md-7 float-left">
+                            <h4>My skills</h4>
+                            <span class="skill-item" *ngFor="let skill of user.skills">
+                                {{skill.name}}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div *ngIf="user.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
-        <div class="profile-description mx-4">
-            <h4>Read my story</h4>
-            <div id="description" [innerHTML]="user.description" class="profile-description-text">
-            </div>
-            <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
-                <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
-                <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
+        <div *ngIf="user.description?.length > 0" class="profile-description-container container col-md-10" [ngClass]="{'expanded': expanded}">
+            <div class="profile-description mx-4">
+                <h4>Read my story</h4>
+                <div id="description" [innerHTML]="user.description" class="profile-description-text">
+                </div>
+                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                    <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
+                    <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
+                </div>
             </div>
         </div>
     </div>
