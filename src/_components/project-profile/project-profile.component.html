@@ -69,3 +69,16 @@
         </div>
     </div>
 </div>
+<div *ngIf="project?.participants?.length" class="container">
+    <div class="profile-participants__container row">
+        <h4>Team members</h4>
+            <div class="profile-participants row">
+                <div class="participant-photo-container col-sm-auto" *ngFor="let participant of project.participants">
+                    <div *ngIf="project?.profileName?.photo" class="participant-photo" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
+                    <a [routerLink]="['/user', participant.id]">
+                        <p align="center" class="bold">{{participant.name}}</p>
+                    </a>
+            </div>
+        </div>
+    </div>
+</div>
