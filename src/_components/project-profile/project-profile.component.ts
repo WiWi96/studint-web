@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { ProfileName } from '_models/profile/profileName';
 import * as moment from 'moment';
@@ -7,6 +8,7 @@ import { Duration } from '_models/duration';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { PostService } from '_service/post/post.service';
 import { SkillService } from '_service/skill/skill.service';
+import { AddressFormComponent } from '../_forms/address-form/address-form.component';
 
 @Component({
     selector: 'app-project-profile',
@@ -25,7 +27,8 @@ export class ProjectProfileComponent implements OnInit {
         private route: ActivatedRoute,
         private projectProfileService: ProjectProfileService,
         private postService: PostService,
-        private skillService: SkillService
+        private skillService: SkillService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -113,5 +116,9 @@ export class ProjectProfileComponent implements OnInit {
             text += "s";
         }
         return text;
+    }
+
+    deleteProjectModal(content): any {
+        const modalRef = this.modalService.open(content);
     }
 }

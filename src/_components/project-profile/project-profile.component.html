@@ -1,5 +1,21 @@
 <div id="profile-background-photo" style="background-image: url('https://static1.visitestonia.com/images/2890339/Estonian_forest_reasons_to_visit_Sven_Zacek.jpg')"></div>
 <div class="profile-header container">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Warning</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure, you want to delete your project?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Delete fuction here')">Delete</button>
+            <button type="button" class="btn btn-outline-dark" (click)="d('Close click')">Cancel</button>
+        </div>
+    </ng-template>
+    <button class="btn btn-sm btn-outline-primary" (click)="deleteProjectModal(content)">Delete this project</button>
     <div class="profile-top row text-center text-sm-left">
         <div class="profile-photo-container col-sm-auto">
             <div *ngIf="project?.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + project.profileName.photo + ')'}"></div>
