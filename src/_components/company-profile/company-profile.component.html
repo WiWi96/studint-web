@@ -47,10 +47,11 @@
     <div *ngIf="company.description?.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
         <div class="profile-description mx-4">
             <h4>About us</h4>
-            <div [innerHTML]="company.description" class="profile-description-text">
+            <div id="description" [innerHTML]="company.description" class="profile-description-text">
             </div>
-            <div class="profile-description-more col" (click)="expandDescription()">
-                <span><i class="fas fa-angle-down"></i></span>
+            <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
+                <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
             </div>
         </div>
     </div>

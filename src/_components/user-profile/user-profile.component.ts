@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { UserProfile } from '_models/profile/userProfile';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private elementRef: ElementRef,
         private userProfileService: UserProfileService,
         private skillService: SkillService,
         private postService: PostService,
@@ -44,12 +45,14 @@ export class UserProfileComponent implements OnInit {
         );
     }
 
-    expandDescription() {
-        this.expanded = true;
-    }
-
     showDescriptionMoreButton() {
+        let element = document.getElementById('description');
+        let height = element.offsetHeight;
 
+        if (height > 250) {
+            return true;
+        }
+        return false;
     }
 
     getLanguages(): String {

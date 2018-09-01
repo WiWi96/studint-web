@@ -42,8 +42,14 @@ export class CompanyProfileComponent implements OnInit {
         );
     }
 
-    expandDescription() {
-        this.expanded = true;
+    showDescriptionMoreButton() {
+        let element = document.getElementById('description');
+        let height = element.offsetHeight;
+
+        if (height > 250) {
+            return true;
+        }
+        return false;
     }
 
     photoExists(profile: ProfileName): Boolean {

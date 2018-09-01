@@ -35,7 +35,7 @@ export class ErrorsHandler implements ErrorHandler {
                 }
             }
         } else {
-            return notificationService.notify(error.message);
+            console.error(error.message);
         }
     }
 }

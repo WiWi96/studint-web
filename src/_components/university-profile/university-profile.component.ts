@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfile } from '_models/profile/universityProfile';
@@ -11,7 +11,7 @@ import { error } from '@angular/compiler/src/util';
     templateUrl: 'university-profile.component.html',
     styleUrls: ['./university-profile.component.less'],
 })
-export class UniversityProfileComponent implements OnInit {
+export class UniversityProfileComponent implements OnInit, OnDestroy {
     id: number;
     expanded = false;
     private sub: any;
@@ -35,14 +35,20 @@ export class UniversityProfileComponent implements OnInit {
         this.sub.unsubscribe();
     }
 
+    showDescriptionMoreButton() {
+        let element = document.getElementById('description');
+        let height = element.offsetHeight;
+
+        if (height > 250) {
+            return true;
+        }
+        return false;
+    }
+
     getUniversity(id: number): void {
         this.universityProfileService.getUniversity(id).subscribe(
             data => { this.university = data },
         );
-    }
-
-    expandDescription() {
-        this.expanded = true;
     }
 
     photoExists(profile: ProfileName): Boolean {
