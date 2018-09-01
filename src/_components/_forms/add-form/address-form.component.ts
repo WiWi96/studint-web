@@ -12,6 +12,8 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 })
 export class AddressFormComponent implements OnInit {
 
+  addressCompany: Address;
+
   submittedStudent: boolean = false;
   submittedUniversity: boolean = false;
   submittedCompany: boolean = false;
@@ -25,7 +27,7 @@ export class AddressFormComponent implements OnInit {
   accountUniversityDetailsFormGroup: FormGroup;
   accountCompanyDetailsFormGroup: FormGroup;
 
-  addressCompany: Address;
+ 
 
   companyProfile: CompanyProfile;
   email: string;
@@ -39,18 +41,17 @@ export class AddressFormComponent implements OnInit {
 
   ngOnInit() {
     //this.addressCompany = this.companyProfile.address;
-    this.accountCompanyDetailsFormGroup = this.formBuilder.group({
-      email: [this.email, [Validators.required, Validators.email, Validators.maxLength(254)]],
+    this.createCompanyForm();
 
-    });
-  
+
   }
 
-  //get f() { return this.accountStudentDetailsFormGroup.controls; }
-  //get f2() { return this.accountUniversityDetailsFormGroup.controls; }
- //get f3() { return this.accountCompanyDetailsFormGroup.controls; }
+  get f() { return this.accountStudentDetailsFormGroup.controls; }
+  get f2() { return this.accountUniversityDetailsFormGroup.controls; }
+  get f3() { return this.accountCompanyDetailsFormGroup.controls; }
 
   close() {
+
     this.activeModal.close();
   }
 
@@ -73,24 +74,24 @@ export class AddressFormComponent implements OnInit {
       surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
     });
 
-    /*this.addressFormGroup = this.formBuilder.group({
-      town: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+    this.addressFormGroup = this.formBuilder.group({
+      town: [this.addressCompany.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       postalCode: [this.addressCompany.postCode, [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: [this.addressCompany.street, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       country: [this.addressCompany.country, [Validators.required]],
       houseNo: [this.addressCompany.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
-    });*/
-    
-    
+    });
 
 
- 
+    this.accountCompanyDetailsFormGroup = this.formBuilder.group({
+      address: this.addressFormGroup,
+    })
+
   }
 
-
-
   onSubmitCompany() {
-    this.submittedCompany = true;
+    this.addressCompany.town = this.accountCompanyDetailsFormGroup.get('town').value();
+    this.addressCompany.street = this.accountCompanyDetailsFormGroup.get('street').value();
   }
 }
 

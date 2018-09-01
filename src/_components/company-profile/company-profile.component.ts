@@ -18,7 +18,6 @@ export class CompanyProfileComponent implements OnInit {
     company: CompanyProfile;
 
     expanded = false;
-    tmp: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -27,7 +26,6 @@ export class CompanyProfileComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.tmp = 'warsaw';
         this.sub = this.route.params.subscribe(params => {
             this.id = +params['id'];
             this.getCompany(this.id);
@@ -55,6 +53,6 @@ export class CompanyProfileComponent implements OnInit {
     openExampleModalWindow(): any {
         const modalRef = this.modalService.open(AddressFormComponent);
 
-        modalRef.componentInstance.email = this.tmp;
+        modalRef.componentInstance.addressCompany = this.company.address;
     }
 }
