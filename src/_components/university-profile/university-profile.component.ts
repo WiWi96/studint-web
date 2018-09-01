@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 import { PostService } from '_service/post/post.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-university-profile',
@@ -10,93 +12,35 @@ import { PostService } from '_service/post/post.service';
     styleUrls: ['./university-profile.component.less'],
 })
 export class UniversityProfileComponent implements OnInit {
+    id: number;
     expanded = false;
+    private sub: any;
     university: UniversityProfile;
 
     constructor(
+        private route: ActivatedRoute,
         private universityProfileService: UniversityProfileService,
         private postService: PostService,
     ) {
-        this.university = {
-            profileName: {
-                id: 1,
-                name: 'Silesian University of Technology',
-                // tslint:disable-next-line:max-line-length
-                photo: 'https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png'
-            },
-            // tslint:disable-next-line:max-line-length
-            description: '<p>The Silesian University of Technology, a higher education institution with over 70 years of tradition in operating under various social and economic conditions, is a renowned technical university, recognized both in the scientific and research community, as well as in the area of higher education.</p><p>The main objective of our university is to train highly skilled engineering staff from the modern industry and to conduct innovative research. New ideas and solutions, born at the Silesian University of Technology, enable multilateral scientific cooperation in many areas of relevance to the economy, making the SUT an active player with regards to innovation and new technologies, required by the knowledge-based economy.</p>',
-            profiles: new Map(),
-            posts: [
-                {
-                    id: 1,
-                    author: {
-                        id: 1,
-                        name: 'PolSl',
-                        // tslint:disable-next-line:max-line-length
-                        photo: 'https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png',
-                    },
-                    publishedDate: new Date(2018, 8, 26, 17, 0),
-                    post: 'We are recruiting!'
-                },
-                {
-                    id: 1,
-                    author: {
-                        id: 1,
-                        name: 'PolSl',
-                        // tslint:disable-next-line:max-line-length
-                        photo: 'https://www.polsl.pl/logo/PublishingImages/Politechnika_Sl_logo_pl/pl/kolor/politechnika_sl_logo_pion_inwersja_pl_rgb.png',
-                    },
-                    publishedDate: new Date(2018, 7, 10, 9, 0),
-                    post: 'Happy holidays for all Students!'
-                }
-            ],
-            address: {
-                town: 'Gliwice',
-                postCode: '44-100',
-                street: 'Akademicka',
-                country: 'Poland',
-                houseNo: '2',
-            },
-            type: 'University of technology',
-            courses: [
-                {
-                    id: 1,
-                    name: 'Computer Science'
-                },
-                {
-                    id: 2,
-                    name: 'Architecture'
-                },
-                {
-                    id: 3,
-                    name: 'Building'
-                },
-                {
-                    id: 4,
-                    name: 'Chemistry'
-                },
-                {
-                    id: 5,
-                    name: 'Economics'
-                },
-                {
-                    id: 6,
-                    name: 'Geology'
-                },
-                {
-                    id: 7,
-                    name: 'Mathematics'
-                },
-                {
-                    id: 8,
-                    name: 'Medical Technology'
-                },
-            ],
-        }
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id'];
+            this.getUniversity(this.id);
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    getUniversity(id: number): void {
+        this.universityProfileService.getUniversity(id).subscribe(
+            data => { this.university = data },
+            err => console.error(err)
+        );
+    }
 
     expandDescription() {
         this.expanded = true;

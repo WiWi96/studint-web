@@ -3,8 +3,13 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
 import { AddressFormComponent } from '../_forms/address-form/address-form.component';
 import { Address } from '_models/address';
+=======
+import { AddressFormComponent } from '../_forms/add-form/address-form.component';
+
+>>>>>>> ee6f88257eb4f301b4c3f6a4383bddd773d375f1
 
 @Component({
     selector: 'app-company-profile',
