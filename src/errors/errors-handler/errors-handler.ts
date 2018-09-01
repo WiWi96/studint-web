@@ -23,7 +23,12 @@ export class ErrorsHandler implements ErrorHandler {
                     return router.navigate(['/login']);
                 }
                 else {
-                    this.errorsService.updateError(error.status);
+                    if (error.status === 0) {
+                        this.errorsService.updateError(503);
+                    }
+                    else {
+                        this.errorsService.updateError(error.status);
+                    }
                     this.zone.run(() => {
                         return router.navigate(['/error']);
                     });
