@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Address } from '_models/address';
 import { CompanyProfile } from '_models/profile/companyProfile';
+import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 
 
 @Component({
@@ -36,11 +37,12 @@ export class AddressFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    public companyProfileService: CompanyProfileService
   ) { }
 
   ngOnInit() {
-    //this.addressCompany = this.companyProfile.address;
+    this.addressCompany = this.companyProfile.address;
     this.createCompanyForm();
 
 
@@ -82,16 +84,28 @@ export class AddressFormComponent implements OnInit {
       houseNo: [this.addressCompany.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
     });
 
-
     this.accountCompanyDetailsFormGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
+      password: this.passwordFormGroup,
+      companyName: ['', [Validators.required]],
       address: this.addressFormGroup,
+      checkbox: ['', [Validators.required]]
     })
 
   }
 
   onSubmitCompany() {
-    this.addressCompany.town = this.accountCompanyDetailsFormGroup.get('town').value();
-    this.addressCompany.street = this.accountCompanyDetailsFormGroup.get('street').value();
+    this.setAddressDetails();
+    this.companyProfileService.updateCompany(this.companyProfile).subscribe();
+    this.activeModal.close();
+  }
+
+  setAddressDetails() {
+    this.addressCompany.town = this.addressFormGroup.get('town').value;
+    this.addressCompany.postCode = this.addressFormGroup.get('postalCode').value;
+    this.addressCompany.street = this.addressFormGroup.get('street').value;
+    this.addressCompany.country = this.addressFormGroup.get('country').value;
+    this.addressCompany.houseNo = this.addressFormGroup.get('houseNo').value;
   }
 }
 

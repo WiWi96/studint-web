@@ -52,7 +52,8 @@ export class CompanyProfileComponent implements OnInit {
     };
     openExampleModalWindow(): any {
         const modalRef = this.modalService.open(AddressFormComponent);
+        modalRef.componentInstance.companyProfile = this.company;
 
-        modalRef.componentInstance.addressCompany = this.company.address;
+
     }
 }
