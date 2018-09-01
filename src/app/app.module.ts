@@ -33,13 +33,11 @@ import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
-import { ErrorsComponent } from '_components/error-page/error-page.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
 import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
-
-
-
-
+import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
+import { NotificationService } from '_service/notification/notification.service';
+import { ErrorsService } from 'errors/errors-service/errors.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +52,6 @@ import { AddressFormComponent } from '_components/_forms/add-form/address-form.c
     CompanyProfileComponent,
     StaticBarComponent,
     WallComponent,
-    ErrorsComponent,
     ModalWindowComponent,
     AddressFormComponent
   ],
@@ -66,17 +63,18 @@ import { AddressFormComponent } from '_components/_forms/add-form/address-form.c
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule.forRoot()
+    NgbModule
   ],
-  providers: [CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
     TeamService, PostService, MainPageService],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    AddressFormComponent
+    ErrorsComponent, AddressFormComponent
   ]
 })
 export class AppModule { }

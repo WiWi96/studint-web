@@ -41,7 +41,6 @@ export class UserProfileComponent implements OnInit {
     getUser(id: number): void {
         this.userProfileService.getUser(id).subscribe(
             data => { this.user = data },
-            err => console.error(err)
         );
     }
 

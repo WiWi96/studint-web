@@ -39,7 +39,6 @@ export class CompanyProfileComponent implements OnInit {
     getCompany(id: number): void {
         this.companyProfileService.getCompany(id).subscribe(
             data => { this.company = data },
-            err => console.error(err)
         );
     }
 

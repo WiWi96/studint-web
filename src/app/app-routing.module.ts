@@ -8,9 +8,8 @@ import { UniversityProfileComponent } from '_components/university-profile';
 import { CompanyProfileComponent } from '_components/company-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
-
 import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
-import { ErrorsComponent } from '_components/error-page/error-page.component';
+import { ErrorsComponent } from 'errors';
 
 
 const routes: Routes = [
@@ -22,7 +21,8 @@ const routes: Routes = [
     { path: 'university/:id', component: UniversityProfileComponent },
     { path: 'project/:id', component: ProjectProfileComponent },
     { path: 'company/:id', component: CompanyProfileComponent },
-    { path: '**', component: ErrorsComponent, data: { code: 404 } }
+    { path: 'error', component: ErrorsComponent },
+    { path: '**', component: ErrorsComponent, data: { error: 404 } }
 ];
 
 // export const routing = RouterModule.forRoot(routes);

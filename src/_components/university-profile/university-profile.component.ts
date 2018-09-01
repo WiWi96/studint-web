@@ -38,7 +38,6 @@ export class UniversityProfileComponent implements OnInit {
     getUniversity(id: number): void {
         this.universityProfileService.getUniversity(id).subscribe(
             data => { this.university = data },
-            err => console.error(err)
         );
     }
 

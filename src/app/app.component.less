@@ -1,0 +1,25 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+
+.notification {
+    width: 20rem;
+    padding: 1rem;
+    position: fixed;
+    color: @primary-color;
+    font-weight: bold;
+    background-color: @gray-light;
+    top: 90px;
+    right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100;
+    .light-shadow;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    p {
+        margin: 0;
+    }
+}
