@@ -4,6 +4,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddressFormComponent } from '../_forms/address-form/address-form.component';
+import { Address } from '_models/address';
 
 @Component({
     selector: 'app-company-profile',
@@ -13,11 +14,13 @@ import { AddressFormComponent } from '../_forms/address-form/address-form.compon
 export class CompanyProfileComponent implements OnInit {
     expanded = false;
     company: CompanyProfile;
-
+    address: Address;
     constructor(
         private companyProfileService: CompanyProfileService,
         private modalService: NgbModal
         ) {
+            this.address = new Address();
+            this.address.street ="Poland";
         this.company = {
             profileName: {
                 id: 1,
@@ -52,13 +55,8 @@ export class CompanyProfileComponent implements OnInit {
                 post: 'Happy holidays for all Students!'
                 }
             ],
-            address: {
-                town: 'Katowice',
-                postCode: '40-028',
-                street: 'Francuska',
-                country: 'Poland',
-                houseNo: '42',
-            },
+            address: this.address,
+
             type: 'Information Technology and Services',
             projects: [{
                 id: 1,
@@ -88,7 +86,9 @@ export class CompanyProfileComponent implements OnInit {
         return profile.photo && profile.photo.length > 0;
     }
 
-    openExampleModalWindow(): any {
+    openExampleModalWindow() {
+        
         const modalRef = this.modalService.open(AddressFormComponent);
+        modalRef.componentInstance.address = this.company.address;
     }
 }

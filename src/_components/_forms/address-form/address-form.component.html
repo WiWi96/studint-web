@@ -6,37 +6,35 @@
 </div>
 <div class="modal-boy">
   <div class="container">
+    <input type="text" class="form-control" [(ngModel)]="this.address.street" id="InputCity2" placeholder="City" required>
     <form [formGroup]="addressFormGroup">
-      <div class="form-group">
-        <select class="custom-select form-control">
-          <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
-        </select>
+
+
+
+      <select class="custom-select form-control">
+        <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+      </select>
+
+      <input type="text" class="form-control" formControlName="town" id="InputCity2" placeholder="City" required>
+      <div *ngIf="submittedUniversity">
+        <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
+        <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.pattern">
+          Only letters are allowed</p>
       </div>
-      <div class="form-group">
-        <input type="text" class="form-control" formControlName="town" id="InputCity2" placeholder="City" required>
-        <div *ngIf="submittedUniversity">
-          <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.required">City is required</p>
-          <p class="alert alert-danger" *ngIf="addressFormGroup.controls.town.errors?.pattern">
-            Only letters are allowed</p>
-        </div>
+
+
+
+      <input formControlName="street">
+
+
+
+      <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber2" placeholder="House number" required>
+      <div *ngIf="submittedUniversity">
+        <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
+        <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.pattern">House number is incorrect</p>
       </div>
-      <div class="form-row">
-        <div class="col-md-6 mb-3">
-          <input type="text" class="form-control" formControlName="street" id="Street2" placeholder="Street" required>
-          <div *ngIf="submittedUniversity">
-            <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.required">Street is required</p>
-            <p class="alert alert-danger" *ngIf="addressFormGroup.controls.street.errors?.pattern">
-              Only letters are allowed</p>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber2" placeholder="House number" required>
-          <div *ngIf="submittedUniversity">
-            <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.required">House number is required</p>
-            <p class="alert alert-danger" *ngIf="addressFormGroup.controls.houseNo.errors?.pattern">House number is incorrect</p>
-          </div>
-        </div>
-      </div>
+
+
     </form>
   </div>
 </div>
