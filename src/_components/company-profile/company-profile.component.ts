@@ -4,7 +4,8 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddressFormComponent } from '../_forms/address-form/address-form.component';
+import { AddressFormComponent } from '../_forms/add-form/address-form.component';
+
 
 @Component({
     selector: 'app-company-profile',

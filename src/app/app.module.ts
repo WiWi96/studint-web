@@ -35,7 +35,9 @@ import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
 import { ErrorsComponent } from '_components/error-page/error-page.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { AddressFormComponent } from '_components/_forms/address-form/address-form.component';
+import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
+
+
 
 
 
