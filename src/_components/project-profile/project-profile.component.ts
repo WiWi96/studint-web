@@ -43,7 +43,6 @@ export class ProjectProfileComponent implements OnInit {
     getProject(id: number): void {
         this.projectProfileService.getProject(id).subscribe(
             data => { this.project = data },
-            err => console.error(err)
         );
     }
 
