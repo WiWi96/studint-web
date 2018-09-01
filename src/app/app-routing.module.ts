@@ -10,6 +10,7 @@ import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
 import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
 import { ErrorsComponent } from 'errors';
+import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
 
 
 const routes: Routes = [
@@ -17,10 +18,14 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'address', component: AddressFormComponent },
+
     { path: 'user/:id', component: UserProfileComponent },
     { path: 'university/:id', component: UniversityProfileComponent },
     { path: 'project/:id', component: ProjectProfileComponent },
     { path: 'company/:id', component: CompanyProfileComponent },
+
+    { path: 'manage-projects', component: ProjectManagementComponent },
+
     { path: 'error', component: ErrorsComponent },
     { path: '**', component: ErrorsComponent, data: { error: 404 } }
 ];

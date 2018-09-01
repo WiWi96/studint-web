@@ -38,6 +38,8 @@ import { AddressFormComponent } from '_components/_forms/add-form/address-form.c
 import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
+import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
+import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { ErrorsService } from 'errors/errors-service/errors.service';
     StaticBarComponent,
     WallComponent,
     ModalWindowComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    ProjectManagementComponent,
+    TeamManagementComponent
   ],
   imports: [
     BrowserModule,

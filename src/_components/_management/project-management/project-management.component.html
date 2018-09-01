@@ -1,0 +1,46 @@
+<div class="content container">
+  <div class="row">
+    <h1>Project management</h1>
+    <div class="col text-right">
+      <button class="btn btn-primary" (click)="createProject()">
+        <i class="fas fa-plus"></i> Create project
+      </button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped text-center">
+        <thead class="thead-default">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Project name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Start date</th>
+            <th scope="col">Joining date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects">
+            <td scope="row" class="align-middle">{{project.id}}</td>
+            <td class="align-middle bold text-left"><a [routerLink]="[ '/project', project.id ]">{{project.name}}</a></td>
+            <td class="align-middle" [ngSwitch]="project.status">
+                <span *ngSwitchCase="'inprogress'">In progress</span>
+                <span *ngSwitchCase="'invite'">Open</span>
+                <span *ngSwitchCase="'tba'">To be announced</span>
+                <span *ngSwitchCase="'finished'">Finished</span>
+                <span *ngSwitchCase="'canceled'">Canceled</span>
+            </td>
+            <td class="align-middle">{{project.startDate}}</td>
+            <td class="align-middle">{{project.joiningDate}}</td>
+            <td class="align-middle">
+              <div class="btn-group btn-group-sm" role="group" aria-label="Project actions">
+                <button class="btn btn-outline-primary bold" (click)="editDetails(project.id)">Edit details</button>
+                <button *ngIf="project.status !== 'canceled' && project.status !== 'finished'" (click)="manageTeams(project.id)" class="btn btn-outline-primary bold">Manage teams</button>
+                <button *ngIf="project.status !== 'canceled' && project.status !== 'finished'" (click)="cancelProject(project.id)" class="btn btn-danger bold">Cancel project</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
