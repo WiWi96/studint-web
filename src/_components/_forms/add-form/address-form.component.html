@@ -5,85 +5,21 @@
   </button>
 </div>
 <div class="modal-boy">
-  <div class="container">
-    <form class="registerform" [formGroup]="accountCompanyDetailsFormGroup" (ngSubmit)="onSubmitCompany()" action="mail.php"
-      method="post">
+  
+    <form class="registerform" [formGroup]="accountCompanyDetailsFormGroup" >
       <div class="form-group">
         <input type="email" class="form-control" formControlName="email" id="InputEmail3" placeholder="E-mail" required />
-        <div *ngIf="submittedCompany">
-          <p class="alert alert-danger" *ngIf="f3.email.errors?.required">Email is required</p>
-          <p class="alert alert-danger" *ngIf="f3.email.errors?.email && f.email.touched">Email is not valid</p>
-        </div>
+
       </div>
-      <div formGroupName="password">
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
-            minlength="4" required />
-          <div *ngIf="submittedCompany">
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').get('password').errors?.required">Repeat password is required</p>
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="repeatPassword" id="InputCompanyRepeatPassword3" placeholder="Repeat password"
-            required />
-          <div *ngIf="submittedCompany">
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').get('repeatPassword').errors?.required">Repeat password is required</p>
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" formControlName="companyName" id="InputCompanyName" placeholder="Company name" required>
-        <div *ngIf="submittedCompany">
-          <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.controls.companyName.errors?.required">Company name is required</p>
-        </div>
-      </div>
-      <div formGroupName="address">
-        <div class="form-group">
-          <select class="custom-select form-control">
-            <option *ngFor="let country of countries" [ngValue]="accountCompanyDetailsFormGroup.get('address').get('country')">{{country}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
-          <div *ngIf="submittedCompany">
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('town').errors?.pattern">
-              Only letters are allowed</p>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
-            <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
-              <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('street').errors?.pattern">
-                Only letters are allowed</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
-            <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
-              <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
-          <div *ngIf="submittedCompany">
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
-            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
-              Incorrect zip code</p>
-          </div>
-        </div>
-      </div>
+  
     </form>
-  </div>
+  
 </div>
 <div class="modal-footer">
+  <button class="btn" (click)="close()">
+    cancel
+  </button>
   <button class="btn btn-success" (click)="onSubmit()">
-    Submit Form
+    EDIT
   </button>
 </div>
