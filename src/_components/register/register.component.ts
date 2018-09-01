@@ -1,6 +1,6 @@
 // ts-ignore
 import { NgModule, Component, OnInit, ViewChild } from "@angular/core";
-import { FormsModule, FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormsModule, FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { MainPageService } from "_service/mainpage/mainpage.service";
@@ -25,6 +25,10 @@ export class RegisterComponent implements OnInit {
   othersFormGroup: FormGroup;
   firstNameSurnameFormGroup: FormGroup;
 
+
+  detailsAccount: FormGroup;
+
+  detailsFormGroup: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private mainPageService: MainPageService
@@ -37,6 +41,16 @@ export class RegisterComponent implements OnInit {
     }, {
         validator: RegistrationValidator.validate.bind(this)
       });
+
+
+
+    this.detailsAccount = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
+    });
+
+
+
+
 
     this.registrationFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
@@ -60,6 +74,13 @@ export class RegisterComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]],
       surname: ['', [Validators.required, Validators.pattern("[a-zA-z]+")]]
     })
+
+    this.detailsFormGroup = this.formBuilder.group({
+      emailAndPassword: this.registrationFormGroup,
+      name: this.othersFormGroup,
+      firstAndSecondName: this.firstNameSurnameFormGroup
+    });
+
 
     this.getAllProfileNames();
 
@@ -93,9 +114,7 @@ export class RegisterComponent implements OnInit {
 
   //endpoints
   getAllProfileNames() {
-    this.mainPageService.getAllProfileNames().subscribe(data => {
-      console.log(data);
-    })
+
   }
 
 }
