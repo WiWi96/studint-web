@@ -22,11 +22,9 @@ export class RegisterComponent implements OnInit {
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   addressFormGroup: FormGroup;
-  othersFormGroup: FormGroup;
   fullNameFormGroup: FormGroup;
 
 
-  detailsAccount: FormGroup;
 
   accountStudentDetailsFormGroup: FormGroup;
   accountUniversityDetailsFormGroup: FormGroup;
@@ -67,11 +65,6 @@ export class RegisterComponent implements OnInit {
       surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
     })
 
-    this.othersFormGroup = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      checkbox: ['', [Validators.required]]
-    })
-
     this.accountStudentDetailsFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
       password: this.passwordFormGroup,
@@ -105,11 +98,6 @@ export class RegisterComponent implements OnInit {
       street: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       country: ['', [Validators.required]],
       houseNo: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
-    });
-
-    this.othersFormGroup = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      checkbox: ['', [Validators.required]]
     });
 
     this.accountUniversityDetailsFormGroup = this.formBuilder.group({
@@ -148,10 +136,6 @@ export class RegisterComponent implements OnInit {
       houseNo: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
     });
 
-    this.othersFormGroup = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      checkbox: ['', [Validators.required]]
-    });
 
     this.accountCompanyDetailsFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
