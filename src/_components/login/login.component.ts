@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService, JwtToken } from 'app/auth/auth.service';
 import { first } from 'rxjs/operators';
 
 
@@ -16,11 +17,10 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     error = '';
+    username: string;
+    password: string;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router) { }
+constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
         this.loginFormGroup = this.formBuilder.group({
@@ -59,4 +59,18 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });*/
     }
+    authenticate() {
+        const returnUrl: string = this.route.snapshot.queryParams['returnUrl'];
+    
+        this.authService.logIn(this.username, this.password)
+          .subscribe((resp: JwtToken) => {
+            this.authService.storeToken(resp);
+            this.router.navigateByUrl(returnUrl || '/mainpage');
+            this.authService.refreshPermissions();
+          }, (error) => {
+            // TODO: handle invalid credentials
+            this.username = '';
+            this.password = '';
+          });
+      }
 }

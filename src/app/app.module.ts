@@ -39,6 +39,13 @@ import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
 
+// Security
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { TokenStorage } from 'app/auth/token-storage';
+import { JwtModule } from '@auth0/angular-jwt';
+import { jwtConfig } from './auth/jwtConfig';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,11 +73,12 @@ import { ErrorsService } from 'errors/errors-service/errors.service';
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule
+    NgbModule,
+    JwtModule.forRoot(jwtConfig),
   ],
   providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService],
+    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage],
   bootstrap: [AppComponent],
 
   entryComponents: [
