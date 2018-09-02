@@ -39,6 +39,8 @@ import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
+import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
+
 
 
 
@@ -57,7 +59,8 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     WallComponent,
     ModalWindowComponent,
     FileSelectDirective,
-    CompanyUniversityEditModalComponent
+    CompanyUniversityEditModalComponent,
+    StudentEditModalComponent
     
   ],
   imports: [
@@ -79,7 +82,7 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, CompanyUniversityEditModalComponent
+    ErrorsComponent, CompanyUniversityEditModalComponent, StudentEditModalComponent
   ]
 })
 export class AppModule { }
