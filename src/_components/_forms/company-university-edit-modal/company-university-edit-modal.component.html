@@ -6,99 +6,92 @@
 </div>
 <div class="modal-boy">
   <div class="container">
-    <div *ngIf="isCompany || isUniversity">
-      <form class="registerform" [formGroup]="accountDetailsFormGroup">
+    <form class="registerform" [formGroup]="accountDetailsFormGroup">
+      <div class="form-group">
+        <div *ngIf="isCompany">
+          <small>Company</small>
+          <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+        </div>
+        <div *ngIf="isUniversity">
+          <small>University</small>
+          <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+        </div>
+        <div *ngIf="isCompany">
+          <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>
+        </div>
+      </div>
+      <div formGroupName="address">
         <div class="form-group">
-          <div *ngIf="isCompany">
-            <small>Company</small>
-            <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
-          </div>
-          <div *ngIf="isUniversity">
-            <small>University</small>
-            <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
-          </div>
-          <div *ngIf="isCompany">
-            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>
+          <small>Country</small>
+          <select class="custom-select form-control" formControlName="country">
+            <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <small>City</small>
+          <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+          <div *ngIf="submittedCompany">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.pattern">
+              Only letters are allowed</p>
           </div>
         </div>
-        <div formGroupName="address">
-          <div class="form-group">
-            <small>Country</small>
-            <select class="custom-select form-control" formControlName="country">
-              <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <small>City</small>
-            <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <small>Street</small>
+            <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
             <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.pattern">
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.pattern">
                 Only letters are allowed</p>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6 mb-3">
-              <small>Street</small>
-              <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
-              <div *ngIf="submittedCompany">
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.pattern">
-                  Only letters are allowed</p>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <small>House number</small>
-              <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
-              <div *ngIf="submittedCompany">
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Postal code</small>
-            <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
+          <div class="col-md-6 mb-3">
+            <small>House number</small>
+            <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
             <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
-                Incorrect zip code</p>
-            </div>
-          </div>
-        </div>
-        <div formGroupName="socialServices">
-          <div class="form-group">
-            <small>Github</small>
-            <input type="text" class="form-control" formControlName="github" id="github">
-            <div *ngIf="submittedCompany">
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Twitter</small>
-            <input type="text" class="form-control" formControlName="twitter" id="twitter">
-            <div *ngIf="submittedCompany">
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Facebook</small>
-            <input type="text" class="form-control" formControlName="facebook" id="facebook">
-            <div *ngIf="submittedCompany">
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <small>Description</small>
-          <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
+          <small>Postal code</small>
+          <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
+          <div *ngIf="submittedCompany">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
+              Incorrect zip code</p>
+          </div>
         </div>
-        <small>Photo</small>
+      </div>
+      <div formGroupName="socialServices">
         <div class="form-group">
-          <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-          <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-            Upload an Image
-          </button>
+          <small>Github</small>
+          <input type="text" class="form-control" formControlName="github" id="github">
+          <div *ngIf="submittedCompany">
+          </div>
         </div>
-      </form>
-    </div>
+        <div class="form-group">
+          <small>Twitter</small>
+          <input type="text" class="form-control" formControlName="twitter" id="twitter">
+          <div *ngIf="submittedCompany">
+          </div>
+        </div>
+        <div class="form-group">
+          <small>Facebook</small>
+          <input type="text" class="form-control" formControlName="facebook" id="facebook">
+          <div *ngIf="submittedCompany">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Description</small>
+        <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
+      </div>
+      <small>Photo</small>
+
+    </form>
   </div>
 </div>
 <div class="modal-footer">

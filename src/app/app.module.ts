@@ -74,7 +74,7 @@ import { StudentEditModalComponent } from '_components/_forms/student-edit-modal
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule
+    NgbModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
@@ -82,7 +82,7 @@ import { StudentEditModalComponent } from '_components/_forms/student-edit-modal
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, CompanyUniversityEditModalComponent, StudentEditModalComponent
+     CompanyUniversityEditModalComponent, StudentEditModalComponent
   ]
 })
 export class AppModule { }

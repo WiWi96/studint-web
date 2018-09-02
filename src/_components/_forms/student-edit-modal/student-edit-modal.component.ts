@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '../../../../node_modules/@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-student-edit-modal',
@@ -9,15 +9,23 @@ import { FormGroup, Validators } from '../../../../node_modules/@angular/forms';
 export class StudentEditModalComponent implements OnInit {
 
   accountStudentDetailsFormGroup: FormGroup;
+  fullNameFormGroup: FormGroup;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit() {
+    this.fullNameFormGroup = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
+    })
   }
 
+
   createStudentForm() {
-    /*this.accountStudentDetailsFormGroup = this.formBuilder.group({
+    this.accountStudentDetailsFormGroup = this.formBuilder.group({
       fullname: this.fullNameFormGroup,
-    });*/
+    });
   }
 }
