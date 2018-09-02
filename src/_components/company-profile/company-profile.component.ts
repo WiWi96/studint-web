@@ -5,6 +5,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddressFormComponent } from '../_forms/add-form/address-form.component';
+import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class CompanyProfileComponent implements OnInit {
     company: CompanyProfile;
 
     expanded = false;
+    socialServices = ['https://github.com', 'https://twitter.co', 'https://www.facebook.com'];
 
     constructor(
         private route: ActivatedRoute,
@@ -56,7 +58,10 @@ export class CompanyProfileComponent implements OnInit {
         return profile.photo && profile.photo.length > 0;
     }
 
-    openExampleModalWindow(): any {
-        const modalRef = this.modalService.open(AddressFormComponent);
+    openEditModal(): any {
+        const modalRef = this.modalService.open(CompanyUniversityEditModalComponent);
+        modalRef.componentInstance.companyProfile = this.company;
+        modalRef.componentInstance.isCompany = true;
+        modalRef.componentInstance.socialServices = this.socialServices
     }
 }

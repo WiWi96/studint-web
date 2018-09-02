@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
+import { FileSelectDirective } from '../../node_modules/ng2-file-upload';
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -40,6 +41,7 @@ import { ErrorsService } from 'errors/errors-service/errors.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,7 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     StaticBarComponent,
     WallComponent,
     ModalWindowComponent,
+    FileSelectDirective,
     CompanyUniversityEditModalComponent
     
   ],
