@@ -6,6 +6,7 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { UniversityProfile } from '_models/profile/universityProfile';
+import { ProfileName } from '_models/profile/profileName';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -20,6 +21,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
 
   address: Address;
+  profileName: ProfileName;
 
   isCompany: boolean;
   isUniversity: boolean;
@@ -36,7 +38,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   accountStudentDetailsFormGroup: FormGroup;
   accountUniversityDetailsFormGroup: FormGroup;
-  accountCompanyDetailsFormGroup: FormGroup;
+  accountDetailsFormGroup: FormGroup;
 
 
   socialServices: string[];
@@ -44,7 +46,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
- 
+
   file: string;
   fileToUpload: File = null;
 
@@ -63,21 +65,21 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       alert('File uploaded successfully');
     };
 
-    
-    if (this.isCompany){
-      this.createCompanyForm();
+    if (this.isCompany) {
       this.address = this.companyProfile.address;
+      this.profileName = this.companyProfile.profileName;
+      this.createCompanyForm();
     }
-    else if(this.isUniversity){
-      this.createUniversityForm();
+    else if (this.isUniversity) {
       this.address = this.univeristyProfile.address;
+      this.profileName = this.univeristyProfile.profileName;
+      this.createUniversityForm();
     }
-
   }
 
   get f() { return this.accountStudentDetailsFormGroup.controls; }
   get f2() { return this.accountUniversityDetailsFormGroup.controls; }
-  get f3() { return this.accountCompanyDetailsFormGroup.controls; }
+  get f3() { return this.accountDetailsFormGroup.controls; }
 
   close() {
 
@@ -90,7 +92,26 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
 
   createUniversityForm() {
+    this.socialServicesFormpGroup = this.formBuilder.group({
+      github: [this.socialServices[0], Validators.required],
+      twitter: [this.socialServices[1], Validators.required],
+      facebook: [this.socialServices[2], Validators.required],
+    });
 
+    this.addressFormGroup = this.formBuilder.group({
+      town: [this.address.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      postalCode: [this.address.postCode, [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
+      street: [this.address.street, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      country: [this.address.country, [Validators.required]],
+      houseNo: [this.address.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
+    });
+
+    this.accountDetailsFormGroup = this.formBuilder.group({
+      name: [this.univeristyProfile.profileName.name, [Validators.required]],
+      address: this.addressFormGroup,
+      socialServices: this.socialServicesFormpGroup,
+      description: [this.univeristyProfile.description, [Validators.required]],
+    })
   }
 
   createCompanyForm() {
@@ -108,8 +129,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       houseNo: [this.address.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
     });
 
-    this.accountCompanyDetailsFormGroup = this.formBuilder.group({
-      companyName: [this.companyProfile.profileName.name, [Validators.required]],
+    this.accountDetailsFormGroup = this.formBuilder.group({
+      name: [this.companyProfile.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
       socialServices: this.socialServicesFormpGroup,
       description: [this.companyProfile.description, [Validators.required]],
@@ -119,9 +140,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   onSubmitCompany() {
     this.setAddressDetails();
-    this.setCompanyName();
+    this.setProfileName();
     this.setSocialServices();
-    this.setCompanyDescription();
+    this.setProfileDescription();
     this.companyProfileService.updateCompany(this.companyProfile).subscribe();
     this.activeModal.close();
   }
@@ -132,12 +153,15 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.socialServices[2] = this.socialServicesFormpGroup.get('facebook').value;
   }
 
-  setCompanyName() {
-    this.companyProfile.profileName.name = this.accountCompanyDetailsFormGroup.get('companyName').value;
+  setProfileName() {
+    this.profileName.name = this.accountDetailsFormGroup.get('name').value;
   }
 
-  setCompanyDescription() {
-    this.companyProfile.description = this.accountCompanyDetailsFormGroup.get('description').value;
+  setProfileDescription() {
+    if (this.isCompany)
+      this.companyProfile.description = this.accountDetailsFormGroup.get('description').value;
+    else if (this.isUniversity)
+      this.univeristyProfile.description = this.accountDetailsFormGroup.get('description').value;
   }
 
   setAddressDetails() {
@@ -149,7 +173,6 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   }
 
 }
-
 
 export class RegistrationValidator {
   static validate(registrationFormGroup: FormGroup) {

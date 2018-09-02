@@ -38,7 +38,6 @@ import { ErrorsComponent } from '_components/error-page/error-page.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
 
 
-import { CompanyEditModalComponent } from '_components/_forms/company-edit-modal/company-edit-modal.component';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
@@ -66,7 +65,6 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     ModalWindowComponent,
 
     FileSelectDirective,
-    CompanyEditModalComponent,
     CompanyUniversityEditModalComponent
   ],
   imports: [
@@ -87,7 +85,6 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyEditModalComponent,
     CompanyUniversityEditModalComponent
   ]
 })

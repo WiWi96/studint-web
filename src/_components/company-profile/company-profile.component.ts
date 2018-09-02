@@ -4,7 +4,6 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CompanyEditModalComponent } from '../_forms/company-edit-modal/company-edit-modal.component';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
