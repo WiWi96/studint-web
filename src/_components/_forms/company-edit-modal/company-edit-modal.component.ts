@@ -4,14 +4,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Address } from '_models/address';
 import { CompanyProfile } from '_models/profile/companyProfile';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
+import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
+const URL = 'http://localhost:3000/api/upload';
 
 @Component({
-  selector: 'app-address-form',
-  templateUrl: './address-form.component.html',
-  styleUrls: ['./address-form.component.less']
+  selector: 'app-company-edit-modal',
+  templateUrl: './company-edit-modal.component.html',
+  styleUrls: ['./company-edit-modal.component.less']
 })
-export class AddressFormComponent implements OnInit {
+export class CompanyEditModalComponent implements OnInit {
+
+  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
 
   addressCompany: Address;
 
@@ -23,15 +27,19 @@ export class AddressFormComponent implements OnInit {
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   fullNameFormGroup: FormGroup;
+  socialServicesFormpGroup: FormGroup;
 
   accountStudentDetailsFormGroup: FormGroup;
   accountUniversityDetailsFormGroup: FormGroup;
   accountCompanyDetailsFormGroup: FormGroup;
 
- 
+
+  socialServices: string[];
 
   companyProfile: CompanyProfile;
   email: string;
+  file: string;
+  fileToUpload: File = null;
 
   countries = ['Poland', 'Germany', 'Spain']
 
@@ -42,10 +50,14 @@ export class AddressFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('ImageUpload:uploaded:', item, status, response);
+      alert('File uploaded successfully');
+    };
+
     this.addressCompany = this.companyProfile.address;
     this.createCompanyForm();
-
-
   }
 
   get f() { return this.accountStudentDetailsFormGroup.controls; }
@@ -57,7 +69,16 @@ export class AddressFormComponent implements OnInit {
     this.activeModal.close();
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
   createCompanyForm() {
+    this.socialServicesFormpGroup = this.formBuilder.group({
+      github: [this.socialServices[0], Validators.required],
+      twitter: [this.socialServices[1], Validators.required],
+      facebook: [this.socialServices[2], Validators.required],
+    });
 
     this.passwordFormGroup = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -85,19 +106,35 @@ export class AddressFormComponent implements OnInit {
     });
 
     this.accountCompanyDetailsFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
-      password: this.passwordFormGroup,
-      companyName: ['', [Validators.required]],
+      companyName: [this.companyProfile.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
-      checkbox: ['', [Validators.required]]
+      socialServices: this.socialServicesFormpGroup,
+      description: [this.companyProfile.description, [Validators.required]],
     })
 
   }
 
   onSubmitCompany() {
     this.setAddressDetails();
+    this.setCompanyName();
+    this.setSocialServices();
+    this.setCompanyDescription();
     this.companyProfileService.updateCompany(this.companyProfile).subscribe();
     this.activeModal.close();
+  }
+
+  setSocialServices() {
+    this.socialServices[0] = this.socialServicesFormpGroup.get('github').value;
+    this.socialServices[1] = this.socialServicesFormpGroup.get('twitter').value;
+    this.socialServices[2] = this.socialServicesFormpGroup.get('facebook').value;
+  }
+
+  setCompanyName() {
+    this.companyProfile.profileName.name = this.accountCompanyDetailsFormGroup.get('companyName').value;
+  }
+
+  setCompanyDescription() {
+    this.companyProfile.description = this.accountCompanyDetailsFormGroup.get('description').value;
   }
 
   setAddressDetails() {
@@ -107,6 +144,7 @@ export class AddressFormComponent implements OnInit {
     this.addressCompany.country = this.addressFormGroup.get('country').value;
     this.addressCompany.houseNo = this.addressFormGroup.get('houseNo').value;
   }
+
 }
 
 export class RegistrationValidator {
@@ -125,6 +163,5 @@ export class RegistrationValidator {
     }
 
     return null;
-
   }
 }

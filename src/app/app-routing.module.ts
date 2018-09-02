@@ -9,7 +9,7 @@ import { CompanyProfileComponent } from '_components/company-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
 
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
+
 import { ErrorsComponent } from '_components/error-page/error-page.component';
 
 
@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'address', component: AddressFormComponent },
+    //{ path: 'address', component: AddressFormComponent },
     { path: 'user/:id', component: UserProfileComponent },
     { path: 'university/:id', component: UniversityProfileComponent },
     { path: 'project/:id', component: ProjectProfileComponent },

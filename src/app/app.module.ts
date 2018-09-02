@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
+import { FileSelectDirective } from 'ng2-file-upload';
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -35,7 +36,14 @@ import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
 import { ErrorsComponent } from '_components/error-page/error-page.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
+
+
+import { CompanyEditModalComponent } from '_components/_forms/company-edit-modal/company-edit-modal.component';
+import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
+
+
+
+
 
 
 
@@ -56,7 +64,10 @@ import { AddressFormComponent } from '_components/_forms/add-form/address-form.c
     WallComponent,
     ErrorsComponent,
     ModalWindowComponent,
-    AddressFormComponent
+
+    FileSelectDirective,
+    CompanyEditModalComponent,
+    CompanyUniversityEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +87,8 @@ import { AddressFormComponent } from '_components/_forms/add-form/address-form.c
   bootstrap: [AppComponent],
 
   entryComponents: [
-    AddressFormComponent
+    CompanyEditModalComponent,
+    CompanyUniversityEditModalComponent
   ]
 })
 export class AppModule { }

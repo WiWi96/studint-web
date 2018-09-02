@@ -19,24 +19,24 @@
                         <p>{{company.type}}</p>
                     </div>
                     <div class="bio-item">
-                        <a href="https://github.com" class="profile-item">
+                        <a href="this.socialServices[0]" class="profile-item">
                             <div class="bio-item-icon"><i class="fab fa-github"></i></div>
                             Github
                         </a>
                     </div>
                     <div class="bio-item">
-                        <a href="https://twitter.com" class="profile-item">
+                        <a href="this.socialServices[1]" class="profile-item">
                             <div class="bio-item-icon"><i class="fab fa-twitter"></i></div>
                             Twitter
                         </a>
                     </div>
                     <div class="bio-item">
-                        <a href="https://www.facebook.com" class="profile-item">
+                        <a href="this.socialServices[2]" class="profile-item">
                             <div class="bio-item-icon"><i class="fab fa-facebook-square"></i></div>
                             Facebook
                         </a>
                     </div>
-                    <button class="btn btn-success" (click)="openExampleModalWindow()">Edit</button>
+                    <button type="button" class="btn btn-link" (click)="openEditModal()">Edit</button>
                 </div>                
             </div>                      
         </div>
