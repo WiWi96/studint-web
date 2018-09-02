@@ -34,10 +34,11 @@ import { StaticBarComponent } from '_components/static-bar/static-bar.component'
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
 import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
+import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ErrorsService } from 'errors/errors-service/errors.service';
     StaticBarComponent,
     WallComponent,
     ModalWindowComponent,
-    AddressFormComponent
+    CompanyUniversityEditModalComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,7 @@ import { ErrorsService } from 'errors/errors-service/errors.service';
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, AddressFormComponent
+    ErrorsComponent, CompanyUniversityEditModalComponent
   ]
 })
 export class AppModule { }
