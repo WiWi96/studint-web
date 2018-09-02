@@ -7,6 +7,7 @@ import { CompanyProfileService } from '_service/profile/company/companyProfile.s
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
+import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -16,7 +17,6 @@ const URL = 'http://localhost:3000/api/upload';
   styleUrls: ['./company-university-edit-modal.component.less']
 })
 export class CompanyUniversityEditModalComponent implements OnInit {
-
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
 
@@ -55,7 +55,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    public companyProfileService: CompanyProfileService
+    private companyProfileService: CompanyProfileService,
+    private universityProfileService: UniversityProfileService 
   ) { }
 
   ngOnInit() {
@@ -77,19 +78,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     }
   }
 
-  get f() { return this.accountStudentDetailsFormGroup.controls; }
-  get f2() { return this.accountUniversityDetailsFormGroup.controls; }
-  get f3() { return this.accountDetailsFormGroup.controls; }
-
   close() {
-
     this.activeModal.close();
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }
-
 
   createUniversityForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
@@ -143,8 +138,11 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.setProfileName();
     this.setSocialServices();
     this.setProfileDescription();
-    this.companyProfileService.updateCompany(this.companyProfile).subscribe();
-    this.activeModal.close();
+    if (this.isCompany)
+      this.companyProfileService.updateCompany(this.companyProfile).subscribe();
+    else if (this.isUniversity)
+      this.universityProfileService.updateUniversity(this.univeristyProfile).subscribe();
+      this.activeModal.close();
   }
 
   setSocialServices() {
@@ -174,21 +172,3 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
 }
 
-export class RegistrationValidator {
-  static validate(registrationFormGroup: FormGroup) {
-    let password = registrationFormGroup.controls.password.value;
-    let repeatPassword = registrationFormGroup.controls.repeatPassword.value;
-
-    if (repeatPassword.length <= 0) {
-      return null;
-    }
-
-    if (repeatPassword !== password) {
-      return {
-        doesMatchPassword: true
-      };
-    }
-
-    return null;
-  }
-}

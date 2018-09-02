@@ -5,6 +5,8 @@ import { UniversityProfile } from '_models/profile/universityProfile';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 import { PostService } from '_service/post/post.service';
 import { error } from '@angular/compiler/src/util';
+import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
+import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-university-profile',
@@ -17,10 +19,13 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
     private sub: any;
     university: UniversityProfile;
 
+    socialServices = ['https://github.com', 'https://twitter.co', 'https://www.facebook.com'];
+
     constructor(
         private route: ActivatedRoute,
         private universityProfileService: UniversityProfileService,
         private postService: PostService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -53,5 +58,12 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
 
     photoExists(profile: ProfileName): Boolean {
         return profile.photo && profile.photo.length > 0;
+    }
+
+    openEditModal() {
+        const modalRef = this.modalService.open(CompanyUniversityEditModalComponent);
+        modalRef.componentInstance.univeristyProfile = this.university;
+        modalRef.componentInstance.isUniversity = true;
+        modalRef.componentInstance.socialServices = this.socialServices
     }
 }

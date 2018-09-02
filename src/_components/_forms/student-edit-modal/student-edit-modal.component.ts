@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators } from '../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-student-edit-modal',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentEditModalComponent implements OnInit {
 
+  accountStudentDetailsFormGroup: FormGroup;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  createStudentForm() {
+    /*this.accountStudentDetailsFormGroup = this.formBuilder.group({
+      fullname: this.fullNameFormGroup,
+    });*/
+  }
 }
