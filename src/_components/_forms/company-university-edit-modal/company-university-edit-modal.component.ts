@@ -143,7 +143,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.setProfileName();
     this.setSocialServices();
     this.setProfileDescription();
-    this.companyProfileService.updateCompany(this.companyProfile).subscribe();
+    this.companyProfileService.updateCompany(this.companyProfile).subscribe(
+      data => {
+        console.log(data);
+      },
+
+      error => {console.log(error)}
+    );
     this.activeModal.close();
   }
 
