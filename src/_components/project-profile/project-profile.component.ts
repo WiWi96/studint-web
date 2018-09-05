@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectProfile } from '_models/profile/projectProfile';
-import { ProfileName } from '_models/profile/profileName';
-import * as moment from 'moment';
-import { Duration } from '_models/duration';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { PostService } from '_service/post/post.service';
 import { SkillService } from '_service/skill/skill.service';
+import { UtilsService } from '_service/utils/utils.service';
 
 @Component({
     selector: 'app-project-profile',
@@ -19,10 +17,10 @@ export class ProjectProfileComponent implements OnInit {
     id: number;
     project: ProjectProfile;
     Arr = Array;
-    public now = moment().startOf('day');
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private projectProfileService: ProjectProfileService,
         private postService: PostService,
         private skillService: SkillService
@@ -44,75 +42,5 @@ export class ProjectProfileComponent implements OnInit {
         this.projectProfileService.getProject(id).subscribe(
             data => { this.project = data },
         );
-    }
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
-    }
-
-    getDateStatus(date: Date): String {
-        var momentDate = moment(date);
-        if (momentDate.diff(this.now, 'days') >= 10) {
-            return 'future';
-        }
-        else if (momentDate.diff(this.now, 'days') > 1) {
-            return 'tenDays';
-        }
-        else if (momentDate.diff(this.now, 'days') === 1) {
-            return 'tomorrow';
-        }
-        else if (this.now.isSame(momentDate, 'days')) {
-            return 'today';
-        }
-        else if (momentDate.diff(this.now, 'days') === -1) {
-            return 'yesterday';
-        }
-        else {
-            return 'past';
-        }
-    }
-
-    getDifficultyNumber(): number {
-        if (this.project) {
-            switch (this.project.level) {
-                case 'beginner':
-                    return 1;
-                case 'intermediate':
-                    return 2;
-                case 'advanced':
-                    return 3;
-                case 'professional':
-                    return 4;
-                case 'master':
-                    return 5;
-                default:
-                    return undefined;
-            }
-        }
-        return undefined;
-    }
-
-    getDurationUnit(duration: Duration): String {
-        var text: String = duration.unit;
-        if (duration.value !== 0) {
-            if (text.slice(-1) === 'y') {
-                text = text.slice(-1) + "ie";
-            }
-            else if (text.slice(-1) === 's') {
-                text += "e";
-            }
-            text += "s";
-        }
-        return text;
     }
 }

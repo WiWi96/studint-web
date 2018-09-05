@@ -9,27 +9,22 @@
                 <div class="profile-card col">
                     <div class="profile-name">
                         <h1>{{project.profileName?.name}}</h1>
-                        <h6 [ngSwitch]="project.status" id="profile-status">
-                            <span *ngSwitchCase="'inprogress'">In progress</span>
-                            <span *ngSwitchCase="'invite'">Join us!</span>
-                            <span *ngSwitchCase="'tba'">To be announced</span>
-                            <span *ngSwitchCase="'finished'">Finished</span>
-                        </h6>
+                        <h6 id="profile-status">{{utils.getProjectStatusText(project.status)}}</h6>
                     </div>
                     <div class="profile-info-container row d-block">
                         <div class="profile-info col-md-5 text-left float-left">
-                            <div *ngIf="getDifficultyNumber()" class="info-item py-2 d-block text-center text-sm-left">
+                            <div *ngIf="utils.getDifficultyNumber()" class="info-item py-2 d-block text-center text-sm-left">
                                 <h6>Difficulty</h6>
                                 <div class="difficulty-stars">
-                                    <i *ngFor="let i of Arr(getDifficultyNumber()).fill(1)" class="fas fa-star"></i>
-                                    <i *ngFor="let i of Arr(5 - getDifficultyNumber()).fill(1)" class="far fa-star"></i>
+                                    <i *ngFor="let i of Arr(utils.getDifficultyNumber()).fill(1)" class="fas fa-star"></i>
+                                    <i *ngFor="let i of Arr(5 - utils.getDifficultyNumber()).fill(1)" class="far fa-star"></i>
                                 </div>
                             </div>
                             <div *ngIf="project.duration" class="info-item d-block text-center text-sm-left">
                                 <h6>Estimated duration</h6>
-                                <p>{{project.duration.value}} {{getDurationUnit(project.duration)}}</p>
+                                <p>{{project.duration.value}} {{utils.getDurationUnit(project.duration)}}</p>
                             </div>
-                            <div *ngIf="project.startDate" [ngSwitch]="getDateStatus(project.startDate)" class="info-item">
+                            <div *ngIf="project.startDate" [ngSwitch]="utils.getDateStatus(project.startDate)" class="info-item">
                                 <div class="info-item-icon"><i class="fas fa-play"></i></div>
                                 <p *ngSwitchCase="'future'">Project starts on {{project.startDate | amDateFormat: 'LL'}}</p>
                                 <p *ngSwitchCase="'tenDays'">Project is starting in less than 10 days! ({{project.startDate
@@ -40,7 +35,7 @@
                                 <p *ngSwitchCase="'yesterday'">Project started yesterday</p>
                                 <p *ngSwitchCase="'past'">Project started on {{project.startDate | amDateFormat: 'LL'}}</p>
                             </div>
-                            <div *ngIf="project.joiningDate" [ngSwitch]="getDateStatus(project.joiningDate)" class="info-item">
+                            <div *ngIf="project.joiningDate" [ngSwitch]="utils.getDateStatus(project.joiningDate)" class="info-item">
                                 <div class="info-item-icon"><i class="fas fa-stopwatch"></i></div>
                                 <p *ngSwitchCase="'future'">Entries are accepted until {{project.joiningDate | amDateFormat:
                                     'LL'}}
@@ -68,7 +63,7 @@
                 <h4>Project description</h4>
                 <div id="description" [innerHTML]="project.description" class="profile-description-text">
                 </div>
-                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
                     <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
                     <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>

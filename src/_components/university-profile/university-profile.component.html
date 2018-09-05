@@ -56,7 +56,7 @@
                 <h4>About us</h4>
                 <div id="description" [innerHTML]="university.description" class="profile-description-text">
                 </div>
-                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
                     <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
                     <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>

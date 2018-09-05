@@ -5,6 +5,7 @@ import { UniversityProfile } from '_models/profile/universityProfile';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 import { PostService } from '_service/post/post.service';
 import { error } from '@angular/compiler/src/util';
+import { UtilsService } from '_service/utils/utils.service';
 
 @Component({
     selector: 'app-university-profile',
@@ -19,6 +20,7 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private universityProfileService: UniversityProfileService,
         private postService: PostService,
     ) {
@@ -35,23 +37,9 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
-    }
-
     getUniversity(id: number): void {
         this.universityProfileService.getUniversity(id).subscribe(
             data => { this.university = data },
         );
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
     }
 }

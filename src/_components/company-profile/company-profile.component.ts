@@ -5,6 +5,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddressFormComponent } from '../_forms/add-form/address-form.component';
+import { UtilsService } from '_service/utils/utils.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class CompanyProfileComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private companyProfileService: CompanyProfileService,
         private modalService: NgbModal
     ) { }
@@ -40,20 +42,6 @@ export class CompanyProfileComponent implements OnInit {
         this.companyProfileService.getCompany(id).subscribe(
             data => { this.company = data },
         );
-    }
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
     }
 
     openExampleModalWindow(): any {

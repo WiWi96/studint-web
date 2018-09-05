@@ -22,171 +22,141 @@ export class StaticBarComponent implements OnInit {
 
   constructor() {
     // temp projects initialization
-    this.projects = [
-      {
-        profileName: {
-          id: 1,
-          name: 'Project 1',
-          photo: ''
-        },
-        description: 'string',
-        technologies: [new Skill],
-        type: 'string',
-        level: 'string',
-        participants: [new ProfileName],
-        // teams: [new Team],
-        // participationStatus: 'string',
-        startDate: new Date,
-        joiningDate: new Date,
-        duration: new Duration,
-        status: 'string',
-      },
-      {
-        profileName: {
-          id: 2,
-          name: 'Project 2',
-          photo: ''
-        },
-        description: 'string',
-        technologies: [new Skill],
-        type: 'string',
-        level: 'string',
-        participants: [new ProfileName],
-        // teams: [new Team],
-        // participationStatus: 'string',
-        startDate: new Date,
-        joiningDate: new Date,
-        duration: new Duration,
-        status: 'string',
-      },
-      {
-        profileName: {
-          id: 3,
-          name: 'Project 3',
-          photo: ''
-        },
-        description: 'string',
-        technologies: [new Skill],
-        type: 'string',
-        level: 'string',
-        participants: [new ProfileName],
-        // teams: [new Team],
-        // participationStatus: 'string',
-        startDate: new Date,
-        joiningDate: new Date,
-        duration: new Duration,
-        status: 'string',
-      },
-    ];
+    // this.projects = [
+    //   {
+    //     profileName: {
+    //       id: 1,
+    //       name: 'Project 1',
+    //       photo: ''
+    //     },
+    //     description: 'string',
+    //     technologies: [new Skill],
+    //     type: 'string',
+    //     level: 'string',
+    //     participants: [new ProfileName],
+    //     // teams: [new Team],
+    //     // participationStatus: 'string',
+    //     startDate: new Date,
+    //     joiningDate: new Date,
+    //     duration: new Duration,
+    //     status: 'string',
+    //   },
+    //   {
+    //     profileName: {
+    //       id: 2,
+    //       name: 'Project 2',
+    //       photo: ''
+    //     },
+    //     description: 'string',
+    //     technologies: [new Skill],
+    //     type: 'string',
+    //     level: 'string',
+    //     participants: [new ProfileName],
+    //     // teams: [new Team],
+    //     // participationStatus: 'string',
+    //     startDate: new Date,
+    //     joiningDate: new Date,
+    //     duration: new Duration,
+    //     status: 'string',
+    //   },
+    //   {
+    //     profileName: {
+    //       id: 3,
+    //       name: 'Project 3',
+    //       photo: ''
+    //     },
+    //     description: 'string',
+    //     technologies: [new Skill],
+    //     type: 'string',
+    //     level: 'string',
+    //     participants: [new ProfileName],
+    //     // teams: [new Team],
+    //     // participationStatus: 'string',
+    //     startDate: new Date,
+    //     joiningDate: new Date,
+    //     duration: new Duration,
+    //     status: 'string',
+    //   },
+    // ];
 
-    // temp universities initialization
-    this.universities = [
-      {
-        profileName: {
-            id: 1,
-            name: 'Silesian University of Technology',
-            photo: ''
-        },
-        description: '',
-        profiles: new Map(),
-        posts: [
-            {
-                id: 1,
-                author: {
-                    id: 1,
-                    name: '',
-                    photo: '',
-                },
-                publishedDate: new Date(),
-                post: ''
-            },
-        ],
-        address: {
-            town: '',
-            postCode: '',
-            street: '',
-            country: '',
-            houseNo: '2',
-        },
-        type: '',
-        courses: [
-            {
-                id: 1,
-                name: ''
-            },
-        ],
-      },
-      {
-        profileName: {
-            id: 2,
-            name: 'Akademia Górniczo Hutnicza w Krakowie',
-            photo: ''
-        },
-        description: '',
-        profiles: new Map(),
-        posts: [
-            {
-                id: 1,
-                author: {
-                    id: 1,
-                    name: '',
-                    photo: '',
-                },
-                publishedDate: new Date(),
-                post: ''
-            },
-        ],
-        address: {
-            town: '',
-            postCode: '',
-            street: '',
-            country: '',
-            houseNo: '2',
-        },
-        type: '',
-        courses: [
-            {
-                id: 1,
-                name: ''
-            },
-        ],
-      },
-      {
-        profileName: {
-            id: 3,
-            name: 'Harvard University',
-            photo: ''
-        },
-        description: '',
-        profiles: new Map(),
-        posts: [
-            {
-                id: 1,
-                author: {
-                    id: 1,
-                    name: '',
-                    photo: '',
-                },
-                publishedDate: new Date(),
-                post: ''
-            },
-        ],
-        address: {
-            town: '',
-            postCode: '',
-            street: '',
-            country: '',
-            houseNo: '2',
-        },
-        type: '',
-        courses: [
-            {
-                id: 1,
-                name: ''
-            },
-        ],
-      },
-    ];
+    // // temp universities initialization
+    // this.universities = [
+    //   {
+    //     profileName: {
+    //         id: 1,
+    //         name: 'Silesian University of Technology',
+    //         photo: '',
+    //         backgroundPhoto: '',
+    //         type: ''
+    //     },
+    //     description: '',
+    //     profiles: [],
+    //     address: {
+    //         town: '',
+    //         postCode: '',
+    //         street: '',
+    //         country: '',
+    //         houseNo: '2',
+    //     },
+    //     type: '',
+    //     courses: [
+    //         {
+    //             id: 1,
+    //             name: ''
+    //         },
+    //     ],
+    //   },
+    //   {
+    //     profileName: {
+    //         id: 2,
+    //         name: 'Akademia Górniczo Hutnicza w Krakowie',
+    //         photo: '',
+    //         backgroundPhoto: '',
+    //         type: ''
+    //     },
+    //     description: '',
+    //     profiles: [],
+    //     address: {
+    //         town: '',
+    //         postCode: '',
+    //         street: '',
+    //         country: '',
+    //         houseNo: '2',
+    //     },
+    //     type: '',
+    //     courses: [
+    //         {
+    //             id: 1,
+    //             name: ''
+    //         },
+    //     ],
+    //   },
+    //   {
+    //     profileName: {
+    //         id: 3,
+    //         name: 'Harvard University',
+    //         photo: '',
+    //         backgroundPhoto: '',
+    //         type: ''
+    //     },
+    //     description: '',
+    //     profiles: [],
+    //     address: {
+    //         town: '',
+    //         postCode: '',
+    //         street: '',
+    //         country: '',
+    //         houseNo: '2',
+    //     },
+    //     type: '',
+    //     courses: [
+    //         {
+    //             id: 1,
+    //             name: ''
+    //         },
+    //     ],
+    //   },
+    // ];
 
   }
 
