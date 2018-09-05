@@ -65,13 +65,87 @@
           </div>
         </div>
       </div>
-      <div formGroupName="socialServices">
-        <div class="form-group">
-          <small>Github</small>
-          <input type="text" class="form-control" formControlName="github" id="github">
-          <div *ngIf="submittedCompany">
+
+      <div class="form-group">
+        <select class="custom-select form-control" formControlName="social">
+          <option *ngFor="let item of items">{{item}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div [ngSwitch]="accountDetailsFormGroup.get('social').value">
+
+          <div *ngSwitchCase="'github'">
+            <div class="form-row">
+              <div class="col-md-11 mb-3">
+                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add github link">
+              </div>
+              <div class="col-md-1 mb-3">
+                <a class="btn btn-fa" href="#">
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'twitter'">
+            <div class="form-row">
+              <div class="col-md-11 mb-3">
+                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add twitter link">
+              </div>
+              <div class="col-md-1 mb-3">
+                <a class="btn btn-fa" href="#">
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'facebook'">
+            <div class="form-row">
+              <div class="col-md-11 mb-3">
+                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add facebook link">
+              </div>
+              <div class="col-md-1 mb-3">
+                <a class="btn btn-fa" href="#">
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchDefault>
+            <div class="form-row">
+              <div class="col-md-11 mb-3">
+                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add github link">
+              </div>
+              <div class="col-md-1 mb-3">
+                <a class="btn btn-fa" href="#">
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+
+      </div>
+
+      <ng-template #loading>
+
+      </ng-template>
+
+      <div formGroupName="socialServices">
+
+
+
         <div class="form-group">
           <small>Twitter</small>
           <input type="text" class="form-control" formControlName="twitter" id="twitter">

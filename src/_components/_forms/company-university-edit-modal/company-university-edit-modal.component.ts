@@ -51,6 +51,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   fileToUpload: File = null;
 
   countries = ['Poland', 'Germany', 'Spain']
+  items = ['<<Please Select>>', 'github', 'twitter', 'facebook'];  
+  selected=""
 
   constructor(
     private formBuilder: FormBuilder,
@@ -124,6 +126,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       address: this.addressFormGroup,
       socialServices: this.socialServicesFormpGroup,
       description: [this.companyProfile.description, [Validators.required]],
+      social: ['', [Validators.required]],
+      github: ['', [Validators.required]],
     })
 
   }
