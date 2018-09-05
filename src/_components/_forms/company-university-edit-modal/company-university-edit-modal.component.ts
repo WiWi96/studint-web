@@ -8,6 +8,7 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
+import { DISABLED } from '../../../../node_modules/@angular/forms/src/model';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -51,18 +52,24 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   fileToUpload: File = null;
 
   countries = ['Poland', 'Germany', 'Spain']
-  items = ['<<Please Select>>', 'github', 'twitter', 'facebook'];  
-  selected=""
+  items = ['Select social media', 'github', 'twitter', 'facebook', 'instagram', 'linkedin', 'goldenline', 'youtube', 'pinterest', 'google', 'custom'];
+  selected = ""
 
+
+
+
+  isDisabled: Array<boolean> = [];
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private companyProfileService: CompanyProfileService,
-    private universityProfileService: UniversityProfileService 
+    private universityProfileService: UniversityProfileService
   ) { }
 
   ngOnInit() {
+    this.setDisableState();
 
+    this.setDisableSocialInputs();
     if (this.isCompany) {
       this.address = this.companyProfile.address;
       this.profileName = this.companyProfile.profileName;
@@ -75,6 +82,20 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     }
   }
 
+  setDisableState() {
+
+    for (let i = 0; i < 10; i++) {
+      this.isDisabled.push(false);
+    }
+    this.isDisabled.forEach(element => {
+      console.log(element);
+    });
+  }
+
+  setDisableSocialInputs() {
+    this.isDisabled.forEach((element, index) => { element = this.socialServices[index] == "" ? false : true })
+  }
+
   close() {
     this.activeModal.close();
   }
@@ -85,9 +106,16 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   createUniversityForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [this.socialServices[0], Validators.required],
-      twitter: [this.socialServices[1], Validators.required],
-      facebook: [this.socialServices[2], Validators.required],
+      github: [''],
+      twitter: [''],
+      facebook: [''],
+      instagram: [''],
+      linkedin: [''],
+      goldenline: [''],
+      youtube: [''],
+      pinterest: [''],
+      google: [''],
+      custom: [''],
     });
 
     this.addressFormGroup = this.formBuilder.group({
@@ -108,9 +136,16 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   createCompanyForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [this.socialServices[0], Validators.required],
-      twitter: [this.socialServices[1], Validators.required],
-      facebook: [this.socialServices[2], Validators.required],
+      github: [this.socialServices[0]],
+      twitter: [this.socialServices[1]],
+      facebook: [this.socialServices[2]],
+      instagram: [this.socialServices[3]],
+      linkedin: [this.socialServices[4]],
+      goldenline: [this.socialServices[5]],
+      youtube: [this.socialServices[6]],
+      pinterest: [this.socialServices[7]],
+      google: [this.socialServices[8]],
+      custom: [this.socialServices[9]]
     });
 
     this.addressFormGroup = this.formBuilder.group({
@@ -124,12 +159,21 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.accountDetailsFormGroup = this.formBuilder.group({
       name: [this.companyProfile.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
-      socialServices: this.socialServicesFormpGroup,
       description: [this.companyProfile.description, [Validators.required]],
-      social: ['', [Validators.required]],
-      github: ['', [Validators.required]],
+      socialServices: this.socialServicesFormpGroup,
+      socialValue: ['', [Validators.required]],
     })
 
+  }
+
+  addSocial() {
+    //this.isGithubDisable = !this.isGithubDisable;
+    //this.isTwitterDisable = !this.isTwitterDisable;
+  }
+
+  deleteSocialMedia() {
+    //this.isGithubDisable = !this.isGithubDisable;
+    //.isTwitterDisable = !this.isTwitterDisable;
   }
 
   onSubmitCompany() {
@@ -141,8 +185,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       this.companyProfileService.updateCompany(this.companyProfile).subscribe();
     else if (this.isUniversity)
       this.universityProfileService.updateUniversity(this.univeristyProfile).subscribe();
-      this.activeModal.close();
+    this.activeModal.close();
   }
+
 
   setSocialServices() {
     this.socialServices[0] = this.socialServicesFormpGroup.get('github').value;

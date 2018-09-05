@@ -67,104 +67,219 @@
       </div>
 
       <div class="form-group">
-        <select class="custom-select form-control" formControlName="social">
-          <option *ngFor="let item of items">{{item}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <div [ngSwitch]="accountDetailsFormGroup.get('social').value">
-
-          <div *ngSwitchCase="'github'">
-            <div class="form-row">
-              <div class="col-md-11 mb-3">
-                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add github link">
-              </div>
-              <div class="col-md-1 mb-3">
-                <a class="btn btn-fa" href="#">
-                  <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
-                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div *ngSwitchCase="'twitter'">
-            <div class="form-row">
-              <div class="col-md-11 mb-3">
-                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add twitter link">
-              </div>
-              <div class="col-md-1 mb-3">
-                <a class="btn btn-fa" href="#">
-                  <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
-                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div *ngSwitchCase="'facebook'">
-            <div class="form-row">
-              <div class="col-md-11 mb-3">
-                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add facebook link">
-              </div>
-              <div class="col-md-1 mb-3">
-                <a class="btn btn-fa" href="#">
-                  <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
-                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div *ngSwitchDefault>
-            <div class="form-row">
-              <div class="col-md-11 mb-3">
-                <input type="text" class="form-control" formControlName="github" id="github" placeholder="add github link">
-              </div>
-              <div class="col-md-1 mb-3">
-                <a class="btn btn-fa" href="#">
-                  <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
-                    <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
+        <small>Social media</small>
+        <div class="form-group">
+          <select class="custom-select form-control" formControlName="socialValue">
+            <option *ngFor="let item of items">{{item}}</option>
+          </select>
         </div>
+      </div>
+      <div formGroupName="socialServices">
+        <div class="form-group">
+          <div [ngSwitch]="accountDetailsFormGroup.get('socialValue').value">
+            <div *ngSwitchCase="'github'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" formControlName="github" [attr.disabled]="isGithubDisable == true ? true : null" id="githubLink" 
+                    placeholder="Add Github link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'twitter'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isTwitterDisable == true ? true : null"
+                    placeholder="add twitter link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isTwitterDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'facebook'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isFacebookDisable == true ? true : null"
+                    placeholder="add Facebook link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isFacebookDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'instagram'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="instagramLink" formControlName="instagram" [attr.disabled]="isInstagramDisable == true ? true : null"
+                    placeholder="Add Instagram link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isInstagramDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'linkedin'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isLinkedinDisable == true ? true : null" 
+                    placeholder="Add Linkedin link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isLinkedinDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'goldenline'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isGoldenlineDisable == true ? true : null" 
+                    placeholder="Add Goldenline link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isGoldenlineDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'youtube'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isYoutubeDisable == true ? true : null" 
+                     placeholder="Add Youtube link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'pinterest'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isPinterestDisable == true ? true : null" 
+                     placeholder="Add Pinterest link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isPinterestDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'google'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="googleLink" formControlName="goldenline" [attr.disabled]="isGoogleDisable == true ? true : null" 
+                     placeholder="Add Google link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isGoogleDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'custom'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="customLink" formControlName="custom" [attr.disabled]="isCustomDisable == true ? true : null"
+                     placeholder="Add custom link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div *ngSwitchDefault>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <ng-template #loading>
 
+      <ng-template #deleteSocial>
+        <button class="btn btn-fa" (click)="deleteSocialMedia()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+            <i class="fas fas fa-minus-circle fa-stack-1x icon-c fa-2x"></i>
+          </span>
+        </button>
       </ng-template>
 
-      <div formGroupName="socialServices">
 
-
-
-        <div class="form-group">
-          <small>Twitter</small>
-          <input type="text" class="form-control" formControlName="twitter" id="twitter">
-          <div *ngIf="submittedCompany">
-          </div>
-        </div>
-        <div class="form-group">
-          <small>Facebook</small>
-          <input type="text" class="form-control" formControlName="facebook" id="facebook">
-          <div *ngIf="submittedCompany">
-          </div>
-        </div>
-      </div>
       <div class="form-group">
         <small>Description</small>
         <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
       </div>
-      <small>Photo</small>
-
     </form>
   </div>
 </div>
