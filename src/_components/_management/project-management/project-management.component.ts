@@ -25,7 +25,8 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
 
   getProjects(): void {
     this.sub = this.projectService.getAllProjects().subscribe(
-      data => this.projects = data
+      data => this.projects = data,
+      err => this.projects = null
     )
   }
 
@@ -42,6 +43,6 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   }
 
   cancelProject(id: number): void {
-
+    this.projectService.deleteProject(id);
   }
 }

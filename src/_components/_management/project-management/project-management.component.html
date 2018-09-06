@@ -7,6 +7,11 @@
           <i class="fas fa-plus"></i> Create project
         </button>
       </div>
+    </div>
+    <div class="row" *ngIf="!projects; else table">
+      <h6>No projects available</h6>
+    </div>
+    <ng-template #table>
       <div class="table-responsive">
         <table class="table table-striped text-center">
           <thead class="thead-default">
@@ -36,15 +41,17 @@
                 <div class="btn-group btn-group-sm" role="group" aria-label="Project actions">
                   <button class="btn btn-outline-primary bold" (click)="editDetails(project.id)">Edit details</button>
                   <button *ngIf="project.status !== 'canceled' && project.status !== 'finished'" (click)="manageTeams(project.id)" class="btn btn-outline-primary bold">Manage
-                    teams</button>
+                    teams
+                  </button>
                   <button *ngIf="project.status !== 'canceled' && project.status !== 'finished'" (click)="cancelProject(project.id)" class="btn btn-danger bold">Cancel
-                    project</button>
+                    project
+                  </button>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </ng-template>
   </div>
 </span>
