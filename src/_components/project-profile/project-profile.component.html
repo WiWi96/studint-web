@@ -8,21 +8,19 @@
                 </div>
                 <div class="profile-card col">
                     <div class="profile-name">
-                        <h1>{{project.profileName?.name}}</h1>
+                        <h1>{{project.name}}</h1>
                         <h6 id="profile-status">{{utils.getProjectStatusText(project.status)}}</h6>
                     </div>
                     <div class="profile-info-container row d-block">
                         <div class="profile-info col-md-5 text-left float-left">
-                            <div *ngIf="project?.level && utils.getDifficultyNumber(project.level)" class="info-item py-2 d-block text-center text-sm-left">
-                                <h6>Difficulty</h6>
-                                <div class="difficulty-stars">
-                                    <i *ngFor="let i of Arr(utils.getDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
-                                    <i *ngFor="let i of Arr(5 - utils.getDifficultyNumber(project.level)).fill(1)" class="far fa-star"></i>
-                                </div>
-                            </div>
-                            <div *ngIf="project.duration" class="info-item d-block text-center text-sm-left">
-                                <h6>Estimated duration</h6>
-                                <p>{{project.duration.value}} {{utils.getDurationUnit(project.duration)}}</p>
+                            <div *ngIf="project.owner" class="project-company p-3 mx-2 mb-4 row align-items-center">
+                                <div *ngIf="project.owner.photo" class="profile-photo-sm mr-3" [ngStyle]="{'background-image': 'url(' + project.owner.photo + ')'}"></div>
+                                <p class="m-0">
+                                    Project by
+                                    <strong>
+                                        <a [routerLink]="[ '/company', project.owner.id ]">{{project.owner.name}}</a>
+                                    </strong>
+                                </p>
                             </div>
                             <div *ngIf="project.startDate" [ngSwitch]="utils.getDateStatus(project.startDate)" class="info-item">
                                 <div class="info-item-icon"><i class="fas fa-play"></i></div>
@@ -48,11 +46,26 @@
                                 <p *ngSwitchCase="'past'">Entries are no longer accepted</p>
                             </div>
                         </div>
-                        <div *ngIf="project.technologies?.length" class="profile-technologies col-md-7 float-left">
-                            <h4>Technologies</h4>
-                            <span class="technology-item" *ngFor="let technology of project.technologies">
-                                {{technology.name}}
-                            </span>
+                        <div class="col-md-7 float-left">
+                            <div class="row">
+                                <div *ngIf="project?.level && utils.getProjectDifficultyNumber(project.level)" class="info-item col d-block text-center text-sm-left">
+                                    <h6>Difficulty</h6>
+                                    <div class="difficulty-stars" [title]="utils.getProjectLevelText(project.level)">
+                                        <i *ngFor="let i of Arr(utils.getProjectDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
+                                        <i *ngFor="let i of Arr(5 - utils.getProjectDifficultyNumber(project.level)).fill(1)" class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <div *ngIf="project.duration" class="info-item col d-block text-center text-sm-left">
+                                    <h6>Estimated duration</h6>
+                                    <p>{{project.duration.value}} {{utils.getDurationUnit(project.duration)}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="project.technologies?.length" class="profile-technologies">
+                                <h4>Technologies</h4>
+                                <span class="technology-item" *ngFor="let technology of project.technologies">
+                                    {{technology.name}}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +88,7 @@
             <h4>Team members</h4>
             <div class="profile-participants row">
                 <div class="participant-photo-container col-sm-auto" *ngFor="let participant of project.participants">
-                    <div *ngIf="project?.profileName?.photo" class="participant-photo" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
+                    <div *ngIf="project?.profileName?.photo" class="profile-photo-sm" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
                     <a [routerLink]="['/user', participant.id]">
                         <p class="text-center bold">{{participant.name}}</p>
                     </a>
