@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { ProfileName } from '_models/profile/profileName';
 import { ProjectProfile } from '_models/profile/projectProfile';
+import { UtilsService } from '_service/utils/utils.service';
 
 @Component({
   selector: 'app-project-management',
@@ -13,7 +14,9 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   projects: Array<ProjectProfile>;
   sub: any;
 
-  constructor(private projectService: ProjectProfileService) { }
+  constructor(
+    private projectService: ProjectProfileService,
+    private utils: UtilsService) { }
 
   ngOnInit() {
     this.getProjects();
