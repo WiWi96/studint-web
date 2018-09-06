@@ -12,7 +12,7 @@
                         <h6 id="profile-status">{{utils.getProjectStatusText(project.status)}}</h6>
                     </div>
                     <div class="profile-info-container row d-block">
-                        <div class="profile-info col-md-5 text-left float-left">
+                        <div class="profile-info col-lg-5 text-left float-left">
                             <div *ngIf="project.owner" class="project-company p-3 mx-2 mb-4 row align-items-center">
                                 <div *ngIf="project.owner.photo" class="profile-photo-sm mr-3" [ngStyle]="{'background-image': 'url(' + project.owner.photo + ')'}"></div>
                                 <p class="m-0">
@@ -45,8 +45,26 @@
                                 <p *ngSwitchCase="'yesterday'">Entries closed yesterday</p>
                                 <p *ngSwitchCase="'past'">Entries are no longer accepted</p>
                             </div>
+                            <div class="info-item mb-4" [ngSwitch]="project.participationStatus">
+                                <span *ngSwitchCase="'accepted'" class="d-flex">
+                                    <div class="info-item-icon"><i class="far fa-check-circle"></i></div>
+                                    <p>Your entry has been <strong class="accepted">accepted</strong></p>
+                                </span>
+                                <span *ngSwitchCase="'rejected'" class="d-flex">
+                                    <div class="info-item-icon"><i class="far fa-times-circle"></i></div>
+                                    <p>Your entry has been <strong class="rejected">rejected</strong></p>
+                                </span>
+                                <span *ngSwitchCase="'pending'" class="d-flex">
+                                    <div class="info-item-icon"><i class="fas fa-dice"></i></div>
+                                    <p>Your join request is <strong class="pending">pending</strong></p>
+                                </span>
+                                <span *ngSwitchDefault>
+                                    <button *ngIf="project.status === 'INVITE'" class="btn btn-primary btn-lg ml-auto mr-auto" (click)="joinProject()">Join
+                                        the project!</button>
+                                </span>
+                            </div>
                         </div>
-                        <div class="col-md-7 float-left">
+                        <div class="col-lg-7 float-left">
                             <div class="row">
                                 <div *ngIf="project?.level && utils.getProjectDifficultyNumber(project.level)" class="info-item col d-block text-center text-sm-left">
                                     <h6>Difficulty</h6>

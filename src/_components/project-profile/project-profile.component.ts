@@ -43,4 +43,8 @@ export class ProjectProfileComponent implements OnInit {
             data => { this.project = data },
         );
     }
+
+    joinProject():void {
+        
+    }
 }

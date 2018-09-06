@@ -52,7 +52,7 @@ export class UtilsService {
             case 'CANCELED':
                 return 'Canceled';
             case 'INVITE':
-                return 'Join us!';
+                return 'Open for entries';
             default:
                 return undefined;
         }
