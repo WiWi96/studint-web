@@ -70,6 +70,7 @@
         <small>Social media</small>
         <div class="form-group">
           <select class="custom-select form-control" formControlName="socialValue">
+            <option selected>Set social media links</option>
             <option *ngFor="let item of items">{{item}}</option>
           </select>
         </div>
@@ -80,11 +81,11 @@
             <div *ngSwitchCase="'github'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" formControlName="github" [attr.disabled]="isGithubDisable == true ? true : null" id="githubLink" 
+                  <input type="text" class="form-control" id="githubLink" formControlName="github" [attr.disabled]="isSocialDisabled[0] ? true : null" 
                     placeholder="Add Github link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[0]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -98,11 +99,11 @@
             <div *ngSwitchCase="'twitter'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isTwitterDisable == true ? true : null"
+                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isSocialDisabled[1] ? true : null"
                     placeholder="add twitter link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isTwitterDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[1]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -116,11 +117,11 @@
             <div *ngSwitchCase="'facebook'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isFacebookDisable == true ? true : null"
+                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isSocialDisabled[2] == true ? true : null"
                     placeholder="add Facebook link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isFacebookDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[2]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -134,11 +135,11 @@
             <div *ngSwitchCase="'instagram'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="instagramLink" formControlName="instagram" [attr.disabled]="isInstagramDisable == true ? true : null"
+                  <input type="text" class="form-control" id="instagramLink" formControlName="instagram" [attr.disabled]="isSocialDisabled[3] == true ? true : null"
                     placeholder="Add Instagram link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isInstagramDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[3]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -152,11 +153,11 @@
             <div *ngSwitchCase="'linkedin'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isLinkedinDisable == true ? true : null" 
+                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isSocialDisabled[4] == true ? true : null" 
                     placeholder="Add Linkedin link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isLinkedinDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[4]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -170,11 +171,11 @@
             <div *ngSwitchCase="'goldenline'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isGoldenlineDisable == true ? true : null" 
+                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isSocialDisabled[5] ? true : null" 
                     placeholder="Add Goldenline link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isGoldenlineDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[5]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -188,11 +189,11 @@
             <div *ngSwitchCase="'youtube'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isYoutubeDisable == true ? true : null" 
+                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isSocialDisabled[6] ? true : null" 
                      placeholder="Add Youtube link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[6]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -206,11 +207,11 @@
             <div *ngSwitchCase="'pinterest'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isPinterestDisable == true ? true : null" 
+                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isSocialDisabled[7] ? true : null" 
                      placeholder="Add Pinterest link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isPinterestDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[7]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -224,11 +225,11 @@
             <div *ngSwitchCase="'google'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="googleLink" formControlName="goldenline" [attr.disabled]="isGoogleDisable == true ? true : null" 
+                  <input type="text" class="form-control" id="googleLink" formControlName="google" [attr.disabled]="isSocialDisabled[8] ? true : null" 
                      placeholder="Add Google link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isGoogleDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[8]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -242,11 +243,11 @@
             <div *ngSwitchCase="'custom'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="customLink" formControlName="custom" [attr.disabled]="isCustomDisable == true ? true : null"
+                  <input type="text" class="form-control" id="customLink" formControlName="custom" [attr.disabled]="isSocialDisabled[9] ? true : null"
                      placeholder="Add custom link">
                 </div>
                 <div class="col-md-1 mb-3">
-                  <div *ngIf="!isGithubDisable; else deleteSocial">
+                  <div *ngIf="!isSocialDisabled[9]; else deleteSocial">
                     <a class="btn btn-fa" (click)="addSocial()">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
@@ -258,8 +259,6 @@
               </div>
             </div>
 
-            <div *ngSwitchDefault>
-            </div>
           </div>
 
         </div>
@@ -267,7 +266,7 @@
 
 
       <ng-template #deleteSocial>
-        <button class="btn btn-fa" (click)="deleteSocialMedia()">
+        <button class="btn btn-fa" (click)="addSocial()">
           <span class="fa-stack">
             <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
             <i class="fas fas fa-minus-circle fa-stack-1x icon-c fa-2x"></i>

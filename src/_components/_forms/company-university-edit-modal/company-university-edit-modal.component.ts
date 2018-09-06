@@ -9,6 +9,7 @@ import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
 import { DISABLED } from '../../../../node_modules/@angular/forms/src/model';
+import { ValueTransformer } from '../../../../node_modules/@angular/compiler/src/util';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -52,13 +53,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   fileToUpload: File = null;
 
   countries = ['Poland', 'Germany', 'Spain']
-  items = ['Select social media', 'github', 'twitter', 'facebook', 'instagram', 'linkedin', 'goldenline', 'youtube', 'pinterest', 'google', 'custom'];
+  items = ['github', 'twitter', 'facebook', 'instagram', 'linkedin', 'goldenline', 'youtube', 'pinterest', 'google', 'custom'];
+
   selected = ""
 
 
+  isSocialDisabled: Array<boolean> = [];
 
-
-  isDisabled: Array<boolean> = [];
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -85,15 +86,15 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   setDisableState() {
 
     for (let i = 0; i < 10; i++) {
-      this.isDisabled.push(false);
+      this.isSocialDisabled.push(false);
     }
-    this.isDisabled.forEach(element => {
+    this.isSocialDisabled.forEach(element => {
       console.log(element);
     });
   }
 
   setDisableSocialInputs() {
-    this.isDisabled.forEach((element, index) => { element = this.socialServices[index] == "" ? false : true })
+    this.isSocialDisabled = this.isSocialDisabled.map((element, index) => { return (element = this.socialServices[index] == "" ? false : true); })
   }
 
   close() {
@@ -167,14 +168,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   }
 
   addSocial() {
-    //this.isGithubDisable = !this.isGithubDisable;
-    //this.isTwitterDisable = !this.isTwitterDisable;
+    this.items.filter((value, index) => {
+      if (this.accountDetailsFormGroup.get('socialValue').value == value)
+        this.isSocialDisabled[index] = !this.isSocialDisabled[index];
+    })
   }
 
-  deleteSocialMedia() {
-    //this.isGithubDisable = !this.isGithubDisable;
-    //.isTwitterDisable = !this.isTwitterDisable;
-  }
+
 
   onSubmitCompany() {
     this.setAddressDetails();
