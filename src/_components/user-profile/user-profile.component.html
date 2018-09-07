@@ -32,6 +32,7 @@
                                 <p *ngIf="user.projects?.length > 0">I took part in {{user.projects.length}} <span class="studint-logo"></span>
                                     projects.</p>
                             </div>
+                            <button type="button" class="btn btn-link" (click)="openEditModal()">Edit</button>
                         </div>
                         <div *ngIf="user.skills?.length" class="profile-skills col-md-7 float-left">
                             <h4>My skills</h4>

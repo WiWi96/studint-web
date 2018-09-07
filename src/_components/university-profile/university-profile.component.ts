@@ -19,7 +19,8 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
     private sub: any;
     university: UniversityProfile;
 
-    socialServices = ['https://github.com', 'https://twitter.co', 'https://www.facebook.com'];
+    socialServices = ['https://github.com', 'https://www.facebook.com', 'https://twitter.co',  'https://www.instagram.com', 'https://www.linkedin.com',
+    'https://www.goldenline.com', 'https://www.github.com', 'https://www.pinterest.com', 'https://www.google.com', 'https://www.custom.com'];
 
     constructor(
         private route: ActivatedRoute,

@@ -18,7 +18,7 @@ export class CompanyProfileComponent implements OnInit {
     company: CompanyProfile;
 
     expanded = false;
-    socialServices = ['https://github.com', 'https://twitter.co', 'https://www.facebook.com', 'https://www.instagram.com', 'https://www.linkedin.com',
+    socialServices = ['https://github.com', 'https://www.facebook.com', 'https://twitter.co',  'https://www.instagram.com', 'https://www.linkedin.com',
         'https://www.goldenline.com', 'https://www.github.com', 'https://www.pinterest.com', 'https://www.google.com', 'https://www.custom.com'];
 
     constructor(

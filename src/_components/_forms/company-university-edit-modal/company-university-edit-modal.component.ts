@@ -21,6 +21,8 @@ const URL = 'http://localhost:3000/api/upload';
 export class CompanyUniversityEditModalComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
+  file: string;
+  fileToUpload: File = null;
 
   address: Address;
   profileName: ProfileName;
@@ -28,14 +30,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   isCompany: boolean;
   isUniversity: boolean;
 
-  submittedStudent: boolean = false;
-  submittedUniversity: boolean = false;
-  submittedCompany: boolean = false;
-
   addressFormGroup: FormGroup;
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
-  fullNameFormGroup: FormGroup;
   socialServicesFormpGroup: FormGroup;
 
   accountStudentDetailsFormGroup: FormGroup;
@@ -49,11 +46,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   univeristyProfile: UniversityProfile;
 
 
-  file: string;
-  fileToUpload: File = null;
 
   countries = ['Poland', 'Germany', 'Spain']
-  items = ['github', 'twitter', 'facebook', 'instagram', 'linkedin', 'goldenline', 'youtube', 'pinterest', 'google', 'custom'];
+  items = ['youtube', 'facebook', 'twitter', 'instagram', 'linkedin', 'goldenline', 'github', 'pinterest', 'google', 'custom'];
 
   selected = ""
 
@@ -107,43 +102,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   createUniversityForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [''],
-      twitter: [''],
-      facebook: [''],
-      instagram: [''],
-      linkedin: [''],
-      goldenline: [''],
-      youtube: [''],
-      pinterest: [''],
-      google: [''],
-      custom: [''],
-    });
-
-    this.addressFormGroup = this.formBuilder.group({
-      town: [this.address.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      postalCode: [this.address.postCode, [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
-      street: [this.address.street, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      country: [this.address.country, [Validators.required]],
-      houseNo: [this.address.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
-    });
-
-    this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.univeristyProfile.profileName.name, [Validators.required]],
-      address: this.addressFormGroup,
-      socialServices: this.socialServicesFormpGroup,
-      description: [this.univeristyProfile.description, [Validators.required]],
-    })
-  }
-
-  createCompanyForm() {
-    this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [this.socialServices[0]],
-      twitter: [this.socialServices[1]],
-      facebook: [this.socialServices[2]],
+      youtube: [this.socialServices[0]],
+      facebook: [this.socialServices[1]],
+      twitter: [this.socialServices[2]],
       instagram: [this.socialServices[3]],
       linkedin: [this.socialServices[4]],
       goldenline: [this.socialServices[5]],
-      youtube: [this.socialServices[6]],
+      github: [this.socialServices[6]],
       pinterest: [this.socialServices[7]],
       google: [this.socialServices[8]],
       custom: [this.socialServices[9]]
@@ -158,9 +123,40 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.companyProfile.profileName.name, [Validators.required]],
+      name: [this.univeristyProfile.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
-      description: [this.companyProfile.description, [Validators.required]],
+      description: [this.univeristyProfile.description, [Validators.required]],
+      socialServices: this.socialServicesFormpGroup,
+      socialValue: ['', [Validators.required]],
+    })
+  }
+
+  createCompanyForm() {
+    this.socialServicesFormpGroup = this.formBuilder.group({
+      youtube: [this.socialServices[0]],
+      facebook: [this.socialServices[1]],
+      twitter: [this.socialServices[2]],
+      instagram: [this.socialServices[3]],
+      linkedin: [this.socialServices[4]],
+      goldenline: [this.socialServices[5]],
+      github: [this.socialServices[6]],
+      pinterest: [this.socialServices[7]],
+      google: [this.socialServices[8]],
+      custom: [this.socialServices[9]]
+    });
+
+    this.addressFormGroup = this.formBuilder.group({
+      town: [this.address.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      postalCode: [this.address.postCode, [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
+      street: [this.address.street, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      country: [this.address.country, [Validators.required]],
+      houseNo: [this.address.houseNo, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
+    });
+
+    this.accountDetailsFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      address: this.addressFormGroup,
+      description: ['', [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
       socialValue: ['', [Validators.required]],
     })
@@ -173,6 +169,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
         this.isSocialDisabled[index] = !this.isSocialDisabled[index];
     })
   }
+
+  
 
 
 
@@ -190,9 +188,16 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
 
   setSocialServices() {
-    this.socialServices[0] = this.socialServicesFormpGroup.get('github').value;
+    this.socialServices[0] = this.socialServicesFormpGroup.get('youtube').value;
     this.socialServices[1] = this.socialServicesFormpGroup.get('twitter').value;
     this.socialServices[2] = this.socialServicesFormpGroup.get('facebook').value;
+    this.socialServices[3] = this.socialServicesFormpGroup.get('instagram').value;
+    this.socialServices[4] = this.socialServicesFormpGroup.get('linkedin').value;
+    this.socialServices[5] = this.socialServicesFormpGroup.get('goldenline').value;
+    this.socialServices[6] = this.socialServicesFormpGroup.get('github').value;
+    this.socialServices[7] = this.socialServicesFormpGroup.get('pinterest').value;
+    this.socialServices[8] = this.socialServicesFormpGroup.get('google').value;
+    this.socialServices[9] = this.socialServicesFormpGroup.get('custom').value;
   }
 
   setProfileName() {

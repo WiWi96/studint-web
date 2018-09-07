@@ -78,11 +78,11 @@
       <div formGroupName="socialServices">
         <div class="form-group">
           <div [ngSwitch]="accountDetailsFormGroup.get('socialValue').value">
-            <div *ngSwitchCase="'github'">
+            <div *ngSwitchCase="'youtube'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="githubLink" formControlName="github" [attr.disabled]="isSocialDisabled[0] ? true : null" 
-                    placeholder="Add Github link">
+                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isSocialDisabled[0] ? true : null"
+                    placeholder="Add Youtube link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[0]; else deleteSocial">
@@ -96,11 +96,11 @@
                 </div>
               </div>
             </div>
-            <div *ngSwitchCase="'twitter'">
+            <div *ngSwitchCase="'facebook'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isSocialDisabled[1] ? true : null"
-                    placeholder="add twitter link">
+                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isSocialDisabled[1] == true ? true : null"
+                    placeholder="add Facebook link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[1]; else deleteSocial">
@@ -114,11 +114,12 @@
                 </div>
               </div>
             </div>
-            <div *ngSwitchCase="'facebook'">
+
+            <div *ngSwitchCase="'twitter'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isSocialDisabled[2] == true ? true : null"
-                    placeholder="add Facebook link">
+                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isSocialDisabled[2] ? true : null"
+                    placeholder="add twitter link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[2]; else deleteSocial">
@@ -132,6 +133,7 @@
                 </div>
               </div>
             </div>
+
             <div *ngSwitchCase="'instagram'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
@@ -153,7 +155,7 @@
             <div *ngSwitchCase="'linkedin'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isSocialDisabled[4] == true ? true : null" 
+                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isSocialDisabled[4] == true ? true : null"
                     placeholder="Add Linkedin link">
                 </div>
                 <div class="col-md-1 mb-3">
@@ -171,7 +173,7 @@
             <div *ngSwitchCase="'goldenline'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isSocialDisabled[5] ? true : null" 
+                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isSocialDisabled[5] ? true : null"
                     placeholder="Add Goldenline link">
                 </div>
                 <div class="col-md-1 mb-3">
@@ -186,11 +188,11 @@
                 </div>
               </div>
             </div>
-            <div *ngSwitchCase="'youtube'">
+            <div *ngSwitchCase="'github'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isSocialDisabled[6] ? true : null" 
-                     placeholder="Add Youtube link">
+                  <input type="text" class="form-control" id="githubLink" formControlName="github" [attr.disabled]="isSocialDisabled[6] ? true : null"
+                    placeholder="Add Github link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[6]; else deleteSocial">
@@ -207,8 +209,8 @@
             <div *ngSwitchCase="'pinterest'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isSocialDisabled[7] ? true : null" 
-                     placeholder="Add Pinterest link">
+                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isSocialDisabled[7] ? true : null"
+                    placeholder="Add Pinterest link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[7]; else deleteSocial">
@@ -225,8 +227,8 @@
             <div *ngSwitchCase="'google'">
               <div class="form-row">
                 <div class="col-md-11 mb-3">
-                  <input type="text" class="form-control" id="googleLink" formControlName="google" [attr.disabled]="isSocialDisabled[8] ? true : null" 
-                     placeholder="Add Google link">
+                  <input type="text" class="form-control" id="googleLink" formControlName="google" [attr.disabled]="isSocialDisabled[8] ? true : null"
+                    placeholder="Add Google link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[8]; else deleteSocial">
@@ -244,7 +246,7 @@
               <div class="form-row">
                 <div class="col-md-11 mb-3">
                   <input type="text" class="form-control" id="customLink" formControlName="custom" [attr.disabled]="isSocialDisabled[9] ? true : null"
-                     placeholder="Add custom link">
+                    placeholder="Add custom link">
                 </div>
                 <div class="col-md-1 mb-3">
                   <div *ngIf="!isSocialDisabled[9]; else deleteSocial">

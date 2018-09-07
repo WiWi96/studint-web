@@ -28,8 +28,17 @@
           </div>
         </div>
       </div>
-      <br>
-      <button type="submit" class="btn btn-primary">Register</button>
+      <div class="tags-container">
+        <ng-container *ngFor="let item of technologiesTags; let i = index" [attr.data-index]="i">
+          <button type="button" class="btn">
+            <div class="font-tag">{{item}}
+              <span class="close" (click)="onCloseClick(i)">&nbsp;
+                <i class="fas fa-times fa-sm"></i>
+              </span>
+            </div>
+          </button>&nbsp;
+        </ng-container>
+      </div>
     </form>
   </div>
 </div>
@@ -37,7 +46,7 @@
   <button class="btn" (click)="close()">
     cancel
   </button>
-  <button class="btn btn-success" (click)="onSubmitCompany()">
+  <button class="btn btn-success" (click)="onSubmitStudent()">
     save
   </button>
 </div>
