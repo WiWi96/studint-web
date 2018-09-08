@@ -10,12 +10,12 @@
                     </div>
                     <div class="profile-info-container row d-block">
                         <div class="profile-info col-lg-5 text-left float-left">
-                            <div *ngIf="project.owner" class="project-company p-3 mx-2 mb-4 row align-items-center">
-                                <div *ngIf="project.owner.photo" class="profile-photo-sm mr-3" [ngStyle]="{'background-image': 'url(' + project.owner.photo + ')'}"></div>
+                            <div *ngIf="project.company" class="project-company p-3 mx-2 mb-4 row align-items-center">
+                                <div *ngIf="project.company.photo" class="profile-photo-sm mr-3" [ngStyle]="{'background-image': 'url(' + project.company.photo + ')'}"></div>
                                 <p class="m-0">
                                     Project by
                                     <strong>
-                                        <a [routerLink]="[ '/company', project.owner.id ]">{{project.owner.name}}</a>
+                                        <a [routerLink]="[ '/company', project.company.id ]">{{project.company.name}}</a>
                                     </strong>
                                 </p>
                             </div>
