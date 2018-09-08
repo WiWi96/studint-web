@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { UserProfile } from '_models/profile/userProfile';
 import { environment } from 'environments/environment';
+import { Technology } from '_models/technology/technology';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 
 const httpOptions = {
@@ -13,7 +15,7 @@ const httpOptions = {
   })
 };
 
-const userUrl = environment.apiEndpoint + '/user';
+const userUrl = environment.apiEndpoint + '/user' + ''
 
 @Injectable()
 export class UserProfileService {
@@ -43,4 +45,17 @@ export class UserProfileService {
   public getAllUser(): Observable<UserProfile[]> {
     return this.http.get<UserProfile[]>(`${userUrl}`);
   }
+
+  public getAllTechnology(): Observable<string[]> {
+    return this.http.get<string[]>('../../../assets/technology.json');
+  }
+
+  public getAllUserTechnolgies(): Observable<string[]> {
+    return this.http.get<string[]>('../../../assets/technology2.json');
+  }
+
+  public getAllLanguages(): Observable<string[]> {
+    return this.http.get<string[]>('../../../assets/languages.json');
+  }
+  
 }

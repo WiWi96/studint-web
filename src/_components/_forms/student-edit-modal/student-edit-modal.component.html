@@ -6,10 +6,11 @@
 </div>
 <div class="modal-boy">
   <div class="container">
-    <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php"
-      method="post">
+    <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()">
+
       <div formGroupName="fullname">
         <div class="form-group">
+            <small>First Name</small>
           <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
             required/>
           <div *ngIf="submittedStudent">
@@ -19,6 +20,7 @@
           </div>
         </div>
         <div class="form-group">
+          <small>Last Name</small>
           <input type="text" class="form-control" formControlName="surname" id="InputSurname" placeholder="Surname" maxlength="254"
             required/>
           <div *ngIf="submittedStudent">
@@ -28,17 +30,29 @@
           </div>
         </div>
       </div>
-      <div class="tags-container">
-        <ng-container *ngFor="let item of technologiesTags; let i = index" [attr.data-index]="i">
-          <button type="button" class="btn">
-            <div class="font-tag">{{item}}
-              <span class="close" (click)="onCloseClick(i)">&nbsp;
-                <i class="fas fa-times fa-sm"></i>
-              </span>
-            </div>
-          </button>&nbsp;
-        </ng-container>
+
+      <div class="form-group">
+        <small>Technologies</small>
+        <input id="typeahead-focus" type="text" class="form-control" (selectItem)="selectedItem($event.item)" [ngbTypeahead]="searchTechnolgy"
+          (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" #instance="ngbTypeahead" />
       </div>
+      <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of userTechnologiesTags'>
+            <button type="button" class="btn">
+              <div class="font-tag">{{item}}
+                <span class="close" (click)="onCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group">
+
+      </div>
+
     </form>
   </div>
 </div>

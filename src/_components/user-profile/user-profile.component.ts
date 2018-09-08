@@ -8,6 +8,7 @@ import { PostService } from '_service/post/post.service';
 import { TeamService } from '_service/team/team.service';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { StudentEditModalComponent } from '../_forms/student-edit-modal/student-edit-modal.component';
+import { Technology } from '_models/technology/technology';
 
 @Component({
     selector: 'app-user-profile',
@@ -19,6 +20,7 @@ export class UserProfileComponent implements OnInit {
     private sub: any;
     expanded = false;
     user: UserProfile;
+    technolgies: Technology[];
 
     constructor(
         private route: ActivatedRoute,
