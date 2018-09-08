@@ -50,25 +50,35 @@
                 <h4>About us</h4>
                 <div id="description" [innerHTML]="company.description" class="profile-description-text">
                 </div>
-                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
                     <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
                     <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div *ngIf="company.projects?.length" class="container">
         <div class="row">
             <div class="profile-projects bg-dark col-md m-1">
                 <h4><span class="studint-logo"></span> Projects</h4>
-                <div *ngIf="!company.projects?.length" class="no-projects text-center p-5">
-                    <h5>I haven't participated any</h5>
-                </div>
                 <div *ngFor="let project of company.projects" class="item bg-light container my-3">
-                    <h5>{{project.name}}</h5>
-                    <h6>IBM</h6>
+                    <div class="col">
+                        <h5>
+                            <a [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a>
+                        </h5>
+                    </div>
+                    <div class="info-item col text-right">
+                        <div class="difficulty-stars" [title]="utils.getProjectLevelText(project.level)">
+                            <i *ngFor="let i of Arr(utils.getProjectDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
+                            <i *ngFor="let i of Arr(5 - utils.getProjectDifficultyNumber(project.level)).fill(1)" class="far fa-star"></i>
+                        </div>
+                        <h6>{{utils.getProjectStatusText(project.status)}}</h6>
+                        <p><strong>{{utils.getDurationUnit(project.duration)}}</strong> from <strong>{{project.startDate
+                                | amDateFormat: 'LL'}}</strong></p>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <app-wall [posts]="company.posts"></app-wall>

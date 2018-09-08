@@ -4,6 +4,8 @@ import { CompanyProfile } from '_models/profile/companyProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddressFormComponent } from '../_forms/add-form/address-form.component';
+import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
@@ -22,6 +24,7 @@ export class CompanyProfileComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private companyProfileService: CompanyProfileService,
         private modalService: NgbModal
     ) { }
@@ -42,6 +45,9 @@ export class CompanyProfileComponent implements OnInit {
             data => { this.company = data },
         );
     }
+
+    openExampleModalWindow(): any {
+        const modalRef = this.modalService.open(AddressFormComponent);
 
     showDescriptionMoreButton() {
         let element = document.getElementById('description');

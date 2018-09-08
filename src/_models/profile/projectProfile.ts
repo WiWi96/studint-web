@@ -10,8 +10,8 @@ export class ProjectProfile {
     type: string;
     level: string;
     participants: Array<ProfileName> = [];
-    //teams: Array<Team> = [];
-    //participationStatus: string;
+    teams: Array<Team> = [];
+    participationStatus: string;
     startDate: Date;
     joiningDate: Date;
     duration: Duration;

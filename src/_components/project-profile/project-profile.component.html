@@ -8,28 +8,21 @@
                 </div>
                 <div class="profile-card col">
                     <div class="profile-name">
-                        <h1>{{project.profileName?.name}}</h1>
-                        <h6 [ngSwitch]="project.status" id="profile-status">
-                            <span *ngSwitchCase="'inprogress'">In progress</span>
-                            <span *ngSwitchCase="'invite'">Join us!</span>
-                            <span *ngSwitchCase="'tba'">To be announced</span>
-                            <span *ngSwitchCase="'finished'">Finished</span>
-                        </h6>
+                        <h1>{{project.name}}</h1>
+                        <h6 id="profile-status">{{utils.getProjectStatusText(project.status)}}</h6>
                     </div>
                     <div class="profile-info-container row d-block">
-                        <div class="profile-info col-md-5 text-left float-left">
-                            <div *ngIf="getDifficultyNumber()" class="info-item py-2 d-block text-center text-sm-left">
-                                <h6>Difficulty</h6>
-                                <div class="difficulty-stars">
-                                    <i *ngFor="let i of Arr(getDifficultyNumber()).fill(1)" class="fas fa-star"></i>
-                                    <i *ngFor="let i of Arr(5 - getDifficultyNumber()).fill(1)" class="far fa-star"></i>
-                                </div>
+                        <div class="profile-info col-lg-5 text-left float-left">
+                            <div *ngIf="project.owner" class="project-company p-3 mx-2 mb-4 row align-items-center">
+                                <div *ngIf="project.owner.photo" class="profile-photo-sm mr-3" [ngStyle]="{'background-image': 'url(' + project.owner.photo + ')'}"></div>
+                                <p class="m-0">
+                                    Project by
+                                    <strong>
+                                        <a [routerLink]="[ '/company', project.owner.id ]">{{project.owner.name}}</a>
+                                    </strong>
+                                </p>
                             </div>
-                            <div *ngIf="project.duration" class="info-item d-block text-center text-sm-left">
-                                <h6>Estimated duration</h6>
-                                <p>{{project.duration.value}} {{getDurationUnit(project.duration)}}</p>
-                            </div>
-                            <div *ngIf="project.startDate" [ngSwitch]="getDateStatus(project.startDate)" class="info-item">
+                            <div *ngIf="project.startDate" [ngSwitch]="utils.getDateStatus(project.startDate)" class="info-item">
                                 <div class="info-item-icon"><i class="fas fa-play"></i></div>
                                 <p *ngSwitchCase="'future'">Project starts on {{project.startDate | amDateFormat: 'LL'}}</p>
                                 <p *ngSwitchCase="'tenDays'">Project is starting in less than 10 days! ({{project.startDate
@@ -40,7 +33,7 @@
                                 <p *ngSwitchCase="'yesterday'">Project started yesterday</p>
                                 <p *ngSwitchCase="'past'">Project started on {{project.startDate | amDateFormat: 'LL'}}</p>
                             </div>
-                            <div *ngIf="project.joiningDate" [ngSwitch]="getDateStatus(project.joiningDate)" class="info-item">
+                            <div *ngIf="project.joiningDate" [ngSwitch]="utils.getDateStatus(project.joiningDate)" class="info-item">
                                 <div class="info-item-icon"><i class="fas fa-stopwatch"></i></div>
                                 <p *ngSwitchCase="'future'">Entries are accepted until {{project.joiningDate | amDateFormat:
                                     'LL'}}
@@ -52,12 +45,45 @@
                                 <p *ngSwitchCase="'yesterday'">Entries closed yesterday</p>
                                 <p *ngSwitchCase="'past'">Entries are no longer accepted</p>
                             </div>
+                            <div class="info-item mb-4" [ngSwitch]="project.participationStatus">
+                                <span *ngSwitchCase="'accepted'" class="d-flex">
+                                    <div class="info-item-icon"><i class="far fa-check-circle"></i></div>
+                                    <p>Your entry has been <strong class="accepted">accepted</strong></p>
+                                </span>
+                                <span *ngSwitchCase="'rejected'" class="d-flex">
+                                    <div class="info-item-icon"><i class="far fa-times-circle"></i></div>
+                                    <p>Your entry has been <strong class="rejected">rejected</strong></p>
+                                </span>
+                                <span *ngSwitchCase="'pending'" class="d-flex">
+                                    <div class="info-item-icon"><i class="fas fa-dice"></i></div>
+                                    <p>Your join request is <strong class="pending">pending</strong></p>
+                                </span>
+                                <span *ngSwitchDefault>
+                                    <button *ngIf="project.status === 'INVITE'" class="btn btn-primary btn-lg ml-auto mr-auto" (click)="joinProject()">Join
+                                        the project!</button>
+                                </span>
+                            </div>
                         </div>
-                        <div *ngIf="project.technologies?.length" class="profile-technologies col-md-7 float-left">
-                            <h4>Technologies</h4>
-                            <span class="technology-item" *ngFor="let technology of project.technologies">
-                                {{technology.name}}
-                            </span>
+                        <div class="col-lg-7 float-left">
+                            <div class="row">
+                                <div *ngIf="project?.level && utils.getProjectDifficultyNumber(project.level)" class="info-item col d-block text-center text-sm-left">
+                                    <h6>Difficulty</h6>
+                                    <div class="difficulty-stars" [title]="utils.getProjectLevelText(project.level)">
+                                        <i *ngFor="let i of Arr(utils.getProjectDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
+                                        <i *ngFor="let i of Arr(5 - utils.getProjectDifficultyNumber(project.level)).fill(1)" class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <div *ngIf="project.duration" class="info-item col d-block text-center text-sm-left">
+                                    <h6>Estimated duration</h6>
+                                    <p>{{project.duration.value}} {{utils.getDurationUnit(project.duration)}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="project.technologies?.length" class="profile-technologies">
+                                <h4>Technologies</h4>
+                                <span class="technology-item" *ngFor="let technology of project.technologies">
+                                    {{technology.name}}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +94,7 @@
                 <h4>Project description</h4>
                 <div id="description" [innerHTML]="project.description" class="profile-description-text">
                 </div>
-                <div *ngIf="showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
                     <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
                     <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>
@@ -80,7 +106,7 @@
             <h4>Team members</h4>
             <div class="profile-participants row">
                 <div class="participant-photo-container col-sm-auto" *ngFor="let participant of project.participants">
-                    <div *ngIf="project?.profileName?.photo" class="participant-photo" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
+                    <div *ngIf="project?.profileName?.photo" class="profile-photo-sm" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
                     <a [routerLink]="['/user', participant.id]">
                         <p class="text-center bold">{{participant.name}}</p>
                     </a>
