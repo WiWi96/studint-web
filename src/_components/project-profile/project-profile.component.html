@@ -3,9 +3,6 @@
     <div class="container">
         <div class="profile-header container">
             <div class="profile-top row text-center text-sm-left">
-                <div class="profile-photo-container col-sm-auto">
-                    <div *ngIf="project.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + project.profileName.photo + ')'}"></div>
-                </div>
                 <div class="profile-card col">
                     <div class="profile-name">
                         <h1>{{project.name}}</h1>
@@ -106,7 +103,7 @@
             <h4>Team members</h4>
             <div class="profile-participants row">
                 <div class="participant-photo-container col-sm-auto" *ngFor="let participant of project.participants">
-                    <div *ngIf="project?.profileName?.photo" class="profile-photo-sm" style="background-image: url('https://static.polityka.pl/_resource/res/path/42/8a/428a23c5-745e-4fdf-871d-56cc9ad17d7f_600x')"></div>
+                    <div class="profile-photo-sm" [ngStyle]="{'background-image': 'url(' + participant.photo + ')'}"></div>
                     <a [routerLink]="['/user', participant.id]">
                         <p class="text-center bold">{{participant.name}}</p>
                     </a>
