@@ -8,7 +8,6 @@ import { UniversityProfileComponent } from '_components/university-profile';
 import { CompanyProfileComponent } from '_components/company-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
 import { ErrorsComponent } from 'errors';
 import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
 
@@ -17,7 +16,6 @@ const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'address', component: AddressFormComponent },
 
     { path: 'user/:id', component: UserProfileComponent },
     { path: 'university/:id', component: UniversityProfileComponent },

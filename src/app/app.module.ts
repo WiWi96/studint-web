@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
+import { FileSelectDirective } from '../../node_modules/ng2-file-upload';
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -34,13 +35,13 @@ import { StaticBarComponent } from '_components/static-bar/static-bar.component'
 import { WallComponent } from '_components/wall';
 import { HomeComponent } from '_components/home/home.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
 import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
 import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
 import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
 import { UtilsService } from '_service/utils/utils.service';
+import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { UtilsService } from '_service/utils/utils.service';
     AddressFormComponent,
     ProjectManagementComponent,
     TeamManagementComponent
+    FileSelectDirective,
+    CompanyUniversityEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,7 @@ import { UtilsService } from '_service/utils/utils.service';
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, AddressFormComponent
+    ErrorsComponent, CompanyUniversityEditModalComponent
   ]
 })
 export class AppModule { }
