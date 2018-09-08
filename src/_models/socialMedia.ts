@@ -1,4 +1,5 @@
 export class SocialMedia {
-   service: string;
-   url: string; 
+    id: number;
+    service: string;
+    url: string;
 }
