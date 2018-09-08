@@ -45,12 +45,14 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="company.description?.length > 0" class="profile-description-container container col-md-10" [ngClass]="{'expanded': expanded}">
+        <div *ngIf="company.description?.length > 0" class="profile-description-container container col-md-10"
+            [ngClass]="{'expanded': expanded}">
             <div class="profile-description mx-4">
                 <h4>About us</h4>
                 <div id="description" [innerHTML]="company.description" class="profile-description-text">
                 </div>
-                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded" [ngSwitch]="expanded">
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded"
+                    [ngSwitch]="expanded">
                     <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
                     <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>
@@ -62,19 +64,22 @@
             <div class="profile-projects bg-dark col-md m-1">
                 <h4><span class="studint-logo"></span> Projects</h4>
                 <div *ngFor="let project of company.projects" class="item bg-light container my-3">
-                    <div class="col">
-                        <h5>
-                            <a [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a>
-                        </h5>
-                    </div>
-                    <div class="info-item col text-right">
-                        <div class="difficulty-stars" [title]="utils.getProjectLevelText(project.level)">
-                            <i *ngFor="let i of Arr(utils.getProjectDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
-                            <i *ngFor="let i of Arr(5 - utils.getProjectDifficultyNumber(project.level)).fill(1)" class="far fa-star"></i>
+                    <div class="row">
+                        <div class="col">
+                            <h5>
+                                <a [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a>
+                            </h5>
                         </div>
-                        <h6>{{utils.getProjectStatusText(project.status)}}</h6>
-                        <p><strong>{{utils.getDurationUnit(project.duration)}}</strong> from <strong>{{project.startDate
-                                | amDateFormat: 'LL'}}</strong></p>
+                        <div class="info-item col text-right">
+                            <div class="difficulty-stars" [title]="utils.getProjectLevelText(project.level)">
+                                <i *ngFor="let i of Arr(utils.getProjectDifficultyNumber(project.level)).fill(1)" class="fas fa-star"></i>
+                                <i *ngFor="let i of Arr(5 - utils.getProjectDifficultyNumber(project.level)).fill(1)"
+                                    class="far fa-star"></i>
+                            </div>
+                            <h6>{{utils.getProjectStatusText(project.status)}}</h6>
+                            <p><strong>{{utils.getDurationUnit(project.duration)}}</strong> from <strong>{{project.startDate
+                                    | amDateFormat: 'LL'}}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
