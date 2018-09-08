@@ -138,6 +138,54 @@ export class UtilsService {
         }
     }
 
+    public getSocialMediaName(type: string): string {
+        switch (type) {
+            case 'youtube':
+                return 'YouTube';
+            case 'facebook':
+                return 'Facebook';
+            case 'twitter':
+                return 'Twitter';
+            case 'instagram':
+                return 'Instagran';
+            case 'linkedin':
+                return 'LinkedIn';
+            case 'github':
+                return 'GitHub';
+            case 'pinterest':
+                return 'Pinterest';
+            case 'google':
+                return 'Google';
+            case 'custom':
+            default:
+                return 'Website';
+        }
+    }
+
+    public getSocialMediaIconClass(type: string): string {
+        switch (type) {
+            case 'youtube':
+                return 'fab fa-youtube';
+            case 'facebook':
+                return 'fab fa-facebook';
+            case 'twitter':
+                return 'fab fa-twitter';
+            case 'instagram':
+                return 'fab fa-instagram';
+            case 'linkedin':
+                return 'fab fa-linkedin';
+            case 'github':
+                return 'fab fa-github';
+            case 'pinterest':
+                return 'fab fa-pinterest';
+            case 'google':
+                return 'fab fa-google';
+            case 'custom':
+            default:
+                return 'fas fa-globe';
+        }
+    }
+
     public photoExists(profile: ProfileName): Boolean {
         return profile != undefined && profile.photo != undefined && profile.photo.length > 0;
     }
