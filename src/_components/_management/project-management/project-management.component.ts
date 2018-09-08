@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
-import { ProfileName } from '_models/profile/profileName';
-import { ProjectProfile } from '_models/profile/projectProfile';
 import { UtilsService } from '_service/utils/utils.service';
+import { ProjectInfo } from '_models/info/projectInfo';
 
 @Component({
   selector: 'app-project-management',
@@ -11,7 +10,7 @@ import { UtilsService } from '_service/utils/utils.service';
 })
 export class ProjectManagementComponent implements OnInit, OnDestroy {
 
-  projects: Array<ProjectProfile>;
+  projects: Array<ProjectInfo>;
   sub: any;
 
   constructor(
@@ -27,7 +26,7 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   }
 
   getProjects(): void {
-    this.sub = this.projectService.getAllProjects().subscribe(
+    this.sub = this.projectService.getProjectsByCompany(54).subscribe(
       data => this.projects = data,
       err => this.projects = null
     )
@@ -46,6 +45,6 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   }
 
   cancelProject(id: number): void {
-    this.projectService.deleteProject(id);
+    this.projectService.deleteProject(id).subscribe(() => this.getProjects());
   }
 }
