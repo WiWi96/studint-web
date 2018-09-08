@@ -17,7 +17,7 @@
                         <div class="profile-bio col-md-5 text-left float-left">
                             <div *ngIf="user.studiesInfos?.length" class="bio-item">
                                 <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
-                                <p><strong>{{utils.getOrdinal(user.studiesInfos[0].yearOfStudies)}}</strong> year student of <strong>{{user.studiesInfos[0].studyCourse.courseName}}</strong><br>
+                                <p><strong>{{utils.getOrdinal(user.studiesInfos[0].yearOfStudies)}}</strong> year student of <strong>{{user.studiesInfos[0]?.course?.courseName}}</strong><br>
                                     at <strong>{{user.studiesInfos[0].university.name}}</strong></p>
                             </div>
                             <div *ngIf="user.languages?.length" class="bio-item">
@@ -59,12 +59,12 @@
                 <h4>Schools</h4>
                 <div *ngFor="let study of user.studiesInfos" class="item bg-light container my-3">
                     <h5>
-                        <a [routerLink]="[ '/university', study.university.id ]">
-                            {{study.university.name}}
+                        <a [routerLink]="[ '/university', study.university?.id ]">
+                            {{study.university?.name}}
                         </a>
                     </h5>
                     <h6 class="subtitle">{{utils.getDateRangeText(study.startYear, study.finishYear)}}</h6>
-                    <p>{{study.studyCourse.courseName}}</p>
+                    <p>{{study.course?.courseName}}</p>
                 </div>
             </div>
             <div class="profile-projects bg-dark col-md m-1">

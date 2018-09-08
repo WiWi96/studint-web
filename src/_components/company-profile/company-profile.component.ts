@@ -16,6 +16,7 @@ export class CompanyProfileComponent implements OnInit {
     sub: any;
     id: number;
     company: CompanyProfile;
+    Arr = Array;
 
     expanded = false;
     socialServices = ['https://github.com', 'https://twitter.co', 'https://www.facebook.com'];
