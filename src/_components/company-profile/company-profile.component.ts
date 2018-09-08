@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyProfile } from '_models/profile/companyProfile';
-import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddressFormComponent } from '../_forms/add-form/address-form.component';
 import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 
@@ -44,23 +42,6 @@ export class CompanyProfileComponent implements OnInit {
         this.companyProfileService.getCompany(id).subscribe(
             data => { this.company = data },
         );
-    }
-
-    openExampleModalWindow(): any {
-        const modalRef = this.modalService.open(AddressFormComponent);
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
     }
 
     openEditModal(): any {

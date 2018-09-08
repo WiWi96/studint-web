@@ -57,9 +57,8 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     StaticBarComponent,
     WallComponent,
     ModalWindowComponent,
-    AddressFormComponent,
     ProjectManagementComponent,
-    TeamManagementComponent
+    TeamManagementComponent,
     FileSelectDirective,
     CompanyUniversityEditModalComponent
   ],
