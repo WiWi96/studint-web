@@ -10,7 +10,7 @@
 
       <div formGroupName="fullname">
         <div class="form-group">
-            <small>First Name</small>
+          <small>First Name</small>
           <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
             required/>
           <div *ngIf="submittedStudent">
@@ -33,7 +33,7 @@
 
       <div class="form-group">
         <small>Technologies</small>
-        <input id="typeahead-focus" type="text" class="form-control" (selectItem)="selectedItem($event.item)" [ngbTypeahead]="searchTechnolgy"
+        <input id="typeahead-focus" type="text" class="form-control" [ngbTypeahead]="searchTechnolgy" (selectItem)="selectedTechnologyItem($event.item)"
           (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" #instance="ngbTypeahead" />
       </div>
       <div class="form-group">
@@ -41,7 +41,7 @@
           <ng-container *ngFor='let item of userTechnologiesTags'>
             <button type="button" class="btn">
               <div class="font-tag">{{item}}
-                <span class="close" (click)="onCloseClick(item)">&nbsp;
+                <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
                 </span>
               </div>
@@ -50,7 +50,22 @@
         </div>
       </div>
       <div class="form-group">
-
+        <small>Languages</small>
+        <input id="typeahead-focus2" type="text" class="form-control" (selectItem)="selectedLanguageItem($event.item)" (focus)="focus2$.next($event.target.value)"
+          (click)="click2$.next($event.target.value)" [ngbTypeahead]="searchLanguage" #instance="ngbTypeahead" />
+      </div>
+      <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of userLanguagesTags'>
+            <button type="button" class="btn">
+              <div class="font-tag">{{item}}
+                <span class="close" (click)="onLanguageCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
       </div>
 
     </form>

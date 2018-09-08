@@ -21,8 +21,14 @@ export class StudentEditModalComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
+  focus2$ = new Subject<string>();
+  click2$ = new Subject<string>();
+
   userTechnologiesTags: string[];
   serviceTechnolgies: string[];
+
+  userLanguagesTags: string[] = ['English', 'Polish', 'Croatian'];
+  serviceLanguages: string[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +38,7 @@ export class StudentEditModalComponent implements OnInit {
 
   ngOnInit() {
     this.getTechnologies();
+    this.getLanguages();
     this.createStudentForm();
   }
 
@@ -40,11 +47,19 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   createStudentForm() {
+    this.createFullNameFormGroup();
+    this.createAccountDetailsFormGroup();
+  }
+
+  createFullNameFormGroup() {
     this.fullNameFormGroup = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
     })
 
+  }
+
+  createAccountDetailsFormGroup() {
     this.accountStudentDetailsFormGroup = this.formBuilder.group({
       fullname: this.fullNameFormGroup,
     });
@@ -60,6 +75,12 @@ export class StudentEditModalComponent implements OnInit {
     });
   }
 
+  getLanguages() {
+    this.userProfileService.getAllLanguages().subscribe(languages => {
+      this.serviceLanguages = languages;
+    })
+  }
+
   getAllTechnolgies(technolgies: string[]) {
     this.serviceTechnolgies = technolgies;
   }
@@ -68,12 +89,22 @@ export class StudentEditModalComponent implements OnInit {
     this.userTechnologiesTags = technolgies;
   }
 
-  public onCloseClick(item: string): void {
-    console.log(item);
+  getAllTechnologies(languages: string[]) {
+    this.serviceLanguages = languages;
+  }
 
-    this.userTechnologiesTags.forEach((data, index) => {
-      if (data == item) {
+  public onTechnologyCloseClick(teachnologyTag: string): void {
+    this.userTechnologiesTags.forEach((technology, index) => {
+      if (teachnologyTag == technology) {
         this.userTechnologiesTags.splice(index, 1);
+      }
+    });
+  }
+
+  public onLanguageCloseClick(languageTag: string): void {
+    this.userLanguagesTags.forEach((language, index) => {
+      if (languageTag == language) {
+        this.userLanguagesTags.splice(index, 1);
       }
     });
   }
@@ -82,22 +113,36 @@ export class StudentEditModalComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  selectedItem(item: string) {
-    if (!this.userTechnologiesTags.includes(item))
-      this.userTechnologiesTags.push(item)
+  selectedTechnologyItem(technology: string) {
+    if (!this.userTechnologiesTags.includes(technology))
+      this.userTechnologiesTags.push(technology)
   }
 
+  selectedLanguageItem(language: string) {
+    if (!this.userLanguagesTags.includes(language))
+      this.userLanguagesTags.push(language)
+  }
+
+  //search typeahead
   searchTechnolgy = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-
     const inputFocus$ = this.focus$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-
-
       map(term => (term === '' ? this.serviceTechnolgies
-        : this.serviceTechnolgies.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+        : this.serviceTechnolgies.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 4))
+    );
+  }
+
+  searchLanguage = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.click2$.pipe(filter(() => !this.instance.isPopupOpen()));
+    const inputFocus$ = this.focus2$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term => (term === '' ? this.serviceLanguages
+        : this.serviceLanguages.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 4))
     );
   }
 }
