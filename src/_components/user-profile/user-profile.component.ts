@@ -6,7 +6,7 @@ import { UserProfileService } from '_service/profile/user/userProfile.service';
 import { SkillService } from '_service/skill/skill.service';
 import { PostService } from '_service/post/post.service';
 import { TeamService } from '_service/team/team.service';
-import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentEditModalComponent } from '../_forms/student-edit-modal/student-edit-modal.component';
 import { Technology } from '_models/technology/technology';
 
@@ -70,5 +70,6 @@ export class UserProfileComponent implements OnInit {
 
     openEditModal(): any {
         const modalRef = this.modalService.open(StudentEditModalComponent);
+        modalRef.componentInstance.user = this.user;
     }
 }

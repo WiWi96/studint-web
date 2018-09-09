@@ -1,11 +1,16 @@
-[
-    "Polish",
-    "Dutch",
-    "French",
-    "Czech",
-    "Ukrainian",
-    "Chinese",
-    "Dari",
-    "Danish",
-    "Croatian"
-]
+{
+    "languages": [
+        {
+            "id": 13,
+            "name": "German"
+        },
+        {
+            "id": 12,
+            "name": "English"
+        },
+        {
+            "id": 14,
+            "name": "Russian"
+        }
+    ]
+}

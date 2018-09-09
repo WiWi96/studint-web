@@ -32,15 +32,14 @@
       </div>
 
       <div class="form-group">
-        <small>Technologies</small>
-        <input id="typeahead-focus" type="text" class="form-control" [ngbTypeahead]="searchTechnolgy" (selectItem)="selectedTechnologyItem($event.item)"
-          (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" #instance="ngbTypeahead" />
+        <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)"  [typeahead]="skills" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
+          [typeaheadMinLength]="0" placeholder="Skill" />
       </div>
       <div class="form-group">
         <div class="tags-container">
-          <ng-container *ngFor='let item of userTechnologiesTags'>
+          <ng-container *ngFor='let item of userSkillTags'>
             <button type="button" class="btn">
-              <div class="font-tag">{{item}}
+              <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
                 </span>
@@ -50,15 +49,14 @@
         </div>
       </div>
       <div class="form-group">
-        <small>Languages</small>
-        <input id="typeahead-focus2" type="text" class="form-control" (selectItem)="selectedLanguageItem($event.item)" (focus)="focus2$.next($event.target.value)"
-          (click)="click2$.next($event.target.value)" [ngbTypeahead]="searchLanguage" #instance="ngbTypeahead" />
+        <input class="form-control" formControlName="language" (typeaheadOnSelect)="onLanguageSelect($event)" [typeahead]="languages"
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Language" />
       </div>
       <div class="form-group">
         <div class="tags-container">
           <ng-container *ngFor='let item of userLanguagesTags'>
             <button type="button" class="btn">
-              <div class="font-tag">{{item}}
+              <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onLanguageCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
                 </span>

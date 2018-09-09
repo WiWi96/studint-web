@@ -12,7 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
-import { FileSelectDirective } from '../../node_modules/ng2-file-upload';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { TypeaheadModule } from 'ngx-bootstrap';
+
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -40,6 +42,7 @@ import { NotificationService } from '_service/notification/notification.service'
 import { ErrorsService } from 'errors/errors-service/errors.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
+import { LanguageService } from '_service/language/language.service';
 
 
 
@@ -74,11 +77,12 @@ import { StudentEditModalComponent } from '_components/_forms/student-edit-modal
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService],
+    TeamService, PostService, MainPageService, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [

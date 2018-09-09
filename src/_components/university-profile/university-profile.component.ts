@@ -6,7 +6,7 @@ import { UniversityProfileService } from '_service/profile/university/university
 import { PostService } from '_service/post/post.service';
 import { error } from '@angular/compiler/src/util';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
-import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-university-profile',

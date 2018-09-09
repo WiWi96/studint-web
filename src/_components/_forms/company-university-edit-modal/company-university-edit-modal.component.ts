@@ -8,8 +8,8 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
-import { DISABLED } from '../../../../node_modules/@angular/forms/src/model';
-import { ValueTransformer } from '../../../../node_modules/@angular/compiler/src/util';
+import { DISABLED } from '@angular/forms/src/model';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -44,8 +44,6 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
-
-
 
   countries = ['Poland', 'Germany', 'Spain']
   items = ['youtube', 'facebook', 'twitter', 'instagram', 'linkedin', 'goldenline', 'github', 'pinterest', 'google', 'custom'];
@@ -169,10 +167,6 @@ export class CompanyUniversityEditModalComponent implements OnInit {
         this.isSocialDisabled[index] = !this.isSocialDisabled[index];
     })
   }
-
-  
-
-
 
   onSubmitCompany() {
     this.setAddressDetails();

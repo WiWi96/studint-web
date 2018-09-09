@@ -1,11 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '../../../../node_modules/@angular/forms';
-import { NgbActiveModal, NgbTypeahead } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
-import { HtmlParser, HtmlTagDefinition, IfStmt } from '../../../../node_modules/@angular/compiler';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { NgbActiveModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { HtmlParser, HtmlTagDefinition, IfStmt } from '@angular/compiler';
 import { UserProfileService } from '_service/profile/user/userProfile.service';
 import { Technology } from '_models/technology/technology';
-import { Observable, Subject, merge } from '../../../../node_modules/rxjs';
+import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Language } from '_models/skill/language';
+import { UserProfile } from '_models/profile/userProfile';
+import { LanguageService } from '_service/language/language.service';
+import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
+import { Skill } from '_models/skill/skill';
+import { SkillService } from '_service/skill/skill.service';
 
 @Component({
   selector: 'app-student-edit-modal',
@@ -17,33 +23,47 @@ export class StudentEditModalComponent implements OnInit {
   accountStudentDetailsFormGroup: FormGroup;
   fullNameFormGroup: FormGroup;
 
-  @ViewChild('instance') instance: NgbTypeahead;
-  focus$ = new Subject<string>();
-  click$ = new Subject<string>();
+  languageSelected: Language;
+  skillSelected: Skill;
 
-  focus2$ = new Subject<string>();
-  click2$ = new Subject<string>();
-
-  userTechnologiesTags: string[];
+  userSkillTags: Skill[];
   serviceTechnolgies: string[];
 
-  userLanguagesTags: string[] = ['English', 'Polish', 'Croatian'];
-  serviceLanguages: string[];
+
+  userLanguagesTags: Language[];
+
+  languages: Language[];
+  skills: Skill[];
+
+  user: UserProfile;
+  customSelected: string;
+
+  languageFormControl = new FormControl();
+  technologyFormControl = new FormControl();
 
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private languageService: LanguageService,
+    private skillService: SkillService
   ) { }
 
   ngOnInit() {
-    this.getTechnologies();
+    this.userLanguagesTags = this.user.languages;
+    this.userSkillTags = this.user.skills;
     this.getLanguages();
+    this.getTechnologies();
     this.createStudentForm();
+
   }
 
   onSubmitStudent() {
 
+  }
+
+  close() {
+    this.activeModal.dismiss();
   }
 
   createStudentForm() {
@@ -56,52 +76,38 @@ export class StudentEditModalComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
     })
-
   }
 
   createAccountDetailsFormGroup() {
     this.accountStudentDetailsFormGroup = this.formBuilder.group({
       fullname: this.fullNameFormGroup,
+      language: this.languageFormControl,
+      technology: this.technologyFormControl
     });
   }
 
   getTechnologies() {
-    this.userProfileService.getAllTechnology().subscribe(technologies => {
-      this.getAllTechnolgies(technologies);
-    });
-
-    this.userProfileService.getAllUserTechnolgies().subscribe(data => {
-      this.getUserTechnolgies(data);
+    this.skillService.getAllSkills().subscribe(skills => {
+      this.skills = skills;
     });
   }
 
   getLanguages() {
-    this.userProfileService.getAllLanguages().subscribe(languages => {
-      this.serviceLanguages = languages;
+    this.languageService.getAllLanguages().subscribe(languages => {
+      this.languages = languages;
+
     })
   }
 
-  getAllTechnolgies(technolgies: string[]) {
-    this.serviceTechnolgies = technolgies;
-  }
-
-  getUserTechnolgies(technolgies: string[]) {
-    this.userTechnologiesTags = technolgies;
-  }
-
-  getAllTechnologies(languages: string[]) {
-    this.serviceLanguages = languages;
-  }
-
-  public onTechnologyCloseClick(teachnologyTag: string): void {
-    this.userTechnologiesTags.forEach((technology, index) => {
-      if (teachnologyTag == technology) {
-        this.userTechnologiesTags.splice(index, 1);
+  public onTechnologyCloseClick(skillTag: Skill): void {
+    this.userSkillTags.forEach((skill, index) => {
+      if (skillTag == skill) {
+        this.userSkillTags.splice(index, 1);
       }
     });
   }
 
-  public onLanguageCloseClick(languageTag: string): void {
+  public onLanguageCloseClick(languageTag: Language): void {
     this.userLanguagesTags.forEach((language, index) => {
       if (languageTag == language) {
         this.userLanguagesTags.splice(index, 1);
@@ -109,40 +115,21 @@ export class StudentEditModalComponent implements OnInit {
     });
   }
 
-  close() {
-    this.activeModal.dismiss();
+  onSkillSelect(e: TypeaheadMatch) {
+    this.skillSelected = this.skills.find(value => {
+      return value.name == e.value;
+    });
+
+    if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
+      this.userSkillTags.push(this.skillSelected);
   }
 
-  selectedTechnologyItem(technology: string) {
-    if (!this.userTechnologiesTags.includes(technology))
-      this.userTechnologiesTags.push(technology)
-  }
+  onLanguageSelect(e: TypeaheadMatch): void {
+    this.languageSelected = this.languages.find(value => {
+      return value.name == e.value;
+    });
 
-  selectedLanguageItem(language: string) {
-    if (!this.userLanguagesTags.includes(language))
-      this.userLanguagesTags.push(language)
-  }
-
-  //search typeahead
-  searchTechnolgy = (text$: Observable<string>) => {
-    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
-    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-    const inputFocus$ = this.focus$;
-
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.serviceTechnolgies
-        : this.serviceTechnolgies.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 4))
-    );
-  }
-
-  searchLanguage = (text$: Observable<string>) => {
-    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
-    const clicksWithClosedPopup$ = this.click2$.pipe(filter(() => !this.instance.isPopupOpen()));
-    const inputFocus$ = this.focus2$;
-
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.serviceLanguages
-        : this.serviceLanguages.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 4))
-    );
+    if (this.languageSelected && !this.userLanguagesTags.some(language => { return language.name == e.value }))
+      this.userLanguagesTags.push(this.languageSelected);
   }
 }

@@ -1,4 +1,4 @@
-import { Address } from './../address';
+import { Address } from '../address';
 import { ProfileName } from './profileName';
 import { Post } from '../post';
 
