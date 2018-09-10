@@ -6,99 +6,282 @@
 </div>
 <div class="modal-boy">
   <div class="container">
-    <div *ngIf="isCompany || isUniversity">
-      <form class="registerform" [formGroup]="accountDetailsFormGroup">
+    <form class="registerform" [formGroup]="accountDetailsFormGroup">
+      <div class="form-group">
+        <div *ngIf="isCompany">
+          <small>Company</small>
+          <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+        </div>
+        <div *ngIf="isUniversity">
+          <small>University</small>
+          <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+        </div>
+        <div *ngIf="isCompany">
+          <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>
+        </div>
+      </div>
+      <div formGroupName="address">
         <div class="form-group">
-          <div *ngIf="isCompany">
-            <small>Company</small>
-            <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
-          </div>
-          <div *ngIf="isUniversity">
-            <small>University</small>
-            <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
-          </div>
-          <div *ngIf="isCompany">
-            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>
+          <small>Country</small>
+          <select class="custom-select form-control" formControlName="country">
+            <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <small>City</small>
+          <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+          <div *ngIf="submittedCompany">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.pattern">
+              Only letters are allowed</p>
           </div>
         </div>
-        <div formGroupName="address">
-          <div class="form-group">
-            <small>Country</small>
-            <select class="custom-select form-control" formControlName="country">
-              <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <small>City</small>
-            <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <small>Street</small>
+            <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
             <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.pattern">
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.pattern">
                 Only letters are allowed</p>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6 mb-3">
-              <small>Street</small>
-              <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
-              <div *ngIf="submittedCompany">
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.pattern">
-                  Only letters are allowed</p>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <small>House number</small>
-              <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
-              <div *ngIf="submittedCompany">
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
-                <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Postal code</small>
-            <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
+          <div class="col-md-6 mb-3">
+            <small>House number</small>
+            <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
             <div *ngIf="submittedCompany">
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
-              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
-                Incorrect zip code</p>
-            </div>
-          </div>
-        </div>
-        <div formGroupName="socialServices">
-          <div class="form-group">
-            <small>Github</small>
-            <input type="text" class="form-control" formControlName="github" id="github">
-            <div *ngIf="submittedCompany">
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Twitter</small>
-            <input type="text" class="form-control" formControlName="twitter" id="twitter">
-            <div *ngIf="submittedCompany">
-            </div>
-          </div>
-          <div class="form-group">
-            <small>Facebook</small>
-            <input type="text" class="form-control" formControlName="facebook" id="facebook">
-            <div *ngIf="submittedCompany">
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
+              <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <small>Description</small>
-          <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
+          <small>Postal code</small>
+          <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
+          <div *ngIf="submittedCompany">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
+              Incorrect zip code</p>
+          </div>
         </div>
-        <small>Photo</small>
+      </div>
+
+      <div class="form-group">
+        <small>Social media</small>
         <div class="form-group">
-          <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-          <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-            Upload an Image
-          </button>
+          <select class="custom-select form-control" formControlName="socialValue">
+            <option selected>Set social media links</option>
+            <option *ngFor="let item of items">{{item}}</option>
+          </select>
         </div>
-      </form>
-    </div>
+      </div>
+      <div formGroupName="socialServices">
+        <div class="form-group">
+          <div [ngSwitch]="accountDetailsFormGroup.get('socialValue').value">
+            <div *ngSwitchCase="'youtube'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" [attr.disabled]="isSocialDisabled[0] ? true : null"
+                    placeholder="Add Youtube link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[0]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'facebook'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="facebookLink" formControlName="facebook" [attr.disabled]="isSocialDisabled[1] == true ? true : null"
+                    placeholder="add Facebook link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[1]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'twitter'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="twitterLink" formControlName="twitter" [attr.disabled]="isSocialDisabled[2] ? true : null"
+                    placeholder="add twitter link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[2]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'instagram'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="instagramLink" formControlName="instagram" [attr.disabled]="isSocialDisabled[3] == true ? true : null"
+                    placeholder="Add Instagram link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[3]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'linkedin'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" [attr.disabled]="isSocialDisabled[4] == true ? true : null"
+                    placeholder="Add Linkedin link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[4]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'goldenline'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="goldenlineLink" formControlName="goldenline" [attr.disabled]="isSocialDisabled[5] ? true : null"
+                    placeholder="Add Goldenline link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[5]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'github'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="githubLink" formControlName="github" [attr.disabled]="isSocialDisabled[6] ? true : null"
+                    placeholder="Add Github link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[6]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'pinterest'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" [attr.disabled]="isSocialDisabled[7] ? true : null"
+                    placeholder="Add Pinterest link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[7]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'google'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="googleLink" formControlName="google" [attr.disabled]="isSocialDisabled[8] ? true : null"
+                    placeholder="Add Google link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[8]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'custom'">
+              <div class="form-row">
+                <div class="col-md-11 mb-3">
+                  <input type="text" class="form-control" id="customLink" formControlName="custom" [attr.disabled]="isSocialDisabled[9] ? true : null"
+                    placeholder="Add custom link">
+                </div>
+                <div class="col-md-1 mb-3">
+                  <div *ngIf="!isSocialDisabled[9]; else deleteSocial">
+                    <a class="btn btn-fa" (click)="addSocial()">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+                        <i class="fas fa-plus-circle fa-stack-1x icon-b fa-2x"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <ng-template #deleteSocial>
+        <button class="btn btn-fa" (click)="addSocial()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-1x icon-a fa-2x"></i>
+            <i class="fas fas fa-minus-circle fa-stack-1x icon-c fa-2x"></i>
+          </span>
+        </button>
+      </ng-template>
+
+
+      <div class="form-group">
+        <small>Description</small>
+        <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
+      </div>
+    </form>
   </div>
 </div>
 <div class="modal-footer">

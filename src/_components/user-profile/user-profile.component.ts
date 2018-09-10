@@ -6,6 +6,9 @@ import { UserProfileService } from '_service/profile/user/userProfile.service';
 import { SkillService } from '_service/skill/skill.service';
 import { PostService } from '_service/post/post.service';
 import { TeamService } from '_service/team/team.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StudentEditModalComponent } from '../_forms/student-edit-modal/student-edit-modal.component';
+import { Technology } from '_models/technology/technology';
 
 @Component({
     selector: 'app-user-profile',
@@ -17,6 +20,7 @@ export class UserProfileComponent implements OnInit {
     private sub: any;
     expanded = false;
     user: UserProfile;
+    technolgies: Technology[];
 
     constructor(
         private route: ActivatedRoute,
@@ -24,7 +28,8 @@ export class UserProfileComponent implements OnInit {
         private userProfileService: UserProfileService,
         private skillService: SkillService,
         private postService: PostService,
-        private teamService: TeamService
+        private teamService: TeamService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -61,5 +66,10 @@ export class UserProfileComponent implements OnInit {
 
     photoExists(profile: ProfileName): Boolean {
         return profile != undefined && profile.photo != undefined && profile.photo.length > 0;
+    }
+
+    openEditModal(): any {
+        const modalRef = this.modalService.open(StudentEditModalComponent);
+        modalRef.componentInstance.user = this.user;
     }
 }

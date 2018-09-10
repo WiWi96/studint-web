@@ -1,4 +1,4 @@
-import { Post } from './../post';
+import { Post } from '../post';
 import { ProfileName } from './profileName';
 import { Skill } from '../skill/skill';
 import { Language } from '../skill/language';

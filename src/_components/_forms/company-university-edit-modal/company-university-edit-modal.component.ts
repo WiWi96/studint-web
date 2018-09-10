@@ -7,6 +7,9 @@ import { CompanyProfileService } from '_service/profile/company/companyProfile.s
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
+import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
+import { DISABLED } from '@angular/forms/src/model';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -17,8 +20,9 @@ const URL = 'http://localhost:3000/api/upload';
 })
 export class CompanyUniversityEditModalComponent implements OnInit {
 
-
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
+  file: string;
+  fileToUpload: File = null;
 
   address: Address;
   profileName: ProfileName;
@@ -26,14 +30,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   isCompany: boolean;
   isUniversity: boolean;
 
-  submittedStudent: boolean = false;
-  submittedUniversity: boolean = false;
-  submittedCompany: boolean = false;
-
   addressFormGroup: FormGroup;
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
-  fullNameFormGroup: FormGroup;
   socialServicesFormpGroup: FormGroup;
 
   accountStudentDetailsFormGroup: FormGroup;
@@ -46,25 +45,25 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
-
-  file: string;
-  fileToUpload: File = null;
-
   countries = ['Poland', 'Germany', 'Spain']
+  items = ['youtube', 'facebook', 'twitter', 'instagram', 'linkedin', 'goldenline', 'github', 'pinterest', 'google', 'custom'];
+
+  selected = ""
+
+
+  isSocialDisabled: Array<boolean> = [];
 
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
-    public companyProfileService: CompanyProfileService
+    private companyProfileService: CompanyProfileService,
+    private universityProfileService: UniversityProfileService
   ) { }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
-      alert('File uploaded successfully');
-    };
+    this.setDisableState();
 
+    this.setDisableSocialInputs();
     if (this.isCompany) {
       this.address = this.companyProfile.address;
       this.profileName = this.companyProfile.profileName;
@@ -77,12 +76,21 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     }
   }
 
-  get f() { return this.accountStudentDetailsFormGroup.controls; }
-  get f2() { return this.accountUniversityDetailsFormGroup.controls; }
-  get f3() { return this.accountDetailsFormGroup.controls; }
+  setDisableState() {
+
+    for (let i = 0; i < 10; i++) {
+      this.isSocialDisabled.push(false);
+    }
+    this.isSocialDisabled.forEach(element => {
+      console.log(element);
+    });
+  }
+
+  setDisableSocialInputs() {
+    this.isSocialDisabled = this.isSocialDisabled.map((element, index) => { return (element = this.socialServices[index] == "" ? false : true); })
+  }
 
   close() {
-
     this.activeModal.close();
   }
 
@@ -90,12 +98,18 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
 
-
   createUniversityForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [this.socialServices[0], Validators.required],
-      twitter: [this.socialServices[1], Validators.required],
-      facebook: [this.socialServices[2], Validators.required],
+      youtube: [this.socialServices[0]],
+      facebook: [this.socialServices[1]],
+      twitter: [this.socialServices[2]],
+      instagram: [this.socialServices[3]],
+      linkedin: [this.socialServices[4]],
+      goldenline: [this.socialServices[5]],
+      github: [this.socialServices[6]],
+      pinterest: [this.socialServices[7]],
+      google: [this.socialServices[8]],
+      custom: [this.socialServices[9]]
     });
 
     this.addressFormGroup = this.formBuilder.group({
@@ -109,16 +123,24 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.accountDetailsFormGroup = this.formBuilder.group({
       name: [this.univeristyProfile.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
-      socialServices: this.socialServicesFormpGroup,
       description: [this.univeristyProfile.description, [Validators.required]],
+      socialServices: this.socialServicesFormpGroup,
+      socialValue: ['', [Validators.required]],
     })
   }
 
   createCompanyForm() {
     this.socialServicesFormpGroup = this.formBuilder.group({
-      github: [this.socialServices[0], Validators.required],
-      twitter: [this.socialServices[1], Validators.required],
-      facebook: [this.socialServices[2], Validators.required],
+      youtube: [this.socialServices[0]],
+      facebook: [this.socialServices[1]],
+      twitter: [this.socialServices[2]],
+      instagram: [this.socialServices[3]],
+      linkedin: [this.socialServices[4]],
+      goldenline: [this.socialServices[5]],
+      github: [this.socialServices[6]],
+      pinterest: [this.socialServices[7]],
+      google: [this.socialServices[8]],
+      custom: [this.socialServices[9]]
     });
 
     this.addressFormGroup = this.formBuilder.group({
@@ -130,12 +152,20 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.companyProfile.profileName.name, [Validators.required]],
+      name: ['', [Validators.required]],
       address: this.addressFormGroup,
+      description: ['', [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
-      description: [this.companyProfile.description, [Validators.required]],
+      socialValue: ['', [Validators.required]],
     })
 
+  }
+
+  addSocial() {
+    this.items.filter((value, index) => {
+      if (this.accountDetailsFormGroup.get('socialValue').value == value)
+        this.isSocialDisabled[index] = !this.isSocialDisabled[index];
+    })
   }
 
   onSubmitCompany() {
@@ -143,20 +173,25 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.setProfileName();
     this.setSocialServices();
     this.setProfileDescription();
-    this.companyProfileService.updateCompany(this.companyProfile).subscribe(
-      data => {
-        console.log(data);
-      },
-
-      error => {console.log(error)}
-    );
+    if (this.isCompany)
+      this.companyProfileService.updateCompany(this.companyProfile).subscribe();
+    else if (this.isUniversity)
+      this.universityProfileService.updateUniversity(this.univeristyProfile).subscribe();
     this.activeModal.close();
   }
 
+
   setSocialServices() {
-    this.socialServices[0] = this.socialServicesFormpGroup.get('github').value;
+    this.socialServices[0] = this.socialServicesFormpGroup.get('youtube').value;
     this.socialServices[1] = this.socialServicesFormpGroup.get('twitter').value;
     this.socialServices[2] = this.socialServicesFormpGroup.get('facebook').value;
+    this.socialServices[3] = this.socialServicesFormpGroup.get('instagram').value;
+    this.socialServices[4] = this.socialServicesFormpGroup.get('linkedin').value;
+    this.socialServices[5] = this.socialServicesFormpGroup.get('goldenline').value;
+    this.socialServices[6] = this.socialServicesFormpGroup.get('github').value;
+    this.socialServices[7] = this.socialServicesFormpGroup.get('pinterest').value;
+    this.socialServices[8] = this.socialServicesFormpGroup.get('google').value;
+    this.socialServices[9] = this.socialServicesFormpGroup.get('custom').value;
   }
 
   setProfileName() {
@@ -180,21 +215,3 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
 }
 
-export class RegistrationValidator {
-  static validate(registrationFormGroup: FormGroup) {
-    let password = registrationFormGroup.controls.password.value;
-    let repeatPassword = registrationFormGroup.controls.repeatPassword.value;
-
-    if (repeatPassword.length <= 0) {
-      return null;
-    }
-
-    if (repeatPassword !== password) {
-      return {
-        doesMatchPassword: true
-      };
-    }
-
-    return null;
-  }
-}
