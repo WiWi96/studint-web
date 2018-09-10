@@ -56,7 +56,7 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSubmitStudent() {
-
+  
   }
 
   close() {
