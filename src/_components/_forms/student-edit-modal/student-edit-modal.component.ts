@@ -20,26 +20,23 @@ import { SkillService } from '_service/skill/skill.service';
 })
 export class StudentEditModalComponent implements OnInit {
 
+  //Form Groups
   accountStudentDetailsFormGroup: FormGroup;
   fullNameFormGroup: FormGroup;
-
+  //Form Controllers
+  languageFormControl = new FormControl();
+  technologyFormControl = new FormControl();
+  //Selected items
   languageSelected: Language;
   skillSelected: Skill;
-
+  //Student skills and languages
   userSkillTags: Skill[];
-  serviceTechnolgies: string[];
-
-
   userLanguagesTags: Language[];
-
+  //All Languages and Skills
   languages: Language[];
   skills: Skill[];
 
   user: UserProfile;
-  customSelected: string;
-
-  languageFormControl = new FormControl();
-  technologyFormControl = new FormControl();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,15 +44,15 @@ export class StudentEditModalComponent implements OnInit {
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
     private skillService: SkillService
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.userLanguagesTags = this.user.languages;
     this.userSkillTags = this.user.skills;
+  }
+
+  ngOnInit() {
     this.getLanguages();
     this.getTechnologies();
     this.createStudentForm();
-
   }
 
   onSubmitStudent() {
@@ -73,8 +70,8 @@ export class StudentEditModalComponent implements OnInit {
 
   createFullNameFormGroup() {
     this.fullNameFormGroup = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      surname: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
+      firstName: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      surname: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
     })
   }
 
@@ -82,7 +79,8 @@ export class StudentEditModalComponent implements OnInit {
     this.accountStudentDetailsFormGroup = this.formBuilder.group({
       fullname: this.fullNameFormGroup,
       language: this.languageFormControl,
-      technology: this.technologyFormControl
+      technology: this.technologyFormControl,
+      description: [this.user.description]
     });
   }
 
@@ -95,7 +93,6 @@ export class StudentEditModalComponent implements OnInit {
   getLanguages() {
     this.languageService.getAllLanguages().subscribe(languages => {
       this.languages = languages;
-
     })
   }
 
@@ -116,8 +113,8 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSkillSelect(e: TypeaheadMatch) {
-    this.skillSelected = this.skills.find(value => {
-      return value.name == e.value;
+    this.skillSelected = this.skills.find(skill => {
+      return skill.name == e.value;
     });
 
     if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
@@ -125,8 +122,8 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onLanguageSelect(e: TypeaheadMatch): void {
-    this.languageSelected = this.languages.find(value => {
-      return value.name == e.value;
+    this.languageSelected = this.languages.find(language => {
+      return language.name == e.value;
     });
 
     if (this.languageSelected && !this.userLanguagesTags.some(language => { return language.name == e.value }))

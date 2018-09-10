@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Update</h4>
+  <h4 class="modal-title" id="modal-basic-title">PROFILE
+    <i class="far fa-user-circle"></i>
+  </h4>
   <button type="button" class="close" aria-label="Close" (click)="close()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -32,8 +34,9 @@
       </div>
 
       <div class="form-group">
-        <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)"  [typeahead]="skills" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
-          [typeaheadMinLength]="0" placeholder="Skill" />
+        <small>Skills</small>
+        <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
       </div>
       <div class="form-group">
         <div class="tags-container">
@@ -49,6 +52,7 @@
         </div>
       </div>
       <div class="form-group">
+        <small>Languages</small>
         <input class="form-control" formControlName="language" (typeaheadOnSelect)="onLanguageSelect($event)" [typeahead]="languages"
           typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Language" />
       </div>
@@ -65,7 +69,15 @@
           </ng-container>
         </div>
       </div>
-
+      <div class="form-group">
+        <small>Experience</small>
+        <textarea id="inputExperience" class="form-control" formControlName="description" placeholder="Experience" rows="3"></textarea>
+        <div *ngIf="submittedStudent">
+          <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.required">Surname is required</p>
+          <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.pattern">
+            Invalid surname </p>
+        </div>
+      </div>
     </form>
   </div>
 </div>
