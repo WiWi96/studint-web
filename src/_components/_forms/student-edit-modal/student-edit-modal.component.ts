@@ -44,19 +44,18 @@ export class StudentEditModalComponent implements OnInit {
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
     private skillService: SkillService
-  ) {
-    this.userLanguagesTags = this.user.languages;
-    this.userSkillTags = this.user.skills;
-  }
+  ) { }
 
   ngOnInit() {
+    this.userLanguagesTags = this.user.languages;
+    this.userSkillTags = this.user.skills;
     this.getLanguages();
     this.getTechnologies();
     this.createStudentForm();
   }
 
   onSubmitStudent() {
-  
+
   }
 
   close() {

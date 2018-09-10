@@ -30,7 +30,7 @@ export class ErrorsHandler implements ErrorHandler {
                        // this.errorsService.updateError(error.status);
                     }
                     this.zone.run(() => {
-                        return router.navigate(['/error']);
+                        return router.navigate(['/error'], { replaceUrl: true });
                     });
                 }
             }

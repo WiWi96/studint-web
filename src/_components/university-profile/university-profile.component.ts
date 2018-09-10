@@ -7,6 +7,7 @@ import { PostService } from '_service/post/post.service';
 import { error } from '@angular/compiler/src/util';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UtilsService } from '_service/utils/utils.service';
 
 @Component({
     selector: 'app-university-profile',
@@ -24,6 +25,7 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private universityProfileService: UniversityProfileService,
         private postService: PostService,
         private modalService: NgbModal
@@ -39,16 +41,6 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-    }
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
     }
 
     getUniversity(id: number): void {

@@ -5,13 +5,14 @@ import { Duration } from '../duration';
 
 export class ProjectProfile {
     profileName: ProfileName;
+    company: ProfileName;
     description: string;
     technologies: Array<Skill> = [];
     type: string;
     level: string;
     participants: Array<ProfileName> = [];
-    //teams: Array<Team> = [];
-    //participationStatus: string;
+    teams: Array<Team> = [];
+    participationStatus: string;
     startDate: Date;
     joiningDate: Date;
     duration: Duration;

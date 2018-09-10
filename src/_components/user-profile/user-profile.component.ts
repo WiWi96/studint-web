@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserProfile } from '_models/profile/userProfile';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
@@ -9,6 +9,7 @@ import { TeamService } from '_service/team/team.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentEditModalComponent } from '../_forms/student-edit-modal/student-edit-modal.component';
 import { Technology } from '_models/technology/technology';
+import { UtilsService } from '_service/utils/utils.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -19,12 +20,13 @@ export class UserProfileComponent implements OnInit {
     id: number;
     private sub: any;
     expanded = false;
+    Arr = Array;
     user: UserProfile;
     technolgies: Technology[];
 
     constructor(
         private route: ActivatedRoute,
-        private elementRef: ElementRef,
+        private utils: UtilsService,
         private userProfileService: UserProfileService,
         private skillService: SkillService,
         private postService: PostService,
@@ -48,16 +50,6 @@ export class UserProfileComponent implements OnInit {
         this.userProfileService.getUser(id).subscribe(
             data => { this.user = data },
         );
-    }
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
     }
 
     getLanguages(): String {

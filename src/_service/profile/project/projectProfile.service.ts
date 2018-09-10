@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { environment } from 'environments/environment';
+import { ProjectInfo } from '_models/info/projectInfo';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,6 +14,7 @@ const httpOptions = {
 };
 
 const projectUrl = environment.apiEndpoint + '/project';
+const companyUrl = environment.apiEndpoint + '/company';
 
 @Injectable()
 export class ProjectProfileService {
@@ -36,6 +38,10 @@ export class ProjectProfileService {
   //get requests
   public getProject(id: number): Observable<ProjectProfile> {
     return this.http.get<ProjectProfile>(`${projectUrl}/${id}`);
+  }
+
+  public getProjectsByCompany(companyId: number): Observable<ProjectInfo[]> {
+    return this.http.get<ProjectInfo[]>(`${companyUrl}/project/${companyId}`);
   }
 
   public getAllProjects(): Observable<ProjectProfile[]> {

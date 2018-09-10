@@ -1,13 +1,13 @@
 import { Address } from '../address';
 import { ProfileName } from './profileName';
-import { Post } from '../post';
+import { SocialMedia } from '../socialMedia';
+import { ProjectInfo } from '../info/projectInfo';
 
 export class CompanyProfile {
     profileName: ProfileName;
     description: string;
-    profiles: Map<string, string>;
-    posts: Array<Post> = [];
+    profiles: Array<SocialMedia> = [];
     address: Address;
     type: string;
-    projects: Array<ProfileName> = [];
+    projects: Array<ProjectInfo> = [];
 }

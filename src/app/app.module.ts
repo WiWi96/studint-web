@@ -40,11 +40,12 @@ import { ModalWindowComponent } from '_components/modal-window/modal-window.comp
 import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
+import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
+import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
+import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
 import { LanguageService } from '_service/language/language.service';
-
-
 
 
 @NgModule({
@@ -61,10 +62,11 @@ import { LanguageService } from '_service/language/language.service';
     StaticBarComponent,
     WallComponent,
     ModalWindowComponent,
+    ProjectManagementComponent,
+    TeamManagementComponent,
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -80,13 +82,13 @@ import { LanguageService } from '_service/language/language.service';
     NgbModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
-  providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
     TeamService, PostService, MainPageService, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [
-     CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent
   ]
 })
 export class AppModule { }

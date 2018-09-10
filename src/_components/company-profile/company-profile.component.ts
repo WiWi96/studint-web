@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyProfile } from '_models/profile/companyProfile';
-import { ProfileName } from '_models/profile/profileName';
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 
 
@@ -16,6 +16,7 @@ export class CompanyProfileComponent implements OnInit {
     sub: any;
     id: number;
     company: CompanyProfile;
+    Arr = Array;
 
     expanded = false;
     socialServices = ['https://github.com', 'https://www.facebook.com', 'https://twitter.co',  'https://www.instagram.com', 'https://www.linkedin.com',
@@ -23,6 +24,7 @@ export class CompanyProfileComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private utils: UtilsService,
         private companyProfileService: CompanyProfileService,
         private modalService: NgbModal
     ) { }
@@ -42,20 +44,6 @@ export class CompanyProfileComponent implements OnInit {
         this.companyProfileService.getCompany(id).subscribe(
             data => { this.company = data },
         );
-    }
-
-    showDescriptionMoreButton() {
-        let element = document.getElementById('description');
-        let height = element.offsetHeight;
-
-        if (height > 250) {
-            return true;
-        }
-        return false;
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
     }
 
     openEditModal(): any {
