@@ -54,11 +54,19 @@ export class StudentEditModalComponent implements OnInit {
     this.createStudentForm();
   }
 
-  onSubmitStudent() {
+  updateUserProfile(){
+    console.log(this.userLanguagesTags);
+    this.user.languages = this.userLanguagesTags;
+  }
 
+  onSubmitStudent() {
+    this.updateUserProfile();
+    this.userProfileService.updateUser(this.user).subscribe();
+    this.activeModal.dismiss();
   }
 
   close() {
+    
     this.activeModal.dismiss();
   }
 
