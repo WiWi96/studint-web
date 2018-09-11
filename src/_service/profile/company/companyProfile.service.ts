@@ -25,6 +25,7 @@ export class CompanyProfileService {
 
   //put requests
   public updateCompany(companyProfile: CompanyProfile): Observable<CompanyProfile> {
+    debugger;
     return this.http.put<CompanyProfile>(`${companyUrl}`, companyProfile);
   }
 
