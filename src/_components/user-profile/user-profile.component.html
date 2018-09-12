@@ -32,6 +32,7 @@
                                     </strong><span class="studint-logo"></span>
                                     projects.</p>
                             </div>
+                  
                             <div *ngFor="let profile of user.profiles" class="bio-item">
                                 <div class="bio-item-icon">
                                     <i [class]="utils.getSocialMediaIconClass(profile.service)"></i>
@@ -48,6 +49,7 @@
                             </span>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-link" (click)="openEditModal()">Edit</button>
                 </div>
             </div>
         </div>

@@ -14,7 +14,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
-import { FileSelectDirective } from '../../node_modules/ng2-file-upload';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { TypeaheadModule } from 'ngx-bootstrap';
+
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -45,6 +47,9 @@ import { ProjectManagementComponent } from '_components/_management/project-mana
 import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
 import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
+import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
+import { LanguageService } from '_service/language/language.service';
+
 
 @NgModule({
   declarations: [
@@ -64,7 +69,8 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     ProjectManagementComponent,
     TeamManagementComponent,
     FileSelectDirective,
-    CompanyUniversityEditModalComponent
+    CompanyUniversityEditModalComponent,
+    StudentEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -79,15 +85,16 @@ import { CompanyUniversityEditModalComponent } from '_components/_forms/company-
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule
+    NgbModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService],
+    TeamService, PostService, MainPageService, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, CompanyUniversityEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent
   ]
 })
 export class AppModule { }

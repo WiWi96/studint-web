@@ -27,7 +27,7 @@ export class ErrorsHandler implements ErrorHandler {
                         this.errorsService.updateError(503);
                     }
                     else {
-                        this.errorsService.updateError(error.status);
+                       // this.errorsService.updateError(error.status);
                     }
                     this.zone.run(() => {
                         return router.navigate(['/error'], { replaceUrl: true });
