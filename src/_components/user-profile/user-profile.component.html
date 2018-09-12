@@ -32,7 +32,7 @@
                                     </strong><span class="studint-logo"></span>
                                     projects.</p>
                             </div>
-                  
+
                             <div *ngFor="let profile of user.profiles" class="bio-item">
                                 <div class="bio-item-icon">
                                     <i [class]="utils.getSocialMediaIconClass(profile.service)"></i>
@@ -66,21 +66,9 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="projects-container container">
         <div class="row">
-            <div *ngIf="user.studiesInfos?.length" class="profile-universities bg-primary col-md m-1">
-                <h4>Schools</h4>
-                <div *ngFor="let study of user.studiesInfos" class="item bg-light container my-3">
-                    <h5>
-                        <a [routerLink]="[ '/university', study.university?.id ]">
-                            {{study.university?.name}}
-                        </a>
-                    </h5>
-                    <h6 class="subtitle">{{utils.getDateRangeText(study.startYear, study.finishYear)}}</h6>
-                    <p>{{study.course?.courseName}}</p>
-                </div>
-            </div>
-            <div class="profile-projects bg-dark col-md m-1">
+            <div class="profile-projects bg-dark col-md-10">
                 <h4><span class="studint-logo"></span> Projects</h4>
                 <div *ngIf="!user.projects?.length" class="no-projects text-center p-5">
                     <h5>I haven't participated any</h5>
@@ -104,6 +92,49 @@
                             <h6>{{utils.getProjectStatusText(project.status)}}</h6>
                             <p><strong>{{utils.getDurationUnit(project.duration)}}</strong> from <strong>{{project.startDate
                                     | amDateFormat: 'LL'}}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div *ngIf="user.studiesInfos?.length" class="profile-universities bg-primary col-md m-1">
+                <h4>Education</h4>
+                <div *ngFor="let study of user.studiesInfos" class="item bg-light container my-3">
+                    <h5>
+                        <a [routerLink]="[ '/university', study.university?.id ]">
+                            {{study.university?.name}}
+                        </a>
+                    </h5>
+                    <h6 class="subtitle">{{utils.getDateRangeText(study.startYear, study.finishYear)}}</h6>
+                    <p>{{study.course?.courseName}}</p>
+                </div>
+            </div>
+            <div class="profile-projects bg-primary col-md m-1">
+                <h4>Experience</h4>
+                <div *ngIf="!user.experienceInfos?.length" class="no-projects text-center p-5">
+                    <h5>No experience yet</h5>
+                </div>
+                <div *ngFor="let experience of sortJobs()" class="item bg-light container my-3">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>
+                                {{experience.company}}
+                            </h5>
+                            <h6 class="subtitle">
+                                {{experience.position}}
+                            </h6>
+                            <div *ngIf="experience.finishDate">
+                                <p>from <strong>{{experience?.startDate | amDateFormat: 'MMMM, YYYY'}}</strong> to <strong>{{experience?.finishDate | amDateFormat: 'MMMM, YYYY'}}</strong></p>
+                            </div>
+                            <div *ngIf="!experience.finishDate">
+                                <p>from <strong>{{experience?.startDate | amDateFormat: 'MMMM, YYYY'}}</strong></p>
+                            </div>
+                        </div>
+                        <div class="info-item col-md-4 text-right">
+                            <h6 *ngIf="experience.current">CURRENT JOB</h6>                            
                         </div>
                     </div>
                 </div>
