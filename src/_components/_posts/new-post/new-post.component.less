@@ -1,0 +1,28 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+
+.post-form {
+    .post-form-inner {
+        position: relative;
+        #post-content-input {
+            padding-right: 1rem;
+        }
+        .post-emoji-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: @gray;
+
+            &:hover {
+                color: @gray-dark;
+            }
+        }
+        .emoji-picker {
+            .transition();
+            position: absolute;
+            right: 0;
+        }
+    }
+}

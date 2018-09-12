@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'ng5-auto-complete';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -34,10 +36,11 @@ import { UniversityProfileComponent } from '_components/university-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
-import { WallComponent } from '_components/wall';
+import { WallComponent } from '_components/_posts/wall';
+import { NewPostComponent } from '_components/_posts/new-post/new-post.component';
 import { HomeComponent } from '_components/home/home.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
+import { ErrorsModule, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
 import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
@@ -61,6 +64,7 @@ import { LanguageService } from '_service/language/language.service';
     CompanyProfileComponent,
     StaticBarComponent,
     WallComponent,
+    NewPostComponent,
     ModalWindowComponent,
     ProjectManagementComponent,
     TeamManagementComponent,
@@ -73,6 +77,8 @@ import { LanguageService } from '_service/language/language.service';
     CommonModule,
     FormsModule,
     AutoCompleteModule,
+    EditorModule,
+    PickerModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
