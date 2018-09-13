@@ -16,16 +16,18 @@ export class NewPostComponent implements OnInit {
   emojiPickerDisplayed: Boolean;
   private wasInside = false;
   private editor;
-  // editorContent = '';
   private postInfo: Post;
 
   editorConfig = {
     selector: 'textarea',
-    plugins: 'autolink noneditable',
+    plugins: 'autolink noneditable paste',
+    paste_as_text: true,
     toolbar: 'undo redo | bold italic underline',
     browser_spellcheck: true,
     menubar: false,
-    statusbar: false
+    statusbar: false,
+    content_style: "* {font-family: Lato; font-size: 16px; margin-top: 3px; margin-bottom: 3px}",
+    height: 150
   };
 
   constructor(
@@ -42,12 +44,7 @@ export class NewPostComponent implements OnInit {
   }
 
   addEmoji(event: { $event: MouseEvent, emoji: EmojiData }) {
-    let emoticonElement = <HTMLElement>event.$event.target;
-    if (!emoticonElement.style.backgroundImage || emoticonElement.style.backgroundImage === '') {
-      emoticonElement = <HTMLElement>emoticonElement.firstChild;
-    }
-    emoticonElement.classList.add("mceNonEditable");
-    this.editor.insertContent(emoticonElement.outerHTML);
+    this.editor.insertContent(event.emoji.native);
   }
 
   @HostListener('click')
