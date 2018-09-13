@@ -9,15 +9,21 @@
                         <div class="card-photo" [ngStyle]="{'background-image': 'url(' + item.author.photo + ')'}"></div>
                     </div>
                     <div>
-                        <h5 class="card-title">
-                            <a [routerLink]="['/user', item.author.id]">
+                        <h5 class="card-title" [ngSwitch]="item.author?.type">
+                            <a *ngSwitchCase="'User'" [routerLink]="['/user', item.author.id]">
                                 {{item.author.name ? item.author.name : 'Unknown person'}}
+                            </a>
+                            <a *ngSwitchCase="'University'" [routerLink]="['/university', item.author.id]">
+                                {{item.author.name ? item.author.name : 'Unknown school'}}
+                            </a>
+                            <a *ngSwitchCase="'Company'" [routerLink]="['/company', item.author.id]">
+                                {{item.author.name ? item.author.name : 'Unknown company'}}
                             </a>
                         </h5>
                         <h6 class="card-subtitle">{{item.publishedDate | date: 'longDate'}}</h6>
                     </div>
                 </div>
-                <p class="card-text">{{item.post}}</p>
+                <div [innerHTML]="item.post"></div>
             </div>
         </div>
 
