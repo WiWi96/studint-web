@@ -49,6 +49,7 @@ import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
 import { LanguageService } from '_service/language/language.service';
+import { EditorComponent } from '_components/_forms/editor/editor.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { LanguageService } from '_service/language/language.service';
     TeamManagementComponent,
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
-    StudentEditModalComponent
+    StudentEditModalComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

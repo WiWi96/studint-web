@@ -13,22 +13,8 @@ export class NewPostComponent implements OnInit {
 
   postSubmitted: Boolean;
   newPostFormGroup: FormGroup;
-  emojiPickerDisplayed: Boolean;
-  private wasInside = false;
   private editor;
   private postInfo: Post;
-
-  editorConfig = {
-    selector: 'textarea',
-    plugins: 'autolink noneditable paste',
-    paste_as_text: true,
-    toolbar: 'undo redo | bold italic underline',
-    browser_spellcheck: true,
-    menubar: false,
-    statusbar: false,
-    content_style: "* {font-family: Lato; font-size: 16px; margin-top: 3px; margin-bottom: 3px}",
-    height: 150
-  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,23 +27,6 @@ export class NewPostComponent implements OnInit {
 
   onEditorInit({ event, editor }: any) {
     this.editor = editor;
-  }
-
-  addEmoji(event: { $event: MouseEvent, emoji: EmojiData }) {
-    this.editor.insertContent(event.emoji.native);
-  }
-
-  @HostListener('click')
-  clickInside() {
-    this.wasInside = true;
-  }
-
-  @HostListener('document:click')
-  clickout() {
-    if (!this.wasInside) {
-      this.emojiPickerDisplayed = false;
-    }
-    this.wasInside = false;
   }
 
   createForm() {

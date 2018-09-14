@@ -1,16 +1,10 @@
-<div class="container" (click)="emojiPickerDisplayed = false; $event.stopPropagation()">
+<div class="container">
   <form class="post-form" (ngSubmit)="onSubmitPost()">
     <div class="post-form-inner form-group" [formGroup]="newPostFormGroup">
-      <editor formControlName="content" name="content" apiKey="fl7i0z2dn2ao3q4urgzo4opdh7ds3tdzxj9ws3qhe5phptpn"
-        (onInit)="onEditorInit($event)" [init]="editorConfig" required></editor>
-      <a class="post-emoji-btn" (click)="emojiPickerDisplayed = !emojiPickerDisplayed; $event.stopPropagation()">
-        <i class="far fa-grin-beam"></i>
-      </a>
+      <app-editor (onInit)="onEditorInit($event)" formControlName="content" name="content" required></app-editor>
       <div *ngIf="postSubmitted">
         <p class="alert alert-danger" *ngIf="newPostFormGroup.get('content').errors?.required">Post content is required</p>
       </div>
-      <emoji-mart *ngIf="emojiPickerDisplayed" class="emoji-picker" title="Pick an emoji :)" set="twitter" emoji="sunglasses"
-        (click)="$event.stopPropagation()" (emojiClick)="addEmoji($event)"></emoji-mart>
     </div>
     <button type="submit" class="btn btn-primary">Publish</button>
   </form>

@@ -279,16 +279,16 @@
 
       <div class="form-group">
         <small>Description</small>
-        <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description" rows="3"></textarea>
+        <app-editor id="exampleFormControlTextarea1" formControlName="description"></app-editor>
       </div>
     </form>
   </div>
 </div>
 <div class="modal-footer">
   <button class="btn" (click)="close()">
-    cancel
+    Cancel
   </button>
-  <button class="btn btn-success" (click)="onSubmitCompany()">
-    save
+  <button class="btn btn-primary" (click)="onSubmitCompany()">
+    Save
   </button>
 </div>
