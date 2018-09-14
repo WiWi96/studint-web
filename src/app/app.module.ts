@@ -1,3 +1,4 @@
+import { Interceptor } from './app.interceptor';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
@@ -100,7 +101,11 @@ import { jwtConfig } from './auth/jwtConfig';
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService],
+    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    } ],
   bootstrap: [AppComponent],
 
   entryComponents: [
