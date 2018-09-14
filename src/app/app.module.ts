@@ -52,6 +52,13 @@ import { LanguageService } from '_service/language/language.service';
 import { EditorComponent } from '_components/_forms/editor/editor.component';
 
 
+// Security
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { TokenStorage } from 'app/auth/token-storage';
+import { JwtModule } from '@auth0/angular-jwt';
+import { jwtConfig } from './auth/jwtConfig';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,12 +94,13 @@ import { EditorComponent } from '_components/_forms/editor/editor.component';
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
+    JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, LanguageService],
+    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [
