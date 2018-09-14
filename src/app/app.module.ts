@@ -49,7 +49,15 @@ import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
 import { LanguageService } from '_service/language/language.service';
+import { EditorComponent } from '_components/_forms/editor/editor.component';
 
+
+// Security
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { TokenStorage } from 'app/auth/token-storage';
+import { JwtModule } from '@auth0/angular-jwt';
+import { jwtConfig } from './auth/jwtConfig';
 
 @NgModule({
   declarations: [
@@ -70,7 +78,8 @@ import { LanguageService } from '_service/language/language.service';
     TeamManagementComponent,
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
-    StudentEditModalComponent
+    StudentEditModalComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -85,12 +94,13 @@ import { LanguageService } from '_service/language/language.service';
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
+    JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, LanguageService],
+    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [

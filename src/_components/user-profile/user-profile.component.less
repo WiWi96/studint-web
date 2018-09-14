@@ -166,3 +166,24 @@ div#profile-background-photo {
         .light-shadow(@gray-darker);
     }
 }
+
+.bg-light {
+    .item {
+        .light-shadow(@gray);
+        background-color: @gray-lighter !important;
+
+        h5.title {
+            color: @gray-darker;
+        }
+        
+        h6.subtitle {
+            color: @primary-color-dark;
+        }
+    }
+}
+
+.projects-container {
+    .row {
+        justify-content: center;
+    }
+}

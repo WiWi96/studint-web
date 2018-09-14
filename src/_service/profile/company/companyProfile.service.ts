@@ -12,7 +12,7 @@ const httpOptions = {
   })
 };
 
-const companyUrl = '//localhost:8080/company';
+const companyUrl = environment.apiEndpoint + '/company';
 
 @Injectable()
 export class CompanyProfileService {

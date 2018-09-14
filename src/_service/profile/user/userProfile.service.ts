@@ -16,7 +16,7 @@ const httpOptions = {
   })
 };
 
-const userUrl = environment.apiEndpoint + '/user' + ''
+const userUrl = environment.apiEndpoint + '/user';
 
 @Injectable()
 export class UserProfileService {

@@ -48,7 +48,7 @@ export class UserProfileComponent implements OnInit {
 
     getUser(id: number): void {
         this.userProfileService.getUser(id).subscribe(
-            data => { this.user = data },
+            data => { this.user = data; },
         );
     }
 
@@ -63,5 +63,11 @@ export class UserProfileComponent implements OnInit {
     openEditModal(): any {
         const modalRef = this.modalService.open(StudentEditModalComponent);
         modalRef.componentInstance.user = this.user;
+    }
+
+    sortJobs() {
+        const sorted = this.user.experienceInfos
+        .sort((a: any, b: any) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+        return sorted;
     }
 }
