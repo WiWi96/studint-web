@@ -6,21 +6,21 @@
         <span class="sidenav__closebtn" (click)="closeNav()">&times;</span>
         <div class="sidenav__content">
             <button class="sidenav__button" (click)="toggleProjects()">Projects</button>
-            <ul *ngIf="!user.projects?.length && showProjects" class="sidenav__list">
+            <ul *ngIf="!user?.projects?.length && showProjects" class="sidenav__list">
                 <p class="sidenav__list-item">No available projects</p>
             </ul>
             <ul class="sidenav__list" *ngIf="showProjects">
-                <li *ngFor="let project of user.projects">
+                <li *ngFor="let project of user?.projects">
                     <a class="sidenav__list-item"  href="/project/{{project.projectId}}">{{project.projectName}}</a>
                 </li>
             </ul>
             <button class="sidenav__button" (click)="toggleUniversities()">Universities</button>
-            <ul *ngIf="!user.studiesInfos?.length && showProjects" class="sidenav__list">
+            <ul *ngIf="!user?.studiesInfos?.length && showProjects" class="sidenav__list">
                 <p class="sidenav__list-item">No available universities</p>
             </ul>
             <ul class="sidenav__list" *ngIf="showUniversities">
-                <li *ngFor="let universityInfo of user.studiesInfos">
-                    <a class="sidenav__list-item" href="/university/{{universityInfo.university.id}}">{{universityInfo.university?.name}}</a>
+                <li *ngFor="let universityInfo of user?.studiesInfos">
+                    <a class="sidenav__list-item" href="/university/{{universityInfo.university?.id}}">{{universityInfo.university?.name}}</a>
                 </li>
             </ul>
         </div>
