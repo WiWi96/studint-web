@@ -58,6 +58,7 @@ import { AuthService } from './auth/auth.service';
 import { TokenStorage } from 'app/auth/token-storage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
+import { MainpageComponent } from '_components/mainpage/mainpage.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { jwtConfig } from './auth/jwtConfig';
     NavigationBarComponent,
     LoginComponent,
     RegisterComponent,
+    MainpageComponent,
     UserProfileComponent,
     UniversityProfileComponent,
     ProjectProfileComponent,
