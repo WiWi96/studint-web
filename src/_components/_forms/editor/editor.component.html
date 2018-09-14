@@ -1,0 +1,14 @@
+<div class="editor-container">
+  <editor class="editor" apiKey="fl7i0z2dn2ao3q4urgzo4opdh7ds3tdzxj9ws3qhe5phptpn" (onInit)="onEditorInit($event)" (onChange)="onEditorChange($event)"
+    [init]="editorConfig">
+  </editor>
+  <span class="emoji-btn d-none d-md-inline">
+    <a (click)="emojiPickerDisplayed = !emojiPickerDisplayed; $event.stopPropagation()">
+      <i class="far fa-grin-beam"></i>
+    </a>
+  </span>
+</div>
+<div class="emoji-picker">
+  <emoji-mart *ngIf="emojiPickerDisplayed" class="emoji-mart" title="Pick an emoji :)" set="twitter" emoji="sunglasses" (click)="$event.stopPropagation()"
+    (emojiClick)="addEmoji($event)"></emoji-mart>
+</div>

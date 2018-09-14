@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'ng5-auto-complete';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -12,6 +14,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { TypeaheadModule } from 'ngx-bootstrap';
+
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
@@ -31,13 +36,21 @@ import { UniversityProfileComponent } from '_components/university-profile';
 import { ProjectProfileComponent } from '_components/project-profile';
 import { CompanyProfileComponent } from '_components/company-profile';
 import { StaticBarComponent } from '_components/static-bar/static-bar.component';
-import { WallComponent } from '_components/wall';
+import { WallComponent } from '_components/_posts/wall';
+import { NewPostComponent } from '_components/_posts/new-post/new-post.component';
 import { HomeComponent } from '_components/home/home.component';
 import { ModalWindowComponent } from '_components/modal-window/modal-window.component';
-import { AddressFormComponent } from '_components/_forms/add-form/address-form.component';
-import { ErrorsModule, ErrorsHandler, ErrorsComponent } from 'errors';
+import { ErrorsModule, ErrorsComponent } from 'errors';
 import { NotificationService } from '_service/notification/notification.service';
 import { ErrorsService } from 'errors/errors-service/errors.service';
+import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
+import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
+import { UtilsService } from '_service/utils/utils.service';
+import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
+import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
+import { LanguageService } from '_service/language/language.service';
+import { EditorComponent } from '_components/_forms/editor/editor.component';
+
 
 // Security
 import { AuthGuard } from './auth/auth.guard';
@@ -59,30 +72,39 @@ import { jwtConfig } from './auth/jwtConfig';
     CompanyProfileComponent,
     StaticBarComponent,
     WallComponent,
+    NewPostComponent,
     ModalWindowComponent,
-    AddressFormComponent
+    ProjectManagementComponent,
+    TeamManagementComponent,
+    FileSelectDirective,
+    CompanyUniversityEditModalComponent,
+    StudentEditModalComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
     AutoCompleteModule,
+    EditorModule,
+    PickerModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
-    NgbModule,
     JwtModule.forRoot(jwtConfig),
+    NgbModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
-  providers: [ErrorsService, NotificationService, CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage],
+    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    ErrorsComponent, AddressFormComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent
   ]
 })
 export class AppModule { }
