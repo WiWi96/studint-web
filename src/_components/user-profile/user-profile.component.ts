@@ -22,7 +22,6 @@ export class UserProfileComponent implements OnInit {
     expanded = false;
     Arr = Array;
     user: UserProfile;
-    technolgies: Technology[];
 
     constructor(
         private route: ActivatedRoute,
@@ -54,10 +53,6 @@ export class UserProfileComponent implements OnInit {
 
     getLanguages(): String {
         return this.user.languages.map(o => o.name).join(', ');
-    }
-
-    photoExists(profile: ProfileName): Boolean {
-        return profile != undefined && profile.photo != undefined && profile.photo.length > 0;
     }
 
     openEditModal(): any {

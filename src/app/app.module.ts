@@ -60,6 +60,7 @@ import { TokenStorage } from 'app/auth/token-storage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
+import { LoggedOffGuard } from './auth/loggedOff.guard';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,7 @@ import { MainpageComponent } from '_components/mainpage/mainpage.component';
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService,{
+    TeamService, PostService, MainPageService, AuthGuard, LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
