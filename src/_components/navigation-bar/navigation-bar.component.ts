@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { AuthService } from 'app/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
@@ -71,7 +73,8 @@ export class NavigationBarComponent implements OnInit {
       map(term => term.length < 2 ? []
         : this.states.filter(v => v.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
     )
-  constructor() {
+  constructor(private authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -81,6 +84,19 @@ export class NavigationBarComponent implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.smallScreen = window.innerWidth < 992;
+  }
+
+  goToProfile() {
+
+  }
+
+  goToSettings() {
+
+  }
+
+  signOut() {
+    this.authService.logOut();
+    this.router.navigate(['/']);
   }
 
 }
