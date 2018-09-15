@@ -10,12 +10,15 @@ import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
 import { ErrorsComponent } from 'errors';
 import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
+import { MainpageComponent } from '_components/mainpage/mainpage.component';
 
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+
+    { path: 'mainpage', component: MainpageComponent },
 
     { path: 'user/:id', component: UserProfileComponent },
     { path: 'university/:id', component: UniversityProfileComponent },

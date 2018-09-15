@@ -25,7 +25,6 @@ body {
     color: @gray-dark;
     margin: 0;
     padding-top: 70px;
-    padding-bottom: 60px;
 }
 
 a {
@@ -46,6 +45,10 @@ h6 {
     font-weight: bold;
 }
 
+hr {
+    border-color: @secondary-color;
+}
+
 .bg-light {
     background-color: @gray-light;
     h1,
@@ -55,6 +58,9 @@ h6 {
     h5,
     h6 {
         color: @secondary-color;
+    }
+    hr {
+        border-color: @gray;
     }
 }
 
@@ -74,6 +80,9 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @gray-dark;
+    }
 }
 
 .bg-primary {
@@ -92,6 +101,9 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @primary-color-dark;
+    }
 }
 
 .bg-secondary {
@@ -109,6 +121,9 @@ h6 {
         &:before {
             color: @gray-lighter;
         }
+    }
+    hr {
+        border-color: @secondary-color-dark;
     }
 }
 

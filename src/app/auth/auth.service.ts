@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   logIn(username: string, password: string): Observable<any> {
-    return this.http.post(`http://localhost:8080/signin`, { username: username, password: password });
+    return this.http.post(`${environment.apiEndpoint}/signin`, { username: username, password: password });
   }
 
   storeToken(token: JwtToken) {
@@ -62,7 +62,7 @@ export class AuthService {
 
   isManager(): boolean {
     const roles: string[] = this.getRoles();
-    return roles != null && roles.includes('MANAGER');
+    return roles != null && roles.includes('USER');
   }
 
   refreshPermissions() {
