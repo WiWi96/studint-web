@@ -115,15 +115,18 @@ export class StudentEditModalComponent implements OnInit {
     this.skillSelected = this.skills.find(skill => {
       return skill.name == e.value;
     });
+    this.technologyFormControl.reset();
 
     if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
       this.userSkillTags.push(this.skillSelected);
+      
   }
 
   onLanguageSelect(e: TypeaheadMatch): void {
     this.languageSelected = this.languages.find(language => {
       return language.name == e.value;
     });
+    this.languageFormControl.reset();
 
     if (this.languageSelected && !this.userLanguagesTags.some(language => { return language.name == e.value }))
       this.userLanguagesTags.push(this.languageSelected);

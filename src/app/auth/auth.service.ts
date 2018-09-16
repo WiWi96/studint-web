@@ -62,7 +62,7 @@ export class AuthService {
 
   isManager(): boolean {
     const roles: string[] = this.getRoles();
-    return roles != null && roles.includes('MANAGER');
+    return roles != null && roles.includes('USER');
   }
 
   refreshPermissions() {

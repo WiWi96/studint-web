@@ -10,19 +10,24 @@ import { ProjectProfileComponent } from '_components/project-profile';
 import { HomeComponent } from '_components/home/home.component';
 import { ErrorsComponent } from 'errors';
 import { ProjectManagementComponent } from '_components/_management/project-management/project-management.component';
+import { MainpageComponent } from '_components/mainpage/mainpage.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoggedOffGuard } from './auth/loggedOff.guard';
 
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: '', component: HomeComponent, canActivate: [LoggedOffGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [LoggedOffGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [LoggedOffGuard] },
 
-    { path: 'user/:id', component: UserProfileComponent },
-    { path: 'university/:id', component: UniversityProfileComponent },
-    { path: 'project/:id', component: ProjectProfileComponent },
-    { path: 'company/:id', component: CompanyProfileComponent },
+    { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuard] },
 
-    { path: 'manage-projects', component: ProjectManagementComponent },
+    { path: 'user/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+    { path: 'university/:id', component: UniversityProfileComponent, canActivate: [AuthGuard] },
+    { path: 'project/:id', component: ProjectProfileComponent, canActivate: [AuthGuard] },
+    { path: 'company/:id', component: CompanyProfileComponent, canActivate: [AuthGuard] },
+
+    { path: 'manage-projects', component: ProjectManagementComponent, canActivate: [AuthGuard] },
 
     { path: 'error', component: ErrorsComponent },
     { path: '**', component: ErrorsComponent, data: { error: 404 } }
