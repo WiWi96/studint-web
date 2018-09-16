@@ -4,9 +4,8 @@ import { Team } from '../team/team';
 import { Duration } from '../duration';
 
 export class ProjectProfile {
-    id: number;
     profileName: ProfileName;
-    name: string;
+    company: ProfileName;
     description: string;
     technologies: Array<Skill> = [];
     type: string;

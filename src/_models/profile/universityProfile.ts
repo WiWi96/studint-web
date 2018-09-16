@@ -1,12 +1,15 @@
-import { Address } from './../address';
+import { Address } from '../address';
 import { ProfileName } from './profileName';
-import { Post } from '../post';
+import { Course } from '../course';
+import { SocialMedia } from '../socialMedia';
+import { ProjectInfo } from '../info/projectInfo';
 
 export class UniversityProfile {
     profileName: ProfileName;
     description: string;
-    profiles: Map<string, string>;
-    posts: Array<Post> = [];
+    profiles: Array<SocialMedia> = [];
     address: Address;
     type: string;
+    courses: Array<Course> = [];
+    projects: Array<ProjectInfo> = [];
 }

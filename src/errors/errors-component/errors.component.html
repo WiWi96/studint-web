@@ -1,0 +1,29 @@
+<header class="error-header bg-dark">
+  <div class="container h-100">
+    <div class="row h-100 text-center justify-content-center align-items-center">
+      <div [ngSwitch]="getErrorStatus(error)" class="error-message col-md-6 order-2 order-md-1">
+        <h1>Oh no!</h1>
+        <p *ngSwitchCase="'5xx'">We have a problem with our server. We try to resolve it ASAP</p>
+        <p *ngSwitchCase="'404'">The page you're trying to visit doesn't exist</p>
+        <p *ngSwitchCase="'403'">You dont't have permissions to view this site</p>
+        <p *ngSwitchCase="'418'">I'm a teapot!</p>
+        <p *ngSwitchCase="'4xx'">The request wasn't correct. Try again</p>
+        <p *ngSwitchDefault>To be honest... We don't know what happened here</p>
+      </div>
+      <div class="road-sign-parent col-md-6 order-1 order-md-2">
+        <div class="road-sign-container">
+          <div class="road-sign">
+            <span class="road-sign-text">
+              Dead<br/>end
+            </span>
+          </div>
+          <div class="road-sign-code-container">
+            <div [ngClass]="{'hidden': !error}" class="road-sign-code">
+              <span>{{error}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

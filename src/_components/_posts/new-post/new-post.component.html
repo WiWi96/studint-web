@@ -1,0 +1,11 @@
+<div class="container">
+  <form class="post-form" (ngSubmit)="onSubmitPost()">
+    <div class="post-form-inner form-group" [formGroup]="newPostFormGroup">
+      <app-editor (onInit)="onEditorInit($event)" formControlName="content" name="content" required></app-editor>
+      <div *ngIf="postSubmitted">
+        <p class="alert alert-danger" *ngIf="newPostFormGroup.get('content').errors?.required">Post content is required</p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Publish</button>
+  </form>
+</div>

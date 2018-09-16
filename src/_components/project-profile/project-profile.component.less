@@ -1,0 +1,171 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.container {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+div#profile-background-photo {
+    @media (min-width: 576px) {
+        height: 400px;
+    }
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+    filter: blur(2px);
+    box-shadow: 0px -126px 63px -63px @background-color inset;
+    z-index: -1;
+}
+
+.profile-header {
+    @media (min-width: 576px) {
+        .light-shadow();
+        background-color: @background-color;
+        margin-top: 200px;
+        .profile-card {
+            margin-top: -140px;
+        }
+    }
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    z-index: 1;
+    .profile-top {
+        margin-left: 0;
+        margin-right: 0;
+        .profile-photo-container {
+            height: 160px;
+            .profile-photo {
+                position: relative;
+                margin-top: -140px;
+                .light-shadow();
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                width: 180px;
+                height: 180px;
+                border-radius: 100%;
+                background-position: center;
+                background-size: cover;
+                background-color: @background-color;
+            }
+        }
+        .profile-card {
+            position: relative;
+            .profile-name {
+                padding-top: 50px;
+                h1 {
+                    font-weight: bold;
+                    color: @gray-lighter;
+                    text-transform: none;
+                    .default-text-shadow(@gray-dark);
+                }
+                #profile-status {
+                    color: @secondary-color;
+                    text-transform: none;
+                }
+            }
+            .profile-info-container {
+                margin-top: 30px;
+                .profile-info {
+                    .project-company {
+                        .light-shadow;
+                        h6 {
+                            text-transform: none;
+                            color: @gray-dark;
+                            margin-bottom: 0;
+                        }
+                    }
+                    .info-item {
+                        display: flex;
+                        .info-item-icon {
+                            color: @secondary-color;
+                            width: 20px;
+                            text-align: center;
+                            margin-right: 10px;
+                        }
+                        .difficulty-stars {
+                            font-size: 24px;
+                        }
+                    }
+                }
+                .profile-technologies {
+                    .light-shadow;
+                    background-color: @gray-light;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    .technology-item {
+                        display: inline-block;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        border: 1px solid @gray;
+                        margin: 4px 2px;
+                        .light-shadow;
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.profile-description-container {
+    max-height: 300px;
+    overflow: hidden;
+    .light-shadow;
+    &.expanded {
+        max-height: none;
+        overflow: auto;
+        .profile-description-more {
+            position: initial;
+            height: auto;
+            span {
+                position: initial;
+            }
+        }
+    }
+    .profile-description-more {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: @secondary-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        box-shadow: 0px -61px 100px 3px @background-color inset;
+        span {
+            position: absolute;
+            bottom: 0;
+            line-height: 40px;
+        }
+    }
+}
+
+.profile-participants__container {
+    .light-shadow;
+    padding: 30px;
+    flex-direction: column;
+    .profile-participants {
+        align-items: flex-start;
+        p {
+            line-height: 1;
+            padding-top: 5px;
+        }
+    }
+    .participant-photo-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+    }
+}

@@ -1,0 +1,146 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.container {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+div#profile-background-photo {
+    background: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    overflow: hidden;
+    filter: blur(2px);
+    box-shadow: 0px -126px 63px -63px @background-color inset;
+    z-index: -1;
+}
+
+.profile-header {
+    @media (min-width: 576px) {
+        .light-shadow();
+        background-color: @background-color;
+    }
+    position: relative;
+    margin-top: 200px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    z-index: 1;
+    .profile-top {
+        margin-left: 0;
+        margin-right: 0;
+        .profile-photo-container {
+            height: 160px;
+            .profile-photo {
+                position: relative;
+                margin-top: -140px;
+                .light-shadow();
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                width: 180px;
+                height: 180px;
+                border-radius: 100%;
+                background-position: center;
+                background-size: cover;
+                background-color: @background-color;
+            }
+        }
+        .profile-card {
+            position: relative;
+            margin-top: -140px;
+            .profile-name {
+                padding-top: 50px;
+                h1 {
+                    font-weight: bold;
+                    color: @gray-lighter;
+                    text-transform: none;
+                    .default-text-shadow(@gray-dark);
+                }
+                #profile-status {
+                    color: @secondary-color;
+                    text-transform: none;
+                }
+            }
+            .profile-bio-container {
+                margin-top: 30px;
+                .bio-item {
+                    display: flex;
+                    .bio-item-icon {
+                        color: @secondary-color;
+                        width: 20px;
+                        text-align: center;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+        .profile-courses {
+            .light-shadow;
+            background-color: @gray-light;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .course-item {
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 20px;
+                border: 1px solid @gray;
+                margin: 4px 2px;
+                .light-shadow;
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+
+.profile-description-container {
+    max-height: 300px;
+    overflow: hidden;
+    .light-shadow;
+    &.expanded {
+        max-height: none;
+        overflow: auto;
+        .profile-description-more {
+            position: initial;
+            height: auto;
+            span {
+                position: initial;
+            }
+        }
+    }
+    .profile-description-more {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: @secondary-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        box-shadow: 0px -61px 100px 3px @background-color inset;
+        span {
+            position: absolute;
+            bottom: 0;
+            line-height: 40px;
+        }
+    }
+}
+
+.bg-primary {
+    .item {
+        .light-shadow(@gray-dark);
+    }
+}
+
+.bg-dark {
+    .item {
+        .light-shadow(@gray-darker);
+    }
+}

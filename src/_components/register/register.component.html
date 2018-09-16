@@ -1,46 +1,298 @@
-<div class="container">
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
-            />
-            <!-- [ngClass] generuje klase CSS kiedy warunek jest prawdziwy -->
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
-            />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-            />
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Username is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+<div class="bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 pb-5">
+                <!-- Tabs with icons on Card -->
+                <div class="card card-nav-tabs">
+                    <div class="card-header card-header-primary">
+                        <!--  -->
+                        <div class="nav-justified">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#student" data-toggle="tab">
+                                            <i class="fas fa-graduation-cap fa-2x"></i>&nbsp;STUDENT
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#university" data-toggle="tab">
+                                            <i class="fas fa-university fa-2x"></i>&nbsp;UNIVERSITY
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#company" data-toggle="tab">
+                                            <i class="fas fa-building fa-2x"></i>&nbsp;COMPANY
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <div class="tab-content">
+                            <div class="text-center">
+                                <div class="size-studint">
+                                    <label class="label-studint">Welcome to
+                                        <span class="studint-logo"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="student">
+                                <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()" action="mail.php"
+                                    method="post">
+                                    <div class="form-group">
+                                        <div class="md-form">
+                                            <input type="email" class="form-control" formControlName="email" id="form3" placeholder="E-mail" maxlength="254" required
+                                            />
+                                        </div>
+                                        <div *ngIf="submittedStudent">
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.required">Email is required
+                                            </p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.email && f.email.touched">Email is not valid</p>
+                                            <p class="alert alert-danger" *ngIf="f.email.errors?.maxlength">Email may have maximum 254 characters </p>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="password">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputStudentPassword1" placeholder="Enter password"
+                                                minlength="4" required />
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('password').get('password').errors?.required">Password is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('password').get('password').errors?.minlength">Password must be at least 4 characters long</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputStudentRepeatPassword1" placeholder="Repeat password"
+                                                required />
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('password').get('repeatPassword').errors?.required">Repeat password is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="fullname">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
+                                                required/>
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('firstName').errors?.required">First name is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('firstName').errors?.pattern">
+                                                    Invalid first name</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="surname" id="InputSurname" placeholder="Surname" maxlength="254"
+                                                required/>
+                                            <div *ngIf="submittedStudent">
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.required">Surname is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.pattern">
+                                                    Invalid surname </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" formControlName="checkbox" id="InputCheckbox1" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                                <div *ngIf="submittedStudent">
+                                                    <p class="alert alert-danger" *ngIf="f.checkbox.errors?.required">You must accept Terms & Conditions</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="university">
+                                <form class="registerform" [formGroup]="accountUniversityDetailsFormGroup" (ngSubmit)="onSubmitUniversity()" action="mail.php"
+                                    method="post">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail2" placeholder="E-mail" required />
+                                        <div *ngIf="submittedUniversity">
+                                            <p class="alert alert-danger" *ngIf="f2.email.errors?.required">Email is required</p>
+                                            <p class="alert alert-danger" *ngIf="f2.email.errors?.email && f.email.touched">Email is not valid</p>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="password">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputUniversityPassword1" placeholder="Enter password"
+                                                required />
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('password').get('password').errors?.required">Password is required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputUniversityRepeatPassword2" placeholder="Repeat password"
+                                                minlength="4" required />
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('password').get('repeatPassword').errors?.required">Repeat password is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="universityName" id="InputUniversityName" placeholder="University name" required>
+                                        <div *ngIf="submittedUniversity">
+                                            <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.controls.universityName.errors?.required">Company name is required</p>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="address">
+                                        <div class="form-group">
+                                            <select class="custom-select form-control">
+                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="town" id="InputCity2" placeholder="City" required>
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('town').errors?.pattern">
+                                                    Only letters are allowed</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="street" id="Street2" placeholder="Street" required>
+                                                <div *ngIf="submittedUniversity">
+                                                    <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
+                                                    <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('street').errors?.pattern">
+                                                        Only letters are allowed</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber2" placeholder="House number" required>
+                                                <div *ngIf="submittedUniversity">
+                                                    <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="postalCode" id="Zip2" placeholder="Zip" required>
+                                            <div *ngIf="submittedUniversity">
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
+                                                    Incorrect zip code</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" formControlName="checkbox" id="InputCheckbox2" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                                <div *ngIf="submittedUniversity">
+                                                    <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.controls.checkbox.errors?.required">You must accept Terms & Conditions</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="company">
+                                <form class="registerform" [formGroup]="accountCompanyDetailsFormGroup" (ngSubmit)="onSubmitCompany()" action="mail.php"
+                                    method="post">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" formControlName="email" id="InputEmail3" placeholder="E-mail" required />
+                                        <div *ngIf="submittedCompany">
+                                            <p class="alert alert-danger" *ngIf="f3.email.errors?.required">Email is required</p>
+                                            <p class="alert alert-danger" *ngIf="f3.email.errors?.email && f.email.touched">Email is not valid</p>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="password">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
+                                                minlength="4" required />
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').get('password').errors?.required">Repeat password is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" formControlName="repeatPassword" id="InputCompanyRepeatPassword3" placeholder="Repeat password"
+                                                required />
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').get('repeatPassword').errors?.required">Repeat password is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('password').errors?.doesMatchPassword">Password does not match</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="companyName" id="InputCompanyName" placeholder="Company name" required>
+                                        <div *ngIf="submittedCompany">
+                                            <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.controls.companyName.errors?.required">Company name is required</p>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="address">
+                                        <div class="form-group">
+                                            <select class="custom-select form-control">
+                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('town').errors?.pattern">
+                                                    Only letters are allowed</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
+                                                <div *ngIf="submittedCompany">
+                                                    <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
+                                                    <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('street').errors?.pattern">
+                                                        Only letters are allowed</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
+                                                <div *ngIf="submittedCompany">
+                                                    <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
+                                                    <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
+                                            <div *ngIf="submittedCompany">
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
+                                                <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
+                                                    Incorrect zip code</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="form-check-label">
+                                                <small>
+                                                    <input type="checkbox" formControlName="checkbox" id="InputCheckbox3" required> By clicking Register, you agree to our Terms & Conditions, Visitor Agreement
+                                                    and Privacy Policy.
+                                                </small>
+                                                <div *ngIf="submittedCompany">
+                                                    <p class="alert alert-danger" *ngIf="accountCompanyDetailsFormGroup.controls.checkbox.errors?.required">You must accept Terms & Conditions</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- End Tabs on Card -->
             </div>
         </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-        </div>
-    </form>
+    </div>
 </div>

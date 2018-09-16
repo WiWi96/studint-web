@@ -62,33 +62,35 @@ div#profile-background-photo {
                     text-transform: none;
                 }
             }
-            .profile-bio {
+            .profile-bio-container {
                 margin-top: 30px;
-                .bio-item {
-                    display: flex;
-                    .bio-item-icon {
-                        color: @secondary-color;
-                        width: 20px;
-                        text-align: center;
-                        margin-right: 10px;
+                .profile-bio {
+                    .bio-item {
+                        display: flex;
+                        .bio-item-icon {
+                            color: @secondary-color;
+                            width: 20px;
+                            text-align: center;
+                            margin-right: 10px;
+                        }
                     }
                 }
-            }
-        }
-        .profile-skills {
-            .light-shadow;
-            background-color: @gray-light;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            .skill-item {
-                display: inline-block;
-                padding: 4px 10px;
-                border-radius: 20px;
-                border: 1px solid @gray;
-                margin: 4px 2px;
-                .light-shadow;
-                &:hover {
-                    transform: scale(1.05);
+                .profile-skills {
+                    .light-shadow;
+                    background-color: @gray-light;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    .skill-item {
+                        display: inline-block;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        border: 1px solid @gray;
+                        margin: 4px 2px;
+                        .light-shadow;
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+                    }
                 }
             }
         }
@@ -103,7 +105,11 @@ div#profile-background-photo {
         max-height: none;
         overflow: auto;
         .profile-description-more {
-            display: none;
+            position: initial;
+            height: auto;
+            span {
+                position: initial;
+            }
         }
     }
     .profile-description-more {
@@ -132,13 +138,15 @@ div#profile-background-photo {
     .light-shadow;
     padding: 10px;
     .item {
-        h5, h6 {
+        h5,
+        h6 {
             text-transform: none;
-        }
-        h5 {
             color: @secondary-color;
         }
-        h6 {
+        h6.subtitle {
+            color: @gray-dark;
+        }
+        p {
             color: @gray-dark;
         }
         &:hover {
@@ -156,5 +164,26 @@ div#profile-background-photo {
 .bg-dark {
     .item {
         .light-shadow(@gray-darker);
+    }
+}
+
+.bg-light {
+    .item {
+        .light-shadow(@gray);
+        background-color: @gray-lighter !important;
+
+        h5.title {
+            color: @gray-darker;
+        }
+        
+        h6.subtitle {
+            color: @primary-color-dark;
+        }
+    }
+}
+
+.projects-container {
+    .row {
+        justify-content: center;
     }
 }

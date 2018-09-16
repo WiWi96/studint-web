@@ -25,7 +25,13 @@ body {
     color: @gray-dark;
     margin: 0;
     padding-top: 70px;
-    padding-bottom: 60px;
+}
+
+a {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
 }
 
 h1,
@@ -39,6 +45,10 @@ h6 {
     font-weight: bold;
 }
 
+hr {
+    border-color: @secondary-color;
+}
+
 .bg-light {
     background-color: @gray-light;
     h1,
@@ -49,6 +59,9 @@ h6 {
     h6 {
         color: @secondary-color;
     }
+    hr {
+        border-color: @gray;
+    }
 }
 
 .bg-dark {
@@ -58,13 +71,17 @@ h6 {
     h3,
     h4,
     h5,
-    h6 {
+    h6,
+    p {
         color: @gray-light;
     }
     span.studint-logo {
         &:after {
             color: @gray-lighter;
         }
+    }
+    hr {
+        border-color: @gray-dark;
     }
 }
 
@@ -75,7 +92,8 @@ h6 {
     h3,
     h4,
     h5,
-    h6 {
+    h6,
+    p {
         color: @gray-light;
     }
     span.studint-logo {
@@ -83,16 +101,20 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @primary-color-dark;
+    }
 }
 
 .bg-secondary {
-    background-color: @secondary-color  !important;
+    background-color: @secondary-color !important;
     h1,
     h2,
     h3,
     h4,
     h5,
-    h6 {
+    h6,
+    p {
         color: @gray-light;
     }
     span.studint-logo {
@@ -100,10 +122,33 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @secondary-color-dark;
+    }
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .italic {
     font-style: italic;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.accepted {
+    color: @red;
+}
+
+.rejected {
+    color: @green;
+}
+
+.pending {
+    color: @secondary-color;
 }
 
 .btn,
@@ -118,6 +163,28 @@ h6 {
     }
 }
 
+.btn-group {
+    .default-shadow();
+    &:hover {
+        .hover-shadow();
+    }
+    &:active,
+    &:focus {
+        .active-shadow();
+    }
+    .btn,
+    .form-control {
+        box-shadow: none;
+        &:hover {
+            box-shadow: none;
+        }
+        &:active,
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
 /* Buttons */
 
 .btn {
@@ -128,6 +195,23 @@ h6 {
     }
     &:active {
         transform: scale(1.1);
+    }
+}
+
+.btn-primary {
+    background-color: @primary-color;
+    border-color: @primary-color-dark;
+    &:hover {
+        background-color: @primary-color-dark;
+        border-color: @primary-color-darker;
+    }
+    &:not(:disabled):not(:disabled):active {
+        background-color: @primary-color-darker;
+        border-color: @primary-color-darker;
+    }
+    &:not(:disabled):not(:disabled):focus,
+    &:not(:disabled):not(:disabled):focus:active {
+        box-shadow: 0 0 30px 5px @primary-color-light;
     }
 }
 
@@ -180,4 +264,22 @@ h6 {
             color: @gray-darker;
         }
     }
+}
+
+/* Profile photo */
+
+.profile-photo-sm {
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+    .light-shadow;
+}
+
+/* Modals */
+
+.modal-boy {
+    max-height: 70vh;
+    overflow-y: scroll;
 }
