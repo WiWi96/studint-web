@@ -64,6 +64,8 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
 
   }
 
+  finishProject = (params) => {
+  }
   cancelProject = (params) => {
     this.projectService.deleteProject(params.id).subscribe(() => this.getProjects());
     this.modalRef.hide();
