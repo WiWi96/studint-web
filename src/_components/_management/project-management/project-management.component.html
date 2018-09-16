@@ -39,7 +39,7 @@
                   <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
                     teams
                   </button>
-                  <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" (click)="cancelProject(project.projectId)" class="btn btn-danger bold">Cancel
+                  <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" (click)="openConfirmModal('Do you want to cancel this project?', cancelProject, { id: project.projectId })" class="btn btn-danger bold">Cancel
                     project
                   </button>
                 </div>
