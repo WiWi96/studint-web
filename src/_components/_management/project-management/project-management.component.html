@@ -27,7 +27,12 @@
           <tbody>
             <tr *ngFor="let project of projects">
               <td scope="row" class="align-middle">{{project.projectId}}</td>
-              <td class="align-middle bold text-left"><a [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a></td>
+              <td class="align-middle text-left">
+                <a *ngIf="project.status !== ProjectStatus.Canceled; else canceled" class="bold" [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a>
+                <ng-template #canceled>
+                  {{project.projectName}}
+                </ng-template>
+              </td>
               <td class="align-middle">
                 {{utils.getProjectStatusText(project.status)}}
               </td>
