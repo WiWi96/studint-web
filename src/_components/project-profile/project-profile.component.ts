@@ -49,6 +49,13 @@ export class ProjectProfileComponent implements OnInit {
     }
 
     joinProject():void {
-        
+        this.projectProfileService.joinProject(this.id).subscribe(
+            data => { this.project = data },
+            error => {console.log(error)}
+        )
+    }
+
+    leaveProject():void {
+
     }
 }

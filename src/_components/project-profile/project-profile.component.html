@@ -64,9 +64,15 @@
                                     <div class="info-item-icon"><i class="far fa-times-circle"></i></div>
                                     <p>Your entry has been <strong class="rejected">rejected</strong></p>
                                 </span>
-                                <span *ngSwitchCase="ParticipationStatus.Pending" class="d-flex">
-                                    <div class="info-item-icon"><i class="fas fa-dice"></i></div>
-                                    <p>Your join request is <strong class="pending">pending</strong></p>
+                                <span *ngSwitchCase="ParticipationStatus.Pending">
+                                    <span class="d-flex">
+                                        <div class="info-item-icon"><i class="fas fa-dice"></i></div>
+                                        <p>Your join request is <strong class="pending">pending</strong></p>
+                                    </span>
+                                    <span>
+                                        <button class="btn btn-danger btn-sm ml-auto mr-auto" (click)="leaveProject()">Leave
+                                            the project!</button>
+                                    </span>
                                 </span>
                                 <span *ngSwitchDefault>
                                     <button *ngIf="project.status === ProjectStatus.Invite" class="btn btn-primary btn-lg ml-auto mr-auto"
