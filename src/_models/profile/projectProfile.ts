@@ -7,8 +7,9 @@ import { ProjectLevel } from '_enums/projectLevel';
 import { ParticipationStatus } from '_enums/participationStatus';
 
 export class ProjectProfile {
-    profileName: ProfileName;
-    company: ProfileName;
+    id: number;
+    name?: string;
+    company?: ProfileName;
     description?: string;
     technologies?: Array<Skill> = [];
     type?: string;
