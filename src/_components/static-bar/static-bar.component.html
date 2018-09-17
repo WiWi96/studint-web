@@ -15,7 +15,7 @@
                 </li>
             </ul>
             <button class="sidenav__button" (click)="toggleUniversities()">Universities</button>
-            <ul *ngIf="!user?.studiesInfos?.length && showProjects" class="sidenav__list">
+            <ul *ngIf="!user?.studiesInfos?.length && showUniversities" class="sidenav__list">
                 <p class="sidenav__list-item">No available universities</p>
             </ul>
             <ul class="sidenav__list" *ngIf="showUniversities">

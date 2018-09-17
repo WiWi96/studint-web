@@ -45,10 +45,10 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
-  countries = ['Poland', 'Germany', 'Spain']
+  countries = ['Poland', 'Germany', 'Spain'];
   items = ['youtube', 'facebook', 'twitter', 'instagram', 'linkedin', 'goldenline', 'github', 'pinterest', 'google', 'custom'];
 
-  selected = ""
+  selected = '';
 
 
   isSocialDisabled: Array<boolean> = [];
@@ -152,9 +152,9 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: [this.profileName.name, [Validators.required]],
       address: this.addressFormGroup,
-      description: ['', [Validators.required]],
+      description: [this.companyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
       socialValue: ['', [Validators.required]],
     })

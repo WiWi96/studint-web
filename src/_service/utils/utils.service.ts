@@ -2,71 +2,83 @@ import { Injectable } from "@angular/core";
 import { ProfileName } from "_models/profile/profileName";
 import { Duration } from "_models/duration";
 import * as moment from 'moment';
+import { ProjectStatus } from "_enums/projectStatus";
+import { ProjectLevel } from "_enums/projectLevel";
+import { UserStatus } from "_enums/userStatus";
+import { ServiceType } from "_enums/serviceTypes";
+import { BsModalService } from "ngx-bootstrap";
+import { ConfirmModalComponent } from "_components/_forms/confirm-modal/confirm-modal.component";
 
 @Injectable()
 export class UtilsService {
     public now = moment().startOf('day');
 
-    public getProjectLevelText(level: string): string {
+    constructor(private modalService: BsModalService) {
+
+    }
+
+    public getProjectLevelText(level: ProjectLevel): string {
         switch (level) {
-            case 'BEGINNER':
+            case ProjectLevel.Beginner:
                 return 'Beginner';
-            case 'INTERMEDIATE':
+            case ProjectLevel.Intermediate:
                 return 'Intermediate';
-            case 'ADVANCED':
+            case ProjectLevel.Advanced:
                 return 'Advanced';
-            case 'PROFESSIONAL':
+            case ProjectLevel.Professional:
                 return 'Professional';
-            case 'MASTER':
+            case ProjectLevel.Master:
                 return 'Master';
             default:
                 return undefined;
         }
     }
 
-    public getProjectDifficultyNumber(level: string): number {
+    public getProjectDifficultyNumber(level: ProjectLevel): number {
         switch (level) {
-            case 'BEGINNER':
+            case ProjectLevel.Beginner:
                 return 1;
-            case 'INTERMEDIATE':
+            case ProjectLevel.Intermediate:
                 return 2;
-            case 'ADVANCED':
+            case ProjectLevel.Advanced:
                 return 3;
-            case 'PROFESSIONAL':
+            case ProjectLevel.Professional:
                 return 4;
-            case 'MASTER':
+            case ProjectLevel.Master:
                 return 5;
             default:
                 return undefined;
         }
     }
 
-    public getProjectStatusText(status: string): string {
+    public getProjectStatusText(status: ProjectStatus): string {
         switch (status) {
-            case 'IN_PROGRESS':
+            case ProjectStatus.InProgress:
                 return 'In progress';
-            case 'TBA':
+            case ProjectStatus.TBA:
                 return 'To be announced';
-            case 'FINISHED':
+            case ProjectStatus.Finished:
                 return 'Finished';
-            case 'CANCELED':
+            case ProjectStatus.Canceled:
                 return 'Canceled';
-            case 'INVITE':
+            case ProjectStatus.Invite:
                 return 'Open for entries';
+            case ProjectStatus.Closed:
+                return 'Closed for entries';
             default:
                 return undefined;
         }
     }
 
-    public getUserStatusText(status: string): string {
+    public getUserStatusText(status: UserStatus): string {
         switch (status) {
-            case 'READY':
+            case UserStatus.Ready:
                 return 'Ready to join a project';
-            case 'BUSY':
+            case UserStatus.Busy:
                 return 'Currently doing something';
-            case 'NEW':
+            case UserStatus.New:
                 return 'Looking around';
-            case 'INACTIVE':
+            case UserStatus.Inactive:
                 return 'I\'m away for a while';
             default:
                 return undefined;
@@ -138,49 +150,49 @@ export class UtilsService {
         }
     }
 
-    public getSocialMediaName(type: string): string {
+    public getSocialMediaName(type: ServiceType): string {
         switch (type) {
-            case 'youtube':
+            case ServiceType.YouTube:
                 return 'YouTube';
-            case 'facebook':
+            case ServiceType.Facebook:
                 return 'Facebook';
-            case 'twitter':
+            case ServiceType.Twitter:
                 return 'Twitter';
-            case 'instagram':
+            case ServiceType.Instagram:
                 return 'Instagran';
-            case 'linkedin':
+            case ServiceType.LinkedIn:
                 return 'LinkedIn';
-            case 'github':
+            case ServiceType.GitHub:
                 return 'GitHub';
-            case 'pinterest':
+            case ServiceType.Pinterest:
                 return 'Pinterest';
-            case 'google':
+            case ServiceType.Google:
                 return 'Google';
-            case 'custom':
+            case ServiceType.Custom:
             default:
                 return 'Website';
         }
     }
 
-    public getSocialMediaIconClass(type: string): string {
+    public getSocialMediaIconClass(type: ServiceType): string {
         switch (type) {
-            case 'youtube':
+            case ServiceType.YouTube:
                 return 'fab fa-youtube';
-            case 'facebook':
+            case ServiceType.Facebook:
                 return 'fab fa-facebook';
-            case 'twitter':
+            case ServiceType.Twitter:
                 return 'fab fa-twitter';
-            case 'instagram':
+            case ServiceType.Instagram:
                 return 'fab fa-instagram';
-            case 'linkedin':
+            case ServiceType.LinkedIn:
                 return 'fab fa-linkedin';
-            case 'github':
+            case ServiceType.GitHub:
                 return 'fab fa-github';
-            case 'pinterest':
+            case ServiceType.Pinterest:
                 return 'fab fa-pinterest';
-            case 'google':
+            case ServiceType.Google:
                 return 'fab fa-google';
-            case 'custom':
+            case ServiceType.Custom:
             default:
                 return 'fas fa-globe';
         }
@@ -198,5 +210,17 @@ export class UtilsService {
             return true;
         }
         return false;
+    }
+
+    public openConfirmModal(message: string, confirmAction: Function, params: object) {
+        const initialState = {
+            message: message
+        };
+        let modalRef = this.modalService.show(ConfirmModalComponent, { initialState });
+        modalRef.content.onClose.subscribe((confirmed) => {
+            if (confirmed) {
+                confirmAction(params);
+            }
+        });
     }
 }
