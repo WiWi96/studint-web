@@ -38,8 +38,10 @@
                   <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" class="btn btn-outline-primary bold" (click)="editDetails(project.projectId)">
                     <i class="fas fa-cog"></i>
                   </button>
-                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
+                  <button *ngIf="project.status === ProjectStatus.Invite || project.status === ProjectStatus.Closed || project.status === ProjectStatus.InProgress" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
                     teams
+                  </button>
+                  <button *ngIf="project.status === ProjectStatus.TBA" (click)="openConfirmModal('Do you want to open entries for this project?', publishProject, { id: project.projectId })" class="btn btn-outline-primary bold">Open entries
                   </button>
                   <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="openConfirmModal('Do you want to mark this project as finished?', finishProject, { id: project.projectId })" class="btn btn-outline-primary bold">Mark as finished
                   </button>

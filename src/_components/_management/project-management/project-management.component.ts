@@ -54,6 +54,11 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
         });
     }
 
+    updateStatus(id: number, status: ProjectStatus) {
+      let project = { id: id, status: status };
+      this.projectService.updateProject(project).subscribe(() => this.getProjects());
+    }
+
     createProject(): void {
 
     }
@@ -66,9 +71,12 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
 
     }
 
+    publishProject = (params) => {
+      this.updateStatus(params.id, ProjectStatus.Invite);
+    }
+
     finishProject = (params) => {
-        let project = { id: params.id, status: ProjectStatus.Finished };
-        this.projectService.updateProject(project).subscribe(() => this.getProjects());
+      this.updateStatus(params.id, ProjectStatus.Finished);
     }
 
     cancelProject = (params) => {
