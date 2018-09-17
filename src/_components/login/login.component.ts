@@ -29,7 +29,7 @@ constructor(private authService: AuthService, private router: Router, private ro
         });
 
         // reset login status
-        //this.authenticationService.logout();
+        this.authService.logOut();
 
         // default to '/users/table'
         this.returnUrl = 'users/table';
