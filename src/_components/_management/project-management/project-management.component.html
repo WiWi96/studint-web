@@ -35,11 +35,15 @@
               <td class="align-middle">{{project.joiningDate}}</td>
               <td class="align-middle">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Project actions">
-                  <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" class="btn btn-outline-primary bold" (click)="editDetails(project.projectId)">Edit details</button>
-                  <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" class="btn btn-outline-primary bold" (click)="editDetails(project.projectId)">
+                    <i class="fas fa-cog"></i>
+                  </button>
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
                     teams
                   </button>
-                  <button *ngIf="project.status !== 'CANCELED' && project.status !== 'FINISHED'" (click)="cancelProject(project.projectId)" class="btn btn-danger bold">Cancel
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="openConfirmModal('Do you want to mark this project as finished?', finishProject, { id: project.projectId })" class="btn btn-outline-primary bold">Mark as finished
+                  </button>
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="openConfirmModal('Do you want to cancel this project?', cancelProject, { id: project.projectId })" class="btn btn-danger bold">Cancel
                     project
                   </button>
                 </div>

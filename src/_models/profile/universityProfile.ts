@@ -6,10 +6,11 @@ import { ProjectInfo } from '../info/projectInfo';
 
 export class UniversityProfile {
     profileName: ProfileName;
-    description: string;
-    profiles: Array<SocialMedia> = [];
-    address: Address;
-    type: string;
-    courses: Array<Course> = [];
-    projects: Array<ProjectInfo> = [];
+    description?: string;
+    profiles?: Array<SocialMedia> = [];
+    address?: Address;
+    type?: string;
+    courses?: Array<Course> = [];
+    projects?: Array<ProjectInfo> = [];
+    isFollower?: boolean;
 }

@@ -1,5 +1,7 @@
+import { ServiceType } from "_enums/serviceTypes";
+
 export class SocialMedia {
     id: number;
-    service: string;
+    service: ServiceType;
     url: string;
 }

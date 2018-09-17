@@ -5,6 +5,8 @@ import { ProjectProfileService } from '_service/profile/project/projectProfile.s
 import { PostService } from '_service/post/post.service';
 import { SkillService } from '_service/skill/skill.service';
 import { UtilsService } from '_service/utils/utils.service';
+import { ParticipationStatus } from '_enums/participationStatus';
+import { ProjectStatus } from '_enums/projectStatus';
 
 @Component({
     selector: 'app-project-profile',
@@ -12,6 +14,8 @@ import { UtilsService } from '_service/utils/utils.service';
     styleUrls: ['./project-profile.component.less'],
 })
 export class ProjectProfileComponent implements OnInit {
+    ParticipationStatus = ParticipationStatus;
+    ProjectStatus = ProjectStatus;
     expanded = false;
     sub: any;
     id: number;

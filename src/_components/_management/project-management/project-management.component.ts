@@ -1,50 +1,77 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectInfo } from '_models/info/projectInfo';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { ConfirmModalComponent } from '../../_forms/confirm-modal/confirm-modal.component';
+import { ProjectProfile } from '_models/profile/projectProfile';
+import { ProjectStatus } from '_enums/projectStatus';
 
 @Component({
-  selector: 'app-project-management',
-  templateUrl: './project-management.component.html',
-  styleUrls: ['./project-management.component.less']
+    selector: 'app-project-management',
+    templateUrl: './project-management.component.html',
+    styleUrls: ['./project-management.component.less']
 })
 export class ProjectManagementComponent implements OnInit, OnDestroy {
+    ProjectStatus = ProjectStatus;
+    projects: Array<ProjectInfo>;
+    sub: any;
+    modalRef: BsModalRef;
 
-  projects: Array<ProjectInfo>;
-  sub: any;
+    constructor(
+        private projectService: ProjectProfileService,
+        private utils: UtilsService,
+        private modalService: BsModalService) { }
 
-  constructor(
-    private projectService: ProjectProfileService,
-    private utils: UtilsService) { }
+    ngOnInit() {
+        this.getProjects();
+    }
 
-  ngOnInit() {
-    this.getProjects();
-  }
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+    getProjects(): void {
+        this.sub = this.projectService.getProjectsByCompany(54).subscribe(
+            data => this.projects = data,
+            err => this.projects = null
+        )
+    }
 
-  getProjects(): void {
-    this.sub = this.projectService.getProjectsByCompany(54).subscribe(
-      data => this.projects = data,
-      err => this.projects = null
-    )
-  }
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+    }
 
-  createProject(): void {
+    openConfirmModal(message: string, confirmAction: Function, params: object) {
+        const initialState = {
+            message: message
+        };
+        this.modalRef = this.modalService.show(ConfirmModalComponent, { initialState });
+        this.modalRef.content.onClose.subscribe((confirmed) => {
+            if (confirmed) {
+                confirmAction(params);
+            }
+        });
+    }
 
-  }
+    createProject(): void {
 
-  editDetails(id: number): void {
+    }
 
-  }
+    editDetails(id: number): void {
 
-  manageTeams(id: number): void {
+    }
 
-  }
+    manageTeams(id: number): void {
 
-  cancelProject(id: number): void {
-    this.projectService.deleteProject(id).subscribe(() => this.getProjects());
-  }
+    }
+
+    finishProject = (params) => {
+        let project = { id: params.id, status: ProjectStatus.Finished };
+        this.projectService.updateProject(project).subscribe(() => this.getProjects());
+    }
+
+    cancelProject = (params) => {
+        this.projectService.deleteProject(params.id).subscribe(() => this.getProjects());
+    }
 }

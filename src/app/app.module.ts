@@ -16,7 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -61,6 +61,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
+import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { LoggedOffGuard } from './auth/loggedOff.guard';
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
-    EditorComponent
+    EditorComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -100,6 +102,7 @@ import { LoggedOffGuard } from './auth/loggedOff.guard';
     MomentModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
+    ModalModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
@@ -112,7 +115,7 @@ import { LoggedOffGuard } from './auth/loggedOff.guard';
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent
   ]
 })
 export class AppModule { }
