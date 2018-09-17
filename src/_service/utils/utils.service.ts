@@ -6,10 +6,16 @@ import { ProjectStatus } from "_enums/projectStatus";
 import { ProjectLevel } from "_enums/projectLevel";
 import { UserStatus } from "_enums/userStatus";
 import { ServiceType } from "_enums/serviceTypes";
+import { BsModalService } from "ngx-bootstrap";
+import { ConfirmModalComponent } from "_components/_forms/confirm-modal/confirm-modal.component";
 
 @Injectable()
 export class UtilsService {
     public now = moment().startOf('day');
+
+    constructor(private modalService: BsModalService) {
+
+    }
 
     public getProjectLevelText(level: ProjectLevel): string {
         switch (level) {
@@ -204,5 +210,17 @@ export class UtilsService {
             return true;
         }
         return false;
+    }
+
+    public openConfirmModal(message: string, confirmAction: Function, params: object) {
+        const initialState = {
+            message: message
+        };
+        let modalRef = this.modalService.show(ConfirmModalComponent, { initialState });
+        modalRef.content.onClose.subscribe((confirmed) => {
+            if (confirmed) {
+                confirmAction(params);
+            }
+        });
     }
 }
