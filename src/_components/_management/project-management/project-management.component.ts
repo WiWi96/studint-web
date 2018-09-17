@@ -4,6 +4,8 @@ import { UtilsService } from '_service/utils/utils.service';
 import { ProjectInfo } from '_models/info/projectInfo';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ConfirmModalComponent } from '../../_forms/confirm-modal/confirm-modal.component';
+import { ProjectProfile } from '_models/profile/projectProfile';
+import { ProjectStatus } from '_enums/projectStatus';
 
 @Component({
   selector: 'app-project-management',
@@ -11,7 +13,7 @@ import { ConfirmModalComponent } from '../../_forms/confirm-modal/confirm-modal.
   styleUrls: ['./project-management.component.less']
 })
 export class ProjectManagementComponent implements OnInit, OnDestroy {
-
+  ProjectStatus = ProjectStatus;
   projects: Array<ProjectInfo>;
   sub: any;
   modalRef: BsModalRef;
@@ -65,7 +67,12 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   }
 
   finishProject = (params) => {
+    let project = new ProjectProfile();
+    project.profileName = {id: params.id};
+    this.projectService.updateProject(project).subscribe(() => this.getProjects());
+    this.modalRef.hide();
   }
+
   cancelProject = (params) => {
     this.projectService.deleteProject(params.id).subscribe(() => this.getProjects());
     this.modalRef.hide();
