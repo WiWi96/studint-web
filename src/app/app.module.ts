@@ -61,6 +61,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
+import { ProjectComponent } from '_components/_forms/project/project.component';
+
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { LoggedOffGuard } from './auth/loggedOff.guard';
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
-    EditorComponent
+    EditorComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
