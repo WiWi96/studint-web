@@ -44,7 +44,9 @@ export class StudentEditModalComponent implements OnInit {
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
     private skillService: SkillService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.userLanguagesTags = this.user.languages;
@@ -55,10 +57,12 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSubmitStudent() {
-
+    this.userProfileService.updateUser(this.user).subscribe();
+    this.activeModal.dismiss();
   }
 
   close() {
+    this.userProfileService.updateUser(this.user).subscribe();
     this.activeModal.dismiss();
   }
 

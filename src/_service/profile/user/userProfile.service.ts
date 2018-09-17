@@ -30,7 +30,7 @@ export class UserProfileService {
 
   //put requests
   public updateUser(userProfile: UserProfile): Observable<UserProfile> {
-    return this.http.put<UserProfile>(`${userUrl}/${userProfile.profileName.id}`, userProfile);
+    return this.http.put<UserProfile>(`${userUrl}`, userProfile);
   }
 
   //delete requests
