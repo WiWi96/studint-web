@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ReplaySubject } from '../../../node_modules/rxjs/ReplaySubject';
 import { environment } from '../../environments/environment';
+import { ProfileName } from '_models/profile/profileName';
 
 export interface JwtToken {
   token: string;
@@ -68,5 +69,11 @@ export class AuthService {
 
   refreshPermissions() {
     this.permissionChanged.next(true);
+  }
+
+  public getLoggedProfile(): Observable<ProfileName> {
+    if (this.isLogged()) {
+      return this.http.get<ProfileName>(`${environment.apiEndpoint}/profile`);
+    }
   }
 }

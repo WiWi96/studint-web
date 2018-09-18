@@ -8,6 +8,7 @@ import { UserStatus } from "_enums/userStatus";
 import { ServiceType } from "_enums/serviceTypes";
 import { BsModalService } from "ngx-bootstrap";
 import { ConfirmModalComponent } from "_components/_forms/confirm-modal/confirm-modal.component";
+import { UserType } from "_enums/userType";
 
 @Injectable()
 export class UtilsService {
@@ -82,6 +83,17 @@ export class UtilsService {
                 return 'I\'m away for a while';
             default:
                 return undefined;
+        }
+    }
+
+    getUserRouterLink(type: UserType) {
+        switch (type) {
+            case UserType.Student:
+                return 'user';
+            case UserType.Company:
+                return 'company';
+            case UserType.University:
+                return 'university';
         }
     }
 

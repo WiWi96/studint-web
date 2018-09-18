@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { AuthService } from 'app/auth/auth.service';
 import { Router } from '@angular/router';
+import { ProfileService } from '_service/profile/profile.service';
+import { ProfileName } from '_models/profile/profileName';
+import { UserType } from '_enums/userType';
+import { UtilsService } from '_service/utils/utils.service';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
@@ -11,6 +15,7 @@ import { Router } from '@angular/router';
 export class NavigationBarComponent implements OnInit {
   isCollapsed = true;
   smallScreen: boolean;
+  loggedUser: ProfileName;
 
   selected: string;
   states: string[] = [
@@ -74,11 +79,15 @@ export class NavigationBarComponent implements OnInit {
         : this.states.filter(v => v.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
     )
   constructor(private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private utils: UtilsService) {
   }
 
   ngOnInit() {
     this.onResize();
+    this.authService.getLoggedProfile().subscribe(
+      data => this.loggedUser = data
+    )
   }
 
   @HostListener('window:resize')
@@ -87,7 +96,9 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goToProfile() {
-
+    if (this.loggedUser) {
+      this.router.navigate([this.utils.getUserRouterLink(this.loggedUser.type), this.loggedUser.id]);
+    }
   }
 
   goToSettings() {
