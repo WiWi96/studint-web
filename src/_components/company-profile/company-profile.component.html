@@ -29,6 +29,12 @@
                                     <a [href]="profile.url">{{utils.getSocialMediaName(profile.service)}}</a>
                                 </p>
                             </div>
+                            <span *ngIf="company.isFollower === true">
+                                <button class="btn btn-light ml-auto mr-auto" (click)="updateFollower()">Unfollow company</button>
+                            </span>
+                            <span *ngIf="company.isFollower === false">
+                                <button class="btn btn-primary ml-auto mr-auto" (click)="updateFollower()">Follow company</button>
+                            </span>
                             <button type="button" class="btn btn-link" (click)="openEditModal()">Edit</button>
                         </div>
                     </div>

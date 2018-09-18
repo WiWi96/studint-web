@@ -62,6 +62,7 @@ import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
 import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
+import { ProfileService } from '_service/profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,7 @@ import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-
     ModalModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
-  providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, UtilsService, ProfileService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
     TeamService, PostService, MainPageService, AuthGuard, LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
       provide: HTTP_INTERCEPTORS,

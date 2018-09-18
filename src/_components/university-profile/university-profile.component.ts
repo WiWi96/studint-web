@@ -8,6 +8,8 @@ import { error } from '@angular/compiler/src/util';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UtilsService } from '_service/utils/utils.service';
+import { ProfileService } from '_service/profile/profile.service';
+import { NotificationService } from '_service/notification/notification.service';
 
 @Component({
     selector: 'app-university-profile',
@@ -28,7 +30,9 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
         private utils: UtilsService,
         private universityProfileService: UniversityProfileService,
         private postService: PostService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private profileService: ProfileService,
+        private notificationService: NotificationService
     ) {
     }
 
@@ -58,5 +62,12 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.univeristyProfile = this.university;
         modalRef.componentInstance.isUniversity = true;
         modalRef.componentInstance.socialServices = this.socialServices
+    }
+
+    updateFollower() {
+        this.profileService.updateFollower(this.id).subscribe(
+            isFollower => this.university.isFollower = isFollower,
+            () => this.notificationService.notify("Cannot follow or unfollow the profile right now. Please try again later.")
+        )
     }
 }
