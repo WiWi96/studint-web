@@ -16,7 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -62,6 +62,8 @@ import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
 import { ProjectComponent } from '_components/_forms/project/project.component';
+import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
+
 
 
 @NgModule({
@@ -86,7 +88,7 @@ import { ProjectComponent } from '_components/_forms/project/project.component';
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
     EditorComponent,
-    ProjectComponent
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +105,7 @@ import { ProjectComponent } from '_components/_forms/project/project.component';
     MomentModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
+    ModalModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
@@ -115,7 +118,7 @@ import { ProjectComponent } from '_components/_forms/project/project.component';
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent
   ]
 })
 export class AppModule { }
