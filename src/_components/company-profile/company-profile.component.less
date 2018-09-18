@@ -53,10 +53,23 @@ div#profile-background-photo {
             margin-top: -140px;
             .profile-name {
                 padding-top: 50px;
-                h1 {
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
                     font-weight: bold;
                     color: @gray-lighter;
                     text-transform: none;
+                    .default-text-shadow(@gray-dark);
+                }
+                .edit-link {
+                    border: .1rem solid @gray-lighter;
+                    border-radius: 6px;
+                    background-color: fade(@gray-dark, 30%);
+                    font-weight: bold;
+                    color: @gray-lighter;
                     .default-text-shadow(@gray-dark);
                 }
                 #profile-status {
@@ -144,7 +157,8 @@ div#profile-background-photo {
     .light-shadow;
     padding: 10px;
     .item {
-        h5, h6 {
+        h5,
+        h6 {
             text-transform: none;
             color: @secondary-color;
         }

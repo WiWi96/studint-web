@@ -8,7 +8,14 @@
                 </div>
                 <div class="profile-card col">
                     <div class="profile-name">
-                        <h1>{{user.profileName?.name}}</h1>
+                        <span>
+                            <h1 class="d-inline-block">{{user.profileName?.name}}</h1>
+                            <span class="mx-3 d-inline-block align-top">
+                                <button class="btn edit-link p-2" (click)="openEditModal()">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </button>
+                            </span>
+                        </span>
                         <h6 id="profile-status">
                             {{utils.getUserStatusText(user.status)}}
                         </h6>
