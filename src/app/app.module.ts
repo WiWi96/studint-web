@@ -61,7 +61,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
-import { ProjectComponent } from '_components/_forms/project/project.component';
+import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
+
 
 
 @NgModule({
@@ -86,7 +87,7 @@ import { ProjectComponent } from '_components/_forms/project/project.component';
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
     EditorComponent,
-    ProjectComponent
+    ProjectEditComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +116,7 @@ import { ProjectComponent } from '_components/_forms/project/project.component';
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent
   ]
 })
 export class AppModule { }

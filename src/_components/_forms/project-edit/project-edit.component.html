@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">PROFILE
+    <i class="far fa-user-circle"></i>
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-boy">
+  <div class="container">
+    <form class="registerform" [formGroup]="projectFormGroup">
+      <div class="form-group">
+        <small>Project name</small>
+        <input type="text" class="form-control" formControlName="name" required/>
+      </div>
+      <div class="form-group">
+        <small>Description</small>
+        <app-editor id="inputExperience" formControlName="description"></app-editor>
+      </div>
+      <div class="form-group">
+        <ngb-rating [(rate)]="currentRate">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+        <hr>
+        <pre>Rate: <b>{{currentRate}}</b></pre>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn" (click)="close()">
+    Cancel
+  </button>
+  <button class="btn btn-primary">
+    Save
+  </button>
+</div>
