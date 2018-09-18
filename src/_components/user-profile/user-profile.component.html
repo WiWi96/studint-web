@@ -49,10 +49,10 @@
                                 </p>
                             </div>
                             <span *ngIf="user.isFollower === true">
-                                <button class="btn btn-light ml-auto mr-auto" (click)="updateFollower()">Unfollow user</button>
+                                <button class="btn btn-light ml-auto mr-auto mb-3" (click)="updateFollower()">Unfollow user</button>
                             </span>
                             <span *ngIf="user.isFollower === false">
-                                <button class="btn btn-primary ml-auto mr-auto" (click)="updateFollower()">Follow user</button>
+                                <button class="btn btn-primary ml-auto mr-auto mb-3" (click)="updateFollower()">Follow user</button>
                             </span>
                         </div>
                         <div *ngIf="user.skills?.length" class="profile-skills col-md-7 float-left">

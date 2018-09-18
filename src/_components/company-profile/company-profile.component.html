@@ -37,11 +37,11 @@
                                 </p>
                             </div>
                             <span *ngIf="company.isFollower === true">
-                                <button class="btn btn-light ml-auto mr-auto" (click)="updateFollower()">Unfollow
+                                <button class="btn btn-light ml-auto mr-auto mb-3" (click)="updateFollower()">Unfollow
                                     company</button>
                             </span>
                             <span *ngIf="company.isFollower === false">
-                                <button class="btn btn-primary ml-auto mr-auto" (click)="updateFollower()">Follow
+                                <button class="btn btn-primary ml-auto mr-auto mb-3" (click)="updateFollower()">Follow
                                     company</button>
                             </span>
                         </div>
