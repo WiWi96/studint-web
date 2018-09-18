@@ -5,6 +5,8 @@ import { CompanyProfileService } from '_service/profile/company/companyProfile.s
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
+import { ProfileService } from '_service/profile/profile.service';
+import { NotificationService } from '_service/notification/notification.service';
 
 
 @Component({
@@ -26,7 +28,9 @@ export class CompanyProfileComponent implements OnInit {
         private route: ActivatedRoute,
         private utils: UtilsService,
         private companyProfileService: CompanyProfileService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private profileService: ProfileService,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit() {
@@ -51,5 +55,12 @@ export class CompanyProfileComponent implements OnInit {
         modalRef.componentInstance.companyProfile = this.company;
         modalRef.componentInstance.isCompany = true;
         modalRef.componentInstance.socialServices = this.socialServices
+    }
+
+    updateFollower() {
+        this.profileService.updateFollower(this.id).subscribe(
+            isFollower => this.company.isFollower = isFollower,
+            () => this.notificationService.notify("Cannot follow or unfollow the profile right now. Please try again later.")
+        )
     }
 }
