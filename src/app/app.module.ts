@@ -1,3 +1,4 @@
+import { Interceptor } from './app.interceptor';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,11 +12,11 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -59,6 +60,8 @@ import { TokenStorage } from 'app/auth/token-storage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
+import { LoggedOffGuard } from './auth/loggedOff.guard';
+import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +84,8 @@ import { MainpageComponent } from '_components/mainpage/mainpage.component';
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
-    EditorComponent
+    EditorComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -98,15 +102,20 @@ import { MainpageComponent } from '_components/mainpage/mainpage.component';
     MomentModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
+    ModalModule.forRoot(),
     TypeaheadModule.forRoot()
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, AuthService, TokenStorage, LanguageService],
+    TeamService, PostService, MainPageService, AuthGuard, LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    } ],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent
   ]
 })
 export class AppModule { }

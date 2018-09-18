@@ -29,7 +29,7 @@ constructor(private authService: AuthService, private router: Router, private ro
         });
 
         // reset login status
-        //this.authenticationService.logout();
+        this.authService.logOut();
 
         // default to '/users/table'
         this.returnUrl = 'users/table';
@@ -61,7 +61,6 @@ constructor(private authService: AuthService, private router: Router, private ro
     }
     authenticate() {
         const returnUrl: string = this.route.snapshot.queryParams['returnUrl'];
-    
         this.authService.logIn(this.username, this.password)
           .subscribe((resp: JwtToken) => {
             this.authService.storeToken(resp);

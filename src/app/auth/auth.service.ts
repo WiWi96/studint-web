@@ -20,7 +20,8 @@ export class AuthService {
   constructor(private storage: TokenStorage, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   isLogged(): boolean {
-    return this.storage.getToken() != null;
+    let token = this.storage.getToken();
+    return token != null && !this.jwtService.isTokenExpired(token);
   }
 
   logIn(username: string, password: string): Observable<any> {
@@ -62,7 +63,7 @@ export class AuthService {
 
   isManager(): boolean {
     const roles: string[] = this.getRoles();
-    return roles != null && roles.includes('MANAGER');
+    return roles != null && roles.includes('USER');
   }
 
   refreshPermissions() {

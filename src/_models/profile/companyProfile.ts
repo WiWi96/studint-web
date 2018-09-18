@@ -5,9 +5,10 @@ import { ProjectInfo } from '../info/projectInfo';
 
 export class CompanyProfile {
     profileName: ProfileName;
-    description: string;
-    profiles: Array<SocialMedia> = [];
-    address: Address;
-    type: string;
-    projects: Array<ProjectInfo> = [];
+    description?: string;
+    profiles?: Array<SocialMedia> = [];
+    address?: Address;
+    type?: string;
+    projects?: Array<ProjectInfo> = [];
+    isFollower?: boolean;
 }

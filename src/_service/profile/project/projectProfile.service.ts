@@ -47,4 +47,8 @@ export class ProjectProfileService {
   public getAllProjects(): Observable<ProjectProfile[]> {
     return this.http.get<ProjectProfile[]>(`${projectUrl}`);
   }
+
+  public joinProject(id: number): Observable<ProjectProfile> {
+    return this.http.get<ProjectProfile>(`${projectUrl}/${id}/enroll`);
+  }
 }
