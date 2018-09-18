@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
-import { NgbActiveModal } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbRatingConfig } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-project-edit',
@@ -15,10 +15,14 @@ export class ProjectEditComponent implements OnInit {
 
   projectProfile: ProjectProfile;
 
-  currentRate = 8;
+  currentRate = 2;
 
   constructor(private formBuilder: FormBuilder,
-              public activeModal: NgbActiveModal) { }
+    public activeModal: NgbActiveModal,
+    config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = false;
+  }
 
   ngOnInit() {
     this.createProjectForm();

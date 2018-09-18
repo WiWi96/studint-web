@@ -18,9 +18,10 @@
         <app-editor id="inputExperience" formControlName="description"></app-editor>
       </div>
       <div class="form-group">
+          <small>Difficult</small><br>
         <ngb-rating [(rate)]="currentRate">
           <ng-template let-fill="fill" let-index="index">
-            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            <span class="star fas fa-star" [class.filled]="fill === 100"></span>
           </ng-template>
         </ngb-rating>
         <hr>
