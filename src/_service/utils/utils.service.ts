@@ -204,10 +204,13 @@ export class UtilsService {
 
     public showDescriptionMoreButton() {
         let element = document.getElementById('description');
-        let height = element.offsetHeight;
 
-        if (height > 250) {
-            return true;
+        if (element) {
+            let height = element.offsetHeight;
+
+            if (height > 250) {
+                return true;
+            }
         }
         return false;
     }
