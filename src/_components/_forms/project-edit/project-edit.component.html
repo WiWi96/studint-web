@@ -18,7 +18,7 @@
         <br>
         <ngb-rating [(rate)]="currentRate">
           <ng-template let-fill="fill" let-index="index">
-            <span class="star fas fa-star" [class.filled]="fill === 100"></span>
+            <span class="star fas fa-star" (click)="toggleStar()" [class.filled]="fill === 100"></span>
           </ng-template>
         </ngb-rating>
         <hr>
@@ -29,8 +29,8 @@
         <div class="row">
           <div class="col-7">
             <div class="input-group">
-
-              <input class="form-control" formControlName="startDate" placeholder="yyyy-mm-dd" name="dp"  [displayMonths]="1" ngbDatepicker #d="ngbDatepicker">
+              <input class="form-control" formControlName="startDate" placeholder="yyyy-mm-dd" name="dp" [displayMonths]="1" ngbDatepicker
+                #d="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary far fa-calendar-plus" (click)="d.toggle()" type="button"></button>
               </div>
@@ -43,7 +43,8 @@
         <div class="row">
           <div class="col-7">
             <div class="input-group">
-              <input class="form-control" formControlName="endDate" placeholder="yyyy-mm-dd" name="dp"  [displayMonths]="1" ngbDatepicker #d2="ngbDatepicker">
+              <input class="form-control" formControlName="endDate" placeholder="yyyy-mm-dd" name="dp" [displayMonths]="1" ngbDatepicker
+                #d2="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary  far fa-calendar-plus" (click)="d2.toggle()" type="button"></button>
               </div>
@@ -57,6 +58,19 @@
           typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
       </div>
       <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of projectSkillTags'>
+            <button type="button" class="btn btn-tag">
+              <div class="font-tag">{{item.name}}
+                <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group">
         <small>Description</small>
         <app-editor id="inputExperience" formControlName="description"></app-editor>
       </div>
@@ -67,7 +81,7 @@
   <button class="btn" (click)="close()">
     Cancel
   </button>
-  <button class="btn btn-primary">
+  <button class="btn btn-primary" (click)="onSubmitProject()">
     Save
   </button>
 </div>

@@ -8,6 +8,7 @@ export class UtilsService {
     public now = moment().startOf('day');
 
     public getProjectLevelText(level: string): string {
+        debugger;
         switch (level) {
             case 'BEGINNER':
                 return 'Beginner';
@@ -41,6 +42,23 @@ export class UtilsService {
         }
     }
 
+    public getProjectStatusCase(level: number): string {
+        switch (level) {
+            case 1:
+                return 'BEGINNER';
+            case 2:
+                return 'INTERMEDIATE';
+            case 3:
+                return 'ADVANCED';
+            case 4:
+                return 'PROFESSIONAL';
+            case 5:
+                return 'MASTER';
+            default:
+                return undefined;
+        }
+    }
+
     public getProjectStatusText(status: string): string {
         switch (status) {
             case 'IN_PROGRESS':
@@ -57,6 +75,7 @@ export class UtilsService {
                 return undefined;
         }
     }
+
 
     public getUserStatusText(status: string): string {
         switch (status) {

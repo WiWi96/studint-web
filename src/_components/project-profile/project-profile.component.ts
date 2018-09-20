@@ -7,6 +7,7 @@ import { SkillService } from '_service/skill/skill.service';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectEditComponent } from '../_forms/project-edit/project-edit.component';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { ProfileName } from '_models/profile/profileName';
 
 @Component({
     selector: 'app-project-profile',
@@ -31,10 +32,14 @@ export class ProjectProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+    
         this.sub = this.route.params.subscribe(params => {
             this.id = +params['id'];
             this.getProject(this.id);
+      
         });
+
+        
     }
 
     ngOnDestroy() {
@@ -43,7 +48,7 @@ export class ProjectProfileComponent implements OnInit {
 
     getProject(id: number): void {
         this.projectProfileService.getProject(id).subscribe(
-            data => { this.project = data },
+            data => { this.project = data},
         );
     }
 
@@ -52,6 +57,7 @@ export class ProjectProfileComponent implements OnInit {
     }
 
     openEditModal(): any {
+      
         const modalRef = this.modalService.open(ProjectEditComponent);
         modalRef.componentInstance.projectProfile = this.project;
     }

@@ -5,6 +5,7 @@ import { Duration } from '../duration';
 
 export class ProjectProfile {
     profileName: ProfileName;
+    name: string;
     company: ProfileName;
     description: string;
     technologies: Array<Skill> = [];
