@@ -58,6 +58,7 @@ export class StudentEditModalComponent implements OnInit {
 
   onSubmitStudent() {
     this.userProfileService.updateUser(this.user).subscribe();
+    console.log(this.user);
     this.activeModal.dismiss();
   }
 
