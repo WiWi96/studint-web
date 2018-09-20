@@ -23,4 +23,8 @@ export class ProfileService {
     return this.http.post<boolean>(`${profileUrl}/follower/${id}`, null);
   }
 
+  public uploadPhoto(photo: File): Observable<string> {
+    return this.http.put<string>(`${profileUrl}/photo`, photo);
+  }
+
 }

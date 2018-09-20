@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { NgbActiveModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { HtmlParser, HtmlTagDefinition, IfStmt } from '@angular/compiler';
 import { UserProfileService } from '_service/profile/user/userProfile.service';
+import { ProfileService } from '_service/profile/profile.service';
 import { Technology } from '_models/technology/technology';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -29,6 +30,7 @@ export class StudentEditModalComponent implements OnInit {
   //Selected items
   languageSelected: Language;
   skillSelected: Skill;
+  photoSelected: File;
   //Student skills and languages
   userSkillTags: Skill[];
   userLanguagesTags: Language[];
@@ -41,6 +43,7 @@ export class StudentEditModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
+    private profileService: ProfileService,
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
     private skillService: SkillService
@@ -59,6 +62,13 @@ export class StudentEditModalComponent implements OnInit {
   onSubmitStudent() {
     this.userProfileService.updateUser(this.user).subscribe();
     this.activeModal.dismiss();
+  }
+
+  onFileSelected(event) {
+    this.photoSelected = <File>event.target.files[0];
+    this.profileService.uploadPhoto(this.photoSelected).subscribe(
+      photoString => this.user.profileName.photo = photoString
+    );
   }
 
   close() {
@@ -96,7 +106,7 @@ export class StudentEditModalComponent implements OnInit {
   getLanguages() {
     this.languageService.getAllLanguages().subscribe(languages => {
       this.languages = languages;
-    })
+    });
   }
 
   public onTechnologyCloseClick(skillTag: Skill): void {

@@ -10,6 +10,11 @@
   <div class="container">
     <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()">
 
+        <div class="form-group">
+          <small>Photo</small>
+          <input type="file" class="form-control" (change)="onFileSelected($event)" placeholder="Photo"/>
+        </div>
+
       <div formGroupName="fullname">
         <div class="form-group">
           <small>First Name</small>
