@@ -5,7 +5,14 @@
             <div class="profile-top row text-center text-sm-left">
                 <div class="profile-card col">
                     <div class="profile-name">
-                        <h1>{{project.name}}</h1>
+                        <span>
+                            <h1 class="d-inline-block">{{project.name}}</h1>
+                            <span class="mx-3 d-inline-block align-top">
+                                <button class="btn edit-link p-2" (click)="openEditModal()">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </button>
+                            </span>
+                        </span>
                         <h6 id="profile-status">{{utils.getProjectStatusText(project.status)}}</h6>
                     </div>
                     <div class="profile-info-container row d-block">
@@ -71,7 +78,7 @@
                                     </span>
                                     <span>
                                         <button class="btn btn-danger btn-sm ml-auto mr-auto" (click)="leaveProject()">Leave
-                                            the project!</button>
+                                            the project</button>
                                     </span>
                                 </span>
                                 <span *ngSwitchDefault>

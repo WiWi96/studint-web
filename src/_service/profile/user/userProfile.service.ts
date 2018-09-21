@@ -28,6 +28,10 @@ export class UserProfileService {
     return this.http.post<UserProfile>(`${userUrl}/${userProfile.profileName.id}`, userProfile);
   }
 
+  public updateFollower(id: number): Observable<boolean> {
+    return this.http.post<boolean>(`${userUrl}/follower/${id}`, null);
+  }
+
   //put requests
   public updateUser(userProfile: UserProfile): Observable<UserProfile> {
     

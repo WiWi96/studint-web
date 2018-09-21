@@ -65,6 +65,7 @@ import { LoggedOffGuard } from './auth/loggedOff.guard';
 import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
 import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
 import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
+import { ProfileService } from '_service/profile/profile.service';
 
 
 
@@ -114,7 +115,7 @@ import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
 
   ],
-  providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, UtilsService, ProfileService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
     TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService, {
       provide: HTTP_INTERCEPTORS,
