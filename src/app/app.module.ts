@@ -57,13 +57,13 @@ import { EditorComponent } from '_components/_forms/editor/editor.component';
 // Security
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
-import { TokenStorage } from 'app/auth/token-storage';
+import { TokenStorage } from './auth/token-storage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
 import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
-import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
+import { NgbDateISOParserFormatter } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
 import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
 import { ProfileService } from '_service/profile/profile.service';
 

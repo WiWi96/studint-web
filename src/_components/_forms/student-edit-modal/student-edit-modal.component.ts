@@ -9,7 +9,7 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { Language } from '_models/skill/language';
 import { UserProfile } from '_models/profile/userProfile';
 import { LanguageService } from '_service/language/language.service';
-import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
 

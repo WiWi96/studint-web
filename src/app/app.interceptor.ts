@@ -6,7 +6,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
-import { catchError } from '../../node_modules/rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
 import 'rxjs/add/observable/throw';
 

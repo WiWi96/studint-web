@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectProfile } from '_models/profile/projectProfile';
-import { FormBuilder, FormGroup, Validators, FormControl } from '../../../../node_modules/@angular/forms';
-import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker, NgbDateStruct, NgbDateParserFormatter, NgbDateAdapter } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker, NgbDateStruct, NgbDateParserFormatter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
-import { TypeaheadMatch, Utils } from '../../../../node_modules/ngx-bootstrap';
+import { TypeaheadMatch, Utils } from 'ngx-bootstrap';
 import { ProfileName } from '_models/profile/profileName';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';

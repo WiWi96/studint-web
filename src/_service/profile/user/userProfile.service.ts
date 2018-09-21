@@ -7,6 +7,8 @@ import { environment } from 'environments/environment';
 import { Technology } from '_models/technology/technology';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Language } from '_models/skill/language';
+import { Registration } from '_models/registration/registration';
+import { UserRegistration } from '_models/registration/userRegistration';
 
 
 const httpOptions = {
@@ -24,8 +26,9 @@ export class UserProfileService {
   constructor(private http: HttpClient) { }
 
   //post requests
-  public createUser(userProfile: UserProfile): Observable<UserProfile> {
-    return this.http.post<UserProfile>(`${userUrl}/${userProfile.profileName.id}`, userProfile);
+  public createUser(registrationUser: UserRegistration): Observable<UserProfile> {
+    console.log(registrationUser);
+    return this.http.post<UserProfile>(`${userUrl}`, registrationUser);
   }
 
   public updateFollower(id: number): Observable<boolean> {

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { TokenStorage } from 'app/auth/token-storage';
+import { TokenStorage } from './token-storage';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ReplaySubject } from '../../../node_modules/rxjs/ReplaySubject';
-import { environment } from '../../environments/environment';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { environment } from 'environments/environment';
 
 export interface JwtToken {
   token: string;

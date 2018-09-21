@@ -8,7 +8,7 @@ import { UtilsService } from '_service/utils/utils.service';
 import { ParticipationStatus } from '_enums/participationStatus';
 import { ProjectStatus } from '_enums/projectStatus';
 import { ProjectEditComponent } from '../_forms/project-edit/project-edit.component';
-import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileName } from '_models/profile/profileName';
 
 @Component({
