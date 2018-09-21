@@ -10,7 +10,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -88,7 +88,8 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
     EditorComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -107,11 +108,12 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
     NgbModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
  
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
+    TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
@@ -119,7 +121,7 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent, 
   ]
 })
 export class AppModule { }

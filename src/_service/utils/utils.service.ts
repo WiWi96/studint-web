@@ -8,7 +8,7 @@ export class UtilsService {
     public now = moment().startOf('day');
 
     public getProjectLevelText(level: string): string {
-        debugger;
+
         switch (level) {
             case 'BEGINNER':
                 return 'Beginner';
