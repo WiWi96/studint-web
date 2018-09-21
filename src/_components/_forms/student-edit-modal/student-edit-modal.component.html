@@ -41,7 +41,7 @@
       <div class="form-group">
         <div class="tags-container">
           <ng-container *ngFor='let item of userSkillTags'>
-            <button type="button" class="btn">
+            <button type="button" class="btn btn-tag">
               <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
@@ -59,7 +59,7 @@
       <div class="form-group">
         <div class="tags-container">
           <ng-container *ngFor='let item of userLanguagesTags'>
-            <button type="button" class="btn">
+            <button type="button" class="btn btn-tag">
               <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onLanguageCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>

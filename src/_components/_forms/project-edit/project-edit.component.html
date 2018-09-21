@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">PROFILE
+    <i class="far fa-user-circle"></i>
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-boy">
+  <div class="container">
+    <form class="registerform" [formGroup]="projectFormGroup" >
+      <div class="form-group">
+        <small>Project name</small>
+        <input type="text" class="form-control" formControlName="name" required/>
+        <div *ngIf="submittedProject">
+          <p class="alert alert-danger" *ngIf="projectFormGroup.get('name').errors?.required">Name is required</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Difficult</small>
+        <br>
+        <ngb-rating [(rate)]="currentRate">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star fas fa-star" [class.filled]="fill === 100"></span>
+          </ng-template>
+        </ngb-rating>
+        <hr>
+      </div>
+      <div class="form-group">
+        <small>Start of project</small>
+        <div class="row">
+          <div class="col-7">
+            <div class="input-group">
+              <input class="form-control" formControlName="startDate" [(ngModel)]="startDate"  placeholder="yyyy-mm-dd"  [displayMonths]="1" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary far fa-calendar-plus" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>End of entries</small>
+        <div class="row">
+          <div class="col-7">
+            <div class="input-group">
+              <input class="form-control" formControlName="endofEntries" [(ngModel)]="endOfEntries" placeholder="yyyy-mm-dd" name="dp" [displayMonths]="1"
+                ngbDatepicker #d2="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary far fa-calendar-plus" (click)="d2.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Skills</small>
+        <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
+      </div>
+      <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of projectSkillTags'>
+            <button type="button" class="btn btn-tag">
+              <div class="font-tag">{{item.name}}
+                <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Description</small>
+        <app-editor id="inputExperience" formControlName="description"></app-editor>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn" (click)="close()">
+    Cancel
+  </button>
+  <button type="submit" (click)="onSubmitProject()" class="btn btn-primary">
+    Save
+  </button>
+</div>
