@@ -171,7 +171,6 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmitStudent() {
-    debugger;
     this.submittedStudent = true;
 
     if (this.accountStudentDetailsFormGroup.invalid) {
@@ -187,8 +186,7 @@ export class RegisterComponent implements OnInit {
     )).subscribe();
 
 
-
-   
+ 
   }
   onSubmitUniversity() {
     this.submittedUniversity = true;
