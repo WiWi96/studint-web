@@ -58,8 +58,6 @@ export class ProjectEditComponent implements OnInit {
     this.getTechnologies();
     this.configDifficult();
     this.initializeDate();
-
-    console.log(this.projectProfile.technologies);
     this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
   }
 
@@ -104,6 +102,14 @@ export class ProjectEditComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
+  public onTechnologyCloseClick(skillTag: Skill): void {
+    this.projectSkillTags.forEach((skill, index) => {
+      if (skillTag == skill) {
+        this.projectSkillTags.splice(index, 1);
+      }
+    });
+  }
+
   // Formgroup creator
   createProjectForm() {
     this.projectFormGroup = this.formBuilder.group({
@@ -126,14 +132,13 @@ export class ProjectEditComponent implements OnInit {
   }
 
   //Date utilities
-
   fromModel(date: Date): NgbDateStruct {
 
     var dateStart = new Date(date);
     return date ? {
       year: dateStart.getUTCFullYear(),
-      month: dateStart.getMonth() + 1,
-      day: dateStart.getDate()
+      month: dateStart.getUTCMonth() + 1,
+      day: dateStart.getUTCDate()
     } : null;
   }
 
