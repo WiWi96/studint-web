@@ -10,7 +10,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { NgbModule, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -63,6 +63,7 @@ import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
 import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
+import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
 
 
 
@@ -89,7 +90,7 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
     StudentEditModalComponent,
     EditorComponent,
     ProjectEditComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -108,20 +109,20 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
     NgbModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
- 
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
+
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
+    TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
-    } ],
+    }, ],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent, 
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent,
   ]
 })
 export class AppModule { }

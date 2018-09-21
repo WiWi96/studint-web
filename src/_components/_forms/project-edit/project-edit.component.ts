@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { FormBuilder, FormGroup, Validators, FormControl } from '../../../../node_modules/@angular/forms';
-import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker, NgbDateStruct, NgbDateParserFormatter } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
@@ -9,6 +9,9 @@ import { TypeaheadMatch, Utils } from '../../../../node_modules/ngx-bootstrap';
 import { ProfileName } from '_models/profile/profileName';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
+import { debug } from 'util';
+import { format } from 'url';
+import { parse } from 'querystring';
 
 @Component({
   selector: 'app-project-edit',
@@ -28,12 +31,15 @@ export class ProjectEditComponent implements OnInit {
   skillSelected: Skill;
   //Form Controllers
   technologyFormControl = new FormControl();
-  model = { year: 2017, month: 8, day: 8 };
-  model2 = { year: 2017, month: 8, day: 8 };
+  startDate: NgbDateStruct;
+  endOfEntries: NgbDateStruct = { year: 2017, month: 8, day: 8 };
   //Rating 
-  currentRate = 2;
+  currentRate;
+  difficultRate;
   //Validation submitted
   submittedProject: boolean = false;
+
+  formater: NgbDateParserFormatter;
 
   constructor(private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -51,9 +57,8 @@ export class ProjectEditComponent implements OnInit {
     this.createProjectForm();
     this.getTechnologies();
     this.configDifficult();
-    this.configDifficult();
-    this.projectSkillTags = this.projectProfile.technologies;
-
+    this.initializeDate();
+    this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
   }
 
   getTechnologies() {
@@ -71,8 +76,23 @@ export class ProjectEditComponent implements OnInit {
 
     this.activeModal.dismiss();
     this.projectProfile.level = this.utils.getProjectStatusCase(this.currentRate)
+    this.projectProfile.technologies = this.projectSkillTags;
+    this.projectProfile.description = this.projectFormGroup.get('description').value;
+    this.updateDate();
+
     this.projectService.updateProject(this.projectProfile);
   }
+
+  updateDate() {
+    this.projectProfile.startDate = this.toModel(this.startDate);
+    this.projectProfile.joiningDate = this.toModel(this.endOfEntries);
+  }
+
+  initializeDate() {
+    this.startDate = this.fromModel(this.projectProfile.startDate);
+    this.endOfEntries = this.fromModel(this.projectProfile.joiningDate);
+  }
+
 
   configDifficult() {
     this.currentRate = this.utils.getProjectDifficultyNumber(this.projectProfile.level);
@@ -82,12 +102,13 @@ export class ProjectEditComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
+  // Formgroup creator
   createProjectForm() {
     this.projectFormGroup = this.formBuilder.group({
       name: [this.projectProfile.name, [Validators.required]],
       description: [this.projectProfile.description],
       startDate: [''],
-      endofEntries: [this.projectProfile.joiningDate],
+      endofEntries: [''],
       technology: this.technologyFormControl,
     })
   }
@@ -101,5 +122,22 @@ export class ProjectEditComponent implements OnInit {
     if (this.skillSelected && !this.projectSkillTags.some(skill => { return skill.name == e.value }))
       this.projectSkillTags.push(this.skillSelected);
   }
+
+
+
+  //Date utilities
+
+  fromModel(date: Date): NgbDateStruct {
+    return date ? {
+      year: date.getUTCFullYear(),
+      month: date.getUTCMonth() + 1,
+      day: date.getUTCDate()
+    } : null;
+  }
+
+  toModel(date: NgbDateStruct): Date {
+    return date ? new Date(Date.UTC(date.year, date.month - 1, date.day, 0, 0, 0)) : null;
+  }
+
 
 }
