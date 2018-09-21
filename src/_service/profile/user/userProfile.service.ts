@@ -30,6 +30,7 @@ export class UserProfileService {
 
   //put requests
   public updateUser(userProfile: UserProfile): Observable<UserProfile> {
+    
     return this.http.put<UserProfile>(`${userUrl}`, userProfile);
   }
 

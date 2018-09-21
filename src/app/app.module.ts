@@ -10,13 +10,17 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
+<<<<<<< HEAD
+=======
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+>>>>>>> project-edit
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -61,8 +65,13 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
+<<<<<<< HEAD
 import { ProjectComponent } from '_components/_forms/project/project.component';
 import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
+=======
+import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
+import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
+>>>>>>> project-edit
 
 
 
@@ -88,7 +97,12 @@ import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
     EditorComponent,
+<<<<<<< HEAD
     ConfirmModalComponent
+=======
+    ProjectEditComponent,
+
+>>>>>>> project-edit
   ],
   imports: [
     BrowserModule,
@@ -105,20 +119,31 @@ import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-
     MomentModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
+<<<<<<< HEAD
     ModalModule.forRoot(),
     TypeaheadModule.forRoot()
+=======
+    TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
+
+>>>>>>> project-edit
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, AuthGuard, LoggedOffGuard, AuthService, TokenStorage, LanguageService,{
+    TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
-    } ],
+    }, ],
   bootstrap: [AppComponent],
 
   entryComponents: [
+<<<<<<< HEAD
     CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent
+=======
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent,
+>>>>>>> project-edit
   ]
 })
 export class AppModule { }
