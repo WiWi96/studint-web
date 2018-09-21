@@ -24,7 +24,7 @@ export class ProfileService {
   }
 
   public uploadPhoto(photo: File): Observable<string> {
-    return this.http.put<string>(`${profileUrl}/photo`, photo);
+    return this.http.post<string>(`${profileUrl}/image/upload`, photo);
   }
 
 }
