@@ -4,6 +4,11 @@ import { FormsModule, FormGroup, FormBuilder, Validators, FormControl, FormGroup
 import { BrowserModule } from "@angular/platform-browser";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { MainPageService } from "_service/mainpage/mainpage.service";
+import { CompanyProfileService } from "_service/profile/company/companyProfile.service";
+import { UserProfileService } from "_service/profile/user/userProfile.service";
+import { Registration } from "_models/registration/registration";
+import { Address } from "_models/address";
+import { UserRegistration } from "_models/registration/userRegistration";
 
 
 @Component({
@@ -34,7 +39,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private mainPageService: MainPageService
+    private mainPageService: MainPageService,
+    private companyService: CompanyProfileService,
+    private studentService: UserProfileService
   ) { }
 
   ngOnInit() {
@@ -166,9 +173,20 @@ export class RegisterComponent implements OnInit {
   onSubmitStudent() {
     this.submittedStudent = true;
 
-    if (this.registrationFormGroup.invalid) {
+    if (this.accountStudentDetailsFormGroup.invalid) {
       return;
     }
+
+    
+    this.studentService.createUser(new UserRegistration(
+      this.accountStudentDetailsFormGroup.get('fullname').get('firstName').value,
+      this.accountStudentDetailsFormGroup.get('fullname').get('surname').value,
+      this.accountStudentDetailsFormGroup.get('email').value,
+      this.accountStudentDetailsFormGroup.get('password').get('password').value
+    )).subscribe();
+
+
+ 
   }
   onSubmitUniversity() {
     this.submittedUniversity = true;

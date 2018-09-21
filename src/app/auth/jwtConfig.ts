@@ -1,5 +1,5 @@
 import { JwtModuleOptions, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { TokenStorage } from 'app/auth/token-storage';
+import { TokenStorage } from './token-storage';
 
 export function jwtOptionsFactory(tokenStorage: TokenStorage) {
   return {

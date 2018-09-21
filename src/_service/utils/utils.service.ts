@@ -17,7 +17,8 @@ export class UtilsService {
 
     }
 
-    public getProjectLevelText(level: ProjectLevel): string {
+    public getProjectLevelText(level: string): string {
+
         switch (level) {
             case ProjectLevel.Beginner:
                 return 'Beginner';
@@ -51,8 +52,26 @@ export class UtilsService {
         }
     }
 
-    public getProjectStatusText(status: ProjectStatus): string {
+    public getProjectStatusCase(level: number): ProjectLevel {
+        switch (level) {
+            case 1:
+                return ProjectLevel.Beginner;
+            case 2:
+                return ProjectLevel.Intermediate;
+            case 3:
+                return ProjectLevel.Advanced;
+            case 4:
+                return ProjectLevel.Professional;
+            case 5:
+                return ProjectLevel.Master;
+            default:
+                return undefined;
+        }
+    }
+
+    public getProjectStatusText(status: string): string {
         switch (status) {
+           
             case ProjectStatus.InProgress:
                 return 'In progress';
             case ProjectStatus.TBA:
@@ -70,7 +89,8 @@ export class UtilsService {
         }
     }
 
-    public getUserStatusText(status: UserStatus): string {
+
+    public getUserStatusText(status: string): string {
         switch (status) {
             case UserStatus.Ready:
                 return 'Ready to join a project';
@@ -204,10 +224,13 @@ export class UtilsService {
 
     public showDescriptionMoreButton() {
         let element = document.getElementById('description');
-        let height = element.offsetHeight;
 
-        if (height > 250) {
-            return true;
+        if (element) {
+            let height = element.offsetHeight;
+
+            if (height > 250) {
+                return true;
+            }
         }
         return false;
     }
