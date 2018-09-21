@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { environment } from 'environments/environment';
+import { Registration } from '_models/registration/registration';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,8 +20,8 @@ export class UniversityProfileService {
   constructor(private http: HttpClient) { }
 
   //post requests
-  public createUniversity(universityProfile: UniversityProfile): Observable<UniversityProfile> {
-    return this.http.post<UniversityProfile>(`${universityUrl}`, universityProfile);
+  public createUniversity(universityRegistration: Registration): Observable<UniversityProfile> {
+    return this.http.post<UniversityProfile>(`${universityUrl}`, universityRegistration);
   }
 
   //put requests

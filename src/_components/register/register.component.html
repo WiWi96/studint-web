@@ -135,7 +135,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="universityName" id="InputUniversityName" placeholder="University name" required>
+                                        <input type="text" class="form-control" formControlName="universityName" id="InputUniversityName" placeholder="University name"
+                                            required>
                                         <div *ngIf="submittedUniversity">
                                             <p class="alert alert-danger" *ngIf="accountUniversityDetailsFormGroup.controls.universityName.errors?.required">Company name is required</p>
                                         </div>
@@ -207,6 +208,7 @@
                                             <p class="alert alert-danger" *ngIf="f3.email.errors?.email && f.email.touched">Email is not valid</p>
                                         </div>
                                     </div>
+
                                     <div formGroupName="password">
                                         <div class="form-group">
                                             <input type="password" class="form-control" formControlName="password" id="InputComapnyPassword3" placeholder="Enter password"
@@ -233,8 +235,8 @@
                                     </div>
                                     <div formGroupName="address">
                                         <div class="form-group">
-                                            <select class="custom-select form-control">
-                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            <select class="custom-select form-control" (change)="onChange($event.target.value)">
+                                                <option *ngFor="let country of countries"   [ngValue]="mode">{{country}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
