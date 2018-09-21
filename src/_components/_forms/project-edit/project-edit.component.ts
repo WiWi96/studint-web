@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { FormBuilder, FormGroup, Validators, FormControl } from '../../../../node_modules/@angular/forms';
-import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker, NgbDateStruct, NgbDateParserFormatter } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbRatingConfig, NgbCalendar, NgbDate, NgbDatepickerConfig, NgbDatepicker, NgbInputDatepicker, NgbDateStruct, NgbDateParserFormatter, NgbDateAdapter } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
@@ -58,6 +58,8 @@ export class ProjectEditComponent implements OnInit {
     this.getTechnologies();
     this.configDifficult();
     this.initializeDate();
+
+    console.log(this.projectProfile.technologies);
     this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
   }
 
@@ -123,21 +125,20 @@ export class ProjectEditComponent implements OnInit {
       this.projectSkillTags.push(this.skillSelected);
   }
 
-
-
   //Date utilities
 
   fromModel(date: Date): NgbDateStruct {
+
+    var dateStart = new Date(date);
     return date ? {
-      year: date.getUTCFullYear(),
-      month: date.getUTCMonth() + 1,
-      day: date.getUTCDate()
+      year: dateStart.getUTCFullYear(),
+      month: dateStart.getMonth() + 1,
+      day: dateStart.getDate()
     } : null;
   }
 
   toModel(date: NgbDateStruct): Date {
     return date ? new Date(Date.UTC(date.year, date.month - 1, date.day, 0, 0, 0)) : null;
   }
-
 
 }
