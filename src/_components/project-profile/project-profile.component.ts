@@ -5,14 +5,11 @@ import { ProjectProfileService } from '_service/profile/project/projectProfile.s
 import { PostService } from '_service/post/post.service';
 import { SkillService } from '_service/skill/skill.service';
 import { UtilsService } from '_service/utils/utils.service';
-<<<<<<< HEAD
 import { ParticipationStatus } from '_enums/participationStatus';
 import { ProjectStatus } from '_enums/projectStatus';
-=======
 import { ProjectEditComponent } from '../_forms/project-edit/project-edit.component';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { ProfileName } from '_models/profile/profileName';
->>>>>>> project-edit
 
 @Component({
     selector: 'app-project-profile',

@@ -17,10 +17,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
-<<<<<<< HEAD
-=======
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
->>>>>>> project-edit
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -65,13 +62,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { jwtConfig } from './auth/jwtConfig';
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
-<<<<<<< HEAD
-import { ProjectComponent } from '_components/_forms/project/project.component';
-import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
-=======
 import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
 import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
->>>>>>> project-edit
+import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
 
 
 
@@ -97,12 +90,9 @@ import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-b
     CompanyUniversityEditModalComponent,
     StudentEditModalComponent,
     EditorComponent,
-<<<<<<< HEAD
-    ConfirmModalComponent
-=======
-    ProjectEditComponent,
+    ConfirmModalComponent,
+    ProjectEditComponent
 
->>>>>>> project-edit
   ],
   imports: [
     BrowserModule,
@@ -119,15 +109,10 @@ import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-b
     MomentModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
-<<<<<<< HEAD
     ModalModule.forRoot(),
-    TypeaheadModule.forRoot()
-=======
     TypeaheadModule.forRoot(),
-    ModalModule.forRoot(),
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
 
->>>>>>> project-edit
   ],
   providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
@@ -139,11 +124,7 @@ import { NgbDateISOParserFormatter } from '../../node_modules/@ng-bootstrap/ng-b
   bootstrap: [AppComponent],
 
   entryComponents: [
-<<<<<<< HEAD
-    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent
-=======
-    CompanyUniversityEditModalComponent, StudentEditModalComponent, ProjectEditComponent,
->>>>>>> project-edit
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent, ProjectEditComponent,
   ]
 })
 export class AppModule { }

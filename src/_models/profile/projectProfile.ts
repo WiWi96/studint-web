@@ -7,7 +7,6 @@ import { ProjectLevel } from '_enums/projectLevel';
 import { ParticipationStatus } from '_enums/participationStatus';
 
 export class ProjectProfile {
-<<<<<<< HEAD
     id: number;
     name?: string;
     company?: ProfileName;
@@ -22,20 +21,4 @@ export class ProjectProfile {
     joiningDate?: Date;
     duration?: Duration;
     status?: ProjectStatus;
-=======
-    profileName: ProfileName;
-    name: string;
-    company: ProfileName;
-    description: string;
-    technologies: Array<Skill> = [];
-    type: string;
-    level: string;
-    participants: Array<ProfileName> = [];
-    teams: Array<Team> = [];
-    participationStatus: string;
-    startDate: Date;
-    joiningDate: Date;
-    duration: Duration;
-    status: string;
->>>>>>> project-edit
 }

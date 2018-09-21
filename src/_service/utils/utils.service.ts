@@ -13,16 +13,12 @@ import { ConfirmModalComponent } from "_components/_forms/confirm-modal/confirm-
 export class UtilsService {
     public now = moment().startOf('day');
 
-<<<<<<< HEAD
     constructor(private modalService: BsModalService) {
 
     }
 
-    public getProjectLevelText(level: ProjectLevel): string {
-=======
     public getProjectLevelText(level: string): string {
 
->>>>>>> project-edit
         switch (level) {
             case ProjectLevel.Beginner:
                 return 'Beginner';
@@ -56,29 +52,26 @@ export class UtilsService {
         }
     }
 
-<<<<<<< HEAD
-    public getProjectStatusText(status: ProjectStatus): string {
-=======
-    public getProjectStatusCase(level: number): string {
+    public getProjectStatusCase(level: number): ProjectLevel {
         switch (level) {
             case 1:
-                return 'BEGINNER';
+                return ProjectLevel.Beginner;
             case 2:
-                return 'INTERMEDIATE';
+                return ProjectLevel.Intermediate;
             case 3:
-                return 'ADVANCED';
+                return ProjectLevel.Advanced;
             case 4:
-                return 'PROFESSIONAL';
+                return ProjectLevel.Professional;
             case 5:
-                return 'MASTER';
+                return ProjectLevel.Master;
             default:
                 return undefined;
         }
     }
 
     public getProjectStatusText(status: string): string {
->>>>>>> project-edit
         switch (status) {
+           
             case ProjectStatus.InProgress:
                 return 'In progress';
             case ProjectStatus.TBA:
@@ -96,12 +89,8 @@ export class UtilsService {
         }
     }
 
-<<<<<<< HEAD
-    public getUserStatusText(status: UserStatus): string {
-=======
 
     public getUserStatusText(status: string): string {
->>>>>>> project-edit
         switch (status) {
             case UserStatus.Ready:
                 return 'Ready to join a project';
