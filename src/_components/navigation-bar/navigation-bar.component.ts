@@ -17,7 +17,7 @@ export class NavigationBarComponent implements OnInit {
     smallScreen: boolean;
 
   selected: string;
-  searchExpression = 'Pola';
+  searchExpression = '';
   profiles: ProfileName[];
   names: string[] = [];
 
@@ -37,7 +37,6 @@ export class NavigationBarComponent implements OnInit {
 
   ngOnInit() {
     this.onResize();
-    this.getResults();
   }
 
   search($event) {
@@ -56,7 +55,7 @@ export class NavigationBarComponent implements OnInit {
     this.profileService.findProfilesWithNameContaining(this.searchExpression).subscribe(data => {
       this.profiles = data;
       this.names = [];
-      for (let profile of this.profiles) {
+      for (const profile of this.profiles) {
         this.names.push(profile.name);
       }
     });
@@ -64,8 +63,8 @@ export class NavigationBarComponent implements OnInit {
 
   goToResult() {
     const res = this.profiles.find( profile => profile.name === this.selected);
-    this.router.navigate([res.type, res.id]);
-    console.log(res);
+    this.router.navigate([res.type.toLowerCase(), res.id]);
+    this.selected = '';
   }
 
   goToProfile() {
