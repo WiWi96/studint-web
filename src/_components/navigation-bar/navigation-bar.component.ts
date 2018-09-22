@@ -2,7 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { AuthService } from 'app/auth/auth.service';
+import { ProfileService } from '_service/profile/profile.service';
 import { Router } from '@angular/router';
+import { ProfileName } from '_models/profile/profileName';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
@@ -13,72 +15,34 @@ export class NavigationBarComponent implements OnInit {
   smallScreen: boolean;
 
   selected: string;
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Dakota',
-    'North Carolina',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming'
-  ];
+  searchExpression = 'Pola';
+  profiles: ProfileName[];
+  names: string[] = [];
 
-  search = (text$: Observable<string>) =>
+  results = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map(term => term.length < 2 ? []
-        : this.states.filter(v => v.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
+        : this.names )
     )
-  constructor(private authService: AuthService,
-    private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private profileService: ProfileService
+    ) {
   }
 
   ngOnInit() {
     this.onResize();
+    this.getResults();
+  }
+
+  search($event) {
+    this.searchExpression = $event.target.value;
+    if (this.searchExpression.length >= 1) {
+      this.getResults();
+    }
   }
 
   @HostListener('window:resize')
@@ -86,11 +50,30 @@ export class NavigationBarComponent implements OnInit {
     this.smallScreen = window.innerWidth < 992;
   }
 
+  getResults() {
+    this.profileService.findProfilesWithNameContaining(this.searchExpression).subscribe(data => {
+      this.profiles = data;
+      this.names = [];
+      for (let profile of this.profiles) {
+        this.names.push(profile.name);
+      }
+      // this.names = [this.profiles[0].name];
+    });
+  }
+
+  goToResult() {
+    const res = this.profiles.find( profile => profile.name === this.selected);
+    this.router.navigate([res.type, res.id]);
+    console.log(res);
+  }
+
   goToProfile() {
 
   }
 
   goToSettings() {
+    console.log(this.profiles[0].name);
+    console.log(this.names[0]);
 
   }
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
+import { ProfileName } from '_models/profile/profileName';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,6 +22,11 @@ export class ProfileService {
   //post requests
   public updateFollower(id: number): Observable<boolean> {
     return this.http.post<boolean>(`${profileUrl}/follower/${id}`, null);
+  }
+
+  // get requests
+  public findProfilesWithNameContaining(name: string): Observable<ProfileName[]> {
+    return this.http.get<ProfileName[]>(`${profileUrl}/${name}`);
   }
 
 }
