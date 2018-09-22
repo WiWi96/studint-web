@@ -1,4 +1,4 @@
-<div class="sidenav__openbtn" (click)="openNav()">
+<div class="sidenav__openbtn" [ngClass]="{'hidden': navbarHidden}" (click)="openNav()">
     <i class="fas fa-arrow-alt-circle-right"></i>
 </div>
 
