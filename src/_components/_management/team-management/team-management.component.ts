@@ -48,7 +48,7 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
 
   initTeams() {
     this.unassignedParticipants = this.project.participants;
-    this.teams = this.project.teams;
+    this.teams = this.project.teams.sort(function (a: Team, b: Team) { return a.id - b.id });
     this.teams.forEach(team => {
       if (team.leader && team.members.includes(team.leader)) {
         team.members = team.members.filter(member => member !== team.leader);
@@ -66,6 +66,10 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   removeTeam = (params) => {
     this.teams.splice(this.teams.indexOf(params.team), 1);
     this.unassignedParticipants = this.unassignedParticipants.concat(params.team.members);
+  }
+
+  removeUser = (params) => {
+
   }
 
 }

@@ -2,23 +2,24 @@
 @import '~styles/global/mixins.less';
 .content {
     margin-top: 30px;
-
-    .unassigned, .team, .new-team {
+    .unassigned,
+    .team,
+    .new-team {
         .light-shadow;
     }
-
     .team {
         position: relative;
-
-        .close-btn {
+        .remove-team-btn {
             position: absolute;
             top: 0;
             right: 0;
             color: @gray;
             cursor: pointer;
+            &:hover {
+                color: @gray-dark;
+            }
         }
     }
-
     .new-team {
         cursor: pointer;
         .transition;
@@ -26,9 +27,21 @@
             transform: scale(1.05);
         }
     }
-
     .leader-star {
         color: @gold;
         margin-left: 3px;
+    }
+    .remove-user-btn {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        color: @gray;
+        cursor: pointer;
+        &:hover {
+            color: @red;
+        }
     }
 }

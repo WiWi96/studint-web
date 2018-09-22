@@ -12,6 +12,9 @@
                 <ng-template #participantTemplate let-item="item" let-index="index">
                     <span>
                         <a [routerLink]="['/user', item.value.id]">{{item.value.name}}</a>
+                        <span class="remove-user-btn p-2" (click)="utils.openConfirmModal('Do you really want to reject entry of ' + item.value.name + '?', removeUser, {user: item.value})">
+                            <i class="fas fa-ban"></i>
+                        </span>
                     </span>
                 </ng-template>
             </div>
@@ -19,7 +22,7 @@
                 <div *ngFor="let team of teams" class="col-sm-6 col-md-4 p-1">
                     <div class="team py-4 px-2 text-center bg-light">
                         <h6 contenteditable="true">{{team.name}}</h6>
-                        <span class="close-btn p-2" (click)="utils.openConfirmModal('Do you really want to remove team ' + team.name + '?', removeTeam, {team: team})">
+                        <span class="remove-team-btn p-2" (click)="utils.openConfirmModal('Do you really want to remove team ' + team.name + '?', removeTeam, {team: team})">
                             <i class="fas fa-times"></i>
                         </span>
                         <bs-sortable [(ngModel)]="team.members" [itemTemplate]="participantTemplateWithStar" itemClass="sortable-item card"
