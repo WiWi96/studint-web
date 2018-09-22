@@ -25,6 +25,16 @@ body {
     color: @gray-dark;
     margin: 0;
     padding-top: 70px;
+    position: relative;
+    min-height: 100vh;
+}
+
+app-root {
+    height: calc(100% - 70px);
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
