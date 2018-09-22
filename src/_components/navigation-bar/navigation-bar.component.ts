@@ -25,7 +25,7 @@ export class NavigationBarComponent implements OnInit {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => term.length < 2 ? []
+      map(term => term.length < 1 ? []
         : this.names )
     )
   constructor(
