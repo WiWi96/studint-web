@@ -3,12 +3,14 @@ import { ProfileName } from '_models/profile/profileName';
 import { Skill } from '_models/skill/skill';
 import { Team } from '_models/team/team';
 import { Duration } from '_models/duration';
+import { AuthService } from 'app/auth/auth.service';
 import { UserProfile } from '_models/profile/userProfile';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { UserProfileService } from '_service/profile/user/userProfile.service';
 import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '_service/utils/utils.service';
+import { NgOnChangesFeature } from '@angular/core/src/render3';
 
 
 @Component({
@@ -18,6 +20,7 @@ import { UtilsService } from '_service/utils/utils.service';
 })
 export class StaticBarComponent implements OnInit {
   id: number;
+  navbarHidden = true;
   showMenu = false;
   private sub: any;
   user: UserProfile;
@@ -29,17 +32,22 @@ export class StaticBarComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private authService: AuthService,
     private utils: UtilsService,
     private userProfileService: UserProfileService,
   ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      // temporary id init
-      // this.id = 162;
-      // this.getUser(this.id);
+      this.id = 113;
+      //this.getUser(this.id);
+      this.navbarHidden = !this.authService.isLogged();
   });
 }
+
+  ngDoCheck() {
+    this.navbarHidden = !this.authService.isLogged();
+  }
 
   getUser(id: number): void {
     this.userProfileService.getUser(id).subscribe(
@@ -60,12 +68,10 @@ export class StaticBarComponent implements OnInit {
   }
 
   closeNav() {
-    // document.getElementById('mySidenav').style.width = '0';
     this.showMenu = false;
   }
 
   openNav() {
     this.showMenu = true;
-    // document.getElementById('mySidenav').style.width = '200px';
   }
 }
