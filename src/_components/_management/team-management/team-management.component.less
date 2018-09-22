@@ -1,0 +1,29 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.content {
+    margin-top: 30px;
+
+    .unassigned, .team, .new-team {
+        .light-shadow;
+    }
+
+    .team {
+        position: relative;
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: @gray;
+            cursor: pointer;
+        }
+    }
+
+    .new-team {
+        cursor: pointer;
+        .transition;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

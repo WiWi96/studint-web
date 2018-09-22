@@ -27,9 +27,8 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     }
 
     getProjects(): void {
-        this.sub = this.projectService.getProjectsByCompany(54).subscribe(
-            data => this.projects = data,
-            err => this.projects = null
+        this.sub = this.projectService.getProjectsByCompany().subscribe(
+            data => this.projects = data
         )
     }
 
@@ -43,10 +42,6 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     }
 
     editDetails(id: number): void {
-
-    }
-
-    manageTeams(id: number): void {
 
     }
 

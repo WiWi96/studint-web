@@ -1,3 +1,36 @@
-<p>
-  team-management works!
-</p>
+<span *ngIf="project">
+    <div class="content container">
+        <div class="row">
+            <h1>Teams management</h1>
+        </div>
+        <div class="">
+            <div class="unassigned bg-primary p-4">
+                <h4>Pending requests</h4>
+                <bs-sortable [(ngModel)]="unassignedParticipants" fieldName="name" itemClass="sortable-item card text-center"
+                    itemActiveClass="sortable-item-active" placeholderItem="No requests" placeholderClass="sortable-placeholder"
+                    wrapperClass="sortable-wrapper card-columns"></bs-sortable>
+                <!-- <pre class="code-preview">{{ unassignedParticipants | json }}</pre> -->
+            </div>
+            <div class="teams row my-3">
+                <div *ngFor="let team of teams" class="col-sm-6 col-md-4 p-1">
+                    <div class="team py-4 px-2 text-center bg-light">
+                        <h6 contenteditable="true">{{team.name}}</h6>
+                        <span class="close-btn p-2" (click)="utils.openConfirmModal('Do you really want to remove team ' + team.name + '?', removeTeam, {team: team})">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <bs-sortable [(ngModel)]="team.members" fieldName="name" itemClass="sortable-item card"
+                            itemActiveClass="sortable-item-active" placeholderItem="Drag here..." placeholderClass="sortable-placeholder"
+                            wrapperClass="sortable-wrapper"></bs-sortable>
+                    </div>
+                    <!-- <pre class="code-preview">{{ team | json }}</pre> -->
+                </div>
+                <div class="col-sm-6 col-md-4 p-1">
+                    <div class="new-team p-4 text-center d-flex align-items-center justify-content-center bg-dark"
+                        (click)="addTeam()">
+                        <p class="mb-0"><i class="fas fa-plus-circle fa-2x"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</span>

@@ -13,6 +13,7 @@ import { ProjectManagementComponent } from '_components/_management/project-mana
 import { MainpageComponent } from '_components/mainpage/mainpage.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoggedOffGuard } from './auth/loggedOff.guard';
+import { TeamManagementComponent } from '_components/_management/team-management/team-management.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'company/:id', component: CompanyProfileComponent, canActivate: [AuthGuard] },
 
     { path: 'manage-projects', component: ProjectManagementComponent, canActivate: [AuthGuard] },
+    { path: 'manage-teams/:id', component: TeamManagementComponent, canActivate: [AuthGuard] },
 
     { path: 'error', component: ErrorsComponent },
     { path: '**', component: ErrorsComponent, data: { error: 404 } }
