@@ -5,14 +5,16 @@ import { AuthService } from 'app/auth/auth.service';
 import { ProfileService } from '_service/profile/profile.service';
 import { Router } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
+import { UserType } from '_enums/userType';
+import { UtilsService } from '_service/utils/utils.service';
 @Component({
-  selector: 'app-navigation-bar',
-  templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.less'],
+    selector: 'app-navigation-bar',
+    templateUrl: './navigation-bar.component.html',
+    styleUrls: ['./navigation-bar.component.less'],
 })
 export class NavigationBarComponent implements OnInit {
-  isCollapsed = true;
-  smallScreen: boolean;
+    isCollapsed = true;
+    smallScreen: boolean;
 
   selected: string;
   searchExpression = 'Pola';
@@ -45,10 +47,10 @@ export class NavigationBarComponent implements OnInit {
     }
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.smallScreen = window.innerWidth < 992;
-  }
+    @HostListener('window:resize')
+    onResize() {
+        this.smallScreen = window.innerWidth < 992;
+    }
 
   getResults() {
     this.profileService.findProfilesWithNameContaining(this.searchExpression).subscribe(data => {
@@ -57,7 +59,6 @@ export class NavigationBarComponent implements OnInit {
       for (let profile of this.profiles) {
         this.names.push(profile.name);
       }
-      // this.names = [this.profiles[0].name];
     });
   }
 
@@ -68,18 +69,15 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goToProfile() {
-
+      this.authService.goToUserProfile();
   }
 
   goToSettings() {
-    console.log(this.profiles[0].name);
-    console.log(this.names[0]);
+    }
 
-  }
-
-  signOut() {
-    this.authService.logOut();
-    this.router.navigate(['/']);
-  }
+    signOut() {
+        this.authService.logOut();
+        this.router.navigate(['/']);
+    }
 
 }
