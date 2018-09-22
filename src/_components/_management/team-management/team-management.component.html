@@ -6,10 +6,14 @@
         <div class="">
             <div class="unassigned bg-primary p-4">
                 <h4>Pending requests</h4>
-                <bs-sortable [(ngModel)]="unassignedParticipants" fieldName="name" itemClass="sortable-item card text-center"
+                <bs-sortable [(ngModel)]="unassignedParticipants" [itemTemplate]="participantTemplate" itemClass="sortable-item card text-center"
                     itemActiveClass="sortable-item-active" placeholderItem="No requests" placeholderClass="sortable-placeholder"
                     wrapperClass="sortable-wrapper card-columns"></bs-sortable>
-                <!-- <pre class="code-preview">{{ unassignedParticipants | json }}</pre> -->
+                <ng-template #participantTemplate let-item="item" let-index="index">
+                    <span>
+                        <a [routerLink]="['/user', item.value.id]">{{item.value.name}}</a>
+                    </span>
+                </ng-template>
             </div>
             <div class="teams row my-3">
                 <div *ngFor="let team of teams" class="col-sm-6 col-md-4 p-1">
@@ -18,11 +22,18 @@
                         <span class="close-btn p-2" (click)="utils.openConfirmModal('Do you really want to remove team ' + team.name + '?', removeTeam, {team: team})">
                             <i class="fas fa-times"></i>
                         </span>
-                        <bs-sortable [(ngModel)]="team.members" fieldName="name" itemClass="sortable-item card"
+                        <bs-sortable [(ngModel)]="team.members" [itemTemplate]="participantTemplateWithStar" itemClass="sortable-item card"
                             itemActiveClass="sortable-item-active" placeholderItem="Drag here..." placeholderClass="sortable-placeholder"
                             wrapperClass="sortable-wrapper"></bs-sortable>
+                        <ng-template #participantTemplateWithStar let-item="item" let-index="index">
+                            <span>
+                                <a [routerLink]="['/user', item.value.id]">{{item.value.name}}</a>
+                                <span class="leader-star" tooltip="Team leader" *ngIf="!index">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </span>
+                        </ng-template>
                     </div>
-                    <!-- <pre class="code-preview">{{ team | json }}</pre> -->
                 </div>
                 <div class="col-sm-6 col-md-4 p-1">
                     <div class="new-team p-4 text-center d-flex align-items-center justify-content-center bg-dark"

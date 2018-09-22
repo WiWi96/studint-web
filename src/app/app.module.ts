@@ -16,7 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule, ModalModule, SortableModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule, SortableModule, TooltipModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Services
@@ -113,6 +113,7 @@ import { ProfileService } from '_service/profile/profile.service';
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
     SortableModule.forRoot(),
+    TooltipModule.forRoot(),
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
 
   ],
