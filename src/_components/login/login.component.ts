@@ -66,6 +66,7 @@ constructor(private authService: AuthService, private router: Router, private ro
             this.authService.storeToken(resp);
             this.router.navigateByUrl(returnUrl || '/mainpage');
             this.authService.refreshPermissions();
+            this.authService.fetchUserProfileName();
           }, (error) => { });
       }
 }

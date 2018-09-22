@@ -1,5 +1,5 @@
 export enum UserType {
     Company = 'Company',
-    Student = 'Student',
+    Student = 'User',
     University = 'University'
 }

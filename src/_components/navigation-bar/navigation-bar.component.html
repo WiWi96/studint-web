@@ -13,8 +13,8 @@
     </div>
     <div *ngIf="authService.isLogged()" id="search-bar-container" [ngbCollapse]="isCollapsed && smallScreen">
       <div id="search-bar" class="container form-inline col-lg-10">
-        <input [(ngModel)]="selected" [ngbTypeahead]="search" class="form-control col mr-2">
-        <button id="searchButton" class="btn btn-outline-primary my-2 my-sm-0 d-md-none" type="submit">
+        <input [(ngModel)]="selected" [ngbTypeahead]="results" (keydown)="search($event)" class="form-control col mr-2">
+        <button id="searchButton" class="btn btn-outline-primary my-2 my-sm-0" type="submit" (click)="goToResult()">
           <i class="fas fa-arrow-right"></i>
         </button>
       </div>
