@@ -11,22 +11,31 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-    <div id="search-bar-container" [ngbCollapse]="isCollapsed && smallScreen">
+    <div *ngIf="authService.isLogged()" id="search-bar-container" [ngbCollapse]="isCollapsed && smallScreen">
       <div id="search-bar" class="container form-inline col-lg-10">
-        <input [(ngModel)]="selected" [ngbTypeahead]="search" class="form-control col mr-2">
-        <button id="searchButton" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-          <i class="fas fa-angle-double-right"></i>
+        <input [(ngModel)]="selected" [ngbTypeahead]="results" (keydown)="search($event)" class="form-control col mr-2">
+        <button id="searchButton" class="btn btn-outline-primary my-2 my-sm-0" type="submit" (click)="goToResult()">
+          <i class="fas fa-arrow-right"></i>
         </button>
       </div>
     </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div>
-        <ul class="navbar-nav ml-auto text-center">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Messages</a>
+    <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+      <div class="ml-auto">
+        <ul class="navbar-nav text-center">
+          <li *ngIf="authService.isLogged()" class="nav-item">
+            <a class="nav-link text-nowrap" href="javascript:void(0)" (click)="goToProfile()">Profile</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+          <li *ngIf="!authService.isLogged()" class="nav-item">
+            <button class="btn btn-primary bold" [routerLink]="['/login']">Sign in</button>
+          </li>
+          <li *ngIf="!authService.isLogged()" class="nav-item">
+            <a class="nav-link text-nowrap" [routerLink]="['/register']">Register</a>
+          </li>
+          <li *ngIf="authService.isLogged()" class="nav-item">
+            <a class="nav-link text-nowrap" href="javascript:void(0)" (click)="goToSettings()">Settings</a>
+          </li>
+          <li *ngIf="authService.isLogged()" class="nav-item">
+            <a class="nav-link text-nowrap" href="javascript:void(0)" (click)="signOut()">Sign out</a>
           </li>
         </ul>
       </div>

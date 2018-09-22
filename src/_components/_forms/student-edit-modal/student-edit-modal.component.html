@@ -36,12 +36,12 @@
       <div class="form-group">
         <small>Skills</small>
         <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
-          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill"/>
       </div>
       <div class="form-group">
         <div class="tags-container">
           <ng-container *ngFor='let item of userSkillTags'>
-            <button type="button" class="btn">
+            <button type="button" class="btn btn-tag">
               <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
@@ -59,7 +59,7 @@
       <div class="form-group">
         <div class="tags-container">
           <ng-container *ngFor='let item of userLanguagesTags'>
-            <button type="button" class="btn">
+            <button type="button" class="btn btn-tag">
               <div class="font-tag">{{item.name}}
                 <span class="close" (click)="onLanguageCloseClick(item)">&nbsp;
                   <i class="fas fa-times fa-sm"></i>
@@ -71,7 +71,7 @@
       </div>
       <div class="form-group">
         <small>Experience</small>
-        <textarea id="inputExperience" class="form-control" formControlName="description" placeholder="Experience" rows="3"></textarea>
+        <app-editor id="inputExperience" formControlName="description"></app-editor>
         <div *ngIf="submittedStudent">
           <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.required">Surname is required</p>
           <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.pattern">
@@ -83,9 +83,9 @@
 </div>
 <div class="modal-footer">
   <button class="btn" (click)="close()">
-    cancel
+    Cancel
   </button>
-  <button class="btn btn-success" (click)="onSubmitStudent()">
-    save
+  <button class="btn btn-primary" (click)="onSubmitStudent()">
+    Save
   </button>
 </div>

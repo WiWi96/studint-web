@@ -42,4 +42,8 @@ export class PostService {
   public getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${postUrl}`);
   }
+
+  public getPostsByProfile(id: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${postUrl}/profile/${id}`);
+  }
 }

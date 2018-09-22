@@ -6,14 +6,16 @@ import { ExperienceInfo } from '../info/experienceInfo';
 import { SocialMedia } from '../socialMedia';
 import { ProjectInfo } from '../info/projectInfo';
 import { StudyInfo } from '../info/studyInfo';
+import { UserStatus } from '_enums/userStatus';
 export class UserProfile {
     profileName: ProfileName;
     description: string;
     experienceInfos: Array<ExperienceInfo> = [];
     profiles: Array<SocialMedia> = [];
-    status: string;
+    status: UserStatus;
     projects: Array<ProjectInfo> = [];
     studiesInfos: Array<StudyInfo> = [];
     skills: Array<Skill> = [];
     languages: Array<Language> = [];
+    isFollower: boolean;
 }

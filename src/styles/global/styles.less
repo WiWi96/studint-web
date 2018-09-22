@@ -25,7 +25,6 @@ body {
     color: @gray-dark;
     margin: 0;
     padding-top: 70px;
-    padding-bottom: 60px;
 }
 
 a {
@@ -46,6 +45,10 @@ h6 {
     font-weight: bold;
 }
 
+hr {
+    border-color: @secondary-color;
+}
+
 .bg-light {
     background-color: @gray-light;
     h1,
@@ -55,6 +58,9 @@ h6 {
     h5,
     h6 {
         color: @secondary-color;
+    }
+    hr {
+        border-color: @gray;
     }
 }
 
@@ -74,6 +80,9 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @gray-dark;
+    }
 }
 
 .bg-primary {
@@ -92,10 +101,13 @@ h6 {
             color: @gray-lighter;
         }
     }
+    hr {
+        border-color: @primary-color-dark;
+    }
 }
 
 .bg-secondary {
-    background-color: @secondary-color  !important;
+    background-color: @secondary-color !important;
     h1,
     h2,
     h3,
@@ -109,6 +121,9 @@ h6 {
         &:before {
             color: @gray-lighter;
         }
+    }
+    hr {
+        border-color: @secondary-color-dark;
     }
 }
 
@@ -125,11 +140,11 @@ h6 {
 }
 
 .accepted {
-    color: @red;
+    color: @green;
 }
 
 .rejected {
-    color: @green;
+    color: @red;
 }
 
 .pending {
@@ -260,4 +275,11 @@ h6 {
     background-size: cover;
     border-radius: 100%;
     .light-shadow;
+}
+
+/* Modals */
+
+.modal-boy {
+    max-height: 70vh;
+    overflow-y: scroll;
 }

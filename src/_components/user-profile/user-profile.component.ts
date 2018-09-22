@@ -10,6 +10,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentEditModalComponent } from '../_forms/student-edit-modal/student-edit-modal.component';
 import { Technology } from '_models/technology/technology';
 import { UtilsService } from '_service/utils/utils.service';
+import { ProfileService } from '_service/profile/profile.service';
+import { NotificationService } from '_service/notification/notification.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -22,16 +24,17 @@ export class UserProfileComponent implements OnInit {
     expanded = false;
     Arr = Array;
     user: UserProfile;
-    technolgies: Technology[];
 
     constructor(
         private route: ActivatedRoute,
         private utils: UtilsService,
+        private profileService: ProfileService,
         private userProfileService: UserProfileService,
         private skillService: SkillService,
         private postService: PostService,
         private teamService: TeamService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private notificationService: NotificationService
     ) {
     }
 
@@ -56,10 +59,6 @@ export class UserProfileComponent implements OnInit {
         return this.user.languages.map(o => o.name).join(', ');
     }
 
-    photoExists(profile: ProfileName): Boolean {
-        return profile != undefined && profile.photo != undefined && profile.photo.length > 0;
-    }
-
     openEditModal(): any {
         const modalRef = this.modalService.open(StudentEditModalComponent);
         modalRef.componentInstance.user = this.user;
@@ -69,5 +68,12 @@ export class UserProfileComponent implements OnInit {
         const sorted = this.user.experienceInfos
         .sort((a: any, b: any) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
         return sorted;
+    }
+
+    updateFollower() {
+        this.profileService.updateFollower(this.id).subscribe(
+            isFollower => this.user.isFollower = isFollower,
+            () => this.notificationService.notify("Cannot follow or unfollow the profile right now. Please try again later.")
+        )
     }
 }

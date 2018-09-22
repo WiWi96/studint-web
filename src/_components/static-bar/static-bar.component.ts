@@ -36,8 +36,8 @@ export class StaticBarComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       // temporary id init
-      this.id = 162;
-      this.getUser(this.id);
+      // this.id = 162;
+      // this.getUser(this.id);
   });
 }
 

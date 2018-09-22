@@ -1,50 +1,64 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectInfo } from '_models/info/projectInfo';
+import { ProjectStatus } from '_enums/projectStatus';
 
 @Component({
-  selector: 'app-project-management',
-  templateUrl: './project-management.component.html',
-  styleUrls: ['./project-management.component.less']
+    selector: 'app-project-management',
+    templateUrl: './project-management.component.html',
+    styleUrls: ['./project-management.component.less']
 })
 export class ProjectManagementComponent implements OnInit, OnDestroy {
+    ProjectStatus = ProjectStatus;
+    projects: Array<ProjectInfo>;
+    sub: any;
 
-  projects: Array<ProjectInfo>;
-  sub: any;
+    constructor(
+        private projectService: ProjectProfileService,
+        private utils: UtilsService) { }
 
-  constructor(
-    private projectService: ProjectProfileService,
-    private utils: UtilsService) { }
+    ngOnInit() {
+        this.getProjects();
+    }
 
-  ngOnInit() {
-    this.getProjects();
-  }
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+    getProjects(): void {
+        this.sub = this.projectService.getProjectsByCompany(54).subscribe(
+            data => this.projects = data,
+            err => this.projects = null
+        )
+    }
 
-  getProjects(): void {
-    this.sub = this.projectService.getProjectsByCompany(54).subscribe(
-      data => this.projects = data,
-      err => this.projects = null
-    )
-  }
+    updateStatus(id: number, status: ProjectStatus) {
+      let project = { id: id, status: status };
+      this.projectService.updateProject(project).subscribe(() => this.getProjects());
+    }
 
-  createProject(): void {
+    createProject(): void {
 
-  }
+    }
 
-  editDetails(id: number): void {
+    editDetails(id: number): void {
 
-  }
+    }
 
-  manageTeams(id: number): void {
+    manageTeams(id: number): void {
 
-  }
+    }
 
-  cancelProject(id: number): void {
-    this.projectService.deleteProject(id).subscribe(() => this.getProjects());
-  }
+    publishProject = (params) => {
+      this.updateStatus(params.id, ProjectStatus.Invite);
+    }
+
+    finishProject = (params) => {
+      this.updateStatus(params.id, ProjectStatus.Finished);
+    }
+
+    cancelProject = (params) => {
+        this.projectService.deleteProject(params.id).subscribe(() => this.getProjects());
+    }
 }

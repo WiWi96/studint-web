@@ -12,7 +12,7 @@ const httpOptions = {
   })
 };
 
-const universityUrl = '//localhost:8080' + '/university';
+const universityUrl = environment.apiEndpoint + '/university';
 
 @Injectable()
 export class UniversityProfileService {

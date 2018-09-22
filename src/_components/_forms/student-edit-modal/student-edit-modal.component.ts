@@ -9,7 +9,7 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { Language } from '_models/skill/language';
 import { UserProfile } from '_models/profile/userProfile';
 import { LanguageService } from '_service/language/language.service';
-import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
 
@@ -44,7 +44,9 @@ export class StudentEditModalComponent implements OnInit {
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
     private skillService: SkillService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.userLanguagesTags = this.user.languages;
@@ -55,10 +57,13 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSubmitStudent() {
-
+    this.userProfileService.updateUser(this.user).subscribe();
+    console.log(this.user);
+    this.activeModal.dismiss();
   }
 
   close() {
+    this.userProfileService.updateUser(this.user).subscribe();
     this.activeModal.dismiss();
   }
 
@@ -115,15 +120,18 @@ export class StudentEditModalComponent implements OnInit {
     this.skillSelected = this.skills.find(skill => {
       return skill.name == e.value;
     });
+    this.technologyFormControl.reset();
 
     if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
       this.userSkillTags.push(this.skillSelected);
+      
   }
 
   onLanguageSelect(e: TypeaheadMatch): void {
     this.languageSelected = this.languages.find(language => {
       return language.name == e.value;
     });
+    this.languageFormControl.reset();
 
     if (this.languageSelected && !this.userLanguagesTags.some(language => { return language.name == e.value }))
       this.userLanguagesTags.push(this.languageSelected);

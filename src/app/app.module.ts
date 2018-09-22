@@ -1,3 +1,4 @@
+import { Interceptor } from './app.interceptor';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,13 +10,14 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -49,6 +51,22 @@ import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '_components/_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { StudentEditModalComponent } from '_components/_forms/student-edit-modal/student-edit-modal.component';
 import { LanguageService } from '_service/language/language.service';
+import { EditorComponent } from '_components/_forms/editor/editor.component';
+
+
+// Security
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { TokenStorage } from './auth/token-storage';
+import { JwtModule } from '@auth0/angular-jwt';
+import { jwtConfig } from './auth/jwtConfig';
+import { MainpageComponent } from '_components/mainpage/mainpage.component';
+import { LoggedOffGuard } from './auth/loggedOff.guard';
+import { ProjectEditComponent } from '_components/_forms/project-edit/project-edit.component';
+import { NgbDateISOParserFormatter } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
+import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
+import { ProfileService } from '_service/profile/profile.service';
+
 
 
 @NgModule({
@@ -58,6 +76,7 @@ import { LanguageService } from '_service/language/language.service';
     NavigationBarComponent,
     LoginComponent,
     RegisterComponent,
+    MainpageComponent,
     UserProfileComponent,
     UniversityProfileComponent,
     ProjectProfileComponent,
@@ -70,7 +89,11 @@ import { LanguageService } from '_service/language/language.service';
     TeamManagementComponent,
     FileSelectDirective,
     CompanyUniversityEditModalComponent,
-    StudentEditModalComponent
+    StudentEditModalComponent,
+    EditorComponent,
+    ConfirmModalComponent,
+    ProjectEditComponent
+
   ],
   imports: [
     BrowserModule,
@@ -85,16 +108,24 @@ import { LanguageService } from '_service/language/language.service';
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
+    JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
-    TypeaheadModule.forRoot()
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
+
   ],
-  providers: [ErrorsService, NotificationService, UtilsService, CompanyProfileService, UniversityProfileService,
+  providers: [ErrorsService, NotificationService, UtilsService, ProfileService, CompanyProfileService, UniversityProfileService,
     SkillService, UserProfileService, ProjectProfileService,
-    TeamService, PostService, MainPageService, LanguageService],
+    TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }, ],
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CompanyUniversityEditModalComponent, StudentEditModalComponent
+    CompanyUniversityEditModalComponent, StudentEditModalComponent, ConfirmModalComponent, ProjectEditComponent,
   ]
 })
 export class AppModule { }

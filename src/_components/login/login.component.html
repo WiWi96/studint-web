@@ -1,4 +1,4 @@
-<div class="bg">
+<div class="bg bg-light">
   <div class="studint-logo-2">
     <span class="studint-logo"></span>
   </div>
@@ -11,14 +11,15 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">
                   <div class="bio-item-icon">
-                    <i class="fas fa-envelope fa-2x"></i>
+                    <i class="fas fa-at"></i>
                   </div>
                 </div>
               </div>
-              <input type="email" class="form-control" formControlName="email" id="EmailInput" placeholder="e-mail" required>
+              <input type="email" class="form-control" formControlName="email" id="EmailInput" placeholder="E-mail"
+                required [(ngModel)]="username">
             </div>
             <div *ngIf="submitted">
-              <p class="alert alert-danger" *ngIf="loginFormGroup.controls.email.errors?.required">Email is required</p>
+              <p class="alert alert-danger" *ngIf="loginFormGroup.controls.email.errors?.required">E-mail is required</p>
             </div>
           </div>
 
@@ -26,39 +27,41 @@
             <div class="input-group mb-2">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <i class="fas fa-unlock-alt fa-2x"></i>
+                  <i class="fas fa-key"></i>
                 </div>
               </div>
-              <input type="password" class="form-control" formControlName="password" id="PasswordInput" placeholder="password" required>
+              <input type="password" class="form-control" formControlName="password" id="PasswordInput" placeholder="Password"
+                required [(ngModel)]="password">
             </div>
             <div *ngIf="submitted">
-              <p class="alert alert-danger" *ngIf="loginFormGroup.controls.password.errors?.required">Password is required</p>
+              <p class="alert alert-danger" *ngIf="loginFormGroup.controls.password.errors?.required">Password is
+                required</p>
             </div>
           </div>
 
 
-          <div class="form-group">
-            <label class="customcheck">
-              <label class="float-left">
-                <label class="text-remember" for="customCheck1">
-                  Remember me
-                </label>
-              </label>
-              <input type="checkbox" checked="checked" id="customCheck1">
+          <div class="form-group d-flex">
+            <label class="customcheck col">
+              <span class="text-remember">
+                Remember me
+              </span>
+              <input type="checkbox" id="rememberCheck">
               <span class="checkmark"></span>
-              <a href="" class="btn-link float-right">
-                <label class="text-forgot">
-                  Forgot Password?
-                </label>
-              </a>
             </label>
+            <a href="" class="btn-link">
+              <span class="text-forgot">
+                Forgot password?
+              </span>
+            </a>
           </div>
-          <button type="submit" class="btn">Log In</button>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-lg" (click)="authenticate()">Sign In</button>
+          </div>
           <hr class="colorgraph">
           <div class="text-center">
-            <label class="text-notamember">
-              Not a member?&nbsp;
-            </label>
+            <span class="text-notamember">
+              Not a member?
+            </span>
             <a [routerLink]="['/register']">
               <label class="signup">
                 Sign up now!
