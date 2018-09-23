@@ -30,8 +30,9 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     }
 
     getProjects(): void {
+        debugger;
         this.sub = this.projectService.getProjectsByCompany(54).subscribe(
-            data => this.projects = data,
+            data => { debugger;this.projects = data},
             err => this.projects = null
         )
     }

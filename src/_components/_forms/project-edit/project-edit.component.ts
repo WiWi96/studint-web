@@ -73,10 +73,6 @@ export class ProjectEditComponent implements OnInit {
 
   }
 
-
-
-
-
   getTechnologies() {
     this.skillService.getAllSkills().subscribe(skills => {
       this.skills = skills;
@@ -102,10 +98,6 @@ export class ProjectEditComponent implements OnInit {
 
 
   }
-
-
-  //Create Project
-
 
   // Update Project
   updateDate() {
