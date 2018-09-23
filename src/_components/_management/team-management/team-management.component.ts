@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
 import { Team } from '_models/team/team';
 import { UtilsService } from '_service/utils/utils.service';
+import * as animals from "animals";
 
 @Component({
   selector: 'app-team-management',
@@ -59,7 +60,18 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
 
   addTeam() {
     let team = new Team();
-    team.name = 'Unnamed team';
+    let animal: string = animals();
+    if (!animal.endsWith('sheep') && !animal.endsWith('fish')) {
+      if (animal === 'goose') {
+        animal = 'geese';
+      }
+      else if (animal === 'mouse') {
+        animal = 'mice';
+      }
+      else
+        animal = this.utils.getPlural(animal);
+    }
+    team.name = animal.charAt(0).toUpperCase() + animal.substr(1);
     this.teams.push(team);
   }
 
@@ -69,7 +81,7 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   removeUser = (params) => {
-
+    console.log(this.teams);
   }
 
 }

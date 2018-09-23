@@ -18,6 +18,7 @@ import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { TypeaheadModule, ModalModule, SortableModule, TooltipModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ContenteditableModule } from 'ng-contenteditable';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -108,6 +109,7 @@ import { ProfileService } from '_service/profile/profile.service';
     ErrorsModule,
     AngularSvgIconModule,
     MomentModule,
+    ContenteditableModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
     ModalModule.forRoot(),
