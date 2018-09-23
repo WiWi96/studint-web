@@ -12,8 +12,11 @@ import { UtilsService } from '_service/utils/utils.service';
 })
 export class WallComponent implements OnInit, OnDestroy {
     @Input() profile: ProfileName;
-    posts: Array<Post>;
+    posts: Array<Post> = [];
     sub: any;
+    oldestPostId: number;
+    bottomWasReached = false;
+    noMorePosts = false;
 
     constructor(
         private utils: UtilsService,
@@ -23,18 +26,43 @@ export class WallComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         if (!this.profile) {
-            this.sub = this.postService.getAllPosts().subscribe(
-                data => this.posts = data,
-                err => console.log(err));
+            this.getFollowedPosts();
         }
         else {
-            this.sub = this.postService.getPostsByProfile(this.profile.id).subscribe(
-                data => this.posts = data,
+            this.getUserPosts();
+        }
+    }
+
+    getFollowedPosts() {
+        if (!this.noMorePosts) {
+            this.sub = this.postService.getFollowedPosts(this.oldestPostId).subscribe(
+                data => {
+                    if (data && data.length !== 0) {
+                        this.posts = this.posts.concat(data);
+                        this.oldestPostId = data[data.length - 1].id;
+                    }
+                    else {
+                        this.noMorePosts = true;
+                    }
+                },
                 err => console.log(err));
         }
     }
 
+    getUserPosts() {
+        this.sub = this.postService.getPostsByProfile(this.profile.id).subscribe(
+            data => this.posts = data,
+            err => console.log(err));
+    }
+
     ngOnDestroy(): void {
         this.sub.unsubscribe();
+    }
+
+    scrolledToBottom(event: { target: Element, visible: boolean }, last: boolean) {
+        if (!this.profile && last && event.visible && !this.bottomWasReached) {
+            this.getFollowedPosts();
+        }
+        this.bottomWasReached = event.visible;
     }
 }

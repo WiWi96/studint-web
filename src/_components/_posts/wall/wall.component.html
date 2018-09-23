@@ -2,8 +2,8 @@
     <h4>Wall of thoughts</h4>
     <p *ngIf="!posts?.length" class="italic">No posts so far...</p>
     <div class="card-columns">
-        <div *ngFor="let item of posts" class="wall-item card p-4 text-left">
-            <div class="card-body">
+        <div *ngFor="let item of posts; let last = last" class="wall-item card p-4 text-left">
+            <div class="card-body" inViewport (inViewportAction)="scrolledToBottom($event, last)">
                 <div class="row mb-2">
                     <div [ngClass]="{'hidden': !utils.photoExists(item.author)}" class="card-photo-container mr-3">
                         <div class="card-photo" [ngStyle]="{'background-image': 'url(' + item.author.photo + ')'}"></div>
