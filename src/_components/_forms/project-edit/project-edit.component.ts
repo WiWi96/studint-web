@@ -78,6 +78,7 @@ export class ProjectEditComponent implements OnInit {
     this.projectProfile.level = this.utils.getProjectStatusCase(this.currentRate)
     this.projectProfile.technologies = this.projectSkillTags;
     this.projectProfile.description = this.projectFormGroup.get('description').value;
+    this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
 
     this.projectService.updateProject(this.projectProfile);
