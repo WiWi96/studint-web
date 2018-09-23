@@ -10,9 +10,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { debug } from 'util';
-import { format } from 'url';
-import { parse } from 'querystring';
-import { runInThisContext } from 'vm';
+
 
 @Component({
   selector: 'app-project-edit',
@@ -40,7 +38,7 @@ export class ProjectEditComponent implements OnInit {
   //Validation submitted
   submittedProject: boolean = false;
   //title
-  title: string;
+  title: string = "";
 
   formater: NgbDateParserFormatter;
   isCreatedProject: boolean = false;
@@ -58,7 +56,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = this.isCreatedProject ? "PROJECT CREATOR" : "PROJECT PROFILE"
+    this.title = this.isCreatedProject ? "PROJECT CREATOR" : "PROJECT PROFILE";
 
     if (this.isCreatedProject) {
       this.createManagementProjectForm();
@@ -100,8 +98,8 @@ export class ProjectEditComponent implements OnInit {
     this.updateDate();
 
     this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
-      
-    
+
+
   }
 
 
