@@ -14,7 +14,7 @@ import * as animals from "animals";
 })
 export class TeamManagementComponent implements OnInit, OnDestroy {
 
-  @Input() id: number;
+  id: number;
   project: ProjectProfile;
   private sub: any;
 
@@ -48,8 +48,8 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   initTeams() {
-    this.unassignedParticipants = this.project.participants;
-    this.teams = this.project.teams.sort(function (a: Team, b: Team) { return a.id - b.id });
+    this.unassignedParticipants = this.project.participants.slice(0);
+    this.teams = this.project.teams.sort(function (a: Team, b: Team) { return a.id - b.id }).slice(0);
     this.teams.forEach(team => {
       if (team.leader && team.members.includes(team.leader)) {
         team.members = team.members.filter(member => member !== team.leader);
@@ -81,6 +81,15 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   removeUser = (params) => {
+    this.unassignedParticipants = this.unassignedParticipants.filter(item => item !== params.user);
+  }
+
+  saveChanges = () => {
+    
+  }
+
+  discardChanges = () => {
+    this.getProject(this.id);
   }
 
 }

@@ -6,12 +6,12 @@
             <div *ngIf="project.startDate" class="col-md-4 info-item">
                 <div class="info-item-icon"><i class="fas fa-play"></i></div>
                 <p>Start date: <strong>{{project.startDate | amDateFormat:
-                    'LL'}}</strong></p>
+                        'LL'}}</strong></p>
             </div>
             <div *ngIf="project.joiningDate" class="col-md-4 info-item">
                 <div class="info-item-icon"><i class="fas fa-stopwatch"></i></div>
                 <p>Entries end: <strong>{{project.joiningDate | amDateFormat:
-                    'LL'}}</strong></p>
+                        'LL'}}</strong></p>
             </div>
             <div *ngIf="project.startDate" class="col-md-4 info-item">
                 <div class="info-item-icon"><i class="fas fa-info-circle"></i></div>
@@ -28,7 +28,7 @@
             <ng-template #participantTemplate let-item="item" let-index="index">
                 <span>
                     <a [routerLink]="['/user', item.value.id]">{{item.value.name}}</a>
-                    <span class="remove-user-btn p-2" (click)="utils.openConfirmModal('Do you really want to reject entry of ' + item.value.name + '?', removeUser, {user: item.value})">
+                    <span class="remove-user-btn p-2" (click)="utils.openConfirmModal('Do you really want to reject an entry of ' + item.value.name + '?', removeUser, {user: item.value})">
                         <i class="fas fa-ban"></i>
                     </span>
                 </span>
@@ -59,6 +59,13 @@
                     <p class="mb-0"><i class="fas fa-plus-circle fa-2x"></i></p>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container my-3 text-right">
+        <div class="row btn-group">
+            <button type="button" class="btn btn-primary bold" (click)="utils.openConfirmModal('Do you really want to save the changes?', saveChanges, null)">Save changes</button>
+            <button type="button" class="btn btn-outline-danger btn-sm bold" (click)="utils.openConfirmModal('Do you really want to revert all the unsaved changes?', discardChanges, null)">Revert unsaved changes</button>
+            <button type="button" class="btn btn-outline-dark btn-sm bold" [routerLink]="['/manage-projects']">Go back to projects management</button>
         </div>
     </div>
 </span>
