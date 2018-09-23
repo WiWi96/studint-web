@@ -81,7 +81,6 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   removeUser = (params) => {
-    console.log(this.teams);
   }
 
 }
