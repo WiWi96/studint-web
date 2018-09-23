@@ -97,7 +97,7 @@ export class ProjectEditComponent implements OnInit {
     this.projectProfile.description = this.projectFormGroup.get('description').value;
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
-    if (this.isCreatedProject && !this.projectProfile.type) this.projectProfile.type = '0';
+    if (this.isCreatedProject && !this.projectProfile.type) this.projectProfile.type = 'TEST';
     this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
 
 
