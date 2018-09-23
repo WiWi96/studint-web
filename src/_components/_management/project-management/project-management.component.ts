@@ -3,6 +3,8 @@ import { ProjectProfileService } from '_service/profile/project/projectProfile.s
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectInfo } from '_models/info/projectInfo';
 import { ProjectStatus } from '_enums/projectStatus';
+import { NgbModal } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { ProjectEditComponent } from '../../_forms/project-edit/project-edit.component';
 
 @Component({
     selector: 'app-project-management',
@@ -16,7 +18,8 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
 
     constructor(
         private projectService: ProjectProfileService,
-        private utils: UtilsService) { }
+        private utils: UtilsService,
+        private modalService: NgbModal) { }
 
     ngOnInit() {
         this.getProjects();
@@ -38,8 +41,9 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
       this.projectService.updateProject(project).subscribe(() => this.getProjects());
     }
 
-    createProject(): void {
-
+    createProject(): void {            
+        const modalRef = this.modalService.open(ProjectEditComponent);
+        /*modalRef.componentInstance.projectProfile = this.project;*/
     }
 
     editDetails(id: number): void {

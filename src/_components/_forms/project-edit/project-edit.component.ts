@@ -32,14 +32,16 @@ export class ProjectEditComponent implements OnInit {
   //Form Controllers
   technologyFormControl = new FormControl();
   startDate: NgbDateStruct;
-  endOfEntries: NgbDateStruct = { year: 2017, month: 8, day: 8 };
+  endOfEntries: NgbDateStruct;
   //Rating 
-  currentRate;
+  currentRate =1;
   difficultRate;
   //Validation submitted
   submittedProject: boolean = false;
 
   formater: NgbDateParserFormatter;
+
+  isCreatedProject: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -54,11 +56,17 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createProjectForm();
-    this.getTechnologies();
-    this.configDifficult();
-    this.initializeDate();
-    this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
+    if (this.isCreatedProject) {
+
+    } else {
+
+      this.createProjectForm();
+      this.getTechnologies();
+      this.configDifficult();
+      this.initializeDate();
+      this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
+    }
+
   }
 
   getTechnologies() {
@@ -114,8 +122,8 @@ export class ProjectEditComponent implements OnInit {
   // Formgroup creator
   createProjectForm() {
     this.projectFormGroup = this.formBuilder.group({
-      name: [this.projectProfile.name, [Validators.required]],
-      description: [this.projectProfile.description],
+      name: ['', [Validators.required]],
+      description: [''],
       startDate: [''],
       endofEntries: [''],
       technology: this.technologyFormControl,

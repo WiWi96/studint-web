@@ -11,10 +11,18 @@
         <div *ngIf="isCompany">
           <small>Company</small>
           <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+          <div *ngIf="submittedCompany || submittedUniversity">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('name').errors?.pattern">
+              Only letters are allowed</p>
+          </div>
         </div>
         <div *ngIf="isUniversity">
           <small>University</small>
           <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
+          <div *ngIf="submittedCompany || submittedUniversity">
+            <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('name').errors?.pattern">
+              Only letters are allowed</p>
+          </div>
         </div>
         <div *ngIf="submittedCompany || submittedUniversity">
           <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>

@@ -67,8 +67,7 @@ export class ProjectProfileComponent implements OnInit {
 
     }
 
-    openEditModal(): any {
-      
+    openEditModal(): any {     
         const modalRef = this.modalService.open(ProjectEditComponent);
         modalRef.componentInstance.projectProfile = this.project;
     }

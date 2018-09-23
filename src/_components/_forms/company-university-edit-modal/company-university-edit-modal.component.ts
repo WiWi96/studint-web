@@ -112,7 +112,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.univeristyProfile.profileName.name, [Validators.required]],
+      name: [this.univeristyProfile.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       address: this.addressFormGroup,
       description: [this.univeristyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
@@ -144,7 +144,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.profileName.name, [Validators.required]],
+      name: [this.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       address: this.addressFormGroup,
       description: [this.companyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
