@@ -42,8 +42,7 @@ export class ProjectProfileComponent implements OnInit {
             this.getProject(this.id);
       
         });
-
-        
+ 
     }
 
     ngOnDestroy() {
@@ -68,6 +67,7 @@ export class ProjectProfileComponent implements OnInit {
     }
 
     openEditModal(): any {     
+   
         const modalRef = this.modalService.open(ProjectEditComponent);
         modalRef.componentInstance.projectProfile = this.project;
     }

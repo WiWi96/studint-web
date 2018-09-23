@@ -91,12 +91,13 @@ export class ProjectEditComponent implements OnInit {
     }
 
     this.activeModal.dismiss();
+ 
     this.projectProfile.level = this.utils.getProjectStatusCase(this.currentRate)
     this.projectProfile.technologies = this.projectSkillTags;
     this.projectProfile.description = this.projectFormGroup.get('description').value;
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
-
+    if (this.isCreatedProject && !this.projectProfile.type) this.projectProfile.type = '0';
     this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
 
 
