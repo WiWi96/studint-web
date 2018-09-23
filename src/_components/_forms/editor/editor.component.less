@@ -1,0 +1,30 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.editor-container {
+    position: relative;
+    .editor {
+        .light-shadow;
+    }
+    .emoji-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        color: @gray;
+        &:hover {
+            color: @gray-dark;
+        }
+    }
+}
+
+.emoji-picker {
+    position: absolute;
+    margin-top: 5px;
+    right: -100px;
+    top: 0;
+    z-index: 99;
+    .emoji-mart {
+        .default-shadow;
+    }
+}

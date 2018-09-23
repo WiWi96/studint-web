@@ -1,0 +1,64 @@
+<span *ngIf="projects !== undefined">
+  <div class="content container">
+    <div class="row">
+      <h1>Project management</h1>
+      <div class="col text-right">
+        <button class="btn btn-primary" (click)="createProject()">
+          <i class="fas fa-plus"></i> Create project
+        </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="projects == false; else table">
+      <h6>No projects available</h6>
+    </div>
+    <ng-template #table>
+      <div class="table-responsive">
+        <table class="table table-striped text-center">
+          <thead class="thead-default">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Project name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Start date</th>
+              <th scope="col">Joining date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of projects">
+              <td scope="row" class="align-middle">{{project.projectId}}</td>
+              <td class="align-middle text-left">
+                <a *ngIf="project.status !== ProjectStatus.Canceled; else canceled" class="bold" [routerLink]="[ '/project', project.projectId ]">{{project.projectName}}</a>
+                <ng-template #canceled>
+                  {{project.projectName}}
+                </ng-template>
+              </td>
+              <td class="align-middle">
+                {{utils.getProjectStatusText(project.status)}}
+              </td>
+              <td class="align-middle">{{project.startDate}}</td>
+              <td class="align-middle">{{project.joiningDate}}</td>
+              <td class="align-middle">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Project actions">
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" class="btn btn-outline-primary bold" (click)="editDetails(project.projectId)">
+                    <i class="fas fa-cog"></i>
+                  </button>
+                  <button *ngIf="project.status === ProjectStatus.Invite || project.status === ProjectStatus.Closed || project.status === ProjectStatus.InProgress" (click)="manageTeams(project.projectId)" class="btn btn-outline-primary bold">Manage
+                    teams
+                  </button>
+                  <button *ngIf="project.status === ProjectStatus.TBA" (click)="utils.openConfirmModal('Do you want to open entries for this project?', publishProject, { id: project.projectId })" class="btn btn-outline-primary bold">Open entries
+                  </button>
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="utils.openConfirmModal('Do you want to mark this project as finished?', finishProject, { id: project.projectId })" class="btn btn-outline-primary bold">Mark as finished
+                  </button>
+                  <button *ngIf="project.status !== ProjectStatus.Canceled && project.status !== ProjectStatus.Finished" (click)="utils.openConfirmModal('Do you want to cancel this project?', cancelProject, { id: project.projectId })" class="btn btn-danger bold">Cancel
+                    project
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </div>
+</span>

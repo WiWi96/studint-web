@@ -1,0 +1,91 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">PROFILE
+    <i class="far fa-user-circle"></i>
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-boy">
+  <div class="container">
+    <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()">
+
+      <div formGroupName="fullname">
+        <div class="form-group">
+          <small>First Name</small>
+          <input type="text" class="form-control" formControlName="firstName" id="InputFirstName" placeholder="First Name" maxlength="254"
+            required/>
+          <div *ngIf="submittedStudent">
+            <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('firstName').errors?.required">First name is required</p>
+            <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('firstName').errors?.pattern">
+              Invalid first name</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <small>Last Name</small>
+          <input type="text" class="form-control" formControlName="surname" id="InputSurname" placeholder="Surname" maxlength="254"
+            required/>
+          <div *ngIf="submittedStudent">
+            <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.required">Surname is required</p>
+            <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.pattern">
+              Invalid surname </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <small>Skills</small>
+        <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill"/>
+      </div>
+      <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of userSkillTags'>
+            <button type="button" class="btn btn-tag">
+              <div class="font-tag">{{item.name}}
+                <span class="close" (click)="onTechnologyCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Languages</small>
+        <input class="form-control" formControlName="language" (typeaheadOnSelect)="onLanguageSelect($event)" [typeahead]="languages"
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Language" />
+      </div>
+      <div class="form-group">
+        <div class="tags-container">
+          <ng-container *ngFor='let item of userLanguagesTags'>
+            <button type="button" class="btn btn-tag">
+              <div class="font-tag">{{item.name}}
+                <span class="close" (click)="onLanguageCloseClick(item)">&nbsp;
+                  <i class="fas fa-times fa-sm"></i>
+                </span>
+              </div>
+            </button>&nbsp;
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Experience</small>
+        <app-editor id="inputExperience" formControlName="description"></app-editor>
+        <div *ngIf="submittedStudent">
+          <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.required">Surname is required</p>
+          <p class="alert alert-danger" *ngIf="accountStudentDetailsFormGroup.get('fullname').get('surname').errors?.pattern">
+            Invalid surname </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn" (click)="close()">
+    Cancel
+  </button>
+  <button class="btn btn-primary" (click)="onSubmitStudent()">
+    Save
+  </button>
+</div>

@@ -1,61 +1,74 @@
-<div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')"></div>
-<div class="profile-header container">
-    <div class="profile-top row text-center text-sm-left">
-        <div [ngClass]="{'hidden': !photoExists(university.profileName)}" class="profile-photo-container col-sm-auto">
-            <div class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + university.profileName.photo + ')'}"></div>
+<span *ngIf="university">
+    <div id="profile-background-photo" style="background-image: url('https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')"></div>
+    <div class="container">
+        <div class="profile-header container">
+            <div class="profile-top row text-center text-sm-left">
+                <div class="profile-photo-container col-sm-auto">
+                    <div *ngIf="university.profileName?.photo" class="profile-photo ml-auto mr-auto" [ngStyle]="{'background-image': 'url(' + university.profileName.photo + ')'}"></div>
+                </div>
+                <div class="profile-card col">
+                    <div class="profile-name">
+                        <span>
+                            <h1 class="d-inline-block">{{university.profileName?.name}}</h1>
+                            <span class="mx-3 d-inline-block align-top">
+                                <button class="btn edit-link p-2" (click)="openEditModal()">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </button>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="profile-bio-container row d-block">
+                        <div class="profile-bio col-md-5 text-left float-left">
+                            <div *ngIf="university.address" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <p>{{university.address.street + ' ' + university.address.houseNo}}<br>{{university.address.postCode
+                                    + ' ' + university.address.town + ', ' + university.address.country}}</p>
+                            </div>
+                            <div *ngIf="university.type?.length" class="bio-item">
+                                <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <p>{{university.type}}</p>
+                            </div>
+                            <div *ngFor="let profile of university.profiles" class="bio-item">
+                                <div class="bio-item-icon">
+                                    <i [class]="utils.getSocialMediaIconClass(profile.service)"></i>
+                                </div>
+                                <p>
+                                    <a [href]="profile.url">{{utils.getSocialMediaName(profile.service)}}</a>
+                                </p>
+                            </div>
+                            <span *ngIf="university.isFollower === true">
+                                <button class="btn btn-light ml-auto mr-auto mb-3" (click)="updateFollower()">Unfollow
+                                    school</button>
+                            </span>
+                            <span *ngIf="university.isFollower === false">
+                                <button class="btn btn-primary ml-auto mr-auto mb-3" (click)="updateFollower()">Follow
+                                    school</button>
+                            </span>
+                        </div>
+                        <div *ngIf="university.courses?.length > 0" class="profile-courses col-md-7 float-left">
+                            <h4>Our courses</h4>
+                            <span class="course-item" *ngFor="let course of university.courses">
+                                {{course.courseName}}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        <div class="profile-card col">
-            <div class="profile-name">
-                <h1>{{university.profileName.name}}</h1>
-            </div>            
-            <div class="profile-bio-container row d-block">
-                <div class="profile-bio col-md-5 text-left float-left">
-                    <div class="bio-item">
-                        <div class="bio-item-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <p>{{university.address.street + ' ' + university.address.houseNo}}<br>{{university.address.postCode + ' ' + university.address.town + ', ' + university.address.country}}</p>
-                    </div>
-                    <div *ngIf="university.type.length" class="bio-item">
-                        <div class="bio-item-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <p>{{university.type}}</p>
-                    </div>
-                    <div class="bio-item">
-                        <a href="https://github.com" class="profile-item">
-                            <div class="bio-item-icon"><i class="fab fa-github"></i></div>
-                            Github
-                        </a>
-                    </div>
-                    <div class="bio-item">
-                        <a href="https://twitter.com" class="profile-item">
-                            <div class="bio-item-icon"><i class="fab fa-twitter"></i></div>
-                            Twitter
-                        </a>
-                    </div>
-                    <div class="bio-item">
-                        <a href="https://www.facebook.com" class="profile-item">
-                            <div class="bio-item-icon"><i class="fab fa-facebook-square"></i></div>
-                            Facebook
-                        </a>
-                    </div>
+        <div *ngIf="university.description?.length > 0" class="profile-description-container container col-md-10"
+            [ngClass]="{'expanded': expanded}">
+            <div class="profile-description mx-4">
+                <h4>About us</h4>
+                <div id="description" [innerHTML]="university.description" class="profile-description-text">
                 </div>
-                <div class="profile-courses col-md-7 float-left">
-                    <h4>Our courses</h4>
-                    <span class="course-item" *ngFor="let course of university.courses">
-                        {{course.name}}
-                    </span>
+                <div *ngIf="utils.showDescriptionMoreButton()" class="profile-description-more col" (click)="expanded = !expanded"
+                    [ngSwitch]="expanded">
+                    <span *ngSwitchCase="true"><i class="fas fa-angle-up"></i> Show less</span>
+                    <span *ngSwitchDefault><i class="fas fa-angle-down"></i> Show more</span>
                 </div>
-            </div>                
-        
+            </div>
         </div>
     </div>
-</div>
-<div *ngIf="university.description.length > 0" class="profile-description-container container col-md-8" [ngClass]="{'expanded': expanded}">
-        <div class="profile-description mx-4">
-            <h4>Read my story</h4>
-            <div [innerHTML]="university.description" class="profile-description-text">
-            </div>
-            <div class="profile-description-more col" (click)="expandDescription()">
-                <span><i class="fas fa-angle-down"></i></span>
-            </div>
-        </div>
-    </div>
-<app-wall [posts]="university.posts"></app-wall>
+    <app-wall [profile]="university.profileName"></app-wall>
+</span>

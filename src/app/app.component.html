@@ -1,4 +1,46 @@
-<!--The content below is only a placeholder and can be replaced.-->
-  <app-navigation-bar></app-navigation-bar>
-  <app-static-bar></app-static-bar>
-  <router-outlet></router-outlet>
+<app-navigation-bar></app-navigation-bar>
+<div *ngIf="notification && showNotification" (click)="showNotification = !showNotification" class="notification">
+  <p>{{ notification }}</p>
+</div>
+<app-static-bar></app-static-bar>
+<router-outlet></router-outlet>
+<div class="container-fluid bg-secondary">
+  <div class="container p-5">
+    <div class="row">
+      <div class="col text-center">
+        <h5>We are students</h5>
+        <hr>
+        <ul class="footer-menu">
+          <li><a href="">Who are we?</a></li>
+          <li><a href="">The idea</a></li>
+          <li><a href="">Find out more</a></li>
+          <li><a href="">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="col text-center">
+        <h5>The key is you</h5>
+        <hr>
+        <ul class="footer-menu">
+          <li><a href="">Help desk</a></li>
+          <li><a href="">Privacy policy</a></li>
+          <li><a href="">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="col text-center">
+        <h5>Look further</h5>
+        <hr>
+        <ul class="footer-menu">
+          <li><a href="">Careers</a></li>
+          <li><a href="">Blog</a></li>
+          <li><a href="">News</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="credits text-center">
+      Made with ❤ and much effort by these talented boys: Adam, Wojtek, Maciek, Paweł, Dawid & Kuba
+    </p>
+    <p class="credits text-center">
+      <span class="studint-logo"></span> © 2018
+    </p>
+  </div>
+</div>

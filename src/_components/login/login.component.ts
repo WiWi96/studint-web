@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService, JwtToken } from 'app/auth/auth.service';
 import { first } from 'rxjs/operators';
 
 
@@ -11,38 +12,37 @@ import { first } from 'rxjs/operators';
     styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
+    loginFormGroup: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
     error = '';
+    username: string;
+    password: string;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router) { }
+constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+        this.loginFormGroup = this.formBuilder.group({
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
 
         // reset login status
-        //this.authenticationService.logout();
+        this.authService.logOut();
 
         // default to '/users/table'
         this.returnUrl = 'users/table';
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f() { return this.loginFormGroup.controls; }
 
-    onSubmit() {
+    loginSubmitted() {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.loginForm.invalid) {
+        if (this.loginFormGroup.invalid) {
             return;
         }
 
@@ -59,4 +59,14 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });*/
     }
+    authenticate() {
+        const returnUrl: string = this.route.snapshot.queryParams['returnUrl'];
+        this.authService.logIn(this.username, this.password)
+          .subscribe((resp: JwtToken) => {
+            this.authService.storeToken(resp);
+            this.router.navigateByUrl(returnUrl || '/mainpage');
+            this.authService.refreshPermissions();
+            this.authService.fetchUserProfileName();
+          }, (error) => { });
+      }
 }

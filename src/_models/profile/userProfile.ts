@@ -1,15 +1,21 @@
-import { Post } from './../post';
+import { Post } from '../post';
 import { ProfileName } from './profileName';
 import { Skill } from '../skill/skill';
 import { Language } from '../skill/language';
+import { ExperienceInfo } from '../info/experienceInfo';
+import { SocialMedia } from '../socialMedia';
+import { ProjectInfo } from '../info/projectInfo';
+import { StudyInfo } from '../info/studyInfo';
+import { UserStatus } from '_enums/userStatus';
 export class UserProfile {
     profileName: ProfileName;
     description: string;
-    profiles: Map<string, string>;
-    posts: Array<Post> = [];
-    status: string;
-    projects: Array<ProfileName> = [];
-    universities: Array<ProfileName> = [];
+    experienceInfos: Array<ExperienceInfo> = [];
+    profiles: Array<SocialMedia> = [];
+    status: UserStatus;
+    projects: Array<ProjectInfo> = [];
+    studiesInfos: Array<StudyInfo> = [];
     skills: Array<Skill> = [];
     languages: Array<Language> = [];
+    isFollower: boolean;
 }

@@ -57,6 +57,14 @@ div#profile-background-photo {
                     text-transform: none;
                     .default-text-shadow(@gray-dark);
                 }
+                .edit-link {
+                    border: .1rem solid @gray-lighter;
+                    border-radius: 6px;
+                    background-color: fade(@gray-dark, 30%);
+                    font-weight: bold;
+                    color: @gray-lighter;
+                    .default-text-shadow(@gray-dark);
+                }
                 #profile-status {
                     color: @secondary-color;
                     text-transform: none;
@@ -105,7 +113,11 @@ div#profile-background-photo {
         max-height: none;
         overflow: auto;
         .profile-description-more {
-            display: none;
+            position: initial;
+            height: auto;
+            span {
+                position: initial;
+            }
         }
     }
     .profile-description-more {
@@ -137,11 +149,12 @@ div#profile-background-photo {
         h5,
         h6 {
             text-transform: none;
-        }
-        h5 {
             color: @secondary-color;
         }
-        h6 {
+        h6.subtitle {
+            color: @gray-dark;
+        }
+        p {
             color: @gray-dark;
         }
         &:hover {
@@ -159,5 +172,26 @@ div#profile-background-photo {
 .bg-dark {
     .item {
         .light-shadow(@gray-darker);
+    }
+}
+
+.bg-light {
+    .item {
+        .light-shadow(@gray);
+        background-color: @gray-lighter !important;
+
+        h5.title {
+            color: @gray-darker;
+        }
+        
+        h6.subtitle {
+            color: @primary-color-dark;
+        }
+    }
+}
+
+.projects-container {
+    .row {
+        justify-content: center;
     }
 }

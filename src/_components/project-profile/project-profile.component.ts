@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProjectProfile } from '_models/profile/projectProfile';
+import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
+import { PostService } from '_service/post/post.service';
+import { SkillService } from '_service/skill/skill.service';
+import { UtilsService } from '_service/utils/utils.service';
+import { ParticipationStatus } from '_enums/participationStatus';
+import { ProjectStatus } from '_enums/projectStatus';
+import { ProjectEditComponent } from '../_forms/project-edit/project-edit.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileName } from '_models/profile/profileName';
-import * as moment from 'moment';
-import { Duration } from '_models/duration';
 
 @Component({
     selector: 'app-project-profile',
@@ -10,120 +17,58 @@ import { Duration } from '_models/duration';
     styleUrls: ['./project-profile.component.less'],
 })
 export class ProjectProfileComponent implements OnInit {
+    ParticipationStatus = ParticipationStatus;
+    ProjectStatus = ProjectStatus;
     expanded = false;
+    sub: any;
+    id: number;
     project: ProjectProfile;
     Arr = Array;
-    public now = moment().startOf('day');
 
-    constructor() {
-        this.project = {
-            profileName: {
-                id: 1,
-                name: 'Cookie of the Month',
-                photo: ''
-            },
-            description: '<p>The project is all about cookies 🍪</p>',
-            technologies: [
-                {
-                    id: 1,
-                    name: 'Flour'
-                },
-                {
-                    id: 2,
-                    name: 'Cocoa'
-                },
-                {
-                    id: 1,
-                    name: 'Chocolate'
-                },
-                {
-                    id: 1,
-                    name: 'Eggs'
-                }
-            ],
-            type: 'Cooking',
-            level: 'intermediate',
-            participants: [
-                {
-                    id: 1,
-                    name: 'Lisa Chase',
-                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREbV9-iTUYpckFiSiJgS6H1flN2NgeSecPGRX5M4wT8m7mRQ5xNA'
-                }
-            ],
-            status: 'inprogress',
-            startDate: new Date(2018, 7, 25),
-            joiningDate: new Date(2018, 7, 31),
-            duration: {
-                value: 3,
-                unit: 'month'
-            }
-        }
+    constructor(
+        private route: ActivatedRoute,
+        private utils: UtilsService,
+        private projectProfileService: ProjectProfileService,
+        private postService: PostService,
+        private skillService: SkillService,
+        private modalService: NgbModal
+    ) {
     }
 
-    ngOnInit() { }
-
-    expandDescription() {
-        this.expanded = true;
+    ngOnInit() {
+    
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id'];
+            this.getProject(this.id);
+      
+        });
+ 
     }
 
-    showDescriptionMoreButton() {
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    getProject(id: number): void {
+        this.projectProfileService.getProject(id).subscribe(
+            data => { this.project = data},
+        );
+    }
+
+    joinProject():void {
+        this.projectProfileService.joinProject(this.id).subscribe(
+            data => { this.project = data },
+            error => {console.log(error)}
+        )
+    }
+
+    leaveProject():void {
 
     }
 
-    photoExists(profile: ProfileName): Boolean {
-        return profile.photo && profile.photo.length > 0;
-    }
-
-    getDateStatus(date: Date): String {
-        var momentDate = moment(date);
-        if (momentDate.diff(this.now, 'days') >= 10) {
-            return 'future';
-        }
-        else if (momentDate.diff(this.now, 'days') > 1) {
-            return 'tenDays';
-        }
-        else if (momentDate.diff(this.now, 'days') === 1) {
-            return 'tomorrow';
-        }
-        else if (this.now.isSame(momentDate, 'days')) {
-            return 'today';
-        }
-        else if (momentDate.diff(this.now, 'days') === -1) {
-            return 'yesterday';
-        }
-        else {
-            return 'past';
-        }
-    }
-
-    getDifficultyNumber(): number {
-        switch (this.project.level) {
-            case 'beginner':
-                return 1;
-            case 'intermediate':
-                return 2;
-            case 'advanced':
-                return 3;
-            case 'professional':
-                return 4;
-            case 'master':
-                return 5;
-            default:
-                return undefined;
-        }
-    }
-
-    getDurationUnit(duration: Duration): String {
-        var text: String = duration.unit;
-        if (duration.value !== 0) {
-            if (text.slice(-1) === 'y') {
-                text = text.slice(-1) + "ie";
-            }
-            else if (text.slice(-1) === 's') {
-                text += "e";
-            }
-            text += "s";
-        }
-        return text;
+    openEditModal(): any {     
+   
+        const modalRef = this.modalService.open(ProjectEditComponent);
+        modalRef.componentInstance.projectProfile = this.project;
     }
 }
