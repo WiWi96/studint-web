@@ -9,6 +9,7 @@ import { UserProfileService } from "_service/profile/user/userProfile.service";
 import { Registration } from "_models/registration/registration";
 import { Address } from "_models/address";
 import { UserRegistration } from "_models/registration/userRegistration";
+import { UniversityProfileService } from "_service/profile/university/universityProfile.service";
 
 
 @Component({
@@ -37,11 +38,14 @@ export class RegisterComponent implements OnInit {
   accountUniversityDetailsFormGroup: FormGroup;
   accountCompanyDetailsFormGroup: FormGroup;
 
+  selectedCountry: string = "Poland";
+
   constructor(
     private formBuilder: FormBuilder,
     private mainPageService: MainPageService,
     private companyService: CompanyProfileService,
-    private studentService: UserProfileService
+    private studentService: UserProfileService,
+    private universityService: UniversityProfileService
   ) { }
 
   ngOnInit() {
@@ -110,7 +114,7 @@ export class RegisterComponent implements OnInit {
       town: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       postalCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      country: ['', [Validators.required]],
+      country: [''],
       houseNo: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
     });
 
@@ -151,7 +155,7 @@ export class RegisterComponent implements OnInit {
       town: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       postalCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      country: ['', [Validators.required]],
+      country: [''],
       houseNo: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ0-9]+")]]
     });
 
@@ -173,6 +177,8 @@ export class RegisterComponent implements OnInit {
   onSubmitStudent() {
     this.submittedStudent = true;
 
+
+
     if (this.accountStudentDetailsFormGroup.invalid) {
       return;
     }
@@ -190,23 +196,51 @@ export class RegisterComponent implements OnInit {
   }
   onSubmitUniversity() {
     this.submittedUniversity = true;
-
-    if (this.registrationFormGroup.invalid) {
+    if (this.accountUniversityDetailsFormGroup.invalid) {
       return;
     }
+
+    this.universityService.createUniversity(new Registration(
+      this.accountUniversityDetailsFormGroup.get('email').value,
+      this.accountUniversityDetailsFormGroup.get('password').get('password').value,
+      this.accountUniversityDetailsFormGroup.get('universityName').value,
+      new Address(
+      this.accountUniversityDetailsFormGroup.get('address').get('town').value,
+      this.accountUniversityDetailsFormGroup.get('address').get('postalCode').value,
+      this.accountUniversityDetailsFormGroup.get('address').get('street').value,
+      this.selectedCountry,
+      this.accountUniversityDetailsFormGroup.get('address').get('houseNo').value)
+    )).subscribe();
+
   }
 
   onSubmitCompany() {
     this.submittedCompany = true;
-
-    if (this.registrationFormGroup.invalid) {
+ 
+    if (this.accountCompanyDetailsFormGroup.invalid) {
       return;
     }
+
+    this.companyService.createCompany(new Registration(
+      this.accountCompanyDetailsFormGroup.get('email').value,
+      this.accountCompanyDetailsFormGroup.get('password').get('password').value,
+      this.accountCompanyDetailsFormGroup.get('companyName').value,
+      new Address(
+      this.accountCompanyDetailsFormGroup.get('address').get('town').value,
+      this.accountCompanyDetailsFormGroup.get('address').get('postalCode').value,
+      this.accountCompanyDetailsFormGroup.get('address').get('street').value,
+      this.selectedCountry,
+      this.accountCompanyDetailsFormGroup.get('address').get('houseNo').value)
+    )).subscribe();
   }
 
   //endpoints
   getAllProfileNames() {
+  
+  }
 
+  onChange(value: any){
+    this.selectedCountry = value;
   }
 
 }

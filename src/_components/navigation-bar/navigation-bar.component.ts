@@ -2,8 +2,8 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { AuthService } from 'app/auth/auth.service';
-import { Router } from '@angular/router';
 import { ProfileService } from '_service/profile/profile.service';
+import { Router } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
 import { UserType } from '_enums/userType';
 import { UtilsService } from '_service/utils/utils.service';
@@ -16,87 +16,62 @@ export class NavigationBarComponent implements OnInit {
     isCollapsed = true;
     smallScreen: boolean;
 
-    selected: string;
-    states: string[] = [
-        'Alabama',
-        'Alaska',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'Florida',
-        'Georgia',
-        'Hawaii',
-        'Idaho',
-        'Illinois',
-        'Indiana',
-        'Iowa',
-        'Kansas',
-        'Kentucky',
-        'Louisiana',
-        'Maine',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Dakota',
-        'North Carolina',
-        'Ohio',
-        'Oklahoma',
-        'Oregon',
-        'Pennsylvania',
-        'Rhode Island',
-        'South Carolina',
-        'South Dakota',
-        'Tennessee',
-        'Texas',
-        'Utah',
-        'Vermont',
-        'Virginia',
-        'Washington',
-        'West Virginia',
-        'Wisconsin',
-        'Wyoming'
-    ];
+  selected: string;
+  searchExpression = '';
+  profiles: ProfileName[];
+  names: string[] = [];
 
-    search = (text$: Observable<string>) =>
-        text$.pipe(
-            debounceTime(200),
-            distinctUntilChanged(),
-            map(term => term.length < 2 ? []
-                : this.states.filter(v => v.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
-        )
-    constructor(private authService: AuthService,
-        private router: Router,
-        private utils: UtilsService) {
-    }
+  results = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this.names )
+    )
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private profileService: ProfileService
+    ) {
+  }
 
-    ngOnInit() {
-        this.onResize();
+  ngOnInit() {
+    this.onResize();
+  }
+
+  search($event) {
+    this.searchExpression = $event.target.value;
+    if (this.searchExpression.length >= 1) {
+      this.getResults();
     }
+  }
 
     @HostListener('window:resize')
     onResize() {
         this.smallScreen = window.innerWidth < 992;
     }
 
-    goToProfile() {
-        this.authService.goToUserProfile();
-    }
+  getResults() {
+    this.profileService.findProfilesWithNameContaining(this.searchExpression).subscribe(data => {
+      this.profiles = data;
+      this.names = [];
+      for (const profile of this.profiles) {
+        this.names.push(profile.name);
+      }
+    });
+  }
 
-    goToSettings() {
+  goToResult() {
+    const res = this.profiles.find( profile => profile.name === this.selected);
+    this.router.navigate([res.type.toLowerCase(), res.id]);
+    this.selected = '';
+  }
 
+  goToProfile() {
+      this.authService.goToUserProfile();
+  }
+
+  goToSettings() {
     }
 
     signOut() {

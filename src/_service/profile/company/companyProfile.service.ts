@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { CompanyProfile } from '_models/profile/companyProfile';
 import { environment } from 'environments/environment';
+import { Registration } from '_models/registration/registration';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,13 +20,13 @@ export class CompanyProfileService {
   constructor(private http: HttpClient) { }
 
   // post requests
-  public createCompany(companyProfile: CompanyProfile): Observable<CompanyProfile> {
-    return this.http.post<CompanyProfile>(`${companyUrl}`, companyProfile);
+  public createCompany(companyRegistration: Registration): Observable<CompanyProfile> {
+
+    return this.http.post<CompanyProfile>(`${companyUrl}`, companyRegistration);
   }
 
   //put requests
   public updateCompany(companyProfile: CompanyProfile): Observable<CompanyProfile> {
-    debugger;
     return this.http.put<CompanyProfile>(`${companyUrl}`, companyProfile);
   }
 

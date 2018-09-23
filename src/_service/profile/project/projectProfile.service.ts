@@ -41,7 +41,7 @@ export class ProjectProfileService {
   }
 
   public getProjectsByCompany(companyId: number): Observable<ProjectInfo[]> {
-    return this.http.get<ProjectInfo[]>(`${companyUrl}/${companyId}/project`);
+    return this.http.get<ProjectInfo[]>(`${companyUrl}/project`);
   }
 
   public getAllProjects(): Observable<ProjectProfile[]> {
@@ -50,5 +50,9 @@ export class ProjectProfileService {
 
   public joinProject(id: number): Observable<ProjectProfile> {
     return this.http.get<ProjectProfile>(`${projectUrl}/${id}/enroll`);
+  }
+
+  public leaveProject(id: number): Observable<ProjectProfile> {
+    return this.http.get<ProjectProfile>(`${projectUrl}/${id}/leave`);
   }
 }

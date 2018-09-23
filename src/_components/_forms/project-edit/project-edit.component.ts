@@ -10,8 +10,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { debug } from 'util';
-import { format } from 'url';
-import { parse } from 'querystring';
+
 
 @Component({
   selector: 'app-project-edit',
@@ -26,20 +25,23 @@ export class ProjectEditComponent implements OnInit {
   //Form Group
   projectFormGroup: FormGroup;
   //Skills
-  projectSkillTags: Skill[];
+  projectSkillTags: Skill[] = [];
   skills: Skill[];
   skillSelected: Skill;
   //Form Controllers
   technologyFormControl = new FormControl();
   startDate: NgbDateStruct;
-  endOfEntries: NgbDateStruct = { year: 2017, month: 8, day: 8 };
+  endOfEntries: NgbDateStruct;
   //Rating 
-  currentRate;
+  currentRate = 1;
   difficultRate;
   //Validation submitted
   submittedProject: boolean = false;
+  //title
+  title: string = "";
 
   formater: NgbDateParserFormatter;
+  isCreatedProject: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -54,11 +56,21 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createProjectForm();
-    this.getTechnologies();
-    this.configDifficult();
-    this.initializeDate();
-    this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
+    this.title = this.isCreatedProject ? "PROJECT CREATOR" : "PROJECT PROFILE";
+
+    if (this.isCreatedProject) {
+      this.createManagementProjectForm();
+      this.projectProfile = new ProjectProfile();
+      this.getTechnologies();
+    } else {
+
+      this.createProjectForm();
+      this.getTechnologies();
+      this.configDifficult();
+      this.initializeDate();
+      this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
+    }
+
   }
 
   getTechnologies() {
@@ -75,14 +87,19 @@ export class ProjectEditComponent implements OnInit {
     }
 
     this.activeModal.dismiss();
+ 
     this.projectProfile.level = this.utils.getProjectStatusCase(this.currentRate)
     this.projectProfile.technologies = this.projectSkillTags;
     this.projectProfile.description = this.projectFormGroup.get('description').value;
+    this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
+    if (this.isCreatedProject && !this.projectProfile.type) this.projectProfile.type = 'TEST';
+    this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
 
-    this.projectService.updateProject(this.projectProfile);
+
   }
 
+  // Update Project
   updateDate() {
     this.projectProfile.startDate = this.toModel(this.startDate);
     this.projectProfile.joiningDate = this.toModel(this.endOfEntries);
@@ -115,6 +132,16 @@ export class ProjectEditComponent implements OnInit {
     this.projectFormGroup = this.formBuilder.group({
       name: [this.projectProfile.name, [Validators.required]],
       description: [this.projectProfile.description],
+      startDate: [this.projectProfile.startDate],
+      endofEntries: [this.projectProfile.joiningDate],
+      technology: this.technologyFormControl,
+    })
+  }
+
+  createManagementProjectForm() {
+    this.projectFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: [''],
       startDate: [''],
       endofEntries: [''],
       technology: this.technologyFormControl,

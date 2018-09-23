@@ -28,6 +28,7 @@ export class UserProfileService {
   //post requests
   public createUser(registrationUser: UserRegistration): Observable<UserProfile> {
     console.log(registrationUser);
+    
     return this.http.post<UserProfile>(`${userUrl}`, registrationUser);
   }
 
