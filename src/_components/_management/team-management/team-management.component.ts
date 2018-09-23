@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
-import { ProjectProfile } from '_models/profile/projectProfile';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileName } from '_models/profile/profileName';
 import { Team } from '_models/team/team';
 import { UtilsService } from '_service/utils/utils.service';
 import * as animals from "animals";
+import { ProjectTeams } from '_models/team/projectTeams';
+import { NotificationService } from '_service/notification/notification.service';
 
 @Component({
   selector: 'app-team-management',
@@ -15,7 +16,7 @@ import * as animals from "animals";
 export class TeamManagementComponent implements OnInit, OnDestroy {
 
   id: number;
-  project: ProjectProfile;
+  project: ProjectTeams;
   private sub: any;
 
   unassignedParticipants: ProfileName[] = [];
@@ -24,7 +25,8 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   constructor(
     private projectService: ProjectProfileService,
     private route: ActivatedRoute,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   getProject(id: number) {
-    this.projectService.getProject(this.id).subscribe(
+    this.projectService.getProjectTeams(this.id).subscribe(
       data => {
         this.project = data;
         this.initTeams();
@@ -48,14 +50,15 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   initTeams() {
-    this.unassignedParticipants = this.project.participants.slice(0);
+    this.unassignedParticipants = this.project.unassigned.slice(0);
     this.teams = this.project.teams.sort(function (a: Team, b: Team) { return a.id - b.id }).slice(0);
     this.teams.forEach(team => {
-      if (team.leader && team.members.includes(team.leader)) {
-        team.members = team.members.filter(member => member !== team.leader);
+      if (team.leader) {
         team.members.unshift(team.leader);
+        team.leader = null;
       }
     });
+    console.log(this.teams);
   }
 
   addTeam() {
@@ -84,8 +87,20 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
     this.unassignedParticipants = this.unassignedParticipants.filter(item => item !== params.user);
   }
 
-  saveChanges = () => {
-    
+  saveChanges = (params) => {
+    console.log(this.teams);
+    this.project.unassigned = this.unassignedParticipants.slice(0);
+    this.project.teams = this.teams.slice(0);
+    console.log(this.project.teams);
+    this.project.teams.forEach(team => {
+
+      team.leader = team.members.shift();
+      console.log(team.members);
+    });
+    this.projectService.updateProjectTeams(this.project).subscribe(
+      data => this.project = data,
+      () => this.notificationService.notify("Could not update project teams")
+    )
   }
 
   discardChanges = () => {

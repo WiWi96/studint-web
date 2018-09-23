@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ProjectProfile } from '_models/profile/projectProfile';
 import { environment } from 'environments/environment';
 import { ProjectInfo } from '_models/info/projectInfo';
+import { ProjectTeams } from '_models/team/projectTeams';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -30,6 +31,10 @@ export class ProjectProfileService {
     return this.http.put<ProjectProfile>(`${projectUrl}`, projectProfile);
   }
 
+  public updateProjectTeams(project: ProjectTeams): Observable<ProjectTeams> {
+    return this.http.put<ProjectTeams>(`${projectUrl}/teams`, project);
+  }
+
   //delete request
   public deleteProject(id: number): Observable<ProjectProfile> {
     return this.http.delete<ProjectProfile>(`${projectUrl}/${id}`);
@@ -38,6 +43,10 @@ export class ProjectProfileService {
   //get requests
   public getProject(id: number): Observable<ProjectProfile> {
     return this.http.get<ProjectProfile>(`${projectUrl}/${id}`);
+  }
+
+  public getProjectTeams(id: number): Observable<ProjectTeams> {
+    return this.http.get<ProjectTeams>(`${projectUrl}/${id}/teams`);
   }
 
   public getProjectsByCompany(): Observable<ProjectInfo[]> {
