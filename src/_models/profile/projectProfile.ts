@@ -15,7 +15,6 @@ export class ProjectProfile {
     type?: string;
     level?: ProjectLevel;
     participants?: Array<ProfileName> = [];
-    teams?: Array<Team> = [];
     participationStatus?: ParticipationStatus;
     startDate?: Date;
     joiningDate?: Date;

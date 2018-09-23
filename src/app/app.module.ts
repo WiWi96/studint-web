@@ -16,9 +16,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MomentModule } from 'ngx-moment';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { TypeaheadModule, ModalModule } from 'ngx-bootstrap';
+import { TypeaheadModule, ModalModule, SortableModule, TooltipModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InViewportModule } from 'ng-in-viewport';
+import { ContenteditableModule } from 'ng-contenteditable';
 
 // Services
 import { CompanyProfileService } from '_service/profile/company/companyProfile.service';
@@ -110,10 +111,13 @@ import { ProfileService } from '_service/profile/profile.service';
     AngularSvgIconModule,
     MomentModule,
     InViewportModule,
+    ContenteditableModule,
     JwtModule.forRoot(jwtConfig),
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
+    SortableModule.forRoot(),
+    TooltipModule.forRoot(),
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
 
   ],

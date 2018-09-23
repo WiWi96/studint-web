@@ -1,0 +1,68 @@
+@import '~styles/global/variables.less';
+@import '~styles/global/mixins.less';
+.header {
+    margin-top: 30px;
+    .project-name {
+        text-transform: none;
+    }
+    .subtitle {
+        color: @gray-dark;
+    }
+    .info-item {
+        display: flex;
+        .info-item-icon {
+            color: @secondary-color;
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+    }
+}
+
+.content {
+    .unassigned,
+    .team,
+    .new-team {
+        .light-shadow;
+    }
+    .team {
+        position: relative;
+        .team-name {
+            text-transform: none;
+        }
+        .remove-team-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: @gray;
+            cursor: pointer;
+            &:hover {
+                color: @gray-dark;
+            }
+        }
+    }
+    .new-team {
+        cursor: pointer;
+        .transition;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+    .leader-star {
+        color: @gold;
+        margin-left: 3px;
+    }
+    .remove-user-btn {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        color: @gray;
+        cursor: pointer;
+        &:hover {
+            color: @red;
+        }
+    }
+}

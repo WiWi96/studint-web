@@ -1,6 +1,5 @@
 @import '~styles/global/variables.less';
 @import '~styles/global/mixins.less';
-
 .notification {
     width: 20rem;
     padding: 1rem;
@@ -14,26 +13,32 @@
     cursor: pointer;
     z-index: 100;
     .light-shadow;
-
     &:hover {
         transform: scale(1.05);
     }
-
     p {
         margin: 0;
     }
 }
 
-.footer-menu {
-    list-style: none;
-    font-weight: bold;
-    padding: 0;
+#main {
+    flex: 1 1 auto;
+}
+
+.footer {
+    .footer-menu {
+        list-style: none;
+        font-weight: bold;
+        padding: 0;
+    }
 }
 
 .credits {
     font-size: 10px;
 }
 
-.bg-dark, .bg-secondary, .bg-primary {
+.bg-dark,
+.bg-secondary,
+.bg-primary {
     color: @secondary-color-darker;
 }

@@ -72,7 +72,7 @@ export class UtilsService {
 
     public getProjectStatusText(status: string): string {
         switch (status) {
-           
+
             case ProjectStatus.InProgress:
                 return 'In progress';
             case ProjectStatus.TBA:
@@ -166,20 +166,30 @@ export class UtilsService {
         }
     }
 
-    public getDurationUnit(duration: Duration): String {
+    public getDurationUnit(duration: Duration): string {
         if (duration) {
-            var text: String = duration.unit;
-            if (duration.value !== 0) {
-                if (text.slice(-1) === 'y') {
-                    text = text.slice(-1) + "ie";
-                }
-                else if (text.slice(-1) === 's') {
-                    text += "e";
-                }
-                text += "s";
+            var text: string = duration.unit;
+            if (duration.value !== 1) {
+                text = this.getPlural(text);
             }
             return text;
         }
+    }
+
+    public getPlural(text: string): string {
+        let lastLetter = text.slice(-1);
+        if (['h', 'y'].includes(lastLetter) && !['a','e','i','o','u'].includes(text.slice(-2, -1))) {
+            text = text.substr(0, text.length - 1) + "ie";
+        }
+        else if (lastLetter === 'f') {
+            text = text.substr(0, text.length - 1) + "ve";
+        }
+        else if (['s', 'x'].includes(lastLetter)) {
+            text += "e";
+        }
+
+        text += "s";
+        return text;
     }
 
     public getSocialMediaName(type: ServiceType): string {

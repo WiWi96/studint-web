@@ -40,7 +40,7 @@ export class ProjectProfileService {
     return this.http.get<ProjectProfile>(`${projectUrl}/${id}`);
   }
 
-  public getProjectsByCompany(companyId: number): Observable<ProjectInfo[]> {
+  public getProjectsByCompany(): Observable<ProjectInfo[]> {
     return this.http.get<ProjectInfo[]>(`${companyUrl}/project`);
   }
 
