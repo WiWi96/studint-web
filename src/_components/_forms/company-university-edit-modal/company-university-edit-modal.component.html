@@ -16,7 +16,7 @@
           <small>University</small>
           <input type="text" class="form-control" formControlName="name" id="InputCompanyName" required>
         </div>
-        <div *ngIf="isCompany">
+        <div *ngIf="submittedCompany || submittedUniversity">
           <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.controls.name.errors?.required">Company name is required</p>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <div class="form-group">
           <small>City</small>
           <input type="text" class="form-control" formControlName="town" id="InputCity3" placeholder="City" required>
-          <div *ngIf="submittedCompany">
+          <div *ngIf="submittedCompany || submittedUniversity">
             <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.required">City is required</p>
             <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('town').errors?.pattern">
               Only letters are allowed</p>
@@ -40,7 +40,7 @@
           <div class="col-md-6 mb-3">
             <small>Street</small>
             <input type="text" class="form-control" formControlName="street" id="Street3" placeholder="Street" required>
-            <div *ngIf="submittedCompany">
+            <div *ngIf="submittedCompany || submittedUniversity">
               <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.required">Street is required</p>
               <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('street').errors?.pattern">
                 Only letters are allowed</p>
@@ -49,7 +49,7 @@
           <div class="col-md-6 mb-3">
             <small>House number</small>
             <input type="text" class="form-control" formControlName="houseNo" id="HouseNumber3" placeholder="House number" required>
-            <div *ngIf="submittedCompany">
+            <div *ngIf="submittedCompany || submittedUniversity">
               <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.required">House number is required</p>
               <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('houseNo').errors?.pattern">House number is incorrect</p>
             </div>
@@ -58,15 +58,16 @@
         <div class="form-group">
           <small>Postal code</small>
           <input type="text" class="form-control" formControlName="postalCode" id="Zip3" placeholder="Zip" required>
-          <div *ngIf="submittedCompany">
+          <div *ngIf="submittedCompany || submittedUniversity">
             <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.required">Zip is required</p>
             <p class="alert alert-danger" *ngIf="accountDetailsFormGroup.get('address').get('postalCode').errors?.pattern">
               Incorrect zip code</p>
           </div>
         </div>
       </div>
-      
+
       <div formGroupName="socialServices">
+        <small>Social media</small>
         <div class="form-group">
           <div class="btn-default">
             <ngb-tabset type="pills">
@@ -86,7 +87,7 @@
                 </ng-template>
                 <ng-template ngbTabContent>
                   <div class="form-group" style="padding-top: 10px">
-                    <input type="text" class="form-control" id="facebookLink" formControlName="facebook" placeholder="add Facebook link">
+                    <input type="text" class="form-control" id="facebookLink" formControlName="facebook" placeholder="Add Facebook link">
                   </div>
                 </ng-template>
               </ngb-tab>
@@ -96,7 +97,7 @@
                 </ng-template>
                 <ng-template ngbTabContent>
                   <div class="form-group" style="padding-top: 10px">
-                    <input type="text" class="form-control" id="twitterLink" formControlName="twitter" placeholder="add twitter link">
+                    <input type="text" class="form-control" id="twitterLink" formControlName="twitter" placeholder="Add twitter link">
                   </div>
                 </ng-template>
               </ngb-tab>
@@ -152,7 +153,7 @@
               </ngb-tab>
               <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <i class="far fa-user"></i>
+                  <i class="fas fa-globe"></i>
                 </ng-template>
                 <ng-template ngbTabContent>
                   <div class="form-group" style="padding-top: 10px">
@@ -176,7 +177,15 @@
   <button class="btn" (click)="close()">
     Cancel
   </button>
-  <button class="btn btn-primary" (click)="onSubmitCompany()">
-    Save
-  </button>
+  <div *ngIf="isCompany">
+    <button class="btn btn-primary" (click)="onSubmitCompany()">
+      Save
+    </button>
+  </div>
+
+  <div *ngIf="isUniversity">
+      <button class="btn btn-primary" (click)="onSubmitUniversity()">
+        Save
+      </button>
+    </div>
 </div>

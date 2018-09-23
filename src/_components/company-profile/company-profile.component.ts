@@ -21,8 +21,8 @@ export class CompanyProfileComponent implements OnInit {
     Arr = Array;
 
     expanded = false;
-    socialServices = ['https://youtube.com', 'https://www.facebook.com', 'https://twitter.co',  'https://www.instagram.com', 'https://www.linkedin.com',
-        'https://www.goldenline.com', 'https://www.github.com', 'https://www.pinterest.com', 'https://www.google.com', 'https://www.custom.com'];
+    socialServices = ['https://youtube.com', 'https://facebook.com', 'https://twitter.com',  'https://instagram.com', 'https://linkedin.com',
+        'https://goldenline.com', 'https://github.com', 'https://pinterest.com', 'https://google.com', 'https://custom.com'];
 
     constructor(
         private route: ActivatedRoute,
