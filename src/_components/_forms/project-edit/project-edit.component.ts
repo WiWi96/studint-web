@@ -12,6 +12,7 @@ import { ProjectProfileService } from '_service/profile/project/projectProfile.s
 import { debug } from 'util';
 import { format } from 'url';
 import { parse } from 'querystring';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-project-edit',
@@ -26,7 +27,7 @@ export class ProjectEditComponent implements OnInit {
   //Form Group
   projectFormGroup: FormGroup;
   //Skills
-  projectSkillTags: Skill[];
+  projectSkillTags: Skill[] = [];
   skills: Skill[];
   skillSelected: Skill;
   //Form Controllers
@@ -34,13 +35,14 @@ export class ProjectEditComponent implements OnInit {
   startDate: NgbDateStruct;
   endOfEntries: NgbDateStruct;
   //Rating 
-  currentRate =1;
+  currentRate = 1;
   difficultRate;
   //Validation submitted
   submittedProject: boolean = false;
+  //title
+  title: string;
 
   formater: NgbDateParserFormatter;
-
   isCreatedProject: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -56,8 +58,12 @@ export class ProjectEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isCreatedProject) {
+    this.title = this.isCreatedProject ? "PROJECT CREATOR" : "PROJECT PROFILE"
 
+    if (this.isCreatedProject) {
+      this.createManagementProjectForm();
+      this.projectProfile = new ProjectProfile();
+      this.getTechnologies();
     } else {
 
       this.createProjectForm();
@@ -68,6 +74,10 @@ export class ProjectEditComponent implements OnInit {
     }
 
   }
+
+
+
+
 
   getTechnologies() {
     this.skillService.getAllSkills().subscribe(skills => {
@@ -89,9 +99,16 @@ export class ProjectEditComponent implements OnInit {
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
 
-    this.projectService.updateProject(this.projectProfile);
+    this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
+      
+    
   }
 
+
+  //Create Project
+
+
+  // Update Project
   updateDate() {
     this.projectProfile.startDate = this.toModel(this.startDate);
     this.projectProfile.joiningDate = this.toModel(this.endOfEntries);
@@ -121,6 +138,16 @@ export class ProjectEditComponent implements OnInit {
 
   // Formgroup creator
   createProjectForm() {
+    this.projectFormGroup = this.formBuilder.group({
+      name: [this.projectProfile.name, [Validators.required]],
+      description: [this.projectProfile.description],
+      startDate: [this.projectProfile.startDate],
+      endofEntries: [this.projectProfile.joiningDate],
+      technology: this.technologyFormControl,
+    })
+  }
+
+  createManagementProjectForm() {
     this.projectFormGroup = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: [''],

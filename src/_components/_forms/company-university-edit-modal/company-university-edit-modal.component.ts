@@ -112,7 +112,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.univeristyProfile.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      name: [this.univeristyProfile.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
       address: this.addressFormGroup,
       description: [this.univeristyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
@@ -136,7 +136,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      town: [this.address.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      town: [this.address.town, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
       postalCode: [this.address.postCode, [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: [this.address.street, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ'. ]+")]],
       country: [this.address.country, [Validators.required]],
@@ -144,7 +144,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     });
 
     this.accountDetailsFormGroup = this.formBuilder.group({
-      name: [this.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      name: [this.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
       address: this.addressFormGroup,
       description: [this.companyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,

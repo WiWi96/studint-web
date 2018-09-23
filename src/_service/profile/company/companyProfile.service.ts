@@ -21,6 +21,7 @@ export class CompanyProfileService {
 
   // post requests
   public createCompany(companyRegistration: Registration): Observable<CompanyProfile> {
+
     return this.http.post<CompanyProfile>(`${companyUrl}`, companyRegistration);
   }
 
