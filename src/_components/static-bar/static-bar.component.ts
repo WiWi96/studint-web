@@ -23,6 +23,7 @@ export class StaticBarComponent implements OnInit {
   navbarHidden = true;
   showMenu = false;
   private sub: any;
+  userName: ProfileName;
   user: UserProfile;
   showProjects = false;
   showUniversities = false;
@@ -39,8 +40,8 @@ export class StaticBarComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = 113;
-      //this.getUser(this.id);
+      this.userName = this.authService.getProfile();
+      this.getUser();
       this.navbarHidden = !this.authService.isLogged();
   });
 }
@@ -49,8 +50,8 @@ export class StaticBarComponent implements OnInit {
     this.navbarHidden = !this.authService.isLogged();
   }
 
-  getUser(id: number): void {
-    this.userProfileService.getUser(id).subscribe(
+  getUser(): void {
+    this.userProfileService.getUser(this.userName.id).subscribe(
         data => { this.user = data; },
     );
 }
