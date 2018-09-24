@@ -10,10 +10,11 @@
   <div class="container">
     <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()">
 
-        <div class="form-group">
-          <small>Photo</small>
-          <input type="file" class="form-control" (change)="onFileSelected($event)" placeholder="Photo"/>
-        </div>
+      <div class="form-group">
+        <small>Photo</small>
+        <input ng-model="file_upload" formControlName="file_upload" name="file" type="file" (change)="fileChange($event)" #fileInput>
+        <button type="submit" (click)="onSubmitPhoto()">Submit</button>
+      </div>
 
       <div formGroupName="fullname">
         <div class="form-group">
@@ -41,7 +42,7 @@
       <div class="form-group">
         <small>Skills</small>
         <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
-          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill"/>
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
       </div>
       <div class="form-group">
         <div class="tags-container">

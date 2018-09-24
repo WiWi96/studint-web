@@ -37,6 +37,7 @@ export class StudentEditModalComponent implements OnInit {
   //All Languages and Skills
   languages: Language[];
   skills: Skill[];
+  file: File;
 
   user: UserProfile;
 
@@ -60,14 +61,42 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSubmitStudent() {
+    // this.user.profileName.photo = 
     this.userProfileService.updateUser(this.user).subscribe();
+
     this.activeModal.dismiss();
   }
 
   onFileSelected(event) {
-    this.photoSelected = <File>event.target.files[0];
+    /*this.photoSelected = <File>event.target.files[0];
     this.profileService.uploadPhoto(this.photoSelected).subscribe(
       photoString => this.user.profileName.photo = photoString
+    );*/
+  }
+
+  fileChange(event: any) {
+    // Instantiate an object to read the file content
+    let reader = new FileReader();
+    // when the load event is fired and the file not empty
+    if (event.target.files && event.target.files.length > 0) {
+      // Fill file variable with the file content
+      this.file = event.target.files[0];
+    }
+  }
+
+  onSubmitPhoto() {
+    // Instantiate a FormData to store form fields and encode the file
+    let body = new FormData();
+    // Add file content to prepare the request
+    body.append("file", this.file);
+    // Launch post request
+    this.profileService.uploadPhoto(body).subscribe(
+      // Admire results
+      (data) => { console.log(data) },
+      // Or errors :-(
+      error => console.log(error),
+      // tell us if it's finished
+      () => { console.log("completed") }
     );
   }
 
@@ -93,7 +122,8 @@ export class StudentEditModalComponent implements OnInit {
       fullname: this.fullNameFormGroup,
       language: this.languageFormControl,
       technology: this.technologyFormControl,
-      description: [this.user.description]
+      description: [this.user.description],
+      file_upload: null
     });
   }
 
@@ -133,7 +163,7 @@ export class StudentEditModalComponent implements OnInit {
 
     if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
       this.userSkillTags.push(this.skillSelected);
-      
+
   }
 
   onLanguageSelect(e: TypeaheadMatch): void {
