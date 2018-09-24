@@ -32,7 +32,7 @@
         <div class="form-group">
           <small>Country</small>
           <select class="custom-select form-control" formControlName="country">
-            <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+            <option *ngFor="let country of countries" [ngValue]="country.name">{{country.name}}</option>
           </select>
         </div>
         <div class="form-group">
@@ -78,7 +78,7 @@
         <div class="form-group">
           <small>Courses</small>
           <input class="form-control" formControlName="course" (typeaheadOnSelect)="onCourseSelect($event)" [typeahead]="courses" typeaheadOptionField="courseName"
-            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Course" />
+            [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Courses" />
         </div>
       </div>
       <div class="form-group">

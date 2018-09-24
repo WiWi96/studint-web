@@ -8,14 +8,14 @@ import { environment } from 'environments/environment';
 import { Language } from '_models/skill/language';
 
 
-const languageUrl = environment.apiEndpoint + '/country';
+const countryUrl = environment.apiEndpoint + '/country';
 
 @Injectable()
 export class CountryService {
   constructor(private http: HttpClient) {
   }
 
-  public getAllLanguages(): Observable<Language[]> {
-    return this.http.get<Language[]>(`${languageUrl}`);
+  public getAllCountries(): Observable<Language[]> {
+    return this.http.get<Language[]>(`${countryUrl}`);
   }
 }

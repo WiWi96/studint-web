@@ -16,6 +16,8 @@ import { Course } from '_models/course';
 import { CoursService } from '_service/cours/cours.service';
 import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { CountryService } from '_service/country/country.service';
+import { Country } from '_models/country';
 
 @Component({
   selector: 'app-company-university-edit-modal',
@@ -27,15 +29,13 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   profileName: ProfileName;
 
   courseFormControler = new FormControl();
-  
+
   addressFormGroup: FormGroup;
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   socialServicesFormpGroup: FormGroup;
   accountUniversityDetailsFormGroup: FormGroup;
   accountDetailsFormGroup: FormGroup;
-
- 
 
   socialServices: string[];
   courses: Course[] = [];
@@ -46,7 +46,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
-  countries = ['Poland', 'Germany', 'Spain', 'Czech Republic', 'Iceland'];
+  //countries = ['Poland', 'Germany', 'Spain', 'Czech Republic', 'Iceland'];
 
   //sumbitted
   submittedCompany: boolean = false;
@@ -59,12 +59,15 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   universityCoursesTag: Course[] = [];
   courseSelected: Course;
 
+  //All Countries field
+  countries: Country[] = [];
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private companyProfileService: CompanyProfileService,
     private universityProfileService: UniversityProfileService,
-    public coursesService: CoursService
+    public coursesService: CoursService,
+    public countriesService: CountryService
   ) { }
 
   ngOnInit() {
@@ -72,6 +75,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   }
 
   initializeForms() {
+    this.getAllCountries();
     if (this.isCompany) {
       this.address = this.companyProfile.address;
       this.profileName = this.companyProfile.profileName;
@@ -97,6 +101,12 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   getUniversitySocialMedia() {
     this.univeristyProfile.profiles.forEach(social => {
       this.socialMediaMap.set(social.service, social.url);
+    })
+  }
+
+  getAllCountries() {
+    this.countriesService.getAllCountries().subscribe(data => {
+      this.countries = data;
     })
   }
 
@@ -289,11 +299,11 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   }
 
   public onCourseCloseClick(coursTag: Course): void {
-     this.universityCoursesTag.forEach((course, index) => {
-       if (coursTag == course) {
-         this.universityCoursesTag.splice(index, 1);
-       }
-     });
+    this.universityCoursesTag.forEach((course, index) => {
+      if (coursTag == course) {
+        this.universityCoursesTag.splice(index, 1);
+      }
+    });
   }
 
   onCourseSelect(e: TypeaheadMatch) {
