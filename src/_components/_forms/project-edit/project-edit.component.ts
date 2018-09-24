@@ -40,9 +40,12 @@ export class ProjectEditComponent implements OnInit {
   submittedProject: boolean = false;
   //title
   title: string = "";
+  //projecId
+  projectId: number;
 
   formater: NgbDateParserFormatter;
   isCreatedProject: boolean = false;
+  isManagement: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -64,15 +67,32 @@ export class ProjectEditComponent implements OnInit {
       this.projectProfile = new ProjectProfile();
       this.getTechnologies();
     } else {
+      if (!this.isManagement) {
+        this.createProjectForm();
+        this.getTechnologies();
+        this.configDifficult();
+        this.initializeDate();
+        this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
+      } else {
+        this.createManagementProjectForm();
+        this.getProjectById();
+      }
+    }
 
-      this.createProjectForm();
+  }
+
+  getProjectById() {
+    this.projectService.getProject(this.projectId).subscribe(data => {
+      this.projectProfile = data;
       this.getTechnologies();
       this.configDifficult();
       this.initializeDate();
       this.projectSkillTags = JSON.parse(JSON.stringify(this.projectProfile.technologies));
-    }
-
+      this.projectFormGroup.controls['name'].setValue(this.projectProfile.name);
+      this.projectFormGroup.controls['description'].setValue(this.projectProfile.description);
+    })
   }
+
 
   getTechnologies() {
     this.skillService.getAllSkills().subscribe(skills => {
@@ -88,13 +108,13 @@ export class ProjectEditComponent implements OnInit {
     }
 
     this.activeModal.dismiss();
- 
+
     this.projectProfile.level = this.utils.getProjectStatusCase(this.currentRate)
     this.projectProfile.technologies = this.projectSkillTags;
     this.projectProfile.description = this.projectFormGroup.get('description').value;
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
-    if (this.isCreatedProject && !this.projectProfile.type){
+    if (this.isCreatedProject && !this.projectProfile.type) {
       this.projectProfile.type = 'TEST';
       this.projectProfile.status = ProjectStatus.Invite;
     }
@@ -142,6 +162,7 @@ export class ProjectEditComponent implements OnInit {
     })
   }
 
+ 
   createManagementProjectForm() {
     this.projectFormGroup = this.formBuilder.group({
       name: ['', [Validators.required]],

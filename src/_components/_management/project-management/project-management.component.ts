@@ -46,7 +46,9 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     }
 
     editDetails(id: number): void {
-
+       const modalRef = this.modalService.open(ProjectEditComponent);
+        modalRef.componentInstance.projectId = id;
+        modalRef.componentInstance.isManagement = true;
     }
 
     publishProject = (params) => {
