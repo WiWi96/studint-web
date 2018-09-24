@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Address } from '_models/address';
 import { CompanyProfile } from '_models/profile/companyProfile';
@@ -8,14 +8,14 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 import { UniversityProfile } from '_models/profile/universityProfile';
 import { ProfileName } from '_models/profile/profileName';
 import { UniversityProfileService } from '_service/profile/university/universityProfile.service';
-import { DISABLED } from '@angular/forms/src/model';
+
 import { ValueTransformer } from '@angular/compiler/src/util';
 import { SocialMedia } from '_models/socialMedia';
 import { ServiceType } from '_enums/serviceTypes';
 import { Course } from '_models/course';
 import { CoursService } from '_service/cours/cours.service';
 import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
-
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-company-university-edit-modal',
@@ -26,15 +26,16 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   address: Address;
   profileName: ProfileName;
 
+  courseFormControler = new FormControl();
+  
   addressFormGroup: FormGroup;
   registrationFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   socialServicesFormpGroup: FormGroup;
-
   accountUniversityDetailsFormGroup: FormGroup;
-
   accountDetailsFormGroup: FormGroup;
 
+ 
 
   socialServices: string[];
   courses: Course[] = [];
@@ -45,7 +46,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
-  countries = ['Poland', 'Germany', 'Spain', 'Czech Republic'];
+  countries = ['Poland', 'Germany', 'Spain', 'Czech Republic', 'Iceland'];
 
   //sumbitted
   submittedCompany: boolean = false;
@@ -56,7 +57,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   isUniversity: boolean;
 
   universityCoursesTag: Course[] = [];
-  tagSelected: Course;
+  courseSelected: Course;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -78,9 +79,10 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       this.createCompanyForm();
     }
     else if (this.isUniversity) {
-      //this.universityCoursesTag = JSON.parse(JSON.stringify(this.univeristyProfile.courses);
+      this.universityCoursesTag = JSON.parse(JSON.stringify(this.univeristyProfile.courses));
       this.address = this.univeristyProfile.address;
       this.profileName = this.univeristyProfile.profileName;
+      this.getCourses();
       this.getUniversitySocialMedia();
       this.createUniversityForm();
     }
@@ -98,8 +100,8 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     })
   }
 
-  getCourses(){
-    this.coursesService.getAllCourses().subscribe(data =>{
+  getCourses() {
+    this.coursesService.getAllCourses().subscribe(data => {
       this.courses = data;
     })
   }
@@ -129,15 +131,16 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.accountDetailsFormGroup = this.formBuilder.group({
       name: [this.univeristyProfile.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
       address: this.addressFormGroup,
+      course: this.courseFormControler,
       description: [this.univeristyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
+
     })
   }
 
 
   // Company 
   createCompanyForm() {
-
     this.socialServicesFormpGroup = this.formBuilder.group({
       youtube: [this.socialMediaMap.get(ServiceType.YouTube)],
       facebook: [this.socialMediaMap.get(ServiceType.Facebook)],
@@ -161,9 +164,10 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.accountDetailsFormGroup = this.formBuilder.group({
       name: [this.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
       address: this.addressFormGroup,
+      course: this.courseFormControler,
       description: [this.companyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
-     // courses: []
+
     })
 
   }
@@ -179,6 +183,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
     this.setUniversitySocialServices();
     this.setUniversityProfileDescription();
 
+    this.univeristyProfile.courses = this.universityCoursesTag;
     this.universityProfileService.updateUniversity(this.univeristyProfile).subscribe();
     this.activeModal.close();
   }
@@ -282,26 +287,24 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   close() {
     this.activeModal.close();
   }
-/*
-  public onCoursCloseClick(skillTag: Course): void {
-    this.universityCoursesTag.forEach((skill, index) => {
-      if (skillTag == skill) {
-        this.universityCoursesTag.splice(index, 1);
-      }
-    });
+
+  public onCourseCloseClick(coursTag: Course): void {
+     this.universityCoursesTag.forEach((course, index) => {
+       if (coursTag == course) {
+         this.universityCoursesTag.splice(index, 1);
+       }
+     });
   }
 
-
-  onCoursSelect(e: TypeaheadMatch) {
-    this.universityCoursesTag = this.skills.find(skill => {
-      return skill.name == e.value;
+  onCourseSelect(e: TypeaheadMatch) {
+    this.courseSelected = this.courses.find(course => {
+      return course.courseName == e.value;
     });
-    //this.technologyFormControl.reset();
+    this.courseFormControler.reset();
 
-    if (this.universityCoursesTag && !this.universityCoursesTag.some(skill => { return skill.name == e.value }))
-      this.universityCoursesTag.push(this.tagSelected);
-
-  }*/
+    if (this.courseSelected && !this.universityCoursesTag.some(cours => { return cours.courseName == e.value }))
+      this.universityCoursesTag.push(this.courseSelected);
+  }
 
 }
 

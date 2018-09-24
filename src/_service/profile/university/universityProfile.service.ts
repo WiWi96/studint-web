@@ -26,7 +26,6 @@ export class UniversityProfileService {
 
   //put requests
   public updateUniversity(universityProfile: UniversityProfile): Observable<UniversityProfile> {
-    debugger;
     return this.http.put<UniversityProfile>(`${universityUrl}`, universityProfile);
   }
 
