@@ -7,6 +7,7 @@ import { UtilsService } from '_service/utils/utils.service';
 import { CompanyUniversityEditModalComponent } from '../_forms/company-university-edit-modal/company-university-edit-modal.component';
 import { ProfileService } from '_service/profile/profile.service';
 import { NotificationService } from '_service/notification/notification.service';
+import { AuthService } from 'app/auth/auth.service';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class CompanyProfileComponent implements OnInit {
         private companyProfileService: CompanyProfileService,
         private modalService: NgbModal,
         private profileService: ProfileService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
