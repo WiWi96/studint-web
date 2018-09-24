@@ -20,6 +20,7 @@ export class NavigationBarComponent implements OnInit {
   searchExpression = '';
   profiles: ProfileName[];
   names: string[] = [];
+  UserType = UserType;
 
   results = (text$: Observable<string>) =>
     text$.pipe(
