@@ -36,7 +36,7 @@
       <div class="form-group">
         <small>Skills</small>
         <input class="form-control" formControlName="technology" (typeaheadOnSelect)="onSkillSelect($event)" [typeahead]="skills"
-          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill"/>
+          typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Skill" />
       </div>
       <div class="form-group">
         <div class="tags-container">
@@ -69,6 +69,106 @@
           </ng-container>
         </div>
       </div>
+      <div formGroupName="socialServices">
+        <small>Social media</small>
+        <div class="form-group">
+          <div class="btn-default">
+            <ngb-tabset type="pills">
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-youtube"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="youtubeLink" formControlName="youtube" placeholder="Add Youtube link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-facebook"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="facebookLink" formControlName="facebook" placeholder="Add Facebook link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-twitter"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="twitterLink" formControlName="twitter" placeholder="Add twitter link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-instagram"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="instagramLink" formControlName="instagram" placeholder="Add Instagram link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-linkedin-in"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="linkedinLink" formControlName="linkedin" placeholder="Add Linkedin link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-github"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="githubLink" formControlName="github" placeholder="Add Github link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-pinterest"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="pinterestLink" formControlName="pinterest" placeholder="Add Pinterest link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fab fa-google"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="googleLink" formControlName="google" placeholder="Add Google link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <i class="fas fa-globe"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="form-group" style="padding-top: 10px">
+                    <input type="text" class="form-control" id="customLink" formControlName="custom" placeholder="Add custom link">
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
         <small>Experience</small>
         <app-editor id="inputExperience" formControlName="description"></app-editor>
