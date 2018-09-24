@@ -18,7 +18,6 @@ export interface JwtToken {
 export class AuthService {
     jwtService = new JwtHelperService();
     permissionChanged: ReplaySubject<boolean> = new ReplaySubject<boolean>();
-    loggedUser: ProfileName;
     sub: any;
 
     constructor(private storage: TokenStorage, private http: HttpClient, private router: Router, private route: ActivatedRoute, private utils: UtilsService) { }
@@ -38,7 +37,7 @@ export class AuthService {
 
     logOut() {
         this.storage.signOut();
-        this.loggedUser = null;
+        localStorage.removeItem('profile');
         this.sub.unsubscribe();
     }
 
@@ -64,7 +63,7 @@ export class AuthService {
 
     fetchUserProfileName() {
         this.sub = this.getLoggedProfile().subscribe(
-            data => this.loggedUser = data,
+            data => localStorage.setItem('profile', JSON.stringify(data)),
             (error) => {console.log(error)}
         )
     }
@@ -83,13 +82,18 @@ export class AuthService {
         this.permissionChanged.next(true);
     }
 
-    public getLoggedProfile(): Observable<ProfileName> {
+    private getLoggedProfile(): Observable<ProfileName> {
         return this.http.get<ProfileName>(`${environment.apiEndpoint}/profile`);
     }
 
+    public getProfile(): ProfileName {
+        return JSON.parse(localStorage.getItem('profile'));
+    }
+
     public goToUserProfile() {
-        if (this.loggedUser) {
-            this.router.navigate([this.utils.getUserRouterLink(this.loggedUser.type), this.loggedUser.id]);
+        let loggedUser = this.getProfile();
+        if (loggedUser) {
+            this.router.navigate([this.utils.getUserRouterLink(loggedUser.type), loggedUser.id]);
         }
     }
 }

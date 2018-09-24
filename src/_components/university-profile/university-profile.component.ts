@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProfileService } from '_service/profile/profile.service';
 import { NotificationService } from '_service/notification/notification.service';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
     selector: 'app-university-profile',
@@ -32,7 +33,8 @@ export class UniversityProfileComponent implements OnInit, OnDestroy {
         private postService: PostService,
         private modalService: NgbModal,
         private profileService: ProfileService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private authService: AuthService
     ) {
     }
 

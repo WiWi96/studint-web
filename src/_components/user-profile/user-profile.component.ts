@@ -12,6 +12,7 @@ import { Technology } from '_models/technology/technology';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProfileService } from '_service/profile/profile.service';
 import { NotificationService } from '_service/notification/notification.service';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -34,7 +35,8 @@ export class UserProfileComponent implements OnInit {
         private postService: PostService,
         private teamService: TeamService,
         private modalService: NgbModal,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private authService: AuthService
     ) {
     }
 

@@ -8,7 +8,7 @@
                         <span>
                             <h1 class="d-inline-block">{{project.name}}</h1>
                             <span class="mx-3 d-inline-block align-top">
-                                <button class="btn edit-link p-2" (click)="openEditModal()">
+                                <button *ngIf="project.company?.id === authService.getProfile()?.id" class="btn edit-link p-2" (click)="openEditModal()">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </button>
                             </span>
