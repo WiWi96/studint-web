@@ -25,6 +25,7 @@ export class StaticBarComponent implements OnInit {
   private sub: any;
   userName: ProfileName;
   user: UserProfile;
+  fetched = false;
   showProjects = false;
   showUniversities = false;
   projects: Array<ProjectProfile>;
@@ -40,14 +41,17 @@ export class StaticBarComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.userName = this.authService.getProfile();
-      this.getUser();
       this.navbarHidden = !this.authService.isLogged();
   });
 }
 
   ngDoCheck() {
     this.navbarHidden = !this.authService.isLogged();
+    if (this.authService.isLogged() && !this.fetched) {
+      this.userName = this.authService.getProfile();
+      this.getUser();
+      this.fetched = true;
+    } else if (!this.authService.isLogged()) {this.fetched = false; }
   }
 
   getUser(): void {
