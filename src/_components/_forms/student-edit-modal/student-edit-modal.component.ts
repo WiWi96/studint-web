@@ -35,6 +35,8 @@ export class StudentEditModalComponent implements OnInit {
   //All Languages and Skills
   languages: Language[];
   skills: Skill[];
+  // submitted student
+  submittedStudent: boolean = false;
 
   user: UserProfile;
 
@@ -49,16 +51,21 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userLanguagesTags = this.user.languages;
-    this.userSkillTags = this.user.skills;
+    this.userLanguagesTags = JSON.parse(JSON.stringify(this.user.languages));
+    this.userSkillTags = JSON.parse(JSON.stringify(this.user.skills));
     this.getLanguages();
     this.getTechnologies();
     this.createStudentForm();
   }
 
   onSubmitStudent() {
+    this.submittedStudent = true;
+
+    if (this.accountStudentDetailsFormGroup.invalid)
+      return;
+
+    this.user.description = this.accountStudentDetailsFormGroup.get('description').value; // Add 1
     this.userProfileService.updateUser(this.user).subscribe();
-    console.log(this.user);
     this.activeModal.dismiss();
   }
 
@@ -74,8 +81,8 @@ export class StudentEditModalComponent implements OnInit {
 
   createFullNameFormGroup() {
     this.fullNameFormGroup = this.formBuilder.group({
-      firstName: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
-      surname: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]]
+      firstName: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
+      surname: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]]
     })
   }
 
@@ -124,7 +131,7 @@ export class StudentEditModalComponent implements OnInit {
 
     if (this.skillSelected && !this.userSkillTags.some(skill => { return skill.name == e.value }))
       this.userSkillTags.push(this.skillSelected);
-      
+
   }
 
   onLanguageSelect(e: TypeaheadMatch): void {

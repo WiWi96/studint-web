@@ -114,7 +114,7 @@ export class ProjectEditComponent implements OnInit {
     this.projectProfile.description = this.projectFormGroup.get('description').value;
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
-    if (this.isCreatedProject && !this.projectProfile.type) {
+    if ((this.isCreatedProject || this.isManagement) && !this.projectProfile.type) {
       this.projectProfile.type = 'TEST';
       this.projectProfile.status = ProjectStatus.Invite;
     }
