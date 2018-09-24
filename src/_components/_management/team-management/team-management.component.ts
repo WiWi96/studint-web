@@ -58,7 +58,6 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
         team.leader = null;
       }
     });
-    console.log(this.teams);
   }
 
   addTeam() {
@@ -88,17 +87,15 @@ export class TeamManagementComponent implements OnInit, OnDestroy {
   }
 
   saveChanges = (params) => {
-    console.log(this.teams);
     this.project.unassigned = this.unassignedParticipants.slice(0);
     this.project.teams = this.teams.slice(0);
-    console.log(this.project.teams);
     this.project.teams.forEach(team => {
-
       team.leader = team.members.shift();
-      console.log(team.members);
     });
     this.projectService.updateProjectTeams(this.project).subscribe(
-      data => this.project = data,
+      data => {
+        this.project = data
+      },
       () => this.notificationService.notify("Could not update project teams")
     )
   }
