@@ -29,4 +29,8 @@ export class ProfileService {
     return this.http.get<ProfileName[]>(`${profileUrl}/${name}`);
   }
 
+  public uploadPhoto(photo: FormData): Observable<string> {
+    return this.http.post<string>(`${profileUrl}/image/upload`, photo);
+  }
+
 }

@@ -14,6 +14,7 @@ import { Skill } from '_models/skill/skill';
 import { SkillService } from '_service/skill/skill.service';
 import { ServiceType } from '_enums/serviceTypes';
 import { SocialMedia } from '_models/socialMedia';
+import { ProfileService } from '_service/profile/profile.service';
 
 @Component({
   selector: 'app-student-edit-modal',
@@ -46,12 +47,15 @@ export class StudentEditModalComponent implements OnInit {
   user: UserProfile;
   socialMediaMap: Map<ServiceType, string> = new Map<ServiceType, string>();
 
+  file: File;
+
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private userProfileService: UserProfileService,
     private languageService: LanguageService,
-    private skillService: SkillService
+    private skillService: SkillService,
+    public profileService: ProfileService
   ) {
 
   }
@@ -79,6 +83,39 @@ export class StudentEditModalComponent implements OnInit {
     this.setStudentSocialServices();
     this.userProfileService.updateUser(this.user).subscribe();
     this.activeModal.dismiss();
+  }
+
+  onFileSelected(event) {
+    /*this.photoSelected = <File>event.target.files[0];
+    this.profileService.uploadPhoto(this.photoSelected).subscribe(
+      photoString => this.user.profileName.photo = photoString
+    );*/
+  }
+
+  fileChange(event: any) {
+    // Instantiate an object to read the file content
+    let reader = new FileReader();
+    // when the load event is fired and the file not empty
+    if (event.target.files && event.target.files.length > 0) {
+      // Fill file variable with the file content
+      this.file = event.target.files[0];
+    }
+  }
+
+  onSubmitPhoto() {
+    // Instantiate a FormData to store form fields and encode the file
+    let body = new FormData();
+    // Add file content to prepare the request
+    body.append("file", this.file);
+    // Launch post request
+    this.profileService.uploadPhoto(body).subscribe(
+      // Admire results
+      (data) => { console.log(data) },
+      // Or errors :-(
+      error => console.log(error),
+      // tell us if it's finished
+      () => { console.log("completed") }
+    );
   }
 
   close() {
@@ -125,6 +162,7 @@ export class StudentEditModalComponent implements OnInit {
       technology: this.technologyFormControl,
       description: [this.user.description],
       socialServices: this.socialServicesFormpGroup,
+      file_upload: null
     });
   }
 
