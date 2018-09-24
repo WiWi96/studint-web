@@ -10,6 +10,7 @@ import { ProfileName } from '_models/profile/profileName';
 import { UtilsService } from '_service/utils/utils.service';
 import { ProjectProfileService } from '_service/profile/project/projectProfile.service';
 import { debug } from 'util';
+import { ProjectStatus } from '_enums/projectStatus';
 
 
 @Component({
@@ -93,7 +94,10 @@ export class ProjectEditComponent implements OnInit {
     this.projectProfile.description = this.projectFormGroup.get('description').value;
     this.projectProfile.name = this.projectFormGroup.get('name').value;
     this.updateDate();
-    if (this.isCreatedProject && !this.projectProfile.type) this.projectProfile.type = 'TEST';
+    if (this.isCreatedProject && !this.projectProfile.type){
+      this.projectProfile.type = 'TEST';
+      this.projectProfile.status = ProjectStatus.Invite;
+    }
     this.isCreatedProject ? this.projectService.createProject(this.projectProfile).subscribe() : this.projectService.updateProject(this.projectProfile).subscribe();
 
 
