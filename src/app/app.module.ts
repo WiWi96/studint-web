@@ -68,6 +68,8 @@ import { ProjectEditComponent } from '_components/_forms/project-edit/project-ed
 import { NgbDateISOParserFormatter } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-parser-formatter';
 import { ConfirmModalComponent } from '_components/_forms/confirm-modal/confirm-modal.component';
 import { ProfileService } from '_service/profile/profile.service';
+import { CountryService } from '_service/country/country.service';
+import { CoursService } from '_service/cours/cours.service';
 
 
 
@@ -122,7 +124,7 @@ import { ProfileService } from '_service/profile/profile.service';
 
   ],
   providers: [ErrorsService, NotificationService, UtilsService, ProfileService, CompanyProfileService, UniversityProfileService,
-    SkillService, UserProfileService, ProjectProfileService,
+    SkillService, UserProfileService, ProjectProfileService, CountryService, CoursService,
     TeamService, PostService, MainPageService, AuthGuard, , LoggedOffGuard, AuthService, TokenStorage, LanguageService, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

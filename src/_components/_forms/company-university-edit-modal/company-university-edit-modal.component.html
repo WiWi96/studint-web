@@ -73,6 +73,27 @@
           </div>
         </div>
       </div>
+      <!--
+      <div class="form-group" *ngIf="isUniversity">
+        <div class="form-group">
+          <small>Languages</small>
+          <input class="form-control" formControlName="courses" (typeaheadOnSelect)="onCoursSelect($event)" [typeahead]="languages"
+            typeaheadOptionField="name" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Language" />
+        </div>
+        <div class="form-group">
+          <div class="tags-container">
+            <ng-container *ngFor='let item of userLanguagesTags'>
+              <button type="button" class="btn btn-tag">
+                <div class="font-tag">{{item.name}}
+                  <span class="close" (click)="onCoursCloseClick(item)">&nbsp;
+                    <i class="fas fa-times fa-sm"></i>
+                  </span>
+                </div>
+              </button>&nbsp;
+            </ng-container>
+          </div>
+        </div>
+      </div>-->
 
       <div formGroupName="socialServices">
         <small>Social media</small>
@@ -192,8 +213,8 @@
   </div>
 
   <div *ngIf="isUniversity">
-      <button class="btn btn-primary" (click)="onSubmitUniversity()">
-        Save
-      </button>
-    </div>
+    <button class="btn btn-primary" (click)="onSubmitUniversity()">
+      Save
+    </button>
+  </div>
 </div>

@@ -12,6 +12,9 @@ import { DISABLED } from '@angular/forms/src/model';
 import { ValueTransformer } from '@angular/compiler/src/util';
 import { SocialMedia } from '_models/socialMedia';
 import { ServiceType } from '_enums/serviceTypes';
+import { Course } from '_models/course';
+import { CoursService } from '_service/cours/cours.service';
+import { TypeaheadMatch } from '../../../../node_modules/ngx-bootstrap';
 
 
 @Component({
@@ -34,6 +37,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
 
 
   socialServices: string[];
+  courses: Course[] = [];
 
   socialMedia: SocialMedia[];
   socialMediaMap: Map<ServiceType, string> = new Map<ServiceType, string>();
@@ -41,7 +45,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   companyProfile: CompanyProfile;
   univeristyProfile: UniversityProfile;
 
-  countries = ['Poland', 'Germany', 'Spain'];
+  countries = ['Poland', 'Germany', 'Spain', 'Czech Republic'];
 
   //sumbitted
   submittedCompany: boolean = false;
@@ -51,11 +55,15 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   isCompany: boolean;
   isUniversity: boolean;
 
+  universityCoursesTag: Course[] = [];
+  tagSelected: Course;
+
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private companyProfileService: CompanyProfileService,
-    private universityProfileService: UniversityProfileService
+    private universityProfileService: UniversityProfileService,
+    public coursesService: CoursService
   ) { }
 
   ngOnInit() {
@@ -70,6 +78,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       this.createCompanyForm();
     }
     else if (this.isUniversity) {
+      //this.universityCoursesTag = JSON.parse(JSON.stringify(this.univeristyProfile.courses);
       this.address = this.univeristyProfile.address;
       this.profileName = this.univeristyProfile.profileName;
       this.getUniversitySocialMedia();
@@ -86,6 +95,12 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   getUniversitySocialMedia() {
     this.univeristyProfile.profiles.forEach(social => {
       this.socialMediaMap.set(social.service, social.url);
+    })
+  }
+
+  getCourses(){
+    this.coursesService.getAllCourses().subscribe(data =>{
+      this.courses = data;
     })
   }
 
@@ -148,6 +163,7 @@ export class CompanyUniversityEditModalComponent implements OnInit {
       address: this.addressFormGroup,
       description: [this.companyProfile.description, [Validators.required]],
       socialServices: this.socialServicesFormpGroup,
+     // courses: []
     })
 
   }
@@ -266,7 +282,26 @@ export class CompanyUniversityEditModalComponent implements OnInit {
   close() {
     this.activeModal.close();
   }
+/*
+  public onCoursCloseClick(skillTag: Course): void {
+    this.universityCoursesTag.forEach((skill, index) => {
+      if (skillTag == skill) {
+        this.universityCoursesTag.splice(index, 1);
+      }
+    });
+  }
 
+
+  onCoursSelect(e: TypeaheadMatch) {
+    this.universityCoursesTag = this.skills.find(skill => {
+      return skill.name == e.value;
+    });
+    //this.technologyFormControl.reset();
+
+    if (this.universityCoursesTag && !this.universityCoursesTag.some(skill => { return skill.name == e.value }))
+      this.universityCoursesTag.push(this.tagSelected);
+
+  }*/
 
 }
 
