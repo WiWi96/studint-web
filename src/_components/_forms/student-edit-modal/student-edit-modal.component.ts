@@ -65,6 +65,9 @@ export class StudentEditModalComponent implements OnInit {
       return;
 
     this.user.description = this.accountStudentDetailsFormGroup.get('description').value; // Add 1
+  
+    this.user.skills = this.userSkillTags;
+    this.user.languages = this.userLanguagesTags ;
     this.userProfileService.updateUser(this.user).subscribe();
     this.activeModal.dismiss();
   }
@@ -80,9 +83,17 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   createFullNameFormGroup() {
+    var totalWords = this.user.profileName.name;
+    var totalWord2 = this.user.profileName.name;
+
+    var firstWord = totalWords.replace(/ .*/,'');
+    var secondWord = totalWord2.replace(/(([\.\?\!]|^)\s*\b\w+)/gm,"$2");
+    
+    console.log(secondWord);
+
     this.fullNameFormGroup = this.formBuilder.group({
-      firstName: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]],
-      surname: [this.user.profileName.name, [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ ]+")]]
+      firstName: [firstWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ]+")]],
+      surname: [secondWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ]+")]]
     })
   }
 
