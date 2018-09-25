@@ -20,6 +20,15 @@ import { Country } from "_models/country";
   styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
+  dismissible = true;
+  defaultAlerts: any[] = [
+    {
+      type: 'success',
+      msg: `You have registered successfully`
+    }
+  ];
+
+  alerts = this.defaultAlerts;
 
   countries: Country[];
 
@@ -41,6 +50,7 @@ export class RegisterComponent implements OnInit {
   accountCompanyDetailsFormGroup: FormGroup;
 
   selectedCountry: string = "Poland";
+  successfulRegistered: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,6 +67,10 @@ export class RegisterComponent implements OnInit {
     this.createUniversityForm();
     this.createCompanyForm();
     this.getAllProfileNames();
+
+    setTimeout(() => {
+      this.successfulRegistered = false;
+    }, 10000);
   }
 
   get f() { return this.accountStudentDetailsFormGroup.controls; }
@@ -195,7 +209,7 @@ export class RegisterComponent implements OnInit {
       this.accountStudentDetailsFormGroup.get('password').get('password').value
     )).subscribe();
 
-
+    this.successfulRegistered = true;
 
   }
   onSubmitUniversity() {
@@ -216,6 +230,7 @@ export class RegisterComponent implements OnInit {
         this.accountUniversityDetailsFormGroup.get('address').get('houseNo').value)
     )).subscribe();
 
+    this.successfulRegistered = true;
   }
 
   onSubmitCompany() {
@@ -236,6 +251,8 @@ export class RegisterComponent implements OnInit {
         this.selectedCountry,
         this.accountCompanyDetailsFormGroup.get('address').get('houseNo').value)
     )).subscribe();
+
+    this.successfulRegistered = true;
   }
 
   //endpoints
@@ -251,6 +268,10 @@ export class RegisterComponent implements OnInit {
 
   onChange(value: any) {
     this.selectedCountry = value;
+  }
+
+  onClosed(dismissedAlert: any): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
 }

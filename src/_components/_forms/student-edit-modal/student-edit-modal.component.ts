@@ -103,6 +103,7 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   onSubmitPhoto() {
+    debugger;
     // Instantiate a FormData to store form fields and encode the file
     let body = new FormData();
     // Add file content to prepare the request
