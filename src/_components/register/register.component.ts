@@ -10,6 +10,8 @@ import { Registration } from "_models/registration/registration";
 import { Address } from "_models/address";
 import { UserRegistration } from "_models/registration/userRegistration";
 import { UniversityProfileService } from "_service/profile/university/universityProfile.service";
+import { CountryService } from "_service/country/country.service";
+import { Country } from "_models/country";
 
 
 @Component({
@@ -19,7 +21,7 @@ import { UniversityProfileService } from "_service/profile/university/university
 })
 export class RegisterComponent implements OnInit {
 
-  countries = ["Poland", "France", "Japan", "Great Britain", "Germany", "Italy", 'Ondraszek'];
+  countries: Country[];
 
   submittedStudent: boolean = false;
   submittedUniversity: boolean = false;
@@ -45,10 +47,12 @@ export class RegisterComponent implements OnInit {
     private mainPageService: MainPageService,
     private companyService: CompanyProfileService,
     private studentService: UserProfileService,
-    private universityService: UniversityProfileService
+    private universityService: UniversityProfileService,
+    private countryService: CountryService
   ) { }
 
   ngOnInit() {
+    this.getAllCountries();
     this.createStudentForm();
     this.createUniversityForm();
     this.createCompanyForm();
@@ -111,7 +115,7 @@ export class RegisterComponent implements OnInit {
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      town: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      town: ['', [Validators.required, Validators.pattern("^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$")]],
       postalCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       country: [''],
@@ -152,7 +156,7 @@ export class RegisterComponent implements OnInit {
     });
 
     this.addressFormGroup = this.formBuilder.group({
-      town: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
+      town: ['', [Validators.required, Validators.pattern("^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$")]],
       postalCode: ['', [Validators.required, Validators.pattern("^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]")]],
       street: ['', [Validators.required, Validators.pattern("[A-Za-zÀ-ÿ]+")]],
       country: [''],
@@ -183,7 +187,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    
+
     this.studentService.createUser(new UserRegistration(
       this.accountStudentDetailsFormGroup.get('fullname').get('firstName').value,
       this.accountStudentDetailsFormGroup.get('fullname').get('surname').value,
@@ -192,7 +196,7 @@ export class RegisterComponent implements OnInit {
     )).subscribe();
 
 
- 
+
   }
   onSubmitUniversity() {
     this.submittedUniversity = true;
@@ -205,18 +209,18 @@ export class RegisterComponent implements OnInit {
       this.accountUniversityDetailsFormGroup.get('password').get('password').value,
       this.accountUniversityDetailsFormGroup.get('universityName').value,
       new Address(
-      this.accountUniversityDetailsFormGroup.get('address').get('town').value,
-      this.accountUniversityDetailsFormGroup.get('address').get('postalCode').value,
-      this.accountUniversityDetailsFormGroup.get('address').get('street').value,
-      this.selectedCountry,
-      this.accountUniversityDetailsFormGroup.get('address').get('houseNo').value)
+        this.accountUniversityDetailsFormGroup.get('address').get('town').value,
+        this.accountUniversityDetailsFormGroup.get('address').get('postalCode').value,
+        this.accountUniversityDetailsFormGroup.get('address').get('street').value,
+        this.selectedCountry,
+        this.accountUniversityDetailsFormGroup.get('address').get('houseNo').value)
     )).subscribe();
 
   }
 
   onSubmitCompany() {
     this.submittedCompany = true;
- 
+
     if (this.accountCompanyDetailsFormGroup.invalid) {
       return;
     }
@@ -226,20 +230,26 @@ export class RegisterComponent implements OnInit {
       this.accountCompanyDetailsFormGroup.get('password').get('password').value,
       this.accountCompanyDetailsFormGroup.get('companyName').value,
       new Address(
-      this.accountCompanyDetailsFormGroup.get('address').get('town').value,
-      this.accountCompanyDetailsFormGroup.get('address').get('postalCode').value,
-      this.accountCompanyDetailsFormGroup.get('address').get('street').value,
-      this.selectedCountry,
-      this.accountCompanyDetailsFormGroup.get('address').get('houseNo').value)
+        this.accountCompanyDetailsFormGroup.get('address').get('town').value,
+        this.accountCompanyDetailsFormGroup.get('address').get('postalCode').value,
+        this.accountCompanyDetailsFormGroup.get('address').get('street').value,
+        this.selectedCountry,
+        this.accountCompanyDetailsFormGroup.get('address').get('houseNo').value)
     )).subscribe();
   }
 
   //endpoints
   getAllProfileNames() {
-  
+
   }
 
-  onChange(value: any){
+  getAllCountries() {
+    this.countryService.getAllCountries().subscribe(data => {
+      this.countries = data;
+    })
+  }
+
+  onChange(value: any) {
     this.selectedCountry = value;
   }
 

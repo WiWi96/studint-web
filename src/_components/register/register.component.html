@@ -134,7 +134,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <input type="text" class="form-control" formControlName="universityName" id="InputUniversityName" placeholder="University name"
                                             required>
                                         <div *ngIf="submittedUniversity">
@@ -143,8 +143,8 @@
                                     </div>
                                     <div formGroupName="address">
                                         <div class="form-group">
-                                            <select class="custom-select form-control">
-                                                <option *ngFor="let country of countries" [ngValue]="mode">{{country}}</option>
+                                            <select class="custom-select form-control" formControlName="country">
+                                                <option *ngFor="let country of countries" [ngValue]="country.name">{{country.name}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -236,7 +236,7 @@
                                     <div formGroupName="address">
                                         <div class="form-group">
                                             <select class="custom-select form-control" (change)="onChange($event.target.value)">
-                                                <option *ngFor="let country of countries"   [ngValue]="mode">{{country}}</option>
+                                                <option *ngFor="let country of countries"   [ngValue]="country.name">{{country.name}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
