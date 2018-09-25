@@ -31,7 +31,7 @@
           <li *ngIf="!authService.isLogged()" class="nav-item">
             <a class="nav-link text-nowrap" [routerLink]="['/register']">Register</a>
           </li>
-          <li *ngIf="authService.getProfile()?.type === UserType.Company" class="nav-item">
+          <li *ngIf="authService.isLogged() && authService.getProfile()?.type === UserType.Company" class="nav-item">
             <a class="nav-link text-nowrap" [routerLink]="['/manage-projects']">Management</a>
           </li>
           <li *ngIf="authService.isLogged()" class="nav-item">
