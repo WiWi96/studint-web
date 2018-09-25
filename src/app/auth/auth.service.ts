@@ -39,6 +39,7 @@ export class AuthService {
         this.storage.signOut();
         localStorage.removeItem('profile');
         this.sub.unsubscribe();
+        this.router.navigate(['/']);
     }
 
     getRoles(): string[] {
