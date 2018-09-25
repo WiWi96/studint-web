@@ -10,11 +10,11 @@
   <div class="container">
     <form class="registerform" [formGroup]="accountStudentDetailsFormGroup" (ngSubmit)="onSubmitStudent()">
 
-     <!-- <div class="form-group">
+      <div class="form-group">
         <small>Photo</small>
         <input ng-model="file_upload" formControlName="file_upload" name="file" type="file" (change)="fileChange($event)" #fileInput>
         <button type="submit" (click)="onSubmitPhoto()">Submit</button>
-      </div>-->
+      </div>
 
       <div formGroupName="fullname">
         <div class="form-group">
