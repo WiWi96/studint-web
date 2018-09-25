@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
 
     setTimeout(() => {
       this.successfulRegistered = false;
-    }, 10000);
+    }, 5000);
   }
 
   get f() { return this.accountStudentDetailsFormGroup.controls; }

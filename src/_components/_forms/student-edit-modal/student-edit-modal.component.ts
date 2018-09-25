@@ -139,8 +139,8 @@ export class StudentEditModalComponent implements OnInit {
 
 
     this.fullNameFormGroup = this.formBuilder.group({
-      firstName: [firstWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ]+")]],
-      surname: [secondWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ]+")]]
+      firstName: [firstWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ']+")]],
+      surname: [secondWord, [Validators.required, Validators.pattern("[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż ']+")]]
     })
   }
 
